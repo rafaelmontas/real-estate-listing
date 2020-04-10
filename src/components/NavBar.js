@@ -6,7 +6,9 @@ class NavBar extends React.Component {
       <nav className="navbar-fixed-top">
         <div className="nav-container">
           <div className="navbar-menu-form">
-            <span className="toggle bars"><i className="fas fa-bars"></i></span>
+            <span onClick={this.props.onSideDrawerToggleClick} className="toggle bars">
+              <i className="fas fa-bars"></i>
+            </span>
             <span className="logo-img"><i className="fas fa-home"></i></span>
             <span className="brand-logo-name">NewApp</span>
             <form action="">

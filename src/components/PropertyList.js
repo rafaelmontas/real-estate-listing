@@ -14,6 +14,7 @@ class PropertyList extends React.Component {
         </div>
         <div className="search-results-list-grid">
           <PropertyCard/>
+          <PropertyCard/>
         </div>
       </div>
     )
