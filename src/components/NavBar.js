@@ -18,10 +18,10 @@ class NavBar extends React.Component {
           </div>
           <div className="navbar-menu-right">
             <span className="map button">Mapa</span>
-            <a href="#" className="menu-item first"><i className="far fa-heart"></i>Favoritos</a>
-            <a href="#" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
-            <a href="#" className="menu-item button secondary">Iniciar Sesión</a>
-            <a href="#" className="menu-item button primary">Registrarse</a>
+            <a href="/" className="menu-item first"><i className="far fa-heart"></i>Favoritos</a>
+            <a href="/" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
+            <a href="/" className="menu-item button secondary">Iniciar Sesión</a>
+            <a href="/" className="menu-item button primary">Registrarse</a>
           </div>
         </div>
       </nav>

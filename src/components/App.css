@@ -189,7 +189,7 @@ a {
 /* General */
 .search-results-container {
   display: flex;
-  justify-content: start;
+  /* justify-content: start; */
 }
 .search-results-columns {
   width: 100%;

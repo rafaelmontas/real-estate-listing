@@ -17,7 +17,7 @@ class PropertyCard extends React.Component {
     return (
       <div className="home-card-container">
         <div className="home-card">
-          <a href="#">
+          <a href="/">
             <div className="property-card-media">
               <div className="photo-container">
                 <img src={propertyCard.imgSrc} alt="property"/>
