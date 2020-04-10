@@ -33,16 +33,10 @@ class App extends React.Component {
 
   
 
-  render() {
-    let backdrop;
-
-    if(this.state.sideDrawerOpen) {
-      backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
-    }
-
+  render() {    
     return (
       <div className="main-app-container">
-        {backdrop}
+        {this.state.sideDrawerOpen && <Backdrop onBackdropClick={this.handleBackdropClick} />}
         <SideDrawer show={this.state.sideDrawerOpen} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick} />
         <section id="main-app-content" className="search-results-container">
