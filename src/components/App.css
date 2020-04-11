@@ -347,6 +347,7 @@ a {
   overflow: hidden;
   height: 180px;
   position: relative;
+  border-radius: 4px 4px 0 0;
 }
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container img {
   width: 100%;
