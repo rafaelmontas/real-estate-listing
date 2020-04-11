@@ -9,6 +9,49 @@ import MapColumn from "./MapColumn";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 
+import house1 from "../demo_img/house1.png"
+const propertyCard = {
+  id: 1,
+  imgSrc: house1,
+  price: 100000,
+  beds: 3,
+  baths: 2,
+  cars: 2,
+  mts: 150,
+  address: "C/ Dr. Fabio Mota #9",
+  sector: "Naco, Distrito Nacional",
+  lat: 18.472233,
+  lng: -69.922225
+};
+const propertyCard2 = {
+  id: 2,
+  imgSrc: house1,
+  price: 100000,
+  beds: 3,
+  baths: 2,
+  cars: 2,
+  mts: 150,
+  address: "C/ Dr. Fabio Mota #9",
+  sector: "Naco, Distrito Nacional",
+  lat: 18.471853,
+  lng: -69.922347
+};
+const propertyCard3 = {
+  id: 3,
+  imgSrc: house1,
+  price: 100000,
+  beds: 3,
+  baths: 2,
+  cars: 2,
+  mts: 150,
+  address: "C/ Dr. Fabio Mota #9",
+  sector: "Naco, Distrito Nacional",
+  lat: 18.471365,
+  lng: -69.932690
+};
+
+const properties = [propertyCard, propertyCard2, propertyCard3];
+
 
 class App extends React.Component {
   constructor(props) {
@@ -42,11 +85,11 @@ class App extends React.Component {
         <section id="main-app-content" className="search-results-container">
           <div id="results-column-left" className="search-results-columns">
             <FixedFilters />
-            <PropertyList />
+            <PropertyList properties={properties} />
             <Pagination />
             <Footer />
           </div>
-          <MapColumn/>
+          <MapColumn properties={properties} />
         </section>
       </div>
     )

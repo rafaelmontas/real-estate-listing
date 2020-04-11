@@ -13,8 +13,9 @@ class PropertyList extends React.Component {
           </div>
         </div>
         <div className="search-results-list-grid">
-          <PropertyCard/>
-          <PropertyCard/>
+          {this.props.properties.map(property => {
+            return <PropertyCard key={property.id} property={property} />;
+          })}
         </div>
       </div>
     )

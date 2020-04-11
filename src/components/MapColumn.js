@@ -9,6 +9,15 @@ const mapStyles = {
 
 
 class MapColumn extends React.Component {
+
+  displayMarkers() {
+    return this.props.properties.map(property => {
+      return  <Marker key={property.id} position={{ lat: property.lat, lng: property.lng}} />;
+    });
+  };
+
+
+
   render() {
     return (
       <div id="map-column-right" className="search-results-columns">
@@ -24,7 +33,8 @@ class MapColumn extends React.Component {
             lat: 18.472233,
             lng: -69.922225
             }}>
-              <Marker position={{ lat: 18.472233, lng: -69.922225}} />
+              
+              {this.displayMarkers()}
           </Map>
         </div>
       </div>

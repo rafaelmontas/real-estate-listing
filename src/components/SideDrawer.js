@@ -12,16 +12,6 @@ class SideDrawer extends React.Component {
     return (
       <div className={drawerClasses}>
         <div className="top-div">
-          {/* <ul className="top">
-            <li>
-              <div className="login-button inline-button">
-                <span>Iniciar Sesión</span>
-              </div>
-              <div className="sign-up-button inline-button">
-                <span>Registrarte</span>
-              </div>
-            </li>
-          </ul> */}
           <ul>
             <li className="search-button button">
               <div>
@@ -58,7 +48,7 @@ class SideDrawer extends React.Component {
         </div>
         <div className="bottom-div">
           <div className="login-button button">
-            <i class="far fa-arrow-alt-circle-right"></i>
+            <i className="far fa-arrow-alt-circle-right"></i>
             Iniciar Sesión
           </div>
           <div className="download-app button">
