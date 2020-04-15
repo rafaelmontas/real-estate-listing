@@ -1,0 +1,157 @@
+/* .select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #e2e2e2;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 75px;
+  text-align-last: center;
+} */
+
+.buy-sell button.active {
+  background-color: #c30000;
+  color: #fff;
+}
+.buy-sell button i {
+  margin-right: 5px;
+}
+.buy-sell button i.sell {
+  color: #57bf18;
+}
+.buy-sell button i.rent {
+  color: #f7e500;
+}
+
+.exposed-popover {
+  position: absolute;
+  z-index: 300;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.35);
+  border: none;
+  display: none;
+}
+
+.exposed-popover.listing-type {
+  /* position: absolute;
+  z-index: 300;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.35);
+  border: none; */
+  left: 0;
+  right: 0;
+  top: 50px;
+  /* display: none; */
+}
+.exposed-popover.listing-type.open {
+  display: block;
+}
+.exposed-popover .separator {
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  padding-left: 15px;
+}
+
+.exposed-popover .separator .label-listingType {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex: 1 1 0;
+  padding: 7px 0 7px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.exposed-popover .separator .label-listingType i {
+  margin-right: 5px;
+  font-size: 14px;
+}
+#label-for-sell i {
+  color: #57bf18;
+}
+#label-for-rent i {
+  color: #f7e500;
+}
+
+.exposed-popover .separator.done {
+  justify-content: flex-end;
+  padding-right: 15px;
+  border-radius: 0px 0px 4px 4px;
+  background-color: #c30000;
+  border-bottom: none;
+}
+.separator.done span {
+  padding: 8px 15px;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  color: #c30000;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.price button.active {
+  background-color: #c30000;
+  color: #fff;
+}
+
+
+/* Price Filters Button */
+.exposed-popover.price-filters {
+  left: 0;
+  right: 0;
+  top: 50px;
+  /* display: block; */
+}
+.exposed-popover.price-filters.open {
+  display: block;
+}
+
+.exposed-popover.price-filters .container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 100%;
+}
+.exposed-popover.price-filters .container span {
+  padding: 0 16px;
+}
+
+.exposed-popover.price-filters .container .select {
+  flex: 1 1 auto;
+  /* padding: 8px 0; */
+}
+.exposed-popover.price-filters .container .select select {
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+
+@media only screen and (min-width: 992px) {
+  .buy-sell .exposed-popover {
+    width: 300px;
+    left: 15px;
+    /* height: 150px; */
+  }
+  .price .exposed-popover {
+    left: 138px;
+    width: 250px;
+    height: 50px;
+  }
+  .price .exposed-popover .container, .price .exposed-popover .container .select select {
+    padding: 8px;
+  }
+}

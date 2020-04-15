@@ -238,14 +238,43 @@ a {
   flex: 1 1 auto;
   align-items: center;
 }
-.fixed-filters .search-results-filter-section .filter-section-left span.filters {
-  border: 1px solid #e2e2e2;
-  padding: 10px;
+.fixed-filters .search-results-filter-section div.filters {
+  /* border: 1px solid #e2e2e2; */
+  /* padding: 10px; */
+  /* cursor: pointer; */
+  /* border-radius: 4px; */
+  /* background-color: #fff; */
+  margin-right: 5px;
+  display: flex;
+  overflow: hidden;
+  height: 32px;
+  max-width: 115px;
+}
+.fixed-filters .search-results-filter-section .buy-sell {
+  flex: 1 2 auto;
+}
+.fixed-filters .search-results-filter-section button {
+  background-color: #fff;
+  border: 1px solid #c30000;
+  width: 100%;
   cursor: pointer;
   border-radius: 2px;
-  background-color: #fff;
-  margin-right: 5px;
+  color: #c30000;
+  padding: 5px;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
+.fixed-filters .search-results-filter-section .price {
+  flex: 1 1 auto;
+}
+
+
+
+
+
 .filter-section-left .beds-baths, .filter-section-left .type {
   display: none;
 }
@@ -257,6 +286,12 @@ a {
 .fixed-filters .search-results-filter-section .filter-section-left .price .fa-caret-down {
   margin-left: 5px;
 }
+
+
+.fixed-filters .search-results-filter-section .filter-section-button-right {
+  display: flex;
+}
+
 .fixed-filters .search-results-filter-section .filter-section-button-right span {
   border: 1px solid #e2e2e2;
   background-color: #fff;
