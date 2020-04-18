@@ -1,5 +1,6 @@
 import React from "react";
 import "./InputFilters.css";
+import LoadingButton from './LoadingButton';
 
 
 const bedValues = [0, 1, 2, 3, 4, 5];
@@ -13,7 +14,6 @@ class InputFilters extends React.Component {
         <div className="container">
           <div className="top">
             <header className="header">
-              <div className="reset"><span>Restaurar</span></div>
               <div className="label"><h1>Filtros</h1></div>
               <div className="close"><span onClick={this.props.onCloseClick}><i className="fas fa-times"></i></span></div>
             </header>
@@ -59,10 +59,10 @@ class InputFilters extends React.Component {
           </div>
           <div className="bottom-fixed">
             <span id="save-search">
-            <i className="far fa-bell"></i>
+              <i className="far fa-bell"></i>
               Guardar Busqueda
             </span>
-            <span id="search">Ver Resultados</span>
+            <LoadingButton />
           </div>
         </div>
       </div>

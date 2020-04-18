@@ -161,9 +161,7 @@ class FixedFilters extends React.Component {
     this.setState({ [event.target.name]: event.target.checked });
   }
   handleCloseClick() {
-    this.setState(prevState => {
-      return this.setState({ moreFiltersOpen: !prevState.moreFiltersOpen });
-    })
+    this.setState({ moreFiltersOpen: false });
   }
 
   render() {
@@ -260,7 +258,7 @@ class FixedFilters extends React.Component {
                             comercialSelected={this.state.comercialSelected}
                             industrialSelected={this.state.industrialSelected}
                             penthouseSelected={this.state.penthouseSelected}
-                            onCloseClick={this.handleCloseClick}/>
+                            onCloseClick={this.handleCloseClick} />
             </div>
             {/* <span className="filter-button">Filtros<i className="fas fa-angle-down"></i></span>
             <span className="map-button">Mapa</span> */}

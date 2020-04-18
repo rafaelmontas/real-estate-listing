@@ -24,15 +24,11 @@
   padding: 30px 20px;
   text-align: center;
   border-bottom: 1px solid #e2e2e2;
-  display: flex;
-  align-items: center;
 }
-.top .header .reset, .top .header .close {
-  flex: 1 1 0;
-}
-.exposed-popover.more-filters .container .top .header .reset span {
-  border: none;
-  font-size: 14px;
+.top .header .close {
+  position: absolute;
+  top: 31px;
+  right: 10px;
 }
 .exposed-popover.more-filters .container .top .header .close span {
   padding: 25px;
