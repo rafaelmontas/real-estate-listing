@@ -1,5 +1,6 @@
 import React from "react";
 import "./FixedFilters.css";
+import { InputFilters } from "./InputFilters";
 
 const priceList = {
   "sell": [
@@ -63,16 +64,31 @@ class FixedFilters extends React.Component {
       listingType: "sell",
       priceFilterOpen: false,
       minPrice: 0,
-      maxPrice: 0
+      maxPrice: 0,
+      moreFiltersOpen: false,
+      beds: 0,
+      baths: 0,
+      // Property Types
+      housesSelected: true,
+      apartmentsSelected: true,
+      villasSelected: true,
+      comercialSelected: true,
+      industrialSelected: true,
+      penthouseSelected: true
     }
     this.handleListingTypeClick = this.handleListingTypeClick.bind(this);
     this.handleListingType = this.handleListingType.bind(this);
     this.handlePriceFilterClick = this.handlePriceFilterClick.bind(this);
     this.handleMinPrice = this.handleMinPrice.bind(this);
     this.handleMaxPrice = this.handleMaxPrice.bind(this);
+    this.handleMoreFiltersClick = this.handleMoreFiltersClick.bind(this);
+    this.handleBedsClick = this.handleBedsClick.bind(this);
+    this.handleBathClick = this.handleBathClick.bind(this);
+    this.handleChecks = this.handleChecks.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
-  handleListingTypeClick(prevState) {
+  handleListingTypeClick() {
     this.setState({ priceFilterOpen: false });
     this.setState(prevState => {
       return { listingTypeOpen: !prevState.listingTypeOpen }
@@ -128,6 +144,27 @@ class FixedFilters extends React.Component {
     }
   }
 
+  handleMoreFiltersClick() {
+    this.setState({ listingTypeOpen: false });
+    this.setState({ priceFilterOpen: false });
+    this.setState({ moreFiltersOpen: true });
+  }
+  handleBedsClick(event) {
+    this.setState({ beds: parseInt(event.target.value) });
+  }
+  handleBathClick(event) {
+    this.setState({ baths: parseInt(event.target.value) });
+  }
+
+  // Property Types Checks
+  handleChecks(event) {
+    this.setState({ [event.target.name]: event.target.checked });
+  }
+  handleCloseClick() {
+    this.setState(prevState => {
+      return this.setState({ moreFiltersOpen: !prevState.moreFiltersOpen });
+    })
+  }
 
   render() {
     // Listing Type Filters
@@ -206,7 +243,24 @@ class FixedFilters extends React.Component {
           </div>
           <div className="filter-section-button-right">
             <div className="filter-button filters">
-              <button>Filtros <i className="fas fa-angle-down"></i></button>
+              <button onClick={this.handleMoreFiltersClick}>
+                Filtros
+                <i className="fas fa-angle-down"></i>
+              </button>
+              {/* {this.state.moreFiltersOpen && <InputFilters open={this.state.moreFiltersOpen} /> */}
+              <InputFilters show={this.state.moreFiltersOpen}
+                            onBedsClick={this.handleBedsClick}
+                            bedOptionSelected={this.state.beds}
+                            onBathClick={this.handleBathClick}
+                            bathOptionSelected={this.state.baths}
+                            onChecks={this.handleChecks}
+                            housesSelected={this.state.housesSelected}
+                            apartmentsSelected={this.state.apartmentsSelected}
+                            villasSelected={this.state.villasSelected}
+                            comercialSelected={this.state.comercialSelected}
+                            industrialSelected={this.state.industrialSelected}
+                            penthouseSelected={this.state.penthouseSelected}
+                            onCloseClick={this.handleCloseClick}/>
             </div>
             {/* <span className="filter-button">Filtros<i className="fas fa-angle-down"></i></span>
             <span className="map-button">Mapa</span> */}
