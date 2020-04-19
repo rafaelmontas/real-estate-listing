@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 
@@ -14,7 +15,7 @@ class MapColumn extends React.Component {
     return this.props.properties.map(property => {
       return  <Marker key={property.id} position={{ lat: property.lat, lng: property.lng}} />;
     });
-  };
+  }
 
 
 
@@ -42,6 +43,10 @@ class MapColumn extends React.Component {
   }
 }
 
+MapColumn.propTypes = {
+  properties: PropTypes.array.isRequired,
+  google: PropTypes.object.isRequired
+}
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY

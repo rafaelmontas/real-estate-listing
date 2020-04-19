@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 class NavBar extends React.Component {
   render() {
@@ -27,6 +28,10 @@ class NavBar extends React.Component {
       </nav>
     )
   }
+}
+
+NavBar.propTypes = {
+  onSideDrawerToggleClick: PropTypes.func.isRequired
 }
 
 export default NavBar;

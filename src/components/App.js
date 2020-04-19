@@ -66,7 +66,7 @@ class App extends React.Component {
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick} />
         <section id="main-app-content" className="search-results-container">
           <div id="results-column-left" className="search-results-columns">
-            <FixedFilters />
+            <FixedFilters status={this.state.isLoading}/>
             <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
             <Pagination />
             <Footer />

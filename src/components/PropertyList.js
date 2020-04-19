@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import PropertyCard from "./PropertyCard";
 import Skeleton from "react-loading-skeleton";
 import CardSkeleton from "./CardSkeleton";
@@ -6,7 +7,8 @@ import CardSkeleton from "./CardSkeleton";
 
 class PropertyList extends React.Component {
   render() {
-    let card = Array(10).fill(<CardSkeleton/>);
+    let count = 1;
+    let cards = Array(10).fill(<CardSkeleton/>);
     return (
       <div className="search-results-list-container">
         <div className="search-results-list-heading">
@@ -16,7 +18,7 @@ class PropertyList extends React.Component {
           </div>
         </div>
         <div className="search-results-list-grid">
-          {this.props.status && card.map(() => <CardSkeleton/>)}
+          {this.props.status && cards.map(() => <CardSkeleton key={count++}/>)}
           {!this.props.status && this.props.properties.map(property => {
             return <PropertyCard key={property.id} property={property} />;
           })}
@@ -24,6 +26,11 @@ class PropertyList extends React.Component {
       </div>
     )
   }
+}
+
+PropertyList.propTypes = {
+  status: PropTypes.bool.isRequired,
+  properties: PropTypes.array.isRequired
 }
 
 export default PropertyList;

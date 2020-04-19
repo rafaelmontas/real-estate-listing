@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./SideDrawer.css";
 
 
@@ -60,6 +61,10 @@ class SideDrawer extends React.Component {
       </div>
     )
   }
+}
+
+SideDrawer.propTypes = {
+  show: PropTypes.bool.isRequired
 }
 
 export default SideDrawer;

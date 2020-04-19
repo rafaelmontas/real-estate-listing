@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 
 class PropertyCard extends React.Component {
   render() {
@@ -30,6 +30,10 @@ class PropertyCard extends React.Component {
       </div>
     )
   }	
+}
+
+PropertyCard.propTypes = {
+  property: PropTypes.object.isRequired
 }
 
 export default PropertyCard;

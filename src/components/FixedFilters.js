@@ -1,6 +1,7 @@
 import React from "react";
 import "./FixedFilters.css";
-import { InputFilters } from "./InputFilters";
+import PropTypes from 'prop-types';
+import InputFilters from "./InputFilters";
 
 const priceList = {
   "sell": [
@@ -245,7 +246,6 @@ class FixedFilters extends React.Component {
                 Filtros
                 <i className="fas fa-angle-down"></i>
               </button>
-              {/* {this.state.moreFiltersOpen && <InputFilters open={this.state.moreFiltersOpen} /> */}
               <InputFilters show={this.state.moreFiltersOpen}
                             onBedsClick={this.handleBedsClick}
                             bedOptionSelected={this.state.beds}
@@ -258,15 +258,18 @@ class FixedFilters extends React.Component {
                             comercialSelected={this.state.comercialSelected}
                             industrialSelected={this.state.industrialSelected}
                             penthouseSelected={this.state.penthouseSelected}
-                            onCloseClick={this.handleCloseClick} />
+                            onCloseClick={this.handleCloseClick}
+                            status={this.props.status} />
             </div>
-            {/* <span className="filter-button">Filtros<i className="fas fa-angle-down"></i></span>
-            <span className="map-button">Mapa</span> */}
           </div>
         </div>
       </div>
     )
   }
+}
+
+FixedFilters.propTypes = {
+  status: PropTypes.bool.isRequired
 }
 
 export default FixedFilters;

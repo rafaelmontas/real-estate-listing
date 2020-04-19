@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import "./Backdrop.css"
 
 
@@ -15,6 +16,10 @@ class Backdrop extends React.Component {
   render() {
     return <div  onClick={this.props.onBackdropClick} className="backdrop"></div>
   }
-};
+}
+
+Backdrop.propTypes = {
+  onBackdropClick: PropTypes.func.isRequired
+}
 
 export default Backdrop;
