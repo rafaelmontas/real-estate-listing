@@ -9,60 +9,42 @@ import MapColumn from "./MapColumn";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 
-import house1 from "../demo_img/house1.png"
-const propertyCard = {
-  id: 1,
-  imgSrc: house1,
-  price: 100000,
-  beds: 3,
-  baths: 2,
-  cars: 2,
-  mts: 150,
-  address: "C/ Dr. Fabio Mota #9",
-  sector: "Naco, Distrito Nacional",
-  lat: 18.472233,
-  lng: -69.922225
-};
-const propertyCard2 = {
-  id: 2,
-  imgSrc: house1,
-  price: 100000,
-  beds: 3,
-  baths: 2,
-  cars: 2,
-  mts: 150,
-  address: "C/ Dr. Fabio Mota #9",
-  sector: "Naco, Distrito Nacional",
-  lat: 18.471853,
-  lng: -69.922347
-};
-const propertyCard3 = {
-  id: 3,
-  imgSrc: house1,
-  price: 100000,
-  beds: 3,
-  baths: 2,
-  cars: 2,
-  mts: 150,
-  address: "C/ Dr. Fabio Mota #9",
-  sector: "Naco, Distrito Nacional",
-  lat: 18.471365,
-  lng: -69.932690
-};
-
-const properties = [propertyCard, propertyCard2, propertyCard3];
+import properties from '../data'
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      properties: [],
+      isLoading: false,
       sideDrawerOpen: false
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
   }
   
+  componentDidMount() {
+    this.setState({ isLoading: true })
+    this.timer = setTimeout(() => {
+      this.setState({
+        properties: properties,
+        isLoading: false
+      });
+    }, 2000)
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevState.properties.length === 0) {
+  //     console.log(prevState.properties.length)
+  //     console.log(this.state.properties.length)
+  //     return false
+  //   } else {
+  //     alert('updated');
+  //   }
+  // }
 
   // Hanlde clicks related to side drawer
   handleSideDrawerToggleClick() {
@@ -84,12 +66,12 @@ class App extends React.Component {
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick} />
         <section id="main-app-content" className="search-results-container">
           <div id="results-column-left" className="search-results-columns">
-            <FixedFilters onRequest={this.handleRequest} />
-            <PropertyList properties={properties} />
+            <FixedFilters />
+            <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
             <Pagination />
             <Footer />
           </div>
-          <MapColumn properties={properties} />
+          <MapColumn properties={this.state.properties} />
         </section>
       </div>
     )
