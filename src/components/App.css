@@ -242,20 +242,25 @@ a {
   margin-right: 5px;
   display: flex;
   overflow: hidden;
-  height: 32px;
-  max-width: 125px;
+  height: 38px;
+  max-width: 150px;
+}
+.fixed-filters .search-results-filter-section div.filters:last-child {
+  margin-right: 0;
 }
 .fixed-filters .search-results-filter-section .buy-sell {
   flex: 1 2 auto;
 }
 .fixed-filters .search-results-filter-section button {
   background-color: #fff;
-  border: 1px solid #c30000;
+  border: 1px solid rgb(205, 209, 212);
   width: 100%;
   cursor: pointer;
-  border-radius: 2px;
-  color: #c30000;
+  border-radius: 4px;
   padding: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(59, 65, 68);
 
   text-overflow: ellipsis;
   overflow: hidden;
@@ -266,11 +271,19 @@ a {
   flex: 1 1 auto;
 }
 
+.fixed-filters .search-results-filter-section .beds-baths {
+  flex: 1 1 auto;
+}
+.fixed-filters .search-results-filter-section .type {
+  flex: 1 1 auto;
+  margin-right: 0;
+}
 
 
 
 
-.fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters, .filter-section-left .type {
+.fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters,
+.fixed-filters .search-results-filter-section .filter-section-left .type.filters {
   display: none;
 }
 
@@ -349,7 +362,7 @@ a {
 .fa-sort-amount-down {
   padding-right: 10px;
 }
-.fa-angle-down {
+.fa-angle-down, .dynamic-angle {
   padding-left: 10px;
 }
 
@@ -532,7 +545,8 @@ a {
 /************************************* Media Queries **************************************/
 
 @media only screen and (min-width: 768px) {
-  .fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters, .filter-section-left .type {
+  .fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters,
+  .fixed-filters .search-results-filter-section .filter-section-left .type.filters {
     display: flex;
   }
   .search-results-filter-section .filter-section-button-right div.filter-button {

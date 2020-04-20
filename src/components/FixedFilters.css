@@ -117,7 +117,7 @@
 .exposed-popover.price-filters .container {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 16px;
   height: 100%;
 }
 .exposed-popover.price-filters .container span {
@@ -136,12 +136,15 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+  background-image: url(/static/media/sort-down.ca82bc74.svg);
+  background-repeat: no-repeat;
+  background-size: .65em auto, 100%;
+  background-position: right .7em top 50%, 0 0;
 }
 
 /* Beds and Baths button */
 .exposed-popover.beds-baths {
   top: 50px;
-  left: 277px;
   width: 325px;
   /* right: 0; */
   /* display: block; */
@@ -164,16 +167,42 @@
   margin-bottom: 5px;
 }
 
+/* Property Type */
+.exposed-popover.type {
+  top: 50px;
+  /* left: 277px; */
+  width: 325px;
+}
+.exposed-popover.type.open {
+  display: block;
+}
+.exposed-popover.type .container {
+  padding: 8px;
+  width: 100%;
+}
+.exposed-popover.type .container fieldset {
+  border: none;
+  /* margin-bottom: 10px; */
+  width: 100%;
+}
+.exposed-popover.type .container legend {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
   .buy-sell .exposed-popover {
     width: 300px;
-    left: 15px;
+    /* left: 15px; */
+    left: initial;
+    right: initial;
     /* height: 150px; */
   }
   .price .exposed-popover {
-    left: 138px;
-    width: 250px;
+    /* left: 138px; */
+    left: initial;
+    right: initial;
+    width: 280px;
     height: 50px;
   }
   .price .exposed-popover .container, .price .exposed-popover .container .select select {

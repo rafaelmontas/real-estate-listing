@@ -3,6 +3,7 @@ import "./FixedFilters.css";
 import PropTypes from 'prop-types';
 import InputFilters from "./InputFilters";
 import { minPriceList, maxPriceList } from "../utils/PriceUtils";
+import PropertyType from "./PropertyType";
 
 
 const bedValues = [0, 1, 2, 3, 4, 5];
@@ -18,6 +19,7 @@ class FixedFilters extends React.Component {
       minPrice: 0,
       maxPrice: 0,
       bedsBathsOpen: false,
+      propertyTypeOpen: false,
       moreFiltersOpen: false,
       beds: 0,
       baths: 0,
@@ -35,6 +37,7 @@ class FixedFilters extends React.Component {
     this.handleMinPrice = this.handleMinPrice.bind(this);
     this.handleMaxPrice = this.handleMaxPrice.bind(this);
     this.handleBedsBathsClick = this.handleBedsBathsClick.bind(this);
+    this.handlePropertyTypeClick = this.handlePropertyTypeClick.bind(this);
     this.handleMoreFiltersClick = this.handleMoreFiltersClick.bind(this);
     this.handleBedsClick = this.handleBedsClick.bind(this);
     this.handleBathClick = this.handleBathClick.bind(this);
@@ -45,7 +48,8 @@ class FixedFilters extends React.Component {
   handleListingTypeClick() {
     this.setState({
       priceFilterOpen: false,
-      bedsBathsOpen: false
+      bedsBathsOpen: false,
+      propertyTypeOpen: false
     });
     this.setState(prevState => {
       return { listingTypeOpen: !prevState.listingTypeOpen }
@@ -60,7 +64,8 @@ class FixedFilters extends React.Component {
   handlePriceFilterClick() {
     this.setState({
       listingTypeOpen: false,
-      bedsBathsOpen: false
+      bedsBathsOpen: false,
+      propertyTypeOpen: false
     });
     this.setState(prevState => {
       return { priceFilterOpen: !prevState.priceFilterOpen }
@@ -107,10 +112,21 @@ class FixedFilters extends React.Component {
   handleBedsBathsClick() {
     this.setState({
       listingTypeOpen: false,
-      priceFilterOpen: false
+      priceFilterOpen: false,
+      propertyTypeOpen: false
     })
     this.setState(prevState => {
       return { bedsBathsOpen: !prevState.bedsBathsOpen }
+    })
+  }
+  handlePropertyTypeClick() {
+    this.setState({
+      listingTypeOpen: false,
+      priceFilterOpen: false,
+      bedsBathsOpen: false
+    })
+    this.setState(prevState => {
+      return { propertyTypeOpen: !prevState.propertyTypeOpen }
     })
   }
 
@@ -147,12 +163,16 @@ class FixedFilters extends React.Component {
     let minPriceLabel;
     if(this.state.minPrice === 0) {
       minPriceLabel = "No Min";
+    } else if(this.state.minPrice === 1000000) {
+      minPriceLabel = `US$${this.state.minPrice / 1000000}mm`
     } else {
       minPriceLabel = `US$${this.state.minPrice / 1000}k`
     }
     let maxPriceLabel;
     if(this.state.maxPrice === 0) {
       maxPriceLabel = "No Max";
+    } else if(this.state.maxPrice === 1000000) {
+      maxPriceLabel = `US$${this.state.maxPrice / 1000000}mm`
     } else {
       maxPriceLabel = `US$${this.state.maxPrice / 1000}k`
     }
@@ -163,7 +183,7 @@ class FixedFilters extends React.Component {
 
     let bedsLabel;
     if(this.state.beds === 0) {
-      bedsLabel = "Habitaciones y"
+      bedsLabel = "Hab. &"
     } else {
       bedsLabel = `${this.state.beds}hab,`
     }
@@ -183,7 +203,7 @@ class FixedFilters extends React.Component {
               <button onClick={this.handleListingTypeClick} className={buttonCssWhenOpen}>
                 <i className={this.state.listingType === "sell" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
                 <span>{this.state.listingType === "sell" ? "Comprar" : "Alquilar"}</span>
-                <i className="fas fa-angle-down"></i>
+                {this.state.listingTypeOpen ? <i className="fas fa-angle-up dynamic-angle"></i> : <i className="fas fa-angle-down dynamic-angle"></i>}
               </button>
               <div className={popoverCss}>
                 <div className="separator">
@@ -204,7 +224,7 @@ class FixedFilters extends React.Component {
                 <span>{minPriceLabel}</span>
                 <span>-</span>
                 <span>{maxPriceLabel}</span>
-                <i className="fas fa-angle-down"></i>
+                {this.state.priceFilterOpen ? <i className="fas fa-angle-up dynamic-angle"></i> : <i className="fas fa-angle-down dynamic-angle"></i>}
               </button>
               <div className={this.state.priceFilterOpen === true ? "exposed-popover price-filters open" : "exposed-popover price-filters"}>
                 <div className="container">
@@ -226,7 +246,7 @@ class FixedFilters extends React.Component {
               <button onClick={this.handleBedsBathsClick}>
                 <span>{bedsLabel}</span>
                 <span>{bathsLabel}</span>
-                <i className="fas fa-angle-down"></i>
+                {this.state.bedsBathsOpen ? <i className="fas fa-angle-up dynamic-angle"></i> : <i className="fas fa-angle-down dynamic-angle"></i>}
               </button>
               <div className={this.state.bedsBathsOpen ? "exposed-popover beds-baths open" : "exposed-popover beds-baths"}>
                 <div className="container">
@@ -259,7 +279,23 @@ class FixedFilters extends React.Component {
                 </div>
               </div>
             </div>
-            <span className="type filters">Tipo de propiedad</span>
+            <div className="type filters">
+              <button onClick={this.handlePropertyTypeClick}>
+                <span>Tipo de propiedad</span>
+                {this.state.propertyTypeOpen ? <i className="fas fa-angle-up dynamic-angle"></i> : <i className="fas fa-angle-down dynamic-angle"></i>}
+              </button>
+              <div className={this.state.propertyTypeOpen ? "exposed-popover type open" : "exposed-popover type"}>
+                <div className="container">
+                  <PropertyType onChecks={this.handleChecks}
+                                housesSelected={this.state.housesSelected}
+                                apartmentsSelected={this.state.apartmentsSelected}
+                                villasSelected={this.state.villasSelected}
+                                comercialSelected={this.state.comercialSelected}
+                                industrialSelected={this.state.industrialSelected}
+                                penthouseSelected={this.state.penthouseSelected}/>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="filter-section-button-right">
             <div className="filter-button filters">
