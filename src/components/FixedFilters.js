@@ -2,60 +2,11 @@ import React from "react";
 import "./FixedFilters.css";
 import PropTypes from 'prop-types';
 import InputFilters from "./InputFilters";
+import { minPriceList, maxPriceList } from "../utils/PriceUtils";
 
-const priceList = {
-  "sell": [
-    {value: 0, text: "No Min"},
-    {value: 50000, text: "US$ 50,000"},
-    {value: 75000, text: "US$ 75,000"},
-    {value: 100000, text: "US$ 100,000"},
-    {value: 125000, text: "US$ 125,000"},
-    {value: 150000, text: "US$ 150,000"},
-    {value: 175000, text: "US$ 175,000"},
-    {value: 200000, text: "US$ 200,000"},
-    {value: 225000, text: "US$ 225,000"},
-    {value: 250000, text: "US$ 250,000"},
-    {value: 275000, text: "US$ 275,000"},
-    {value: 300000, text: "US$ 300,000"},
-    {value: 350000, text: "US$ 350,000"},
-    {value: 400000, text: "US$ 400,000"},
-    {value: 450000, text: "US$ 450,000"},
-    {value: 500000, text: "US$ 500,000"},
-    {value: 550000, text: "US$ 550,000"},
-    {value: 600000, text: "US$ 600,000"},
-    {value: 6500000, text: "US$ 650,000"},
-    {value: 700000, text: "US$ 700,000"},
-    {value: 750000, text: "US$ 750,000"},
-    {value: 800000, text: "US$ 800,000"},
-    {value: 850000, text: "US$ 850,000"},
-    {value: 900000, text: "US$ 900,000"},
-    {value: 950000, text: "US$ 950,000"},
-    {value: 1000000, text: "US$ 1,000,000"}
-  ],
-  "rent": [
-    {value: 0, text: "No Min"},
-    {value: 500, text: "US$500"},
-    {value: 750, text: "US$750"},
-    {value: 1000, text: "US$ 1,000"},
-    {value: 1250, text: "US$ 1,250"},
-    {value: 1500, text: "US$ 1,500"},
-    {value: 1750, text: "US$ 1,750"},
-    {value: 2000, text: "US$ 2,000"},
-    {value: 2250, text: "US$ 2,250"},
-    {value: 2500, text: "US$ 2,500"},
-    {value: 2750, text: "US$ 2,750"},
-    {value: 3000, text: "US$ 3,000"},
-    {value: 3250, text: "US$ 3,250"},
-    {value: 3500, text: "US$ 3,500"},
-    {value: 3750, text: "US$ 3,750"},
-    {value: 4000, text: "US$ 4,000"},
-    {value: 4250, text: "US$ 4,250"},
-    {value: 4500, text: "US$ 4,500"},
-    {value: 4750, text: "US$ 4,750"},
-    {value: 5000, text: "US$ 5,000"}
-  ]
-}
 
+const bedValues = [0, 1, 2, 3, 4, 5];
+const bathValues = [0, 1, 2, 3, 4, 5];
 
 class FixedFilters extends React.Component {
   constructor(props) {
@@ -66,6 +17,7 @@ class FixedFilters extends React.Component {
       priceFilterOpen: false,
       minPrice: 0,
       maxPrice: 0,
+      bedsBathsOpen: false,
       moreFiltersOpen: false,
       beds: 0,
       baths: 0,
@@ -82,6 +34,7 @@ class FixedFilters extends React.Component {
     this.handlePriceFilterClick = this.handlePriceFilterClick.bind(this);
     this.handleMinPrice = this.handleMinPrice.bind(this);
     this.handleMaxPrice = this.handleMaxPrice.bind(this);
+    this.handleBedsBathsClick = this.handleBedsBathsClick.bind(this);
     this.handleMoreFiltersClick = this.handleMoreFiltersClick.bind(this);
     this.handleBedsClick = this.handleBedsClick.bind(this);
     this.handleBathClick = this.handleBathClick.bind(this);
@@ -90,7 +43,10 @@ class FixedFilters extends React.Component {
   }
 
   handleListingTypeClick() {
-    this.setState({ priceFilterOpen: false });
+    this.setState({
+      priceFilterOpen: false,
+      bedsBathsOpen: false
+    });
     this.setState(prevState => {
       return { listingTypeOpen: !prevState.listingTypeOpen }
     });
@@ -102,7 +58,10 @@ class FixedFilters extends React.Component {
   }
 
   handlePriceFilterClick() {
-    this.setState({ listingTypeOpen: false });
+    this.setState({
+      listingTypeOpen: false,
+      bedsBathsOpen: false
+    });
     this.setState(prevState => {
       return { priceFilterOpen: !prevState.priceFilterOpen }
     });
@@ -116,7 +75,7 @@ class FixedFilters extends React.Component {
       this.setState({ minPrice: parseInt(event.target.value) })
       this.setState({ maxPrice: prices[index] });
     } else if(this.state.listingType === "rent" && event.target.value > this.state.maxPrice && this.state.maxPrice !== 0) {
-      let prices = [0, 1000, 1500, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000];
+      let prices = [0, 1000, 1250, 1500, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000];
       let index = prices.findIndex(number => {
         return number > event.target.value;
       })
@@ -135,7 +94,7 @@ class FixedFilters extends React.Component {
       this.setState({ maxPrice: event.target.value = prices[index] });
       // this.setState({ maxPrice: prices[index] });
     } else if(this.state.listingType === "rent" && this.state.minPrice > event.target.value && parseInt(event.target.value) !== 0) {
-      let prices = [0, 1000, 1500, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000];
+      let prices = [0, 1000, 1250, 1500, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000];
       let index = prices.findIndex(number => {
         return number > this.state.minPrice;
       })
@@ -143,6 +102,16 @@ class FixedFilters extends React.Component {
     } else {
       this.setState({ maxPrice: parseInt(event.target.value) });
     }
+  }
+
+  handleBedsBathsClick() {
+    this.setState({
+      listingTypeOpen: false,
+      priceFilterOpen: false
+    })
+    this.setState(prevState => {
+      return { bedsBathsOpen: !prevState.bedsBathsOpen }
+    })
   }
 
   handleMoreFiltersClick() {
@@ -189,7 +158,22 @@ class FixedFilters extends React.Component {
     }
 
     let listingSelected = this.state.listingType;
-    let priceOptions = priceList[listingSelected];
+    let minPriceOptions = minPriceList[listingSelected];
+    let maxPriceOptions = maxPriceList[listingSelected];
+
+    let bedsLabel;
+    if(this.state.beds === 0) {
+      bedsLabel = "Habitaciones y"
+    } else {
+      bedsLabel = `${this.state.beds}hab,`
+    }
+    let bathsLabel;
+    if(this.state.baths === 0) {
+      bathsLabel = " Baños"
+    } else {
+      bathsLabel = ` ${this.state.baths}+ ba`
+    }
+
 
     return (
       <div className="fixed-filters">
@@ -199,6 +183,7 @@ class FixedFilters extends React.Component {
               <button onClick={this.handleListingTypeClick} className={buttonCssWhenOpen}>
                 <i className={this.state.listingType === "sell" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
                 <span>{this.state.listingType === "sell" ? "Comprar" : "Alquilar"}</span>
+                <i className="fas fa-angle-down"></i>
               </button>
               <div className={popoverCss}>
                 <div className="separator">
@@ -219,25 +204,61 @@ class FixedFilters extends React.Component {
                 <span>{minPriceLabel}</span>
                 <span>-</span>
                 <span>{maxPriceLabel}</span>
+                <i className="fas fa-angle-down"></i>
               </button>
               <div className={this.state.priceFilterOpen === true ? "exposed-popover price-filters open" : "exposed-popover price-filters"}>
                 <div className="container">
                   <div className="select left">
                     <select value={this.state.minPrice} onChange={this.handleMinPrice}>
-                      {priceOptions.map((o, index) => <option key={index} value={o.value}>{o.text}</option>)}
+                      {minPriceOptions.map((o, index) => <option key={index} value={o.value}>{o.text}</option>)}
                     </select>
                   </div>
                   <span>-</span>
                   <div className="select right">
                     <select value={this.state.maxPrice} onChange={this.handleMaxPrice}>
-                      {priceOptions.map((o, index) => <option key={index} value={o.value}>{o.text}</option>)}
+                      {maxPriceOptions.map((o, index) => <option key={index} value={o.value}>{o.text}</option>)}
                     </select>
                   </div>
                 </div>
               </div>
             </div>
-
-            <span className="beds-baths filters">Hab. & Baños</span>
+            <div className="beds-baths filters">
+              <button onClick={this.handleBedsBathsClick}>
+                <span>{bedsLabel}</span>
+                <span>{bathsLabel}</span>
+                <i className="fas fa-angle-down"></i>
+              </button>
+              <div className={this.state.bedsBathsOpen ? "exposed-popover beds-baths open" : "exposed-popover beds-baths"}>
+                <div className="container">
+                  <fieldset className="beds-filter">
+                    <legend>Habitaciones</legend>
+                    <div className="radio-options">
+                      {bedValues.map(value => {
+                        return (
+                          <label key={value}className={this.state.beds === value ? "label-button labels selected" : "label-button labels"}>
+                            {value === 0 ? "Todas" : value}
+                            <input type="radio" name="beds-options" value={value} onChange={this.handleBedsClick}/>
+                          </label>
+                        )
+                      })}
+                    </div>
+                  </fieldset>
+                  <fieldset className="bath-filter">
+                    <legend>Baños</legend>
+                    <div className="radio-options">
+                      {bathValues.map(value => {
+                        return (
+                          <label key={value}className={this.state.baths === value ? "label-button labels selected" : "label-button labels"}>
+                            {value === 0 ? "Todas" : `${value}+`}
+                            <input type="radio" name="bath-options" value={value} onChange={this.handleBathClick}/>
+                          </label>
+                        )
+                      })}
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
             <span className="type filters">Tipo de propiedad</span>
           </div>
           <div className="filter-section-button-right">

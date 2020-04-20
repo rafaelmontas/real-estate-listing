@@ -14,7 +14,7 @@
   background-color: #c30000;
   color: #fff;
 }
-.buy-sell button i {
+.buy-sell button i:first-child {
   margin-right: 5px;
 }
 .buy-sell button i.sell {
@@ -138,6 +138,31 @@
   font-size: 12px;
 }
 
+/* Beds and Baths button */
+.exposed-popover.beds-baths {
+  top: 50px;
+  left: 277px;
+  width: 325px;
+  /* right: 0; */
+  /* display: block; */
+}
+.exposed-popover.beds-baths.open {
+  display: block;
+}
+.exposed-popover.beds-baths .container {
+  padding: 8px;
+}
+.exposed-popover.beds-baths .container fieldset {
+  border: none;
+  margin-bottom: 10px;
+}
+.exposed-popover.beds-baths .container fieldset:last-child {
+  margin-bottom: 0;
+}
+.exposed-popover.beds-baths .container legend {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
 
 
 @media only screen and (min-width: 992px) {

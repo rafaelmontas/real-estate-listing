@@ -239,16 +239,11 @@ a {
   align-items: center;
 }
 .fixed-filters .search-results-filter-section div.filters {
-  /* border: 1px solid #e2e2e2; */
-  /* padding: 10px; */
-  /* cursor: pointer; */
-  /* border-radius: 4px; */
-  /* background-color: #fff; */
   margin-right: 5px;
   display: flex;
   overflow: hidden;
   height: 32px;
-  max-width: 115px;
+  max-width: 125px;
 }
 .fixed-filters .search-results-filter-section .buy-sell {
   flex: 1 2 auto;
@@ -275,7 +270,7 @@ a {
 
 
 
-.filter-section-left .beds-baths, .filter-section-left .type {
+.fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters, .filter-section-left .type {
   display: none;
 }
 
@@ -290,6 +285,9 @@ a {
 
 .fixed-filters .search-results-filter-section .filter-section-button-right {
   display: flex;
+}
+.fixed-filters .search-results-filter-section .filter-section-button-right div.filter-button {
+  margin-right: 0;
 }
 
 .fixed-filters .search-results-filter-section .filter-section-button-right span {
@@ -534,10 +532,10 @@ a {
 /************************************* Media Queries **************************************/
 
 @media only screen and (min-width: 768px) {
-  .filter-section-left .beds-baths, .filter-section-left .type {
-    display: block;
+  .fixed-filters .search-results-filter-section .filter-section-left .beds-baths.filters, .filter-section-left .type {
+    display: flex;
   }
-  .search-results-filter-section .filter-section-button-right .filter-button {
+  .search-results-filter-section .filter-section-button-right div.filter-button {
     display: none;
   }
 }
