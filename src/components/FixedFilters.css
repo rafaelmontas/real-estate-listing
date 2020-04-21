@@ -136,7 +136,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
-  background-image: url(/static/media/sort-down.ca82bc74.svg);
+  background-image: url("../demo_img/sort-down.svg");
   background-repeat: no-repeat;
   background-size: .65em auto, 100%;
   background-position: right .7em top 50%, 0 0;

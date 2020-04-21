@@ -576,6 +576,12 @@ a {
   }
 }
 
+@media only screen and (max-width: 991px) {
+  #results-column-left.search-results-columns.none {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .search-results-list-grid .home-card-container {
     width: 50%;
@@ -598,6 +604,14 @@ a {
 #map-div {
   height: calc(100% - 66px);
   /* border-radius: 8px; */
+}
+
+@media only screen and (max-width: 991px) {
+  #map-column-right.show {
+    display: block;
+    position: fixed;
+    height: 100%;
+  }
 }
 
 @media only screen and (min-width: 992px) {

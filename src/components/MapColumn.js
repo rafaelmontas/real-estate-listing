@@ -21,7 +21,7 @@ class MapColumn extends React.Component {
 
   render() {
     return (
-      <div id="map-column-right" className="search-results-columns">
+      <div id="map-column-right" className={this.props.mapOpen ? "search-results-columns show" : "search-results-columns"}>
         <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
         <div id="map-div">
           <Map
@@ -45,7 +45,8 @@ class MapColumn extends React.Component {
 
 MapColumn.propTypes = {
   properties: PropTypes.array.isRequired,
-  google: PropTypes.object.isRequired
+  google: PropTypes.object.isRequired,
+  mapOpen: PropTypes.bool.isRequired
 }
 
 export default GoogleApiWrapper({

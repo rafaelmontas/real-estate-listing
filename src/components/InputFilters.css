@@ -64,6 +64,10 @@
   text-align: center;
   border: 1px solid #e2e2e2;
   font-weight: 600;
+  cursor: pointer;
+}
+.radio-options .labels:hover {
+  border-color: #c30000;
 }
 .radio-options .labels:first-child {
   border-top-left-radius: 4px;
@@ -99,6 +103,7 @@
 }
 .property-types .options li label {
   display: block;
+  cursor: pointer;
 }
 .property-types .options li label input {
   margin-right: 5px;

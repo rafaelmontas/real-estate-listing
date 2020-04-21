@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import MapToggleMobile from './MapToggleMobile';
 
 class NavBar extends React.Component {
   render() {
@@ -18,7 +19,8 @@ class NavBar extends React.Component {
             </form>
           </div>
           <div className="navbar-menu-right">
-            <span className="map button">Mapa</span>
+            <MapToggleMobile mapOpen={this.props.mapOpen}
+                              onMapToggleClick={this.props.onMapToggleClick} />
             <a href="/" className="menu-item first"><i className="far fa-heart"></i>Favoritos</a>
             <a href="/" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
             <a href="/" className="menu-item button secondary">Iniciar Sesión</a>
@@ -31,7 +33,9 @@ class NavBar extends React.Component {
 }
 
 NavBar.propTypes = {
-  onSideDrawerToggleClick: PropTypes.func.isRequired
+  onSideDrawerToggleClick: PropTypes.func.isRequired,
+  mapOpen: PropTypes.bool.isRequired,
+  onMapToggleClick: PropTypes.func.isRequired
 }
 
 export default NavBar;

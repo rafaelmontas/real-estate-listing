@@ -18,10 +18,12 @@ class App extends React.Component {
     this.state = {
       properties: [],
       isLoading: false,
-      sideDrawerOpen: false
+      sideDrawerOpen: false,
+      MapToggleOpen: false
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
+    this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
   }
   
   componentDidMount() {
@@ -55,23 +57,37 @@ class App extends React.Component {
   handleBackdropClick() {
     this.setState({ sideDrawerOpen: false });
   }
+  handleMapToggleClick() {
+    this.setState((prevState) => {
+      return { MapToggleOpen: !prevState.MapToggleOpen };
+    })
+  }
 
   
 
-  render() {    
+  render() {
+    let mapOpenCss;
+    if(this.state.MapToggleOpen) {
+      mapOpenCss = "search-results-columns none"
+    } else {
+      mapOpenCss = "search-results-columns"
+    }
+    
     return (
       <div className="main-app-container">
         {this.state.sideDrawerOpen && <Backdrop onBackdropClick={this.handleBackdropClick} />}
         <SideDrawer show={this.state.sideDrawerOpen} />
-        <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick} />
+        <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
+                mapOpen={this.state.MapToggleOpen}
+                onMapToggleClick={this.handleMapToggleClick} />
         <section id="main-app-content" className="search-results-container">
-          <div id="results-column-left" className="search-results-columns">
+          <div id="results-column-left" className={mapOpenCss}>
             <FixedFilters status={this.state.isLoading}/>
             <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
             <Pagination />
             <Footer />
           </div>
-          <MapColumn properties={this.state.properties} />
+          <MapColumn properties={this.state.properties} mapOpen={this.state.MapToggleOpen} />
         </section>
       </div>
     )
