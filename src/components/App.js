@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import MapColumn from "./MapColumn";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
+import LoginModal from './LoginModal';
 
 import properties from '../data'
 
@@ -19,11 +20,13 @@ class App extends React.Component {
       properties: [],
       isLoading: false,
       sideDrawerOpen: false,
-      MapToggleOpen: false
+      MapToggleOpen: false,
+      loginOpen: false
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
   }
   
   componentDidMount() {
@@ -55,7 +58,10 @@ class App extends React.Component {
     });
   }
   handleBackdropClick() {
-    this.setState({ sideDrawerOpen: false });
+    this.setState({
+      sideDrawerOpen: false,
+      loginOpen: false
+    });
   }
   handleMapToggleClick() {
     this.setState((prevState) => {
@@ -63,6 +69,12 @@ class App extends React.Component {
     })
   }
 
+  handleLoginClick() {
+    this.setState({
+      loginOpen: true,
+      sideDrawerOpen: false
+    });
+  }
   
 
   render() {
@@ -75,11 +87,14 @@ class App extends React.Component {
     
     return (
       <div className="main-app-container">
-        {this.state.sideDrawerOpen && <Backdrop onBackdropClick={this.handleBackdropClick} />}
-        <SideDrawer show={this.state.sideDrawerOpen} />
+        {this.state.sideDrawerOpen || this.state.loginOpen && <Backdrop onBackdropClick={this.handleBackdropClick} />}
+        <SideDrawer show={this.state.sideDrawerOpen}
+                    onLoginClick={this.handleLoginClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
                 mapOpen={this.state.MapToggleOpen}
-                onMapToggleClick={this.handleMapToggleClick} />
+                onMapToggleClick={this.handleMapToggleClick}
+                onLoginClick={this.handleLoginClick} />
+        {this.state.loginOpen && <LoginModal />}
         <section id="main-app-content" className="search-results-container">
           <div id="results-column-left" className={mapOpenCss}>
             <FixedFilters status={this.state.isLoading}/>

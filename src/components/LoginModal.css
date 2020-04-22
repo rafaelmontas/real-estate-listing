@@ -1,0 +1,30 @@
+.login-modal {
+  position: fixed;
+  z-index: 400;
+  background-color: #fff;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  border-radius: 4px;
+}
+.login-modal .container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .login-modal {
+    width: 600px;
+    height: calc(100% - 150px);
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+

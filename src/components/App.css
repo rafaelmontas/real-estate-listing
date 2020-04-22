@@ -129,6 +129,7 @@ a {
 .navbar-menu-right .menu-item.button.secondary:hover {
   background-color: #f8f8fa;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .navbar-menu-right .menu-item.button.primary {

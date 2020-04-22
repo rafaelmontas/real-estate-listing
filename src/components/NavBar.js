@@ -23,7 +23,8 @@ class NavBar extends React.Component {
                               onMapToggleClick={this.props.onMapToggleClick} />
             <a href="/" className="menu-item first"><i className="far fa-heart"></i>Favoritos</a>
             <a href="/" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
-            <a href="/" className="menu-item button secondary">Iniciar Sesión</a>
+            <span className="menu-item button secondary" onClick={this.props.onLoginClick}>Iniciar Sesión</span>
+            {/* <a href="/" className="menu-item button secondary">Iniciar Sesión</a> */}
             <a href="/" className="menu-item button primary">Registrarse</a>
           </div>
         </div>
@@ -35,7 +36,8 @@ class NavBar extends React.Component {
 NavBar.propTypes = {
   onSideDrawerToggleClick: PropTypes.func.isRequired,
   mapOpen: PropTypes.bool.isRequired,
-  onMapToggleClick: PropTypes.func.isRequired
+  onMapToggleClick: PropTypes.func.isRequired,
+  onLoginClick: PropTypes.func.isRequired
 }
 
 export default NavBar;

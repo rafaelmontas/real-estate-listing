@@ -48,7 +48,7 @@ class SideDrawer extends React.Component {
           </ul>
         </div>
         <div className="bottom-div">
-          <div className="login-button button">
+          <div className="login-button button" onClick={this.props.onLoginClick}>
             <i className="far fa-arrow-alt-circle-right"></i>
             Iniciar Sesión
           </div>
@@ -64,7 +64,8 @@ class SideDrawer extends React.Component {
 }
 
 SideDrawer.propTypes = {
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool.isRequired,
+  onLoginClick: PropTypes.func.isRequired
 }
 
 export default SideDrawer;
