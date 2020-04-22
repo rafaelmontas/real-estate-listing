@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 class PropertyCard extends React.Component {
   render() {
     return (
       <div className="home-card-container">
         <div className="home-card">
-          <a href="/">
+          <Link to={`/properties/${this.props.property.id}`}>
             <div className="property-card-media">
               <div className="photo-container">
                 <img src={this.props.property.imgSrc} alt="property"/>
@@ -25,7 +26,7 @@ class PropertyCard extends React.Component {
               <div className="home-card-address">{this.props.property.address}</div>
               <div className="home-card-sector">{this.props.property.sector}</div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     )
