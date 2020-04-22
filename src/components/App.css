@@ -601,6 +601,15 @@ a {
 #map-column-right .save-search {
   display: none;
 }
+
+#map-column-right .filter-button {
+  position: absolute;
+  top: 15px;
+  z-index: 200;
+}
+
+
+
 #map-div {
   height: calc(100% - 66px);
   /* border-radius: 8px; */

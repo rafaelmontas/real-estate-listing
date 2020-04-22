@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import InputFilters from "./InputFilters";
 import { minPriceList, maxPriceList } from "../utils/PriceUtils";
 import PropertyType from "./PropertyType";
+import FilterToggle from "./FilterToggle";
 
 
 const bedValues = [0, 1, 2, 3, 4, 5];
@@ -299,10 +300,7 @@ class FixedFilters extends React.Component {
           </div>
           <div className="filter-section-button-right">
             <div className="filter-button filters">
-              <button onClick={this.handleMoreFiltersClick}>
-                Filtros
-                <i className="fas fa-angle-down"></i>
-              </button>
+              <FilterToggle onFilterClick={this.handleMoreFiltersClick} />
               <InputFilters show={this.state.moreFiltersOpen}
                             onBedsClick={this.handleBedsClick}
                             bedOptionSelected={this.state.beds}

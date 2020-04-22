@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-
+// import FilterToggle from './FilterToggle';
 
 const mapStyles = {
   width: '100%',
@@ -23,6 +23,9 @@ class MapColumn extends React.Component {
     return (
       <div id="map-column-right" className={this.props.mapOpen ? "search-results-columns show" : "search-results-columns"}>
         <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
+        <div className="filter-button">
+          {/* <FilterToggle /> */}
+        </div>
         <div id="map-div">
           <Map
             google={this.props.google}
