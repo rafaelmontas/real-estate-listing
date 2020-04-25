@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import NavBar from "./NavBar";
 import FixedFilters from "./FixedFilters";
@@ -12,6 +13,10 @@ import LoginModal from './LoginModal';
 
 import properties from '../data'
 
+import {Route, Switch} from 'react-router-dom';
+// import { AnimatedRoute } from 'react-router-transition';
+import PropertyDetails from './PropertyDetails';
+import Favorites from './Favorites';
 
 class MainSearch extends React.Component {
   constructor(props) {
@@ -85,9 +90,13 @@ class MainSearch extends React.Component {
       mapOpenCss = "search-results-columns"
     }
     
+    let backdrop;
+    if(this.state.sideDrawerOpen || this.state.loginOpen) {
+      backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
+    }
     return (
       <div className="main-app-container">
-        {this.state.sideDrawerOpen || this.state.loginOpen && <Backdrop onBackdropClick={this.handleBackdropClick} />}
+        {backdrop}
         <SideDrawer show={this.state.sideDrawerOpen}
                     onLoginClick={this.handleLoginClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
@@ -95,18 +104,35 @@ class MainSearch extends React.Component {
                 onMapToggleClick={this.handleMapToggleClick}
                 onLoginClick={this.handleLoginClick} />
         {this.state.loginOpen && <LoginModal />}
-        <section id="main-app-content" className="search-results-container">
-          <div id="results-column-left" className={mapOpenCss}>
-            <FixedFilters status={this.state.isLoading}/>
-            <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
-            <Pagination />
-            <Footer />
-          </div>
-          <MapColumn properties={this.state.properties} mapOpen={this.state.MapToggleOpen} />
-        </section>
+        <Switch>
+          <Route path={this.props.match.url} exact>
+            <section id="main-app-content" className="search-results-container">
+              <div id="results-column-left" className={mapOpenCss}>
+                <FixedFilters status={this.state.isLoading}/>
+                <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
+                <Pagination />
+                <Footer />
+              </div>
+              <MapColumn properties={this.state.properties} mapOpen={this.state.MapToggleOpen} />
+            </section>
+          </Route>
+          <Route path="/properties/favorites" exact component={Favorites} />
+          <Route path="/properties/:id" exact component={PropertyDetails}/>
+          {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
+          atEnter={{ offset: -100 }}
+          atLeave={{ offset: -100 }}
+          atActive={{ offset: 0 }}
+          mapStyles={(styles) => ({
+            transform: `translateX(${styles.offset}%)`,
+          })}/> */}
+        </Switch>
       </div>
     )
   }
+}
+
+MainSearch.propTypes = {
+  match: PropTypes.object.isRequired
 }
 
 export default MainSearch;

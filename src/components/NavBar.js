@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import MapToggleMobile from './MapToggleMobile';
+import {Link} from 'react-router-dom';
 
 class NavBar extends React.Component {
   render() {
@@ -12,7 +13,7 @@ class NavBar extends React.Component {
               <i className="fas fa-bars"></i>
             </span>
             <span className="logo-img"><i className="fas fa-home"></i></span>
-            <span className="brand-logo-name">NewApp</span>
+            <Link to="/"><span className="brand-logo-name">NewApp</span></Link>
             <form action="">
               <input type="text"/>
               <button><i className="fas fa-search"></i></button>
@@ -21,7 +22,7 @@ class NavBar extends React.Component {
           <div className="navbar-menu-right">
             <MapToggleMobile mapOpen={this.props.mapOpen}
                               onMapToggleClick={this.props.onMapToggleClick} />
-            <a href="/" className="menu-item first"><i className="far fa-heart"></i>Favoritos</a>
+            <Link to="/properties/favorites" className="menu-item first"><i className="far fa-heart"></i>Favoritos</Link>
             <a href="/" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
             <span className="menu-item button secondary" onClick={this.props.onLoginClick}>Iniciar Sesión</span>
             {/* <a href="/" className="menu-item button secondary">Iniciar Sesión</a> */}

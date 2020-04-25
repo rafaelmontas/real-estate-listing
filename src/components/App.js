@@ -1,6 +1,6 @@
 import React from 'react';
+import Home from './Home';
 import MainSearch from './MainSearch';
-import Show from './Show';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 class App extends React.Component {
@@ -8,8 +8,8 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={MainSearch} />
-          <Route path="/properties/:id" exact component={Show} />
+          <Route path="/" exact component={Home} />
+          <Route path="/properties" component={MainSearch} />
         </Switch>
       </BrowserRouter>
     )
