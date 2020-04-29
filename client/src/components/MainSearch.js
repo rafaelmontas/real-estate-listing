@@ -11,7 +11,7 @@ import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
 
-import properties from '../data'
+// import properties from '../data'
 
 import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
@@ -37,10 +37,14 @@ class MainSearch extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      this.setState({
-        properties: properties,
-        isLoading: false
-      });
+      fetch("/properties")
+        .then(res => res.json())
+        .then(properties => {
+          this.setState({
+            properties: properties,
+            isLoading: false
+          });
+        });
     }, 2000)
   }
   componentWillUnmount() {

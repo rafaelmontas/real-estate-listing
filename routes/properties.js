@@ -1,8 +1,9 @@
 const express = require('express');
 const propertiesRouter = express.Router();
+const properties = require("../data");
 
 propertiesRouter.get("/", (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send(properties);
 })
 
 
