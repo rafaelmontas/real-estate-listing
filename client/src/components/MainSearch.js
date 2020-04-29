@@ -72,6 +72,7 @@ class MainSearch extends React.Component {
     this.setState((prevState) => {
       return { MapToggleOpen: !prevState.MapToggleOpen };
     })
+    // Add redirect to /properties url to show map - will unmount property details component
   }
 
   handleLoginClick() {
