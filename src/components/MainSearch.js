@@ -117,7 +117,7 @@ class MainSearch extends React.Component {
             </section>
           </Route>
           <Route path="/properties/favorites" exact component={Favorites} />
-          <Route path="/properties/:id" exact component={PropertyDetails}/>
+          <Route path={`${this.props.match.url}/:id`} exact component={PropertyDetails}/>
           {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
           atEnter={{ offset: -100 }}
           atLeave={{ offset: -100 }}
