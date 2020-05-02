@@ -1,46 +1,59 @@
-const Sequelize = require('sequelize');
-const db = require('../config/database');
-
-const Property = db.define('property', {
-  title: {
-    type: Sequelize.STRING
-  },
-  sector: {
-    type: Sequelize.STRING
-  },
-  price: {
-    type: Sequelize.INTEGER
-  },
-  parkings: {
-    type: Sequelize.INTEGER
-  },
-  mts: {
-    type: Sequelize.INTEGER
-  },
-  lng: {
-    type: Sequelize.INTEGER
-  },
-  lat: {
-    type: Sequelize.INTEGER
-  },
-  listing_type: {
-    type: Sequelize.STRING
-  },
-  description: {
-    type: Sequelize.TEXT
-  },
-  beds: {
-    type: Sequelize.INTEGER
-  },
-  baths: {
-    type: Sequelize.INTEGER
-  },
-  address: {
-    type: Sequelize.STRING
-  },
-  property_type: {
-    type: Sequelize.STRING
-  },
-})
-
-module.exports = Property;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Property = sequelize.define('property', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    sector: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    parkings: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    mts: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    lng: {
+      type: DataTypes.INTEGER
+    },
+    lat: {
+      type: DataTypes.INTEGER
+    },
+    listing_type: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    beds: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    baths: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    property_type: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {});
+  // Property.associate = function(models) {
+  //   associations can be defined here
+  // };
+  return Property;
+};

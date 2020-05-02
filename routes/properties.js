@@ -1,6 +1,7 @@
 const express = require('express');
 const propertiesRouter = express.Router();
-const Property =  require('../models/Property');
+const db =  require('../models');
+const Property = db.property;
 
 const properties = require("../data");
 
