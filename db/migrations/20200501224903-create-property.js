@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      imgSrc: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       sector: {
         allowNull: false,
         type: Sequelize.STRING
@@ -29,10 +33,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       lng: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       lat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       listing_type: {
         allowNull: false,

@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    imgSrc: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     sector: {
       type: DataTypes.STRING,
       allowNull: false
@@ -22,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     lng: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     },
     lat: {
-      type: DataTypes.INTEGER
+      type: DataTypes.FLOAT
     },
     listing_type: {
       type: DataTypes.STRING,

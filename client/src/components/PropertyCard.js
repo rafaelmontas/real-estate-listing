@@ -20,7 +20,7 @@ class PropertyCard extends React.Component {
               <div className="home-card-stats">
                 <div className="stats beds"><i className="fas fa-bed"></i>{this.props.property.beds}</div>
                 <div className="stats baths"><i className="fas fa-bath"></i>{this.props.property.baths}</div>
-                <div className="stats cars"><i className="fas fa-car-side"></i>{this.props.property.cars}</div>
+                <div className="stats cars"><i className="fas fa-car-side"></i>{this.props.property.parkings}</div>
                 <div className="stats mts"><i className="fas fa-ruler-vertical"></i>{this.props.property.mts} mts</div>
               </div>
               <div className="home-card-address">{this.props.property.address}</div>
