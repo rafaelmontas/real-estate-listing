@@ -1,0 +1,67 @@
+.full-details-view {
+  width: 100%;
+  padding: 0 20px;
+}
+/* Header */
+.details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+/* Back button */
+.details-header .back-to-search {
+  cursor: pointer;
+  color: #1A2258;
+}
+.details-header .back-to-search .fa-long-arrow-alt-left {
+  margin-right: 10px;
+}
+
+/* Like and Share buttons (Right) */
+.details-header .like-share-buttons {
+  display: flex;
+}
+.details-header .like-share-buttons span.buttons {
+  /* padding: 8px 8px;
+  border: 1px solid #e2e2e2; */
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.details-header .like-share-buttons span.buttons .button-text {
+  display: none;
+}
+.details-header .like-share-buttons span:hover {
+  background-color: #f5f4f4;
+}
+.details-header .like-share-buttons span i {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #1A2258;
+}
+.details-header .like-share-buttons span:first-child {
+  margin-right: 10px;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .full-details-view {
+    max-width: 1080px;
+    padding: 0;
+    margin: 0 auto;
+  }
+  .details-header .back-to-search {
+    padding: 8px 0;
+  }
+  /* Right Buttons */
+  .details-header .like-share-buttons span.buttons {
+    padding: 8px 8px;
+    border: 1px solid #e2e2e2;
+  }
+  .details-header .like-share-buttons span.buttons .button-text {
+    display: inline-block;
+  }
+}

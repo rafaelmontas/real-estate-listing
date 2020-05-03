@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "askForPassword": true,
+      "database": "real_estate_listing",
+      "dialect": "PostgreSQL",
+      "name": "real_estate_listing",
+      "port": 5432,
+      "server": "localhost",
+      "username": "rafaelmontas"
+    }
+  ]
+}
