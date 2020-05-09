@@ -49,7 +49,7 @@ class PropertyDetails extends React.Component {
             <div className="main-section">
               <div className="collage-grid">
                 <div className="media-main">
-                  <img src={this.state.property.imgSrc}></img>
+                  <img src={this.state.property.imgSrc} alt="property"></img>
                   <div className="photos-badge">
                     <i className="far fa-image"></i>
                     <span>6</span>
@@ -58,20 +58,68 @@ class PropertyDetails extends React.Component {
                 </div>
                 <div className="second-media">
                   <div className="photo-top">
-                    <img src={this.state.property.imgSrc}></img>
+                    <img src={this.state.property.imgSrc} alt="property"></img>
                   </div>
                   <div className="photo-bottom">
-                    <img src={this.state.property.imgSrc}></img>
+                    <img src={this.state.property.imgSrc} alt="property"></img>
                   </div>
                 </div>
               </div>
+              {/* Details Section */}
               <div className="details-section">
+                {/* Info Header */}
+                <div className="info-header">
+                  <div className="price-info">
+                    <div className="price-status-wraper">
+                      <span className="price-tag">US${this.state.property.price}</span>
+                      <div className="status">
+                        <i className={this.state.property.listing_type === "sell" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
+                        <span>{this.state.property.listing_type === "sell" ? "En venta" : "En Alquiler"}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="stats-info">
+                    <div className="stats">
+                      <i className="fas fa-bed"></i>
+                      <span>{this.state.property.beds}</span>
+                      <span className="text">Hab.</span>
+                    </div>
+                    <div className="stats">
+                      <i className="fas fa-bath"></i>
+                      <span>{this.state.property.baths}</span>
+                      <span className="text">Baños</span>
+                    </div>
+                    <div className="stats">
+                      <i className="fas fa-car-side"></i>
+                      <span>{this.state.property.parkings}</span>
+                      <span className="text">Parqueos</span>
+                    </div>
+                    <div className="stats">
+                      <i className="fas fa-ruler-vertical"></i>
+                      <span>{this.state.property.mts} Mts2</span>
+                    </div>
+                  </div>
+                  <div className="address-info">
+                    <span>{this.state.property.sector}, {this.state.property.address}</span>
+                  </div>
+                  <div className="extra-info">
+                    <div className="video-badge">
+                      <i className="fas fa-video"></i>
+                      <span>Tour en video</span>
+                    </div>
+                    <span className="map-link"><i className="fas fa-map-marker-alt"></i> Ver en mapa</span>
+                  </div>
+                </div>
+                {/* Info Header end */}
                 <h1>hi {this.props.match.params.id}</h1>
                 <h3>{this.state.property.price}</h3>
               </div>
+              {/* Details Section End */}
             </div>
             <div className="info-section">
-              <h1>broker info</h1>
+              <div className="info-wraper">
+                <h1>broker info</h1>
+              </div>
             </div>
           </div>
         </div>

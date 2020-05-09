@@ -60,7 +60,7 @@
 .main-content .main-section {
   flex: 1 1 auto;
   /* margin-top: 20px; */
-  background-color: #e2e2e2;
+  /* background-color: #e2e2e2; */
 }
 .main-section .collage-grid {
   display: flex;
@@ -125,18 +125,105 @@
   cursor: pointer;
 }
 
-
+/* Details Section */
 .main-section .details-section {
   padding: 0 20px;
+}
+.main-section .details-section .info-header {
+  padding: 20px 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+.main-section .details-section .info-header .price-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.main-section .details-section .info-header .price-info .price-status-wraper {
+  display: flex;
+}
+.main-section .details-section .info-header .price-info .price-tag {
+  font-weight: bold;
+  font-size: 24px;
+  margin-right: 20px;
+}
+.main-section .details-section .info-header .price-info .status {
+  display: flex;
+  align-items: center;
+}
+.main-section .details-section .info-header .price-info i {
+  font-size: 12px;
+  margin-right: 5px;
+}
+.main-section .details-section .info-header .price-info i.sell {
+  color: #57bf18;
+}
+.main-section .details-section .info-header .price-info i.rent {
+  color: #f7e500;
+}
+
+.info-header .stats-info {
+  display: flex;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.info-header .stats-info .stats {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  color: #545252;
+}
+.info-header .stats-info .stats i {
+  margin-right: 5px;
+}
+.info-header .stats-info .stats span.text {
+  margin-left: 5px;
+  display: none;
+}
+.info-header .address-info {
+  margin-bottom: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.info-header .extra-info {
+  display: flex;
+  align-items: center;
+}
+.main-section .details-section .info-header .extra-info .video-badge {
+  display: inline-flex;
+  padding: 4px 8px;
+  background-color: #2270ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  align-items: center;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.main-section .details-section .info-header .extra-info .video-badge i {
+  margin-right: 5px;
+}
+.info-header .extra-info .map-link {
+  color: #2270FF;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 
 .main-content .info-section {
   display: none;
-  /* flex: 0 0 360px;
-  margin-left: 60px;
-  margin-top: 20px;
-  background-color: #e2e2e2; */
+}
+.main-content .info-section .info-wraper {
+  position: sticky;
+  border-radius: 2px;
+  top: 75px;
+  background-color: #fff;
+  height: 400px;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,.1);
+  z-index: 500;
 }
 
 
@@ -199,13 +286,15 @@
   .main-section .details-section {
     padding: 0;
   }
-
+  .info-header .stats-info .stats span.text {
+    display: inline;
+  }
   /* Broker info */
   .main-content .info-section {
     display: block;
     flex: 0 0 360px;
     margin-left: 60px;
     margin-top: 20px;
-    background-color: #e2e2e2;
+    /* background-color: #e2e2e2; */
   }
 }
