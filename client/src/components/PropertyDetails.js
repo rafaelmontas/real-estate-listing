@@ -111,6 +111,45 @@ class PropertyDetails extends React.Component {
                   </div>
                 </div>
                 {/* Info Header end */}
+                <div className="amenities">
+                  <div className="amenities-header">
+                    <h3>Amenidades</h3>
+                  </div>
+                  <div className="amenities-details">
+                    <div className="amenity">
+                      <i className="fas fa-dumbbell"></i>
+                      <span>Gimnasio</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="fas fa-user-tie"></i>
+                      <span>Portero</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="fas fa-charging-station"></i>
+                      <span>Planta Eléctrica</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="fas fa-wind"></i>
+                      <span>Aire Acondicionado</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="fas fa-swimming-pool"></i>
+                      <span>Piscina</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="fas fa-lock"></i>
+                      <span>Seguridad</span>
+                    </div>
+                    <div className="amenity">
+                      <i className="far fa-caret-square-up"></i>
+                      <span>Ascensor</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="description">
+                  <h3>Descripción</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
+                </div>
                 <h1>hi {this.props.match.params.id}</h1>
                 <h3>{this.state.property.price}</h3>
               </div>
