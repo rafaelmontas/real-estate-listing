@@ -130,7 +130,7 @@
   padding: 0 20px;
 }
 .main-section .details-section .info-header {
-  padding: 20px 0;
+  padding: 20px 0 25px 0;
   border-bottom: 1px solid #e2e2e2;
 }
 .main-section .details-section .info-header .price-info {
@@ -246,8 +246,25 @@
 }
 .description h3 { 
   margin-bottom: 20px;
+  font-size: 14px;
 }
 
+
+
+.map-section {
+  margin-bottom: 25px;
+}
+.map-section h3 {
+  margin-bottom: 20px;
+}
+.map-section .map {
+  position: relative;
+  height: 200px;
+}
+.map-section h3 {
+  color: #3E4246;
+  font-size: 14px;
+}
 
 .main-content .info-section {
   display: none;
@@ -338,7 +355,17 @@
     font-size: 16px;
   }
 
+  .description h3 {
+    font-size: initial;
+  }
 
+
+  .map-section h3 {
+    font-size: initial;
+  }
+  .map-section .map {
+    height: 300px;
+  }
 
   /* Broker info */
   .main-content .info-section {

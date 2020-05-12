@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './PropertyDetails.css';
+import MapSection from './PropertyDetails/MapSection';
 
 class PropertyDetails extends React.Component {
   constructor(props) {
@@ -146,12 +147,11 @@ class PropertyDetails extends React.Component {
                     </div>
                   </div>
                 </div>
+                <MapSection property={this.state.property}/>
                 <div className="description">
                   <h3>Descripción</h3>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
                 </div>
-                <h1>hi {this.props.match.params.id}</h1>
-                <h3>{this.state.property.price}</h3>
               </div>
               {/* Details Section End */}
             </div>
