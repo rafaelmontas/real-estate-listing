@@ -1,0 +1,40 @@
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.form-wraper {
+  padding: 20px;
+}
+.form-wraper h5 {
+  text-transform: uppercase;
+  color: #7d7d7d;
+  margin-bottom: 10px;
+}
+.form-wraper .top-inputs {
+  display: flex;
+  margin-bottom: 10px;
+}
+.form-wraper label {
+  font-size: 14px;
+}
+.form-wraper span.send-button {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #e2e2e2;
+  background-color: #5957ff;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.form-wraper span.send-button i {
+  margin-left: 5px;
+}
+.contact-container .broker-info {
+  height: 100%;
+  background-color: #f7f7f7;
+}

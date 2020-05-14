@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import './PropertyDetails.css';
 import MapSection from './PropertyDetails/MapSection';
+import ContactForm from './PropertyDetails/ContactForm';
 
 class PropertyDetails extends React.Component {
   constructor(props) {
@@ -72,7 +74,9 @@ class PropertyDetails extends React.Component {
                 <div className="info-header">
                   <div className="price-info">
                     <div className="price-status-wraper">
-                      <span className="price-tag">US${this.state.property.price}</span>
+                      <span className="price-tag">
+                        <NumberFormat value={this.state.property.price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
+                      </span>
                       <div className="status">
                         <i className={this.state.property.listing_type === "sell" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
                         <span>{this.state.property.listing_type === "sell" ? "En venta" : "En Alquiler"}</span>
@@ -153,11 +157,15 @@ class PropertyDetails extends React.Component {
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
                 </div>
               </div>
+              <div className="ad-section">
+                <span>Publicidad</span>
+                <div className="advertisement"></div>
+              </div>
               {/* Details Section End */}
             </div>
             <div className="info-section">
               <div className="info-wraper">
-                <h1>broker info</h1>
+                <ContactForm/>
               </div>
             </div>
           </div>

@@ -249,6 +249,24 @@
   font-size: 14px;
 }
 
+.ad-section {
+  padding: 30px 0 50px;
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  margin: 30px 0;
+  display: none;
+}
+.ad-section span {
+  display: block;
+  margin-bottom: 20px;
+  color: #767676;
+  font-size: .75em;
+}
+.ad-section .advertisement {
+  background-color: #efefef;
+  height: 90px;
+}
+
 
 
 .map-section {
@@ -359,6 +377,9 @@
     font-size: initial;
   }
 
+  .ad-section {
+    display: block;
+  }
 
   .map-section h3 {
     font-size: initial;
