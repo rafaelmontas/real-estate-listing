@@ -1,0 +1,34 @@
+.similar-properties {
+  display: flex;
+  justify-content: center;
+  background-color: #f4f5f7;
+  margin-top: 40px;
+  min-height: 500px;
+}
+.similar-properties .similar-properties-container {
+  padding: 20px;
+  width: 100%;
+}
+.similar-properties-container h2 {
+  margin-bottom: 20px;
+}
+.similar-properties-container .property-list .home-card-container {
+  flex-basis: 100%;
+}
+
+
+@media only screen and (min-width: 576px) {
+  .similar-properties-container .property-list .home-card-container {
+    flex-basis: 50%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .similar-properties .similar-properties-container {
+    padding: 40px 0;
+    max-width: 1080px;
+  }
+  .similar-properties-container .property-list .home-card-container {
+    flex-basis: 25%;
+  }
+}
