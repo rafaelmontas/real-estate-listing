@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
 
 class PropertyCard extends React.Component {
@@ -15,7 +16,9 @@ class PropertyCard extends React.Component {
               </div>
             </div>
             <div className="property-card-info">
-              <span className="home-card-price">US$ {this.props.property.price}</span>
+              <span className="home-card-price">
+                <NumberFormat value={this.props.property.price} displayType={'text'} thousandSeparator={true} prefix={'US$'}/>
+              </span>
               <div className="favorite-button"><i className="far fa-heart"></i></div>
               <div className="home-card-stats">
                 <div className="stats beds"><i className="fas fa-bed"></i>{this.props.property.beds}</div>

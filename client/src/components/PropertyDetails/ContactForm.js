@@ -32,7 +32,21 @@ class ContactForm extends React.Component {
           </span>
         </form>
         <div className="broker-info">
-          <h5>Inmobiliaria</h5>
+          <div className="agent-info">
+            <img src="https://s3.amazonaws.com/real.estate.dom/agent.jpg"/>
+            <div className="agent-text">
+              <h5>Agent Name</h5>
+              <span className="cel">
+                Cel:
+                <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
+              </span>
+              <span className="cel">
+                Whatsapp:
+                <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
+              </span>
+              <span className="properties-listed">Propiedades (15)</span>
+            </div>
+          </div>
         </div>
       </div>
     )
