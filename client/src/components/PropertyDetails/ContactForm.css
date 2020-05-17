@@ -64,3 +64,6 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.agent-section-skeleton span span {
+  border-radius: 0;
+}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import './PropertyDetails.css';
 import CollageGrid from './PropertyDetails/CollageGrid';
+import BrokerSection from './PropertyDetails/BrokerSection';
 import MapSection from './PropertyDetails/MapSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
@@ -13,11 +14,16 @@ class PropertyDetails extends React.Component {
     this.state = {
       property: {},
       similarProperties: [],
-      isLoading: false
+      isLoading: false,
+      isContactFormLoading: false
     }
   }
 
   componentDidMount() {
+    this.setState({ isContactFormLoading: true })
+    this.timer = setTimeout(() => {
+      this.setState( {isContactFormLoading: false} )
+    }, 2000)
     fetch(`/properties/${this.props.match.params.id}`)
           .then(res => res.json())
           .then(property => {
@@ -41,7 +47,7 @@ class PropertyDetails extends React.Component {
       );
     }
 
-    if(this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({ isLoading: true })
       this.timer = setTimeout(() => {
         fetch(`/properties/${this.props.match.params.id}`)
@@ -171,6 +177,7 @@ class PropertyDetails extends React.Component {
                       </div>
                     </div>
                   </div>
+                  <BrokerSection/>
                   <MapSection property={this.state.property}/>
                   <div className="description">
                     <h3>Descripción</h3>
@@ -185,7 +192,7 @@ class PropertyDetails extends React.Component {
               </div>
               <div className="info-section">
                 <div className="info-wraper">
-                  <ContactForm/>
+                  <ContactForm loadingStatus={this.state.isContactFormLoading}/>
                 </div>
               </div>
             </div>

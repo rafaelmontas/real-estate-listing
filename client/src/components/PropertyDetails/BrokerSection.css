@@ -1,0 +1,22 @@
+.broker-section {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 25px;
+}
+.broker-section .broker-name span {
+  color: #3838fd;
+  text-decoration: underline;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.broker-section .broker-logo img {
+  max-width: 100px;
+  max-height: 50px;
+}
+
+@media only screen and (min-width: 992px) {
+  .broker-section {
+    display: flex;
+  }
+}

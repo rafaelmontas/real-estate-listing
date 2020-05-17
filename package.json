@@ -30,7 +30,6 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.3"
   }
