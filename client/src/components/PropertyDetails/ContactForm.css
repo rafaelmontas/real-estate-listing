@@ -35,35 +35,9 @@
   margin-left: 5px;
 }
 
-.contact-container .broker-info {
+.contact-container .agent-section {
   display: flex;
   height: 100%;
   padding: 10px 20px;
   background-color: #f7f7f7;
-}
-.contact-container .broker-info .agent-info {
-  display: flex;
-  align-items: center;
-}
-.agent-info img {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-.agent-info .agent-text span {
-  font-size: 14px;
-  display: block;
-}
-.agent-info .agent-text span.cel span {
-  display: inline-block;
-  margin-left: 5px;
-}
-.agent-info .agent-text .properties-listed {
-  color: #3838fd;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.agent-section-skeleton span span {
-  border-radius: 0;
 }

@@ -5,6 +5,7 @@ import './PropertyDetails.css';
 import CollageGrid from './PropertyDetails/CollageGrid';
 import BrokerSection from './PropertyDetails/BrokerSection';
 import MapSection from './PropertyDetails/MapSection';
+import AgentSection from './PropertyDetails/AgentSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
 
@@ -183,6 +184,7 @@ class PropertyDetails extends React.Component {
                     <h3>Descripción</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
                   </div>
+                  <AgentSection/>
                 </div>
                 <div className="ad-section">
                   <span>Publicidad</span>

@@ -256,6 +256,12 @@
   font-size: 14px;
 }
 
+.details-section .agent-section {
+  padding: 25px 0;
+  border-bottom: 1px solid #e2e2e2;
+  border-top: 1px solid #e2e2e2; 
+}
+
 .ad-section {
   padding: 30px 0 50px;
   border-top: 1px solid #e2e2e2;
@@ -385,6 +391,10 @@
 
   .description h3 {
     font-size: initial;
+  }
+
+  .details-section .agent-section {
+    display: none;
   }
 
   .ad-section {

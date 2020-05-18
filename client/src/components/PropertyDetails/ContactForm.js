@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
+import AgentSection from './AgentSection';
 import ContactFormSkeleton from './ContactFormSkeleton';
 import './ContactForm.css'
 
@@ -57,23 +58,7 @@ class ContactForm extends React.Component {
               <i className="far fa-paper-plane"></i>
             </span>
           </form>
-          <div className="broker-info">
-            <div className="agent-info">
-              <img src="https://s3.amazonaws.com/real.estate.dom/agent.jpg" alt="agent"/>
-              <div className="agent-text">
-                <h5>Agent Name</h5>
-                <span className="cel">
-                  Cel:
-                  <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
-                </span>
-                <span className="cel">
-                  Whatsapp:
-                  <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
-                </span>
-                <span className="properties-listed">Propiedades (15)</span>
-              </div>
-            </div>
-          </div>
+          <AgentSection/>
         </div>
       )
     }
