@@ -1,0 +1,22 @@
+.contact-modal {
+  position: fixed;
+  z-index: 400;
+  background-color: #fff;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  border-radius: 4px;
+}
+.contact-modal .contact-header {
+  padding: 30px 20px;
+  text-align: right;
+  border-bottom: 1px solid #e2e2e2;
+}
+.contact-modal .contact-header i {
+  color: #b3b3b3;
+  font-size: 20px;
+}
+.contact-modal .contact-container .agent-section {
+  display: none;
+}

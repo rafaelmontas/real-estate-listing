@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import './PropertyDetails.css';
+import ContactFormModal from './PropertyDetails/ContactFormModal';
 import CollageGrid from './PropertyDetails/CollageGrid';
 import BrokerSection from './PropertyDetails/BrokerSection';
 import MapSection from './PropertyDetails/MapSection';
@@ -16,8 +17,10 @@ class PropertyDetails extends React.Component {
       property: {},
       similarProperties: [],
       isLoading: false,
-      isContactFormLoading: false
+      isContactFormLoading: false,
+      ContactFormOpen: false
     }
+    this.handleContactFormClick = this.handleContactFormClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,11 +68,24 @@ class PropertyDetails extends React.Component {
     }
   }
 
+  handleContactFormClick() {
+    this.setState((prevState) => {
+      return { ContactFormOpen: !prevState.ContactFormOpen }
+    })
+  }
 
 
   render() {
+    let inputSize;
+    if (this.state.ContactFormOpen) {
+      inputSize = "medium"
+    } else {
+      inputSize = "small"
+    }
+
     return (
       <div>
+        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize}/>}
         <div className="details-container">
           <div className="full-details-view">
             {/* Header Component */}
@@ -184,7 +200,7 @@ class PropertyDetails extends React.Component {
                     <h3>Descripción</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
                   </div>
-                  <AgentSection/>
+                  <AgentSection onContactClick={this.handleContactFormClick} tel={"8296483530"}/>
                 </div>
                 <div className="ad-section">
                   <span>Publicidad</span>
@@ -194,7 +210,7 @@ class PropertyDetails extends React.Component {
               </div>
               <div className="info-section">
                 <div className="info-wraper">
-                  <ContactForm loadingStatus={this.state.isContactFormLoading}/>
+                  <ContactForm loadingStatus={this.state.isContactFormLoading} size={inputSize}/>
                 </div>
               </div>
             </div>

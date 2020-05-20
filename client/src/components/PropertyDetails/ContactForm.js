@@ -23,7 +23,7 @@ class ContactForm extends React.Component {
                          label="Nombre"
                          style={{marginRight: "10px"}}
                          variant="outlined"
-                         size="small"
+                         size={this.props.size}
                          error={false}
                          helperText=""/>
               <NumberFormat customInput={TextField}
@@ -32,7 +32,7 @@ class ContactForm extends React.Component {
                             mask="_"
                             type="tel"
                             variant="outlined"
-                            size="small"/>
+                            size={this.props.size}/>
             </div>
             <TextField id="standard-basic"
                        label="Email"
@@ -40,7 +40,7 @@ class ContactForm extends React.Component {
                        fullWidth
                        style={inputStyles}
                        variant="outlined"
-                       size="small"
+                       size={this.props.size}
                        error={false}
                        helperText=""/>
             <TextField id="outlined-basic"

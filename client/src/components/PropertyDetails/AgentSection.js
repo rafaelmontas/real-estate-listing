@@ -12,18 +12,20 @@ class AgentSection extends React.Component {
             <h5>Agent Name</h5>
             <span className="cel">
               Cel:
-              <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
+              <NumberFormat value={this.props.tel} displayType={'text'} format="(###) ###-####"/>
             </span>
             <span className="cel">
               Whatsapp:
-              <NumberFormat value={8296483530} displayType={'text'} format="(###) ###-####"/>
+              <NumberFormat value={this.props.tel} displayType={'text'} format="(###) ###-####"/>
             </span>
             <span className="properties-listed">Propiedades (15)</span>
           </div>
         </div>
         <div className="agent-cta-buttons">
-          <span className="email-button">Email</span>
-          <span className="call-button">Llamar</span>
+          <span className="email-button" onClick={this.props.onContactClick}>Email</span>
+          <span className="call-button">
+            <a href={`tel:${this.props.tel}`}>Llamar</a>
+          </span>
         </div>
       </div>
     )
