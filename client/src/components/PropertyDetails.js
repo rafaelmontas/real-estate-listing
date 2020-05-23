@@ -9,6 +9,7 @@ import MapSection from './PropertyDetails/MapSection';
 import AgentSection from './PropertyDetails/AgentSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
+import Footer from './Footer';
 
 class PropertyDetails extends React.Component {
   constructor(props) {
@@ -52,7 +53,10 @@ class PropertyDetails extends React.Component {
     }
 
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.setState({ isLoading: true })
+      this.setState({
+        isLoading: true,
+        isContactFormLoading: true
+      })
       this.timer = setTimeout(() => {
         fetch(`/properties/${this.props.match.params.id}`)
           .then(res => res.json())
@@ -60,7 +64,8 @@ class PropertyDetails extends React.Component {
             console.log(property)
             this.setState({ 
               property: property,
-              isLoading: false
+              isLoading: false,
+              isContactFormLoading: false
             });
           });
       }, 500)
@@ -128,23 +133,39 @@ class PropertyDetails extends React.Component {
                     </div>
                     <div className="stats-info">
                       <div className="stats">
-                        <i className="fas fa-bed"></i>
-                        <span>{this.state.property.beds}</span>
-                        <span className="text">Hab.</span>
+                        <div className="icon">
+                          <i className="fas fa-bed"></i>
+                        </div>
+                        <div className="text-section">
+                          <span>{this.state.property.beds}</span>
+                          <span className="text">Hab.</span>
+                        </div>
                       </div>
                       <div className="stats">
-                        <i className="fas fa-bath"></i>
-                        <span>{this.state.property.baths}</span>
-                        <span className="text">Baños</span>
+                        <div className="icon">
+                          <i className="fas fa-bath"></i>
+                        </div>
+                        <div className="text-section">
+                          <span>{this.state.property.baths}</span>
+                          <span className="text">Baños</span>
+                        </div>
                       </div>
                       <div className="stats">
-                        <i className="fas fa-car-side"></i>
-                        <span>{this.state.property.parkings}</span>
-                        <span className="text">Parqueos</span>
+                        <div className="icon">
+                          <i className="fas fa-car-side"></i>
+                        </div>
+                        <div className="text-section">
+                          <span>{this.state.property.parkings}</span>
+                          <span className="text">Parqueos</span>
+                        </div>
                       </div>
                       <div className="stats">
-                        <i className="fas fa-ruler-vertical"></i>
-                        <span>{this.state.property.mts} Mts2</span>
+                        <div className="icon">
+                          <i className="fas fa-ruler-vertical"></i>
+                        </div>
+                        <div className="text-section">
+                          <span>{this.state.property.mts} Mts2</span>
+                        </div>
                       </div>
                     </div>
                     <div className="address-info">
@@ -217,6 +238,9 @@ class PropertyDetails extends React.Component {
           </div>
         </div>
         <SimilarProperties properties={this.state.similarProperties}/>
+        <div className="property-footer">
+          <Footer/>
+        </div>
       </div>
     )
   }

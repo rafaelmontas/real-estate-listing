@@ -139,6 +139,8 @@
 .main-section .details-section .info-header {
   padding: 20px 0 25px 0;
   border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  flex-direction: column;
 }
 .main-section .details-section .info-header .price-info {
   display: flex;
@@ -310,6 +312,17 @@
   z-index: 90;
 }
 
+/* Footer for PropertyDetails */
+.property-footer {
+  display: flex;
+  justify-content: center;
+}
+.property-footer .footer-container {
+  padding: 35px 20px;
+  width: 100%;
+  max-width: 1080px;
+  border: none;
+}
 
 
 
@@ -373,8 +386,34 @@
   .main-section .details-section {
     padding: 0;
   }
+  .main-section .details-section .info-header {
+    border-bottom: 0px;
+    padding-bottom: 0px;
+  }
+  .info-header .stats-info {
+    margin: 0;
+    padding: 30px 0;
+    order: 4;
+    justify-content: space-between;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .info-header .stats-info .stats {
+    margin: 0;
+    flex-direction: column;
+  }
+  .info-header .stats-info .stats .icon {
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+  .info-header .stats-info .stats .icon i {
+    margin: 0;
+  }
   .info-header .stats-info .stats span.text {
     display: inline;
+  }
+  .info-header .extra-info {
+    padding-bottom: 20px;
   }
   .amenities {
     padding: 25px 0;
@@ -415,5 +454,11 @@
     margin-left: 60px;
     margin-top: 20px;
     /* background-color: #e2e2e2; */
+  }
+
+  /* Footer */
+  .property-footer .footer-container {
+    max-width: 1080px;
+    padding: 35px 0px;
   }
 }

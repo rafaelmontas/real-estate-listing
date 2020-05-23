@@ -58,7 +58,7 @@ class ContactForm extends React.Component {
               <i className="far fa-paper-plane"></i>
             </span>
           </form>
-          <AgentSection/>
+          <AgentSection tel={"8296483530"}/>
         </div>
       )
     }
