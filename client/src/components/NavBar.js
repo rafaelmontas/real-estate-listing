@@ -13,9 +13,9 @@ class NavBar extends React.Component {
               <i className="fas fa-bars"></i>
             </span>
             <span className="logo-img"><i className="fas fa-home"></i></span>
-            <Link to="/"><span className="brand-logo-name">NewApp</span></Link>
+            <Link to="/"><span className="brand-logo-name">hauzzy</span></Link>
             <form action="">
-              <input type="text"/>
+              <input type="text" placeholder="Provincia, Sector..."/>
               <button><i className="fas fa-search"></i></button>
             </form>
           </div>

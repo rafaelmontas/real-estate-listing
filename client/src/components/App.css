@@ -53,7 +53,7 @@ a {
 .navbar-menu-form .brand-logo-name {
   padding: 8px;
   margin-right: 10px;
-  font-size: 18px;
+  font-size: 28px;
   font-weight: bold;
 }
 .navbar-menu-form form {
@@ -62,12 +62,16 @@ a {
 }
 .navbar-menu-form input {
   width: 100%;
-  height: 38px;
+  height: 40px;
+  background-color: #F9FAFA;
   border: 1px solid #d5d9dc;
   border-radius: 5px 0 0 5px;
   border-right: 0px;
   font-size: 16px;
   padding: 5px;
+}
+.navbar-menu-form input:focus {
+  outline: none;
 }
 .navbar-menu-form button {
   flex: 0 0 44px;
