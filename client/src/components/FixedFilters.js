@@ -60,6 +60,7 @@ class FixedFilters extends React.Component {
     this.setState({ listingType: event.target.value })
     this.setState({ minPrice: 0 });
     this.setState({ maxPrice: 0 });
+    this.props.searchProperties(event.target.value, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths)
   }
 
   handlePriceFilterClick() {
@@ -90,6 +91,7 @@ class FixedFilters extends React.Component {
     } else {
       this.setState({ minPrice: parseInt(event.target.value) });
     }
+    return this.props.searchProperties(this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.beds, this.state.baths)
   }
   handleMaxPrice(event) {
     if(this.state.listingType === "sell" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
@@ -108,6 +110,7 @@ class FixedFilters extends React.Component {
     } else {
       this.setState({ maxPrice: parseInt(event.target.value) });
     }
+    return this.props.searchProperties(this.state.listingType, this.state.minPrice, parseInt(event.target.value), this.state.beds, this.state.baths)
   }
 
   handleBedsBathsClick() {
@@ -138,9 +141,11 @@ class FixedFilters extends React.Component {
   }
   handleBedsClick(event) {
     this.setState({ beds: parseInt(event.target.value) });
+    this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, parseInt(event.target.value), this.state.baths)
   }
   handleBathClick(event) {
     this.setState({ baths: parseInt(event.target.value) });
+    this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, parseInt(event.target.value))
   }
 
   // Property Types Checks

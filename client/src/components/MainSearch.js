@@ -11,6 +11,8 @@ import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
 
+import Property from '../utils/Property';
+
 // import properties from '../data'
 
 import {Route, Switch} from 'react-router-dom';
@@ -32,12 +34,13 @@ class MainSearch extends React.Component {
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.searchProperties = this.searchProperties.bind(this);
   }
   
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch("/properties")
+      fetch("/properties" + this.props.location.search)
         .then(res => res.json())
         .then(properties => {
           this.setState({
@@ -86,6 +89,25 @@ class MainSearch extends React.Component {
     });
   }
   
+  searchProperties(listingType, minPrice, maxPrice, beds, baths) {
+    this.setState({ isLoading: true })
+    this.timer = setTimeout(() => {
+      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}`)
+        .then(response => {
+          return response.json();
+        }).then(properties => {
+          console.log(properties);
+          this.setState({ 
+            properties: properties,
+            isLoading: false
+          })
+        })
+    }, 2000)
+    this.props.history.push({
+      // pathname: '/properties',
+      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}`
+    })
+  }
 
   render() {
     let mapOpenCss;
@@ -99,6 +121,9 @@ class MainSearch extends React.Component {
     if(this.state.sideDrawerOpen || this.state.loginOpen) {
       backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
     }
+    
+    const params = new URLSearchParams(this.props.location.search);
+    const bedState = params.get('beds');
     return (
       <div className="main-app-container">
         {backdrop}
@@ -113,7 +138,9 @@ class MainSearch extends React.Component {
           <Route path={this.props.match.url} exact>
             <section id="main-app-content" className="search-results-container">
               <div id="results-column-left" className={mapOpenCss}>
-                <FixedFilters status={this.state.isLoading}/>
+                <FixedFilters status={this.state.isLoading}
+                              searchProperties={this.searchProperties}
+                              initialState={bedState}/>
                 <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
                 <Pagination />
                 <Footer />
