@@ -33,6 +33,44 @@ propertiesRouter.get("/", (req, res) => {
       res.sendStatus(500);
     });
   } else {
+    let bedsQuery;
+    let bathsQuery;
+    if (req.query.beds == 0 && req.query.baths == 0) {
+      bedsQuery = {
+        [Op.gte]: req.query.beds
+      },
+      bathsQuery = {
+        [Op.gte]: req.query.baths
+      }
+    } else if (req.query.beds != 0 && req.query.baths != 0) {
+        bedsQuery = {
+          [Op.eq]: req.query.beds
+        },
+        bathsQuery = {
+          [Op.eq]: req.query.baths
+        } 
+    } else if (req.query.beds != 0 && req.query.baths == 0) {
+        bedsQuery = {
+          [Op.eq]: req.query.beds
+        },
+        bathsQuery = {
+          [Op.gte]: req.query.baths
+        }
+    } else if (req.query.beds == 0 && req.query.baths != 0) {
+        bedsQuery = {
+          [Op.gte]: req.query.beds
+        },
+        bathsQuery = {
+          [Op.eq]: req.query.baths
+        }
+    } else {
+        bedsQuery = {
+          [Op.eq]: req.query.beds
+        },
+        bathsQuery = {
+          [Op.eq]: req.query.baths
+        }
+    }
     Property.findAll({
       // where: req.query
       where: {
@@ -40,8 +78,8 @@ propertiesRouter.get("/", (req, res) => {
         price: {
           [Op.between]: [req.query.minPrice, req.query.maxPrice]
         },
-        beds: req.query.beds,
-        baths: req.query.baths
+        beds: bedsQuery,
+        baths: bathsQuery
       }
     }).then(properties => {
       res.status(200).send(properties);

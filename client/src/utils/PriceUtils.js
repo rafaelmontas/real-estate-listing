@@ -55,7 +55,7 @@ export const minPriceList = {
 
 export const maxPriceList = {
   "sell": [
-    {value: 0, text: "No Max"},
+    {value: 2000000, text: "No Max"},
     {value: 50000, text: "US$ 50,000"},
     {value: 75000, text: "US$ 75,000"},
     {value: 100000, text: "US$ 100,000"},

@@ -18,7 +18,7 @@ class FixedFilters extends React.Component {
       listingType: "sell",
       priceFilterOpen: false,
       minPrice: 0,
-      maxPrice: 0,
+      maxPrice: 2000000,
       bedsBathsOpen: false,
       propertyTypeOpen: false,
       moreFiltersOpen: false,
@@ -95,7 +95,7 @@ class FixedFilters extends React.Component {
   }
   handleMaxPrice(event) {
     if(this.state.listingType === "sell" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
-      let prices = [0, 75000, 100000, 150000, 175000, 200000, 225000, 250000, 275000, 300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000];
+      let prices = [0, 75000, 100000, 125000, 150000, 175000, 200000, 225000, 250000, 275000, 300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000];
       let index = prices.findIndex(number => {
         return number > this.state.minPrice;
       })
@@ -175,7 +175,7 @@ class FixedFilters extends React.Component {
       minPriceLabel = `US$${this.state.minPrice / 1000}k`
     }
     let maxPriceLabel;
-    if(this.state.maxPrice === 0) {
+    if(this.state.maxPrice === 2000000) {
       maxPriceLabel = "No Max";
     } else if(this.state.maxPrice === 1000000) {
       maxPriceLabel = `US$${this.state.maxPrice / 1000000}mm`
