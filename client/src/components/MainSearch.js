@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string'
 import './App.css';
 import NavBar from "./NavBar";
 import FixedFilters from "./FixedFilters";
@@ -49,6 +50,7 @@ class MainSearch extends React.Component {
           });
         });
     }, 2000)
+    console.log(queryString.parse(this.props.location.search));
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
@@ -89,10 +91,10 @@ class MainSearch extends React.Component {
     });
   }
   
-  searchProperties(listingType, minPrice, maxPrice, beds, baths) {
+  searchProperties(listingType, minPrice, maxPrice, beds, baths, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}`)
+      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}&property_type=${propertyType}`)
         .then(response => {
           return response.json();
         }).then(properties => {
@@ -104,8 +106,7 @@ class MainSearch extends React.Component {
         })
     }, 2000)
     this.props.history.push({
-      // pathname: '/properties',
-      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}`
+      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}&property_type=${propertyType}`
     })
   }
 
@@ -122,8 +123,6 @@ class MainSearch extends React.Component {
       backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
     }
     
-    const params = new URLSearchParams(this.props.location.search);
-    const bedState = params.get('beds');
     return (
       <div className="main-app-container">
         {backdrop}
@@ -140,7 +139,7 @@ class MainSearch extends React.Component {
               <div id="results-column-left" className={mapOpenCss}>
                 <FixedFilters status={this.state.isLoading}
                               searchProperties={this.searchProperties}
-                              initialState={bedState}/>
+                              initialState={queryString.parse(this.props.location.search)}/>
                 <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
                 <Pagination />
                 <Footer />

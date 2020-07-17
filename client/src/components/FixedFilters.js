@@ -25,12 +25,14 @@ class FixedFilters extends React.Component {
       beds: 0,
       baths: 0,
       // Property Types
-      housesSelected: true,
-      apartmentsSelected: true,
-      villasSelected: true,
-      comercialSelected: true,
-      industrialSelected: true,
-      penthouseSelected: true
+      propertyTypes: {
+        "Apartamento": true,
+        casa: true,
+        villa: true,
+        comercial: true,
+        industrial: true,
+        penthouse: true
+      }
     }
     this.handleListingTypeClick = this.handleListingTypeClick.bind(this);
     this.handleListingType = this.handleListingType.bind(this);
@@ -46,6 +48,29 @@ class FixedFilters extends React.Component {
     this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
+  componentDidMount() {
+    if (Object.entries(this.props.initialState).length > 0) {
+      const propertyTypesArray = this.props.initialState.property_type.split(",")
+      console.log(propertyTypesArray.includes("Villa"))
+      this.setState({
+        listingType: this.props.initialState.listing_type,
+        minPrice: parseInt(this.props.initialState.minPrice),
+        maxPrice: parseInt(this.props.initialState.maxPrice),
+        beds: parseInt(this.props.initialState.beds),
+        baths: parseInt(this.props.initialState.baths),
+        propertyTypes: {
+          "Apartamento": propertyTypesArray.includes("Apartamento"),
+          casa: propertyTypesArray.includes("casa"),
+          villa: propertyTypesArray.includes("villa"),
+          comercial: propertyTypesArray.includes("comercial"),
+          industrial: propertyTypesArray.includes("industrial"),
+          penthouse: propertyTypesArray.includes("penthouse")
+        }
+      })
+      console.log(Object.entries(this.props.initialState).length) 
+    }
+  }
+
   handleListingTypeClick() {
     this.setState({
       priceFilterOpen: false,
@@ -57,10 +82,14 @@ class FixedFilters extends React.Component {
     });
   }
   handleListingType(event) {
-    this.setState({ listingType: event.target.value })
-    this.setState({ minPrice: 0 });
-    this.setState({ maxPrice: 0 });
-    this.props.searchProperties(event.target.value, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths)
+    this.setState({
+      listingType: event.target.value,
+      minPrice: 0,
+      maxPrice: 2000000
+    }, () => {
+      const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths, keys)
+    })
   }
 
   handlePriceFilterClick() {
@@ -91,7 +120,8 @@ class FixedFilters extends React.Component {
     } else {
       this.setState({ minPrice: parseInt(event.target.value) });
     }
-    return this.props.searchProperties(this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.beds, this.state.baths)
+    const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+    return this.props.searchProperties(this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.beds, this.state.baths, keys)
   }
   handleMaxPrice(event) {
     if(this.state.listingType === "sell" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
@@ -110,7 +140,8 @@ class FixedFilters extends React.Component {
     } else {
       this.setState({ maxPrice: parseInt(event.target.value) });
     }
-    return this.props.searchProperties(this.state.listingType, this.state.minPrice, parseInt(event.target.value), this.state.beds, this.state.baths)
+    const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+    return this.props.searchProperties(this.state.listingType, this.state.minPrice, parseInt(event.target.value), this.state.beds, this.state.baths, keys)
   }
 
   handleBedsBathsClick() {
@@ -140,17 +171,32 @@ class FixedFilters extends React.Component {
     this.setState({ moreFiltersOpen: true });
   }
   handleBedsClick(event) {
-    this.setState({ beds: parseInt(event.target.value) });
-    this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, parseInt(event.target.value), this.state.baths)
+    this.setState({ beds: parseInt(event.target.value) }, () => {
+      const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths, keys)
+    });
   }
   handleBathClick(event) {
-    this.setState({ baths: parseInt(event.target.value) });
-    this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, parseInt(event.target.value))
+    this.setState({ baths: parseInt(event.target.value) }, () => {
+      const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths, keys)
+    });
   }
 
   // Property Types Checks
   handleChecks(event) {
-    this.setState({ [event.target.name]: event.target.checked });
+    event.persist()
+    this.setState(prevState => ({
+      propertyTypes: {
+        ...prevState.propertyTypes,
+        [event.target.name]: event.target.checked  
+      }
+    }), () => {
+      console.log(this.state.propertyTypes)
+      const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
+      console.log(keys)
+      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.beds, this.state.baths, keys)
+    })
   }
   handleCloseClick() {
     this.setState({ moreFiltersOpen: false });
@@ -293,12 +339,8 @@ class FixedFilters extends React.Component {
               <div className={this.state.propertyTypeOpen ? "exposed-popover type open" : "exposed-popover type"}>
                 <div className="container">
                   <PropertyType onChecks={this.handleChecks}
-                                housesSelected={this.state.housesSelected}
-                                apartmentsSelected={this.state.apartmentsSelected}
-                                villasSelected={this.state.villasSelected}
-                                comercialSelected={this.state.comercialSelected}
-                                industrialSelected={this.state.industrialSelected}
-                                penthouseSelected={this.state.penthouseSelected}/>
+                                propertyTypes={this.state.propertyTypes}
+                                />
                 </div>
               </div>
             </div>
@@ -312,14 +354,9 @@ class FixedFilters extends React.Component {
                             onBathClick={this.handleBathClick}
                             bathOptionSelected={this.state.baths}
                             onChecks={this.handleChecks}
-                            housesSelected={this.state.housesSelected}
-                            apartmentsSelected={this.state.apartmentsSelected}
-                            villasSelected={this.state.villasSelected}
-                            comercialSelected={this.state.comercialSelected}
-                            industrialSelected={this.state.industrialSelected}
-                            penthouseSelected={this.state.penthouseSelected}
                             onCloseClick={this.handleCloseClick}
-                            status={this.props.status} />
+                            status={this.props.status}
+                            propertyTypes={this.state.propertyTypes} />
             </div>
           </div>
         </div>

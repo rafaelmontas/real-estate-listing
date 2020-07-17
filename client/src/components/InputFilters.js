@@ -51,12 +51,7 @@ class InputFilters extends React.Component {
           <div className="bottom">
             <div className="bottom-options">
               <PropertyType onChecks={this.props.onChecks}
-                            housesSelected={this.props.housesSelected}
-                            apartmentsSelected={this.props.apartmentsSelected}
-                            villasSelected={this.props.villasSelected}
-                            comercialSelected={this.props.comercialSelected}
-                            industrialSelected={this.props.industrialSelected}
-                            penthouseSelected={this.props.penthouseSelected}/>
+                            propertyTypes={this.props.propertyTypes}/>
             </div>
           </div>
           <div className="bottom-fixed">
@@ -81,12 +76,6 @@ InputFilters.propTypes = {
   bathOptionSelected: PropTypes.number.isRequired,
   onBathClick: PropTypes.func.isRequired,
   onChecks: PropTypes.func.isRequired,
-  housesSelected: PropTypes.bool.isRequired,
-  apartmentsSelected: PropTypes.bool.isRequired,
-  villasSelected: PropTypes.bool.isRequired,
-  comercialSelected: PropTypes.bool.isRequired,
-  industrialSelected: PropTypes.bool.isRequired,
-  penthouseSelected: PropTypes.bool.isRequired,
   status: PropTypes.bool.isRequired
 }
 
