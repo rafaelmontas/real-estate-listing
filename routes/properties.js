@@ -71,6 +71,8 @@ propertiesRouter.get("/", (req, res) => {
           [Op.eq]: req.query.baths
         }
     }
+    let propertyTypeString = req.query.property_type;
+    let propertyTypeResult = propertyTypeString.split(",");
     Property.findAll({
       // where: req.query
       where: {
@@ -79,7 +81,10 @@ propertiesRouter.get("/", (req, res) => {
           [Op.between]: [req.query.minPrice, req.query.maxPrice]
         },
         beds: bedsQuery,
-        baths: bathsQuery
+        baths: bathsQuery,
+        property_type: {
+          [Op.or]: propertyTypeResult
+        }
       }
     }).then(properties => {
       res.status(200).send(properties);
