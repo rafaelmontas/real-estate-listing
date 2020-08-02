@@ -34,4 +34,17 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Models/tables
+db.properties = ("./Property.js")(sequelize, Sequelize)
+db.users = ("./user.js")(sequelize, Sequelize)
+
+// Relations
+db.properties.belongsTo(db.users, {
+  foreignKey: "user_id"
+});
+db.users.hasMany(db.properties, {
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+})
+
 module.exports = db;

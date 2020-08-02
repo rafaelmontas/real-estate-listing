@@ -1,63 +1,111 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Property = sequelize.define('property', {
-    title: {
+    province: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    imgSrc: {
-      type: DataTypes.STRING,
+    province_id: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     sector: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    price: {
+    sector_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    parkings: {
+    listing_price: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    mts: {
+    parking_spaces: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    square_meters: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    stories: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    year_built: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     lng: {
-      type: DataTypes.FLOAT
+      type: DataTypes.FLOAT,
+      allowNull: true
     },
     lat: {
-      type: DataTypes.FLOAT
+      type: DataTypes.FLOAT,
+      allowNull: true
     },
     listing_type: {
       type: DataTypes.STRING,
       allowNull: false
     },
     description: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      type: DataTypes.TEXT
     },
-    beds: {
+    bedrooms: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    baths: {
+    bathrooms: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    address: {
+    half_bathrooms: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    street_name: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    street_number: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     property_type: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    new_construction: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false
+    },
+    listing_status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Pending"
+    },
+    status_change_timestamp: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    close_price: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    close_date: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    agent_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {});
-  // Property.associate = function(models) {
-  //   associations can be defined here
-  // };
   return Property;
 };
