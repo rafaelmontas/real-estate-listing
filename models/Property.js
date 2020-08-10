@@ -107,5 +107,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     }
   }, {});
+  // Property.associate = function(models) {
+  //   Property.belongsTo(models.user, {
+  //     foreignKey: "user_id"
+  //   })
+  // };
   return Property;
 };

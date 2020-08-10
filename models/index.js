@@ -34,17 +34,20 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// Models/tables
-db.properties = ("./Property.js")(sequelize, Sequelize)
-db.users = ("./user.js")(sequelize, Sequelize)
-
-// Relations
-db.properties.belongsTo(db.users, {
-  foreignKey: "user_id"
-});
-db.users.hasMany(db.properties, {
+// Users Relations
+db.property.belongsTo(db.user, {foreignKey: 'user_id'});
+db.user.hasMany(db.property, {
+  foreignKey: 'user_id',
   onDelete: 'SET DEFAULT',
   onUpdate: 'SET DEFAULT'
-})
+});
+
+// Agents Relations
+db.property.belongsTo(db.agent, {foreignKey: 'agent_id'});
+db.agent.hasMany(db.property, {
+  foreignKey: 'agent_id',
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+});
 
 module.exports = db;
