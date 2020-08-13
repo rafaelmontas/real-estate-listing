@@ -123,11 +123,11 @@ class PropertyDetails extends React.Component {
                     <div className="price-info">
                       <div className="price-status-wraper">
                         <span className="price-tag">
-                          <NumberFormat value={this.state.property.price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
+                          <NumberFormat value={this.state.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
                         </span>
                         <div className="status">
-                          <i className={this.state.property.listing_type === "sell" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
-                          <span>{this.state.property.listing_type === "sell" ? "En venta" : "En Alquiler"}</span>
+                          <i className={this.state.property.listing_type === "For Sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
+                          <span>{this.state.property.listing_type === "For Sale" ? "En venta" : "En Alquiler"}</span>
                         </div>
                       </div>
                     </div>
@@ -137,7 +137,7 @@ class PropertyDetails extends React.Component {
                           <i className="fas fa-bed"></i>
                         </div>
                         <div className="text-section">
-                          <span>{this.state.property.beds}</span>
+                          <span>{this.state.property.bedrooms}</span>
                           <span className="text">Hab.</span>
                         </div>
                       </div>
@@ -146,7 +146,7 @@ class PropertyDetails extends React.Component {
                           <i className="fas fa-bath"></i>
                         </div>
                         <div className="text-section">
-                          <span>{this.state.property.baths}</span>
+                          <span>{this.state.property.bathrooms}</span>
                           <span className="text">Baños</span>
                         </div>
                       </div>
@@ -155,7 +155,7 @@ class PropertyDetails extends React.Component {
                           <i className="fas fa-car-side"></i>
                         </div>
                         <div className="text-section">
-                          <span>{this.state.property.parkings}</span>
+                          <span>{this.state.property.parking_spaces}</span>
                           <span className="text">Parqueos</span>
                         </div>
                       </div>
@@ -169,7 +169,7 @@ class PropertyDetails extends React.Component {
                       </div>
                     </div>
                     <div className="address-info">
-                      <span>{this.state.property.sector}, {this.state.property.address}</span>
+                      <span>{this.state.property.sector}, {`C/ ${this.state.property.street_name} #${this.state.property.street_number}`}</span>
                     </div>
                     <div className="extra-info">
                       <div className="video-badge">

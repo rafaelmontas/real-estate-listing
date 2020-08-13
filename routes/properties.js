@@ -35,40 +35,40 @@ propertiesRouter.get("/", (req, res) => {
   } else {
     let bedsQuery;
     let bathsQuery;
-    if (req.query.beds == 0 && req.query.baths == 0) {
+    if (req.query.bedrooms == 0 && req.query.bathrooms == 0) {
       bedsQuery = {
-        [Op.gte]: req.query.beds
+        [Op.gte]: req.query.bedrooms
       },
       bathsQuery = {
-        [Op.gte]: req.query.baths
+        [Op.gte]: req.query.bathrooms
       }
-    } else if (req.query.beds != 0 && req.query.baths != 0) {
+    } else if (req.query.bedrooms != 0 && req.query.bathrooms != 0) {
         bedsQuery = {
-          [Op.eq]: req.query.beds
+          [Op.eq]: req.query.bedrooms
         },
         bathsQuery = {
-          [Op.eq]: req.query.baths
+          [Op.eq]: req.query.bathrooms
         } 
-    } else if (req.query.beds != 0 && req.query.baths == 0) {
+    } else if (req.query.bedrooms != 0 && req.query.bathrooms == 0) {
         bedsQuery = {
-          [Op.eq]: req.query.beds
+          [Op.eq]: req.query.bedrooms
         },
         bathsQuery = {
-          [Op.gte]: req.query.baths
+          [Op.gte]: req.query.bathrooms
         }
-    } else if (req.query.beds == 0 && req.query.baths != 0) {
+    } else if (req.query.bedrooms == 0 && req.query.bathrooms != 0) {
         bedsQuery = {
-          [Op.gte]: req.query.beds
+          [Op.gte]: req.query.bedrooms
         },
         bathsQuery = {
-          [Op.eq]: req.query.baths
+          [Op.eq]: req.query.bathrooms
         }
     } else {
         bedsQuery = {
-          [Op.eq]: req.query.beds
+          [Op.eq]: req.query.bedrooms
         },
         bathsQuery = {
-          [Op.eq]: req.query.baths
+          [Op.eq]: req.query.bathrooms
         }
     }
     let propertyTypeString = req.query.property_type;
@@ -77,11 +77,11 @@ propertiesRouter.get("/", (req, res) => {
       // where: req.query
       where: {
         listing_type: req.query.listing_type,
-        price: {
+        listing_price: {
           [Op.between]: [req.query.minPrice, req.query.maxPrice]
         },
-        beds: bedsQuery,
-        baths: bathsQuery,
+        bedrooms: bedsQuery,
+        bathrooms: bathsQuery,
         property_type: {
           [Op.or]: propertyTypeResult
         }

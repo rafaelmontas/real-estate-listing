@@ -17,15 +17,15 @@ class PropertyType extends React.Component {
             <li>
               <label>
                 <input type="checkbox"
-                        name="Apartamento"
-                        checked={this.props.propertyTypes["Apartamento"]}
+                        name="Apartment"
+                        checked={this.props.propertyTypes["Apartment"]}
                         onChange={this.props.onChecks}/>
                 Apartamentos
               </label>
             </li>
             <li>
               <label>
-                <input type="checkbox" name="casa" checked={this.props.propertyTypes.casa}
+                <input type="checkbox" name="House" checked={this.props.propertyTypes["House"]}
                 onChange={this.props.onChecks}/>
                 Casas
               </label>
@@ -33,8 +33,8 @@ class PropertyType extends React.Component {
             <li>
               <label>
                 <input type="checkbox"
-                        name="villa"
-                        checked={this.props.propertyTypes.villa}
+                        name="Villa"
+                        checked={this.props.propertyTypes["Villa"]}
                         onChange={this.props.onChecks}/>
                 Villas
               </label>
@@ -44,8 +44,8 @@ class PropertyType extends React.Component {
             <li>
               <label>
                 <input type="checkbox"
-                        name="comercial"
-                        checked={this.props.propertyTypes.comercial}
+                        name="Comercial"
+                        checked={this.props.propertyTypes["Comercial"]}
                         onChange={this.props.onChecks}/>
                 Locales
               </label>
@@ -53,8 +53,8 @@ class PropertyType extends React.Component {
             <li>
               <label>
                 <input type="checkbox"
-                        name="industrial"
-                        checked={this.props.propertyTypes.industrial}
+                        name="Industrial"
+                        checked={this.props.propertyTypes["Industrial"]}
                         onChange={this.props.onChecks}/>
                 Naves
               </label>
@@ -62,8 +62,8 @@ class PropertyType extends React.Component {
             <li>
               <label>
                 <input type="checkbox"
-                        name="penthouse"
-                        checked={this.props.propertyTypes.penthouse}
+                        name="Penthouse"
+                        checked={this.props.propertyTypes["Penthouse"]}
                         onChange={this.props.onChecks}/>
                 Penthouse
               </label>

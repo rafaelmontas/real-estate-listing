@@ -91,10 +91,10 @@ class MainSearch extends React.Component {
     });
   }
   
-  searchProperties(listingType, minPrice, maxPrice, beds, baths, propertyType) {
+  searchProperties(listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}&property_type=${propertyType}`)
+      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
         .then(response => {
           return response.json();
         }).then(properties => {
@@ -106,7 +106,7 @@ class MainSearch extends React.Component {
         })
     }, 2000)
     this.props.history.push({
-      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&beds=${beds}&baths=${baths}&property_type=${propertyType}`
+      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
   }
 
