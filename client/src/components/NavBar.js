@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import MapToggleMobile from './MapToggleMobile';
 import {Link} from 'react-router-dom';
+import AutoCompleteText from './SearchBar/AutoCompleteText';
 
 class NavBar extends React.Component {
   render() {
@@ -14,10 +15,7 @@ class NavBar extends React.Component {
             </span>
             <span className="logo-img"><i className="fas fa-home"></i></span>
             <Link to="/"><span className="brand-logo-name">hauzzy</span></Link>
-            <form action="">
-              <input type="text" placeholder="Provincia, Sector..."/>
-              <button><i className="fas fa-search"></i></button>
-            </form>
+            <AutoCompleteText/>
           </div>
           <div className="navbar-menu-right">
             <MapToggleMobile mapOpen={this.props.mapOpen}
