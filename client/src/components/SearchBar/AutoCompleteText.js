@@ -5,12 +5,27 @@ import './AutoCompleteText.css';
 class AutoCompleteText extends React.Component {
   constructor(props) {
     super(props);
-    this.items = [
-      'Distrito Nacional',
-      'Ensanche Naco',
-      'Piantini',
-      'Bella Vista',
-      'Evaristo Morales'
+    this.itemsOptions = [
+      {
+        province: 'Distrito Nacional',
+        sector: 'Ensanche Naco',
+        type: 'sector'
+      },
+      {
+        province: 'Distrito Nacional',
+        sector: 'Piantini',
+        type: 'sector'
+      },
+      {
+        province: 'Distrito Nacional',
+        sector: 'Bella Vista',
+        type: 'sector'
+      },
+      {
+        province: 'Distrito Nacional',
+        sector: 'Evaristo Morales',
+        type: 'sector'
+      }
     ];
     this.state = {
       suggestions: [],
@@ -27,8 +42,8 @@ class AutoCompleteText extends React.Component {
       this.setState(() => ({suggestions: [], text: value}))
     } else {
       const regex = new RegExp(`${value}`, 'i');
-      const suggestions = this.items.sort().filter(v => regex.test(v));
-      this.setState(() => ({suggestions, text: value}))
+      const suggestions = this.itemsOptions.sort(v => v.sector).filter(v => regex.test(v.sector));
+      this.setState(() => ({suggestions, text: value}), () => console.log(this.state.suggestions));
     }
   }
 
@@ -36,7 +51,6 @@ class AutoCompleteText extends React.Component {
     this.setState(() => ({
       text: value,
       suggestions: [],
-      // suggestionsOpen: false,
     }))
   }
 
@@ -49,9 +63,15 @@ class AutoCompleteText extends React.Component {
       <ul>
         {suggestions.map((item, index) => {
           return (
-            <div key={index} className="autocomplete-option" onMouseDown={() => this.suggestionSelected(item)}>
-              <i className="fas fa-search"></i>
-              <li>{item}</li>
+            <div key={index} className="autocomplete-option" onMouseDown={() => this.suggestionSelected(item.sector)}>
+              <div className="option-logo-text">
+                <i className="fas fa-search"></i>
+                <div className="option-text">
+                  <li>{item.sector}</li>
+                  <span>{item.province}</span>
+                </div>
+              </div>
+              <span>{item.type}</span>
             </div>
           )
         })}

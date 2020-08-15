@@ -28,13 +28,27 @@
 .autocomplete-suggestions ul .autocomplete-option {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 74px;
-  padding: 15px 0 15px 15px;
+  padding: 15px;
   cursor: pointer;
 }
 .autocomplete-suggestions ul .autocomplete-option:hover {
   background-color: #f4f5f7;
 }
-.autocomplete-suggestions ul .autocomplete-option li {
+.autocomplete-suggestions ul .autocomplete-option .option-logo-text {
+  display: flex;
+  align-items: center;
+}
+.autocomplete-suggestions ul .autocomplete-option .option-logo-text span {
+  font-size: 14px;
+  color: #6f7780;
+}
+.autocomplete-suggestions ul .autocomplete-option .option-logo-text .option-text {
   padding-left: 15px;
+  font-family: "Helvetica Neue";
+}
+.autocomplete-suggestions ul .autocomplete-option .option-logo-text .option-text span, .autocomplete-suggestions ul .autocomplete-option span {
+  font-size: 14px;
+  color: #6f7780;
 }
