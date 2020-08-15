@@ -28,30 +28,35 @@ class AutoCompleteText extends React.Component {
       }
     ];
     this.state = {
-      suggestions: [],
+      suggestions: this.itemsOptions,
       text: '',
+      activeOption: -1,
       suggestionsOpen: false,
     }
     this.handleInputFocus = this.handleInputFocus.bind(this);
     this.handleInputBlur = this.handleInputBlur.bind(this);
+    this.hanldeKeyPressed = this.hanldeKeyPressed.bind(this);
+    this.handleOptionsHover = this.handleOptionsHover.bind(this);
   }
 
   onTextChange = (e) => {
     const value = e.target.value;
     if(value.length === 0) {
-      this.setState(() => ({suggestions: [], text: value}))
+      this.setState(() => ({suggestions: this.itemsOptions, text: value, activeOption: -1}))
     } else {
       const regex = new RegExp(`${value}`, 'i');
       const suggestions = this.itemsOptions.sort(v => v.sector).filter(v => regex.test(v.sector));
-      this.setState(() => ({suggestions, text: value}), () => console.log(this.state.suggestions));
+      this.setState(() => ({suggestions, text: value, activeOption: -1}), () => console.log(this.state.suggestions));
     }
   }
 
   suggestionSelected(value) {
     this.setState(() => ({
       text: value,
-      suggestions: [],
+      activeOption: -1,
+      suggestions: this.itemsOptions,
     }))
+    this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
   }
 
   renderSuggestions() {
@@ -60,10 +65,14 @@ class AutoCompleteText extends React.Component {
       return null
     }
     return (
-      <ul>
+      <ul id="hauzzy-suggestions" tabIndex={-1} rol="listbox">
         {suggestions.map((item, index) => {
           return (
-            <div key={index} className="autocomplete-option" onMouseDown={() => this.suggestionSelected(item.sector)}>
+            <div key={index} className={index === this.state.activeOption ? "autocomplete-option autocomplete-option-selected" : "autocomplete-option"}
+                             onMouseDown={() => this.suggestionSelected(item.sector)}
+                             onMouseEnter={this.handleOptionsHover}
+                             tabIndex={-1}
+                             rol="option">
               <div className="option-logo-text">
                 <i className="fas fa-search"></i>
                 <div className="option-text">
@@ -86,6 +95,49 @@ class AutoCompleteText extends React.Component {
     this.setState({suggestionsOpen: false})
   }
 
+  handleOptionsHover() {
+    this.setState({activeOption: -1})
+  }
+
+  hanldeKeyPressed(e) {
+    console.log(e.keyCode);
+    console.log(e.target);
+    // User pressed the enter key, update the input and close the suggestions
+    if(e.keyCode === 13) {
+      if(e.target.value.length != 0 || this.state.activeOption != -1) {
+        if(this.state.activeOption === -1) {
+          this.setState({
+            text: this.state.suggestions[0].sector,
+            activeOption: -1
+          });  
+        } else {
+          this.setState({
+            text: this.state.suggestions[this.state.activeOption].sector,
+            activeOption: -1
+          });
+        }
+        this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
+      }
+      return e.target.blur();
+    }
+    // User pressed the up arrow, decrement the index
+    else if(e.keyCode === 38) {
+      if(this.state.activeOption === -1) {
+        return;
+      } else {
+        this.setState({activeOption: this.state.activeOption - 1})
+      }
+    }
+    // User pressed the down arrow, increment index
+    else if(e.keyCode === 40) {
+      if(this.state.activeOption + 1 === this.state.suggestions.length) {
+        return;
+      } else {
+        this.setState({activeOption: this.state.activeOption + 1})
+      }
+    }
+  }
+
   render() {
     return (
       <div className="autocomplete-container">
@@ -94,7 +146,10 @@ class AutoCompleteText extends React.Component {
                                           onBlur={this.handleInputBlur}
                                           onChange={this.onTextChange}
                                           type="text"
-                                          placeholder="Provincia, Sector..."/>
+                                          placeholder="Provincia, Sector..."
+                                          onKeyDown={this.hanldeKeyPressed}
+                                          aria-autocomplete="list"
+                                          aria-controls="hauzzy-suggestions" />
           <button><i className="fas fa-search"></i></button>
         </div>
         <div className={this.state.suggestionsOpen ? "autocomplete-suggestions open" : "autocomplete-suggestions"}>

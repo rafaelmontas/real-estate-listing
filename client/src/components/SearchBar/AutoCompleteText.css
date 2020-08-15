@@ -33,7 +33,7 @@
   padding: 15px;
   cursor: pointer;
 }
-.autocomplete-suggestions ul .autocomplete-option:hover {
+.autocomplete-suggestions ul .autocomplete-option:hover, .autocomplete-option-selected {
   background-color: #f4f5f7;
 }
 .autocomplete-suggestions ul .autocomplete-option .option-logo-text {

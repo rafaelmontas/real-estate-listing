@@ -131,7 +131,8 @@ class MainSearch extends React.Component {
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
                 mapOpen={this.state.MapToggleOpen}
                 onMapToggleClick={this.handleMapToggleClick}
-                onLoginClick={this.handleLoginClick} />
+                onLoginClick={this.handleLoginClick} 
+                search={this.searchProperties}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
           <Route path={this.props.match.url} exact>
