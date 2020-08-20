@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './AutoCompleteText.css';
+import { withRouter } from "react-router-dom";
 
 class AutoCompleteText extends React.Component {
   constructor(props) {
@@ -63,6 +64,10 @@ class AutoCompleteText extends React.Component {
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
       const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      if(this.props.history.location.pathname !== '/properties') {
+        console.log(this.props.history.location.pathname)
+        this.props.history.push("/properties")
+      }
       this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
     })
     // this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
@@ -130,6 +135,10 @@ class AutoCompleteText extends React.Component {
             const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
             const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
             const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+            if(this.props.history.location.pathname !== '/properties') {
+              console.log(this.props.history.location.pathname)
+              this.props.history.push("/properties")
+            }
             this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
           });
         }
@@ -177,4 +186,4 @@ class AutoCompleteText extends React.Component {
   }
 }
 
-export default AutoCompleteText;
+export default withRouter(AutoCompleteText);
