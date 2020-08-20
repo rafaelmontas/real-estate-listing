@@ -37,6 +37,7 @@ class AutoCompleteText extends React.Component {
     this.handleInputBlur = this.handleInputBlur.bind(this);
     this.hanldeKeyPressed = this.hanldeKeyPressed.bind(this);
     this.handleOptionsHover = this.handleOptionsHover.bind(this);
+    this.suggestionSelected = this.suggestionSelected.bind(this);
   }
 
   onTextChange = (e) => {
@@ -51,12 +52,20 @@ class AutoCompleteText extends React.Component {
   }
 
   suggestionSelected(value) {
-    this.setState(() => ({
+    this.setState({
       text: value,
       activeOption: -1,
       suggestions: this.itemsOptions,
-    }))
-    this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
+    }, () => {
+      const listingType = this.props.initialStateSearch.listing_type == null ? "For Sale" : this.props.initialStateSearch.listing_type;
+      const minPrice = this.props.initialStateSearch.minPrice == null ? 0 : this.props.initialStateSearch.minPrice;
+      const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
+      const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
+      const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+    })
+    // this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
   }
 
   renderSuggestions() {
@@ -114,9 +123,17 @@ class AutoCompleteText extends React.Component {
           this.setState({
             text: this.state.suggestions[this.state.activeOption].sector,
             activeOption: -1
+          }, () => {
+            const listingType = this.props.initialStateSearch.listing_type == null ? "For Sale" : this.props.initialStateSearch.listing_type;
+            const minPrice = this.props.initialStateSearch.minPrice == null ? 0 : this.props.initialStateSearch.minPrice;
+            const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
+            const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
+            const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
+            const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+            this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
           });
         }
-        this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
+        // this.props.search(thi.state.text, "For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
       }
       return e.target.blur();
     }

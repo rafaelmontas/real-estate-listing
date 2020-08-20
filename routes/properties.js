@@ -73,9 +73,21 @@ propertiesRouter.get("/", (req, res) => {
     }
     let propertyTypeString = req.query.property_type;
     let propertyTypeResult = propertyTypeString.split(",");
+    // let sector = req.query.sector;
+    let sector;
+    if(req.query.sector === "All") {
+      sector = {
+        [Op.like]: "%"
+      }
+    } else {
+      sector = {
+        [Op.eq]: req.query.sector
+      }
+    }
     Property.findAll({
       // where: req.query
       where: {
+        sector: sector,
         listing_type: req.query.listing_type,
         listing_price: {
           [Op.between]: [req.query.minPrice, req.query.maxPrice]
@@ -88,7 +100,7 @@ propertiesRouter.get("/", (req, res) => {
       }
     }).then(properties => {
       res.status(200).send(properties);
-      console.log(req.query)
+      console.log(req.params, req.query)
     }).catch(err => {
       console.log(req.query);
       console.log(err);

@@ -15,7 +15,7 @@ class NavBar extends React.Component {
             </span>
             <span className="logo-img"><i className="fas fa-home"></i></span>
             <Link to="/"><span className="brand-logo-name">hauzzy</span></Link>
-            <AutoCompleteText search={this.props.search}/>
+            <AutoCompleteText search={this.props.search} initialStateSearch={this.props.initialStateSearch}/>
           </div>
           <div className="navbar-menu-right">
             <MapToggleMobile mapOpen={this.props.mapOpen}

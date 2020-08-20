@@ -164,7 +164,7 @@ class PropertyDetails extends React.Component {
                           <i className="fas fa-ruler-vertical"></i>
                         </div>
                         <div className="text-section">
-                          <span>{this.state.property.mts} Mts2</span>
+                          <span>{this.state.property.square_meters} Mts2</span>
                         </div>
                       </div>
                     </div>

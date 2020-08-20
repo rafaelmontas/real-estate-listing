@@ -50,7 +50,7 @@ class MainSearch extends React.Component {
           });
         });
     }, 2000)
-    console.log(queryString.parse(this.props.location.search));
+    console.log(queryString.parse(this.props.location.search).sector, queryString.parse(this.props.location.search));
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
@@ -91,10 +91,10 @@ class MainSearch extends React.Component {
     });
   }
   
-  searchProperties(listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  searchProperties(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch(`/properties?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      fetch(`/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
         .then(response => {
           return response.json();
         }).then(properties => {
@@ -106,7 +106,7 @@ class MainSearch extends React.Component {
         })
     }, 2000)
     this.props.history.push({
-      search: `?listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
+      search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
   }
 
@@ -132,7 +132,8 @@ class MainSearch extends React.Component {
                 mapOpen={this.state.MapToggleOpen}
                 onMapToggleClick={this.handleMapToggleClick}
                 onLoginClick={this.handleLoginClick} 
-                search={this.searchProperties}/>
+                search={this.searchProperties}
+                initialStateSearch={queryString.parse(this.props.location.search)}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
           <Route path={this.props.match.url} exact>

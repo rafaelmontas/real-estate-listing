@@ -88,7 +88,7 @@ class FixedFilters extends React.Component {
       maxPrice: 2000000
     }, () => {
       const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
-      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
+      this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
     })
   }
 
@@ -121,7 +121,7 @@ class FixedFilters extends React.Component {
       this.setState({ minPrice: parseInt(event.target.value) });
     }
     const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
-    return this.props.searchProperties(this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
+    return this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
   }
   handleMaxPrice(event) {
     if(this.state.listingType === "For Sale" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
@@ -141,7 +141,7 @@ class FixedFilters extends React.Component {
       this.setState({ maxPrice: parseInt(event.target.value) });
     }
     const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
-    return this.props.searchProperties(this.state.listingType, this.state.minPrice, parseInt(event.target.value), this.state.bedrooms, this.state.bathrooms, keys)
+    return this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, this.state.minPrice, parseInt(event.target.value), this.state.bedrooms, this.state.bathrooms, keys)
   }
 
   handleBedsBathsClick() {
@@ -173,13 +173,13 @@ class FixedFilters extends React.Component {
   handleBedsClick(event) {
     this.setState({ bedrooms: parseInt(event.target.value) }, () => {
       const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
-      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
+      this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
     });
   }
   handleBathClick(event) {
     this.setState({ bathrooms: parseInt(event.target.value) }, () => {
       const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
-      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
+      this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
     });
   }
 
@@ -195,7 +195,7 @@ class FixedFilters extends React.Component {
       console.log(this.state.propertyTypes)
       const keys = Object.keys(this.state.propertyTypes).filter(key => this.state.propertyTypes[key])
       console.log(keys)
-      this.props.searchProperties(this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
+      this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, this.state.minPrice, this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
     })
   }
   handleCloseClick() {
