@@ -41,6 +41,7 @@ class PropertyDetails extends React.Component {
             console.log(similarProperties)
             this.setState({ similarProperties });
           });
+    window.scrollTo(0, 0);
   }
   componentDidUpdate(prevProps, prevState) {
     Object.entries(this.props).forEach(([key, val]) =>

@@ -109,6 +109,7 @@ class MainSearch extends React.Component {
       pathname: "/properties",
       search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
+    window.scrollTo(0, 0);
   }
 
   render() {
