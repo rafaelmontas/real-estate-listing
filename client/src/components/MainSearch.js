@@ -134,7 +134,8 @@ class MainSearch extends React.Component {
                 onMapToggleClick={this.handleMapToggleClick}
                 onLoginClick={this.handleLoginClick} 
                 search={this.searchProperties}
-                initialStateSearch={queryString.parse(this.props.location.search)}/>
+                initialStateSearch={queryString.parse(this.props.location.search)}
+                loadingStatus={this.state.isLoading}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
           <Route path={this.props.match.url} exact>

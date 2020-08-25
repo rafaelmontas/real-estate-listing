@@ -4,6 +4,16 @@ import './AutoCompleteText.css';
 import { withRouter } from "react-router-dom";
 import queryString from 'query-string'
 
+import { css } from "@emotion/core";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border: 3px solid #fff;
+  border-bottom-color: transparent;
+`;
+
 class AutoCompleteText extends React.Component {
   constructor(props) {
     super(props);
@@ -202,7 +212,9 @@ class AutoCompleteText extends React.Component {
                                           onKeyDown={this.hanldeKeyPressed}
                                           aria-autocomplete="list"
                                           aria-controls="hauzzy-suggestions" />
-          <button><i className="fas fa-search"></i></button>
+          <button>
+            {this.props.loadingStatus ? <ClipLoader css={override} size={20} color={"#fff"} loading={true}/> : <i className="fas fa-search"></i>}
+          </button>
         </div>
         <div className={this.state.suggestionsOpen ? "autocomplete-suggestions open" : "autocomplete-suggestions"}>
           {this.renderSuggestions()}
