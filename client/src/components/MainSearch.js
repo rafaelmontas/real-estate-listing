@@ -106,6 +106,7 @@ class MainSearch extends React.Component {
         })
     }, 2000)
     this.props.history.push({
+      pathname: "/properties",
       search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
   }

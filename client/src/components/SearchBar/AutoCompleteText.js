@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './AutoCompleteText.css';
 import { withRouter } from "react-router-dom";
+import queryString from 'query-string'
 
 class AutoCompleteText extends React.Component {
   constructor(props) {
@@ -41,6 +42,28 @@ class AutoCompleteText extends React.Component {
     this.suggestionSelected = this.suggestionSelected.bind(this);
   }
 
+  componentDidMount() {
+    const sectorQ = queryString.parse(this.props.location.search).sector
+    console.log(typeof sectorQ)
+    if (typeof sectorQ !== "undefined" && sectorQ !== "All") {
+      this.setState({text: sectorQ})
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search && this.props.location.pathname !== "/properties") {
+      const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(prevProps.location.search);
+      this.prevBathrooms = bathrooms;
+      this.prevBedrooms = bedrooms;
+      this.prevListingType = listing_type;
+      this.prevMaxPrice = maxPrice;
+      this.prevMinPrice = minPrice;
+      this.prevPropertyType = property_type;
+      this.prevSector = sector;
+      console.log("Route changed!", prevProps.location, this.props.location)
+    }
+  }
+
   onTextChange = (e) => {
     const value = e.target.value;
     if(value.length === 0) {
@@ -64,11 +87,12 @@ class AutoCompleteText extends React.Component {
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
       const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
-      if(this.props.history.location.pathname !== '/properties') {
-        console.log(this.props.history.location.pathname)
-        this.props.history.push("/properties")
+      if(this.props.location.pathname !== '/properties') {
+        console.log(this.prevBathrooms)
+        this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+      } else {
+        this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
       }
-      this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
     })
     // this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
   }
@@ -102,7 +126,8 @@ class AutoCompleteText extends React.Component {
     );
   }
 
-  handleInputFocus() {
+  handleInputFocus(event) {
+    event.target.select();
     this.setState({suggestionsOpen: true});
   }
   handleInputBlur() {
@@ -135,11 +160,12 @@ class AutoCompleteText extends React.Component {
             const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
             const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
             const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
-            if(this.props.history.location.pathname !== '/properties') {
-              console.log(this.props.history.location.pathname)
-              this.props.history.push("/properties")
+            if(this.props.location.pathname !== '/properties') {
+              console.log(this.prevBathrooms)
+              this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+            } else {
+              this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
             }
-            this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
           });
         }
         // this.props.search(thi.state.text, "For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])

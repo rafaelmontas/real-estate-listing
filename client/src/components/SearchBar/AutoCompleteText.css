@@ -5,6 +5,10 @@
   display: flex;
   flex: 1 1 auto;
 }
+.input-autocomplete input {
+  color: rgb(59, 65, 68);
+  font-size: 16px;
+}
 
 .autocomplete-suggestions {
   position: absolute;
@@ -51,4 +55,10 @@
 .autocomplete-suggestions ul .autocomplete-option .option-logo-text .option-text span, .autocomplete-suggestions ul .autocomplete-option span {
   font-size: 14px;
   color: #6f7780;
+}
+
+@media only screen and (max-width: 872px) {
+  .autocomplete-suggestions {
+    width: 500px;
+  }
 }
