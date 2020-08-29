@@ -11,6 +11,7 @@ import MapColumn from "./MapColumn";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
+import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
 
 import Property from '../utils/Property';
 
@@ -29,13 +30,16 @@ class MainSearch extends React.Component {
       isLoading: false,
       sideDrawerOpen: false,
       MapToggleOpen: false,
-      loginOpen: false
+      loginOpen: false,
+      mobileSearchOpen: false
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.searchProperties = this.searchProperties.bind(this);
+    this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
+    this.handleCloseMobileSearchClick = this.handleCloseMobileSearchClick.bind(this);
   }
   
   componentDidMount() {
@@ -90,6 +94,15 @@ class MainSearch extends React.Component {
       sideDrawerOpen: false
     });
   }
+
+  handleMobileSearchClick() {
+    if(this.state.mobileSearchOpen !== true && window.innerWidth <= 770) {
+      this.setState({mobileSearchOpen: true});
+    }
+  }
+  handleCloseMobileSearchClick() {
+    this.setState({mobileSearchOpen: false})
+  }
   
   searchProperties(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
@@ -128,6 +141,7 @@ class MainSearch extends React.Component {
     return (
       <div className="main-app-container">
         {backdrop}
+        {this.state.mobileSearchOpen && <AutoCompleteMobile onCloseMobileSearchClick={this.handleCloseMobileSearchClick} initialStateSearch={queryString.parse(this.props.location.search)} search={this.searchProperties}/>}
         <SideDrawer show={this.state.sideDrawerOpen}
                     onLoginClick={this.handleLoginClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
@@ -136,7 +150,8 @@ class MainSearch extends React.Component {
                 onLoginClick={this.handleLoginClick} 
                 search={this.searchProperties}
                 initialStateSearch={queryString.parse(this.props.location.search)}
-                loadingStatus={this.state.isLoading}/>
+                loadingStatus={this.state.isLoading}
+                onMobileSearchClick={this.handleMobileSearchClick}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
           <Route path={this.props.match.url} exact>

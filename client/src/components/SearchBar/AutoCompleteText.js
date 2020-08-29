@@ -17,6 +17,8 @@ const override = css`
 class AutoCompleteText extends React.Component {
   constructor(props) {
     super(props);
+    // create a ref to store the textInput DOM element
+    // this.textInput = React.createRef();
     this.itemsOptions = [
       {
         province: 'Distrito Nacional',
@@ -58,9 +60,35 @@ class AutoCompleteText extends React.Component {
     if (typeof sectorQ !== "undefined" && sectorQ !== "All") {
       this.setState({text: sectorQ})
     }
+    console.log("mounted!")
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    Object.entries(this.props).forEach(([key, val]) =>
+      prevProps[key] !== val && console.log(`Prop '${key}' changed`)
+    );
+    if (this.state) {
+      Object.entries(this.state).forEach(([key, val]) =>
+        prevState[key] !== val && console.log(`State '${key}' changed`)
+      );
+    }
+    console.log(prevProps.initialStateSearch, prevProps.loadingStatus)
+    console.log(this.props.initialStateSearch, this.props.loadingStatus)
+    console.log(prevProps.location.search, this.props.location.search)
+
+    // if(prevProps.location.search === "") {
+    //   console.log("Empty search!")
+    // }
+    // if(this.props.location.search !== "") {
+    //   const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(prevProps.location.search);
+    //   this.prevBathrooms = bathrooms;
+    //   this.prevBedrooms = bedrooms;
+    //   this.prevListingType = listing_type;
+    //   this.prevMaxPrice = maxPrice;
+    //   this.prevMinPrice = minPrice;
+    //   this.prevPropertyType = property_type;
+    //   this.prevSector = sector;
+    // }
     if (this.props.location.search !== prevProps.location.search && this.props.location.pathname !== "/properties") {
       const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(prevProps.location.search);
       this.prevBathrooms = bathrooms;
@@ -71,7 +99,37 @@ class AutoCompleteText extends React.Component {
       this.prevPropertyType = property_type;
       this.prevSector = sector;
       console.log("Route changed!", prevProps.location, this.props.location)
+    } else if (this.props.location.search === prevProps.location.search && this.props.location.pathname !== "/properties") {
+      this.prevBathrooms = 0;
+      this.prevBedrooms = 0;
+      this.prevListingType = "For Sale";
+      this.prevMaxPrice = 2000000;
+      this.prevMinPrice = 0;
+      this.prevPropertyType = ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"];
+      this.prevSector = this.state.text;
+      console.log("Without filters", prevProps.location, this.props.location)
     }
+    // if (this.state.text === "" && prevState.text !== "") {
+    //   this.setState({text: prevState})
+    // }
+    console.log(this.state.text)
+    console.log(prevProps.location, this.props.location)
+    console.log("logging", prevProps, this.prevBedrooms)
+  }
+
+  componentWillUnmount(prevProps) {
+    // if (this.props.location.search !== prevProps.location.search && this.props.location.pathname !== "/properties") {
+    //   const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(prevProps.location.search);
+    //   this.prevBathrooms = bathrooms;
+    //   this.prevBedrooms = bedrooms;
+    //   this.prevListingType = listing_type;
+    //   this.prevMaxPrice = maxPrice;
+    //   this.prevMinPrice = minPrice;
+    //   this.prevPropertyType = property_type;
+    //   this.prevSector = sector;
+    //   console.log("Route changed!", prevProps.location, this.props.location)
+    // }
+    console.log("unmounting..", this.prevBedrooms)
   }
 
   onTextChange = (e) => {
@@ -100,8 +158,14 @@ class AutoCompleteText extends React.Component {
       if(this.props.location.pathname !== '/properties') {
         console.log(this.prevBathrooms)
         this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+        if(window.innerWidth <= 770) {
+          this.props.onCloseMobileSearchClick();
+        }
       } else {
         this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+        if(window.innerWidth <= 770) {
+          this.props.onCloseMobileSearchClick();
+        }
       }
     })
     // this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
@@ -139,9 +203,12 @@ class AutoCompleteText extends React.Component {
   handleInputFocus(event) {
     event.target.select();
     this.setState({suggestionsOpen: true});
+    console.log(window.innerWidth, window.innerHeight)
   }
   handleInputBlur() {
-    this.setState({suggestionsOpen: false})
+    if(window.innerWidth > 770) {
+      this.setState({suggestionsOpen: false})
+    }
   }
 
   handleOptionsHover() {
@@ -204,6 +271,10 @@ class AutoCompleteText extends React.Component {
     return (
       <div className="autocomplete-container">
         <div className="input-autocomplete">
+          <button className="back-search-mobile" onClick={this.props.onCloseMobileSearchClick}>
+            <i className="fas fa-arrow-left"></i>
+          </button>
+          <i className="fas fa-search mobile"></i>
           <input value={this.state.text} onFocus={this.handleInputFocus}
                                           onBlur={this.handleInputBlur}
                                           onChange={this.onTextChange}
@@ -211,8 +282,10 @@ class AutoCompleteText extends React.Component {
                                           placeholder="Provincia, Sector..."
                                           onKeyDown={this.hanldeKeyPressed}
                                           aria-autocomplete="list"
-                                          aria-controls="hauzzy-suggestions" />
-          <button>
+                                          aria-controls="hauzzy-suggestions"
+                                          ref={this.props.refProp}
+                                          onClick={this.props.onMobileSearchClick} />
+          <button className="search-button-desktop">
             {this.props.loadingStatus ? <ClipLoader css={override} size={20} color={"#fff"} loading={true}/> : <i className="fas fa-search"></i>}
           </button>
         </div>

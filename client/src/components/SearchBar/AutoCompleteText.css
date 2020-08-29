@@ -5,9 +5,35 @@
   display: flex;
   flex: 1 1 auto;
 }
+.input-autocomplete .back-search-mobile {
+  display: none;
+}
+.input-autocomplete .fa-search.mobile {
+  display: none;
+}
 .input-autocomplete input {
   color: rgb(59, 65, 68);
   font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #B4B3BC;
+  opacity: 1; /* Firefox */
+}
+
+/* Loading spinner */
+.input-autocomplete button div {
+  animation-name: static;
+}
+@keyframes static {
+  from {
+    -webkit-transform: rotate(360deg);
+}
+  to {
+      -webkit-transform: rotate(0deg);
+  }
 }
 
 .autocomplete-suggestions {
@@ -44,6 +70,9 @@
   display: flex;
   align-items: center;
 }
+.autocomplete-suggestions ul .autocomplete-option .option-logo-text .fa-search {
+  color: #B4B3BC;
+}
 .autocomplete-suggestions ul .autocomplete-option .option-logo-text span {
   font-size: 14px;
   color: #6f7780;
@@ -60,5 +89,10 @@
 @media only screen and (max-width: 872px) {
   .autocomplete-suggestions {
     width: 500px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .autocomplete-suggestions {
+    display: none;
   }
 }
