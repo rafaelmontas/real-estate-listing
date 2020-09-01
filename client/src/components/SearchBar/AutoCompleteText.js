@@ -4,6 +4,8 @@ import './AutoCompleteText.css';
 import { withRouter } from "react-router-dom";
 import queryString from 'query-string'
 
+import { sectorsProvinces } from '../../utils/SectorsProvinces';
+
 import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -19,30 +21,30 @@ class AutoCompleteText extends React.Component {
     super(props);
     // create a ref to store the textInput DOM element
     // this.textInput = React.createRef();
-    this.itemsOptions = [
-      {
-        province: 'Distrito Nacional',
-        sector: 'Ensanche Naco',
-        type: 'sector'
-      },
-      {
-        province: 'Distrito Nacional',
-        sector: 'Piantini',
-        type: 'sector'
-      },
-      {
-        province: 'Distrito Nacional',
-        sector: 'Bella Vista',
-        type: 'sector'
-      },
-      {
-        province: 'Distrito Nacional',
-        sector: 'Evaristo Morales',
-        type: 'sector'
-      }
-    ];
+    // this.itemsOptions = [
+    //   {
+    //     province: 'Distrito Nacional',
+    //     sector: 'Ensanche Naco',
+    //     type: 'sector'
+    //   },
+    //   {
+    //     province: 'Distrito Nacional',
+    //     sector: 'Piantini',
+    //     type: 'sector'
+    //   },
+    //   {
+    //     province: 'Distrito Nacional',
+    //     sector: 'Bella Vista',
+    //     type: 'sector'
+    //   },
+    //   {
+    //     province: 'Distrito Nacional',
+    //     sector: 'Evaristo Morales',
+    //     type: 'sector'
+    //   }
+    // ];
     this.state = {
-      suggestions: this.itemsOptions,
+      suggestions: sectorsProvinces.slice(0, 3),
       text: '',
       activeOption: -1,
       suggestionsOpen: false,
@@ -52,6 +54,7 @@ class AutoCompleteText extends React.Component {
     this.hanldeKeyPressed = this.hanldeKeyPressed.bind(this);
     this.handleOptionsHover = this.handleOptionsHover.bind(this);
     this.suggestionSelected = this.suggestionSelected.bind(this);
+    this.bottomSuggestionSelected = this.bottomSuggestionSelected.bind(this);
   }
 
   componentDidMount() {
@@ -135,10 +138,10 @@ class AutoCompleteText extends React.Component {
   onTextChange = (e) => {
     const value = e.target.value;
     if(value.length === 0) {
-      this.setState(() => ({suggestions: this.itemsOptions, text: value, activeOption: -1}))
+      this.setState(() => ({suggestions: sectorsProvinces.slice(0, 3), text: value, activeOption: -1}))
     } else {
       const regex = new RegExp(`${value}`, 'i');
-      const suggestions = this.itemsOptions.sort(v => v.sector).filter(v => regex.test(v.sector));
+      const suggestions = sectorsProvinces.sort(v => v.sector).filter(v => regex.test(v.sector)).slice(0, 4);
       this.setState(() => ({suggestions, text: value, activeOption: -1}), () => console.log(this.state.suggestions));
     }
   }
@@ -147,7 +150,7 @@ class AutoCompleteText extends React.Component {
     this.setState({
       text: value,
       activeOption: -1,
-      suggestions: this.itemsOptions,
+      suggestions: sectorsProvinces.slice(0, 4),
     }, () => {
       const listingType = this.props.initialStateSearch.listing_type == null ? "For Sale" : this.props.initialStateSearch.listing_type;
       const minPrice = this.props.initialStateSearch.minPrice == null ? 0 : this.props.initialStateSearch.minPrice;
@@ -170,6 +173,32 @@ class AutoCompleteText extends React.Component {
     })
     // this.props.search("For Sale", 0, 2000000, 0, 0, ["Apartment", "House", "Villa"])
   }
+  bottomSuggestionSelected(value) {
+    this.setState({
+      text: value,
+      activeOption: -1,
+      suggestions: sectorsProvinces.slice(0, 4)
+    }, () => {
+      const listingType = this.props.initialStateSearch.listing_type == null ? "For Sale" : this.props.initialStateSearch.listing_type;
+      const minPrice = this.props.initialStateSearch.minPrice == null ? 0 : this.props.initialStateSearch.minPrice;
+      const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
+      const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
+      const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["Apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      if(this.props.location.pathname !== '/properties') {
+        console.log(this.prevBathrooms)
+        this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+        if(window.innerWidth <= 770) {
+          this.props.onCloseMobileSearchClick();
+        }
+      } else {
+        this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+        if(window.innerWidth <= 770) {
+          this.props.onCloseMobileSearchClick();
+        }
+      }
+    })
+  }
 
   renderSuggestions() {
     const { suggestions } = this.state;
@@ -177,26 +206,64 @@ class AutoCompleteText extends React.Component {
       return null
     }
     return (
-      <ul id="hauzzy-suggestions" tabIndex={-1} rol="listbox">
-        {suggestions.map((item, index) => {
-          return (
-            <div key={index} className={index === this.state.activeOption ? "autocomplete-option autocomplete-option-selected" : "autocomplete-option"}
-                             onMouseDown={() => this.suggestionSelected(item.sector)}
-                             onMouseEnter={this.handleOptionsHover}
-                             tabIndex={-1}
-                             rol="option">
-              <div className="option-logo-text">
-                <i className="fas fa-search"></i>
-                <div className="option-text">
-                  <li>{item.sector}</li>
-                  <span>{item.province}</span>
+      <div>
+        <ul id="hauzzy-suggestions" tabIndex={-1} rol="listbox">
+          {suggestions.map((item, index) => {
+            return (
+              <div key={index} className={index === this.state.activeOption ? "autocomplete-option autocomplete-option-selected" : "autocomplete-option"}
+                              onMouseDown={() => this.suggestionSelected(item.sector)}
+                              onMouseEnter={this.handleOptionsHover}
+                              tabIndex={-1}
+                              rol="option">
+                <div className="option-logo-text">
+                  <i className="fas fa-search"></i>
+                  <div className="option-text">
+                    <li>{item.sector}</li>
+                    <span>{item.province}</span>
+                  </div>
                 </div>
+                <span>{item.type}</span>
               </div>
-              <span>{item.type}</span>
+            )
+          })}
+        </ul>
+        <div className="hauzzy-suggestions-bottom">
+          <div className="suggestions-bottom-container">
+            <div>
+              <h2>Descubre el Distrito Nacional</h2>
             </div>
-          )
-        })}
-      </ul>
+            <div className="suggestions-container">
+              <div className="suggestions-column">
+                {sectorsProvinces.slice(3, 7).map((item, index) => {
+                  return (
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                      <span>{item.sector}</span>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="suggestions-column">
+                {sectorsProvinces.slice(7, 11).map((item, index) => {
+                  return (
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                      <span>{item.sector}</span>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className="suggestions-column">
+                {sectorsProvinces.slice(11, 15).map((item, index) => {
+                  return (
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                      <span>{item.sector}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 

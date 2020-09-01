@@ -86,6 +86,61 @@
   color: #6f7780;
 }
 
+/* Bottom suggestions */
+.autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0 15px 15px;
+}
+.hauzzy-suggestions-bottom .suggestions-bottom-container div h2 {
+  font-size: 14px;
+  color: #949595;
+  padding: 5px 0;
+  font-weight: 400;
+  /* border-top: 1px solid #dedede; */
+  line-height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-container {
+  display: flex;
+}
+.autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column {
+  padding: 0 10px;
+  flex: 1 1 auto;
+  max-width: 33.33%;
+}
+.autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column:first-child {
+  padding-left: 0px;
+}
+.autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column:last-child {
+  padding-right: 0px;
+}
+.hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item {
+  font-weight: 300;
+  font-size: 13px;
+  /* line-height: 25px; */
+  margin-top: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item:first-child {
+  margin-top: 0px;
+}
+.hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item span {
+  display: block;
+  color: #2e64e2;
+  cursor: pointer;
+}
+.hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item span:hover {
+  color: #113a9a;
+}
+
+
 @media only screen and (max-width: 872px) {
   .autocomplete-suggestions {
     width: 500px;
@@ -94,5 +149,23 @@
 @media only screen and (max-width: 770px) {
   .autocomplete-suggestions {
     display: none;
+  }
+}
+
+/* Bottom suggestions Mobile*/
+@media only screen and (max-width: 770px) {
+  .hauzzy-suggestions-bottom .suggestions-bottom-container div h2 {
+    padding: 10px 0;
+  }
+  .autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-container {
+    flex-direction: column;
+  }
+  .autocomplete-suggestions .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column {
+    padding: 0 0 15px;
+    max-width: none;
+  }
+  .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item {
+    font-size: 16px;
+    margin-top: 15px;
   }
 }
