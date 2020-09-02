@@ -67,6 +67,10 @@ class AutoCompleteText extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if(this.props.initialStateSearch.sector !== prevProps.initialStateSearch.sector && this.props.location.pathname === "/properties" && prevProps.initialStateSearch !== null) {
+      console.log("worked");
+      this.setState({text: this.props.initialStateSearch.sector});
+    }
     Object.entries(this.props).forEach(([key, val]) =>
       prevProps[key] !== val && console.log(`Prop '${key}' changed`)
     );
