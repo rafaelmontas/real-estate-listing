@@ -11,9 +11,15 @@ const mapStyles = {
 
 class MapColumn extends React.Component {
 
+  // handleMarkerClick(id) {
+  //   console.log(`Marker clicked! ${id}`)
+  // }
+  
   displayMarkers() {
     return this.props.properties.map(property => {
-      return  <Marker key={property.id} position={{ lat: property.lat, lng: property.lng}} />;
+      return <Marker key={property.id}
+                     position={{ lat: property.lat, lng: property.lng}}
+                     onClick={() => this.props.onMarkerClick(property.id)} />
     });
   }
 

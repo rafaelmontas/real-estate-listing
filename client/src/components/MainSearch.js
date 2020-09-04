@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string'
 import './App.css';
@@ -31,8 +32,10 @@ class MainSearch extends React.Component {
       sideDrawerOpen: false,
       MapToggleOpen: false,
       loginOpen: false,
-      mobileSearchOpen: false
+      mobileSearchOpen: false,
+      cardSelected: 0
     }
+    this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
@@ -40,6 +43,37 @@ class MainSearch extends React.Component {
     this.searchProperties = this.searchProperties.bind(this);
     this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
     this.handleCloseMobileSearchClick = this.handleCloseMobileSearchClick.bind(this);
+  }
+
+  handleMarkerClick(id) {
+    console.log(`Marker clicked! ${id}`, document.getElementById(`homecard_${id}`))
+    // this.propertyCardRef.current.scrollIntoView();
+    // window.scrollTo(0, this.propertyCardRef.current.offsetTop)
+    console.log(document.getElementById(`homecard_${id}`));
+    // const target = this.propertyCardRef.current;
+    const target = document.getElementById(`homecard_${id}`)
+    // const targetPosition = target.offsetTop
+    const targetPosition = ReactDOM.findDOMNode(target).getBoundingClientRect().top - 124;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+    console.log(targetPosition, startPosition, distance);
+
+    function animation(currentTime) {
+      if(startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = ease(timeElapsed, startPosition, distance, 750);
+      window.scrollTo(0, run);
+      if(timeElapsed < 750) window.requestAnimationFrame(animation);
+    }
+    function ease(t, b, c, d) {
+      t /= d / 2;
+      if(t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+    window.requestAnimationFrame(animation)
+    this.setState({cardSelected: id});
   }
   
   componentDidMount() {
@@ -114,7 +148,8 @@ class MainSearch extends React.Component {
           console.log(properties);
           this.setState({ 
             properties: properties,
-            isLoading: false
+            isLoading: false,
+            cardSelected: 0
           })
         })
     }, 2000)
@@ -160,11 +195,15 @@ class MainSearch extends React.Component {
                 <FixedFilters status={this.state.isLoading}
                               searchProperties={this.searchProperties}
                               initialState={queryString.parse(this.props.location.search)}/>
-                <PropertyList properties={this.state.properties} status={this.state.isLoading}/>
+                <PropertyList properties={this.state.properties}
+                              status={this.state.isLoading}
+                              cardSelected={this.state.cardSelected}/>
                 <Pagination />
                 <Footer />
               </div>
-              <MapColumn properties={this.state.properties} mapOpen={this.state.MapToggleOpen} />
+              <MapColumn properties={this.state.properties}
+                         mapOpen={this.state.MapToggleOpen}
+                         onMarkerClick={this.handleMarkerClick} />
             </section>
           </Route>
           <Route path="/properties/favorites" exact component={Favorites} />

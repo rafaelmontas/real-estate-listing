@@ -20,7 +20,10 @@ class PropertyList extends React.Component {
         <div className="search-results-list-grid">
           {this.props.status && cards.map(() => <CardSkeleton key={count++}/>)}
           {!this.props.status && this.props.properties.map(property => {
-            return <PropertyCard key={property.id} property={property} />;
+            return <PropertyCard key={property.id}
+                                 property={property}
+                                 identifier={property.id}
+                                 cardSelected={this.props.cardSelected}/>;
           })}
         </div>
       </div>

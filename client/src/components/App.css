@@ -390,9 +390,17 @@ a {
   border-radius: 4px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
 }
+.search-results-list-grid .home-card-container .home-card.cardSelected {
+  border: 2px solid #333;
+  border-radius: 4px;
+}
 .search-results-list-grid .home-card-container .home-card:hover {
   border-color: #ccc;
   box-shadow: 0 0 7px 0 rgba(0,0,0,.35);
+}
+.search-results-list-grid .home-card-container .home-card.cardSelected:hover {
+  border-color: #333;
+  box-shadow: none;
 }
 
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container {
