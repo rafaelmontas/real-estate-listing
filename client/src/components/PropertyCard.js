@@ -9,7 +9,10 @@ import image from "../demo_img/house1.png"
 class PropertyCard extends React.Component {
   render() {
     return (
-      <div className="home-card-container" id={`homecard_${this.props.identifier}`}>
+      <div className="home-card-container"
+           id={`homecard_${this.props.identifier}`}
+           onMouseEnter={() => this.props.onCardHovered(this.props.identifier)}
+           onMouseLeave={this.props.onCardHoverOut}>
         <div className={this.props.cardSelected === this.props.identifier ? "home-card cardSelected" : "home-card"}>
           <Link to={`/properties/${this.props.property.id}`}>
             <div className="property-card-media">

@@ -9,6 +9,7 @@ import PropertyList from "./PropertyList";
 import Pagination from "./Pagination";
 import Footer from "./Footer";
 import MapColumn from "./MapColumn";
+import MainMap from './Map/MainMap';
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
@@ -33,9 +34,12 @@ class MainSearch extends React.Component {
       MapToggleOpen: false,
       loginOpen: false,
       mobileSearchOpen: false,
-      cardSelected: 0
+      cardSelected: 0,
+      cardHovered: 0
     }
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleCardHover = this.handleCardHover.bind(this);
+    this.handleCardHoverOut = this.handleCardHoverOut.bind(this);
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
@@ -74,6 +78,14 @@ class MainSearch extends React.Component {
     }
     window.requestAnimationFrame(animation)
     this.setState({cardSelected: id});
+  }
+  
+  handleCardHover(identifier) {
+    this.setState({cardHovered: identifier});
+    console.log(identifier)
+  }
+  handleCardHoverOut() {
+    this.setState({cardHovered: 0});
   }
   
   componentDidMount() {
@@ -197,13 +209,18 @@ class MainSearch extends React.Component {
                               initialState={queryString.parse(this.props.location.search)}/>
                 <PropertyList properties={this.state.properties}
                               status={this.state.isLoading}
-                              cardSelected={this.state.cardSelected}/>
+                              cardSelected={this.state.cardSelected}
+                              onCardHovered={this.handleCardHover}
+                              onCardHoverOut={this.handleCardHoverOut}/>
                 <Pagination />
                 <Footer />
               </div>
-              <MapColumn properties={this.state.properties}
+              <MainMap properties={this.state.properties}
+                       onMarkerClick={this.handleMarkerClick} 
+                       cardHovered={this.state.cardHovered}/>
+              {/* <MapColumn properties={this.state.properties}
                          mapOpen={this.state.MapToggleOpen}
-                         onMarkerClick={this.handleMarkerClick} />
+                         onMarkerClick={this.handleMarkerClick} /> */}
             </section>
           </Route>
           <Route path="/properties/favorites" exact component={Favorites} />

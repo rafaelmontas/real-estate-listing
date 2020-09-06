@@ -23,7 +23,9 @@ class PropertyList extends React.Component {
             return <PropertyCard key={property.id}
                                  property={property}
                                  identifier={property.id}
-                                 cardSelected={this.props.cardSelected}/>;
+                                 cardSelected={this.props.cardSelected}
+                                 onCardHovered={this.props.onCardHovered}
+                                 onCardHoverOut={this.props.onCardHoverOut}/>;
           })}
         </div>
       </div>
