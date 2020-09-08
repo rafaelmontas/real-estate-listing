@@ -8,7 +8,6 @@ import FixedFilters from "./FixedFilters";
 import PropertyList from "./PropertyList";
 import Pagination from "./Pagination";
 import Footer from "./Footer";
-import MapColumn from "./MapColumn";
 import MainMap from './Map/MainMap';
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
@@ -215,12 +214,17 @@ class MainSearch extends React.Component {
                 <Pagination />
                 <Footer />
               </div>
-              <MainMap properties={this.state.properties}
-                       onMarkerClick={this.handleMarkerClick} 
-                       cardHovered={this.state.cardHovered}/>
-              {/* <MapColumn properties={this.state.properties}
-                         mapOpen={this.state.MapToggleOpen}
-                         onMarkerClick={this.handleMarkerClick} /> */}
+              <div id="map-column-right" className={this.state.MapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
+                <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
+                <div className="filter-button">
+                  {/* <FilterToggle /> */}
+                </div>
+                <div id="map-div">
+                  <MainMap properties={this.state.properties}
+                               onMarkerClick={this.handleMarkerClick} 
+                               cardHovered={this.state.cardHovered}/>
+                </div>
+              </div>
             </section>
           </Route>
           <Route path="/properties/favorites" exact component={Favorites} />
