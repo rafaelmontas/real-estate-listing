@@ -222,7 +222,9 @@ class MainSearch extends React.Component {
                 <div id="map-div">
                   <MainMap properties={this.state.properties}
                                onMarkerClick={this.handleMarkerClick} 
-                               cardHovered={this.state.cardHovered}/>
+                               cardHovered={this.state.cardHovered}
+                               initialStateSearch={queryString.parse(this.props.location.search)}
+                               loadingStatus={this.state.isLoading}/>
                 </div>
               </div>
             </section>
