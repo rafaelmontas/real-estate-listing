@@ -46,15 +46,21 @@ a {
   padding: 8px;
   margin-right: 10px;
 }
+.navbar-menu-form .logo-img {
+  background-color: #0069ff;
+  padding: 6px;
+  border-radius: 4px;
+}
 .navbar-menu-form .logo-img .fa-home {
   font-size: 24px;
-  color: #c30000;
+  color: #fff;
 }
 .navbar-menu-form .brand-logo-name {
   padding: 8px;
   margin-right: 10px;
   font-size: 28px;
   font-weight: bold;
+  color: #0069ff;
 }
 .navbar-menu-form form {
   display: flex;
@@ -129,22 +135,31 @@ a {
 .navbar-menu-right .menu-item .far {
   padding-right: 5px;
 }
-
-.navbar-menu-right .menu-item.button.secondary:hover {
-  background-color: #f8f8fa;
+.navbar-menu-right .menu-item.button.secondary {
+  border: 1px solid #0069ff;
   border-radius: 4px;
+  color: #0069ff;
+  font-weight: 500;
+}
+.navbar-menu-right .menu-item.button.secondary:hover {
+  background-color: #0069ff;
+  color: #fff;
   cursor: pointer;
 }
 
 .navbar-menu-right .menu-item.button.primary {
-  border: 2px solid rgba(0,0,0,.05);
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+  /* border: 2px solid rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.1); */
+  background-color: #0069ff;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-.navbar-menu-right .menu-item.button.primary:hover {
+/* .navbar-menu-right .menu-item.button.primary:hover {
   background: #f8f8fa;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
-}
+} */
 
 /************************************* Media Queries **************************************/
 

@@ -22,9 +22,13 @@ const paths = {
     { lat: 18.468409, lng: -69.931788 },
     { lat: 18.465620, lng: -69.930244 },
     { lat: 18.469040, lng: -69.923677 },
-    { lat: 18.472713, lng: -69.919289 },
-    { lat: 18.473583, lng: -69.919879 },
-    { lat: 18.473782, lng: -69.919992 },
+    { lat: 18.470586, lng: -69.924750 },
+    { lat: 18.470810, lng: -69.924300 },
+    { lat: 18.471380, lng: -69.923871 },
+    { lat: 18.474596, lng: -69.920180 },
+    // { lat: 18.472713, lng: -69.919289 },
+    // { lat: 18.473583, lng: -69.919879 },
+    // { lat: 18.473782, lng: -69.919992 },
     { lat: 18.475023, lng: -69.920325 },
     { lat: 18.481841, lng: -69.920765 },
     { lat: 18.482065, lng: -69.921129 },
@@ -70,6 +74,7 @@ class MainMap extends React.Component {
     super(props);
     this.state = {
       sector: '',
+      paths: [],
       zoomLevel: 14,
       centerMap: {lat: 18.473110,lng: -69.934695}
     }
@@ -83,9 +88,11 @@ class MainMap extends React.Component {
     sectorsProvinces.forEach(arrayItem => {
       if(arrayItem.sector === this.props.initialStateSearch.sector) {
         const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)
+        const paths = sectorsProvinces[index].paths
         console.log(index)
         this.setState({
           sector: this.props.initialStateSearch.sector,
+          paths: paths,
           zoomLevel: sectorsProvinces[index].zoomLevel,
           centerMap: sectorsProvinces[index].centerLocation
         })
@@ -99,10 +106,14 @@ class MainMap extends React.Component {
       sectorsProvinces.forEach(arrayItem => {
         if(arrayItem.sector === this.props.initialStateSearch.sector) {
           const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)
+          const paths = sectorsProvinces[index].paths
           console.log(index)
           this.setState({
+            paths: paths,
             zoomLevel: sectorsProvinces[index].zoomLevel,
             centerMap: sectorsProvinces[index].centerLocation
+          }, () => {
+            console.log(this.state.paths)
           })
         }
       })
@@ -123,7 +134,7 @@ class MainMap extends React.Component {
     return (
       <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}>
           <GoogleMap
-            options={{mapTypeControl: false, streetViewControl: false}}
+            options={{mapTypeControl: false, streetViewControl: false, styles: [{featureType: "poi", stylers: [{ visibility: "off" }] }]}}
             mapContainerStyle={{width: '100%', height: '100%'}}
             center={!this.props.loadingStatus && this.state.centerMap}
             zoom={!this.props.loadingStatus && this.state.zoomLevel}>
@@ -138,7 +149,7 @@ class MainMap extends React.Component {
                 </OverlayView>
               })}
               {!this.props.loadingStatus && <Polygon
-                paths={paths[this.state.sector]}
+                paths={this.state.paths}
                 options={polygonOptions}
               />}
           </GoogleMap>
