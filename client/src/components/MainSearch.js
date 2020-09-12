@@ -13,15 +13,12 @@ import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
-
-import Property from '../utils/Property';
-
-// import properties from '../data'
-
 import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
 import PropertyDetails from './PropertyDetails';
 import Favorites from './Favorites';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 class MainSearch extends React.Component {
   constructor(props) {
@@ -49,33 +46,10 @@ class MainSearch extends React.Component {
   }
 
   handleMarkerClick(id) {
-    console.log(`Marker clicked! ${id}`, document.getElementById(`homecard_${id}`))
-    // this.propertyCardRef.current.scrollIntoView();
-    // window.scrollTo(0, this.propertyCardRef.current.offsetTop)
-    console.log(document.getElementById(`homecard_${id}`));
-    // const target = this.propertyCardRef.current;
-    const target = document.getElementById(`homecard_${id}`)
-    // const targetPosition = target.offsetTop
-    const targetPosition = ReactDOM.findDOMNode(target).getBoundingClientRect().top - 124;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-    console.log(targetPosition, startPosition, distance);
-
-    function animation(currentTime) {
-      if(startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = ease(timeElapsed, startPosition, distance, 750);
-      window.scrollTo(0, run);
-      if(timeElapsed < 750) window.requestAnimationFrame(animation);
-    }
-    function ease(t, b, c, d) {
-      t /= d / 2;
-      if(t < 1) return c / 2 * t * t + b;
-      t--;
-      return -c / 2 * (t * (t - 2) - 1) + b;
-    }
-    window.requestAnimationFrame(animation)
+    window.scroll({
+      top: document.getElementById(`homecard_${id}`).offsetTop -124,
+      behavior: "smooth"
+    })
     this.setState({cardSelected: id});
   }
   
