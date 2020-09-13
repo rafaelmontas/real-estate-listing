@@ -347,7 +347,7 @@ class FixedFilters extends React.Component {
           </div>
           <div className="filter-section-button-right">
             <div className="filter-button filters">
-              <FilterToggle onFilterClick={this.handleMoreFiltersClick} />
+              <FilterToggle onFiltersClick={this.handleMoreFiltersClick} />
               <InputFilters show={this.state.moreFiltersOpen}
                             onBedsClick={this.handleBedsClick}
                             bedOptionSelected={this.state.bedrooms}

@@ -164,7 +164,7 @@ a {
 /************************************* Media Queries **************************************/
 
 @media only screen and (max-width: 767px) {
-  .navbar-menu-form .logo-img .fa-home, .navbar-menu-form .brand-logo-name {
+  .navbar-menu-form .logo-img, .navbar-menu-form .logo-img .fa-home, .navbar-menu-form .brand-logo-name {
     display: none;
   }
 
@@ -618,6 +618,11 @@ a {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .fixed-filters {
+    z-index: 200;
+  }
+}
 
 
 /************************************* Map Container **************************************/

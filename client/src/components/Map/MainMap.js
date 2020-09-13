@@ -46,9 +46,11 @@ class MainMap extends React.Component {
 
   componentDidMount() {
     console.log(this.props.initialStateSearch.sector)
-    // if(this.props.initialStateSearch.sector) {
-    //   this.setState({sector: this.props.initialStateSearch.sector})
-    // }
+    // navigator.geolocation.getCurrentPosition(position => {
+    //   console.log("Latitude is :", position.coords.latitude);
+    //   console.log("Longitude is :", position.coords.longitude);
+    //   this.setState({centerMap: {lat: position.coords.latitude, lng: position.coords.longitude}})
+    // })
     sectorsProvinces.forEach(arrayItem => {
       if(arrayItem.sector === this.props.initialStateSearch.sector) {
         const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)

@@ -27,7 +27,8 @@ class MainSearch extends React.Component {
       properties: [],
       isLoading: false,
       sideDrawerOpen: false,
-      MapToggleOpen: false,
+      mapToggleOpen: false,
+      moreFiltersOpen: false,
       loginOpen: false,
       mobileSearchOpen: false,
       cardSelected: 0,
@@ -102,7 +103,7 @@ class MainSearch extends React.Component {
   }
   handleMapToggleClick() {
     this.setState((prevState) => {
-      return { MapToggleOpen: !prevState.MapToggleOpen };
+      return { mapToggleOpen: !prevState.mapToggleOpen };
     })
     // Add redirect to /properties url to show map - will unmount property details component
   }
@@ -147,7 +148,7 @@ class MainSearch extends React.Component {
 
   render() {
     let mapOpenCss;
-    if(this.state.MapToggleOpen) {
+    if(this.state.mapToggleOpen) {
       mapOpenCss = "search-results-columns none"
     } else {
       mapOpenCss = "search-results-columns"
@@ -165,7 +166,7 @@ class MainSearch extends React.Component {
         <SideDrawer show={this.state.sideDrawerOpen}
                     onLoginClick={this.handleLoginClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
-                mapOpen={this.state.MapToggleOpen}
+                mapOpen={this.state.mapToggleOpen}
                 onMapToggleClick={this.handleMapToggleClick}
                 onLoginClick={this.handleLoginClick} 
                 search={this.searchProperties}
@@ -179,7 +180,8 @@ class MainSearch extends React.Component {
               <div id="results-column-left" className={mapOpenCss}>
                 <FixedFilters status={this.state.isLoading}
                               searchProperties={this.searchProperties}
-                              initialState={queryString.parse(this.props.location.search)}/>
+                              initialState={queryString.parse(this.props.location.search)}
+                              onFiltersClick={this.handleMoreFiltersClick}/>
                 <PropertyList properties={this.state.properties}
                               status={this.state.isLoading}
                               cardSelected={this.state.cardSelected}
@@ -188,7 +190,7 @@ class MainSearch extends React.Component {
                 <Pagination />
                 <Footer />
               </div>
-              <div id="map-column-right" className={this.state.MapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
+              <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
                 <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
                 <div className="filter-button">
                   {/* <FilterToggle /> */}
