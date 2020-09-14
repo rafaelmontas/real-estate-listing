@@ -23,7 +23,7 @@ const mapOptions = {
 const polygonOptions = {
   // fillColor: "lightblue",
   fillOpacity: 0,
-  strokeColor: "blue",
+  strokeColor: "#5998F2",
   strokeOpacity: 0.8,
   strokeWeight: 2,
   clickable: false,
@@ -103,7 +103,8 @@ class MainMap extends React.Component {
             options={mapOptions}
             mapContainerStyle={{width: '100%', height: '100%'}}
             center={!this.props.loadingStatus && this.state.centerMap}
-            zoom={!this.props.loadingStatus && this.state.zoomLevel}>
+            zoom={!this.props.loadingStatus && this.state.zoomLevel}
+            onClick={this.props.onMapClick}>
               {this.props.properties.map(property => {
                 return <OverlayView
                   key={property.id}

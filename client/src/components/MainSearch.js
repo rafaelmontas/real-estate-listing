@@ -13,6 +13,7 @@ import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
+import MapPropertyCard from './MapPropertyCard/MapPropertyCard';
 import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
 import PropertyDetails from './PropertyDetails';
@@ -31,10 +32,11 @@ class MainSearch extends React.Component {
       moreFiltersOpen: false,
       loginOpen: false,
       mobileSearchOpen: false,
-      cardSelected: 0,
+      cardSelected: null,
       cardHovered: 0
     }
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
+    this.handleMapClick = this.handleMapClick.bind(this);
     this.handleCardHover = this.handleCardHover.bind(this);
     this.handleCardHoverOut = this.handleCardHoverOut.bind(this);
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
@@ -60,6 +62,10 @@ class MainSearch extends React.Component {
   }
   handleCardHoverOut() {
     this.setState({cardHovered: 0});
+  }
+
+  handleMapClick() {
+    this.setState({cardSelected: null}, () => console.log("Map clicked", this.state.cardSelected))
   }
   
   componentDidMount() {
@@ -159,6 +165,10 @@ class MainSearch extends React.Component {
       backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
     }
     
+    let mapPropertyCard;
+    if(window.innerWidth <= 770 && this.state.cardSelected) {
+      mapPropertyCard = <MapPropertyCard properties={this.state.properties} identifier={this.state.cardSelected}/>
+    }
     return (
       <div className="main-app-container">
         {backdrop}
@@ -197,11 +207,13 @@ class MainSearch extends React.Component {
                 </div>
                 <div id="map-div">
                   <MainMap properties={this.state.properties}
-                               onMarkerClick={this.handleMarkerClick} 
+                               onMarkerClick={this.handleMarkerClick}
+                               onMapClick={this.handleMapClick} 
                                cardHovered={this.state.cardHovered}
                                initialStateSearch={queryString.parse(this.props.location.search)}
                                loadingStatus={this.state.isLoading}/>
                 </div>
+                {mapPropertyCard}
               </div>
             </section>
           </Route>

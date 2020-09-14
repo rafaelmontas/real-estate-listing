@@ -1,0 +1,24 @@
+.map-property-card {
+  position: absolute;
+  bottom: 69px;
+  right: 3px;
+  left: 3px;
+  z-index: 500;
+  border-radius: 4px;
+  height: 125px;
+
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.map-property-card .map-property-card-content {
+  display: flex;
+  height: 100%;
+}
+.map-property-card .map-property-card-content .map-property-card-img {
+  flex: 2 2;
+  background-color: burlywood;
+}
+.map-property-card .map-property-card-content .map-property-card-info {
+  flex: 4 4;
+}
