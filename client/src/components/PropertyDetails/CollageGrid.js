@@ -1,5 +1,6 @@
 import React from 'react';
 import CollageGridSkeleton from './CollageGridSkeleton';
+import image from "../../demo_img/house1.png"
 
 class CollageGrid extends React.Component {
   render() {
@@ -10,7 +11,7 @@ class CollageGrid extends React.Component {
       return (
         <div className="collage-grid">
           <div className="media-main">
-            <img src={this.props.property.imgSrc} alt="property"></img>
+            <img src={image} alt="property"></img>
             <div className="photos-badge">
               <i className="far fa-image"></i>
               <span>6</span>
@@ -19,10 +20,10 @@ class CollageGrid extends React.Component {
           </div>
           <div className="second-media">
             <div className="photo-top">
-              <img src={this.props.property.imgSrc} alt="property"></img>
+              <img src={image} alt="property"></img>
             </div>
             <div className="photo-bottom">
-              <img src={this.props.property.imgSrc} alt="property"></img>
+              <img src={image} alt="property"></img>
             </div>
           </div>
         </div>

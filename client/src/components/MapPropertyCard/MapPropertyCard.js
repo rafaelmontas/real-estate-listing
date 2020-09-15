@@ -2,6 +2,7 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
 import './MapPropertyCard.css';
+import image from "../../demo_img/house1.png"
 
 
 class MapPropertyCard extends React.Component {
@@ -29,7 +30,7 @@ class MapPropertyCard extends React.Component {
         <Link to={`/properties/${this.state.property.id}`} style={{ textDecoration: 'none', color: '#000' }}>
           <div className="map-property-card-content">
             <div className="map-property-card-img">
-              hello
+              <img src={image}/>
             </div>
             <div className="map-property-card-info">
               <div className="price-like-section">

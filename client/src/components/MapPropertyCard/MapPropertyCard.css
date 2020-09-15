@@ -19,8 +19,14 @@
   cursor: pointer;
 }
 .map-property-card .map-property-card-content .map-property-card-img {
+  display: flex;
   flex: 2 2;
   background-color: #eae2d8;
+}
+.map-property-card .map-property-card-content .map-property-card-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 .map-property-card .map-property-card-content .map-property-card-info {
   flex: 4 4;
