@@ -32,7 +32,7 @@ class MainSearch extends React.Component {
       moreFiltersOpen: false,
       loginOpen: false,
       mobileSearchOpen: false,
-      cardSelected: null,
+      cardSelected: 0,
       cardHovered: 0
     }
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
@@ -49,11 +49,21 @@ class MainSearch extends React.Component {
   }
 
   handleMarkerClick(id) {
-    window.scroll({
-      top: document.getElementById(`homecard_${id}`).offsetTop -124,
-      behavior: "smooth"
-    })
-    this.setState({cardSelected: id});
+    if(window.innerWidth <= 770) {
+      this.setState({
+        cardSelected: id,
+        cardHovered: id
+      })
+    } else {
+      window.scroll({
+        top: document.getElementById(`homecard_${id}`).offsetTop -124,
+        behavior: "smooth"
+      })
+      this.setState({
+        cardSelected: id,
+        cardHovered: id
+      });
+    }
   }
   
   handleCardHover(identifier) {
@@ -61,11 +71,15 @@ class MainSearch extends React.Component {
     console.log(identifier)
   }
   handleCardHoverOut() {
-    this.setState({cardHovered: 0});
+    if(this.state.cardSelected) {
+      this.setState({cardHovered: this.state.cardSelected})
+    } else {
+      this.setState({cardHovered: 0});
+    }
   }
 
   handleMapClick() {
-    this.setState({cardSelected: null}, () => console.log("Map clicked", this.state.cardSelected))
+    this.setState({cardSelected: 0, cardHovered: 0}, () => console.log("Map clicked", this.state.cardSelected))
   }
   
   componentDidMount() {
@@ -141,7 +155,8 @@ class MainSearch extends React.Component {
           this.setState({ 
             properties: properties,
             isLoading: false,
-            cardSelected: 0
+            cardSelected: 0,
+            cardHovered: 0
           })
         })
     }, 2000)
