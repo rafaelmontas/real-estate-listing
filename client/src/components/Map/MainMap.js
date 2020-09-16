@@ -42,6 +42,9 @@ class MainMap extends React.Component {
       zoomLevel: 14,
       centerMap: {lat: 18.473110,lng: -69.934695}
     }
+    this.prevCenter = {lat: 18.473110,lng: -69.934695};
+    this.prevZoom = null;
+    this.prevPaths = [];
   }
 
   componentDidMount() {
@@ -68,13 +71,16 @@ class MainMap extends React.Component {
   componentDidUpdate(prevProps) {
     console.log('updated map')
     if(prevProps.initialStateSearch.sector !== this.props.initialStateSearch.sector) {
-      this.setState({sector: this.props.initialStateSearch.sector})
       sectorsProvinces.forEach(arrayItem => {
         if(arrayItem.sector === this.props.initialStateSearch.sector) {
           const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)
           const paths = sectorsProvinces[index].paths
           console.log(index)
+          this.prevCenter = this.state.centerMap;
+          this.prevZoom = this.state.zoomLevel;
+          this.prevPaths = this.state.paths;
           this.setState({
+            sector: this.props.initialStateSearch.sector,
             paths: paths,
             zoomLevel: sectorsProvinces[index].zoomLevel,
             centerMap: sectorsProvinces[index].centerLocation
@@ -86,15 +92,6 @@ class MainMap extends React.Component {
     }
   }
 
-  // handleSectorChange() {
-  //   sectorsProvinces.forEach(arrayItem => {
-  //     if(arrayItem.sector === this.props.initialStateSearch.sector) {
-  //       const index = sectorsProvinces.indexOf(arrayItem.sector)
-  //       console.log(index)
-  //     }
-  //   })
-  //   const foundSector = sectorsProvinces.filter(s => s.sector)
-  // }
 
   render() {
     return (
@@ -102,8 +99,8 @@ class MainMap extends React.Component {
           <GoogleMap
             options={mapOptions}
             mapContainerStyle={{width: '100%', height: '100%'}}
-            center={!this.props.loadingStatus && this.state.centerMap}
-            zoom={!this.props.loadingStatus && this.state.zoomLevel}
+            center={this.props.loadingStatus ? this.prevCenter : this.state.centerMap}
+            zoom={this.props.loadingStatus ? this.prevZoom : this.state.zoomLevel}
             onClick={this.props.onMapClick}>
               {this.props.properties.map(property => {
                 return <OverlayView
@@ -115,10 +112,10 @@ class MainMap extends React.Component {
                           cardHovered={this.props.cardHovered} />
                 </OverlayView>
               })}
-              {!this.props.loadingStatus && <Polygon
-                paths={this.state.paths}
+              <Polygon
+                paths={this.props.loadingStatus ? this.prevPaths : this.state.paths}
                 options={polygonOptions}
-              />}
+              />
           </GoogleMap>
       </LoadScript>
     )
