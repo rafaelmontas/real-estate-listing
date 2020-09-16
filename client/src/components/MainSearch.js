@@ -201,7 +201,7 @@ class MainSearch extends React.Component {
                 onMobileSearchClick={this.handleMobileSearchClick}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
-          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} channel="ok">
+          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}>
             <Route path={this.props.match.url} exact>
               <section id="main-app-content" className="search-results-container">
                 <div id="results-column-left" className={mapOpenCss}>
