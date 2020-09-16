@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string'
 import './App.css';
@@ -8,6 +7,7 @@ import FixedFilters from "./FixedFilters";
 import PropertyList from "./PropertyList";
 import Pagination from "./Pagination";
 import Footer from "./Footer";
+import { LoadScript } from '@react-google-maps/api';
 import MainMap from './Map/MainMap';
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
@@ -201,47 +201,49 @@ class MainSearch extends React.Component {
                 onMobileSearchClick={this.handleMobileSearchClick}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
-          <Route path={this.props.match.url} exact>
-            <section id="main-app-content" className="search-results-container">
-              <div id="results-column-left" className={mapOpenCss}>
-                <FixedFilters status={this.state.isLoading}
-                              searchProperties={this.searchProperties}
-                              initialState={queryString.parse(this.props.location.search)}
-                              onFiltersClick={this.handleMoreFiltersClick}/>
-                <PropertyList properties={this.state.properties}
-                              status={this.state.isLoading}
-                              cardSelected={this.state.cardSelected}
-                              onCardHovered={this.handleCardHover}
-                              onCardHoverOut={this.handleCardHoverOut}/>
-                <Pagination />
-                <Footer />
-              </div>
-              <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
-                <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
-                <div className="filter-button">
-                  {/* <FilterToggle /> */}
+          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} channel="ok">
+            <Route path={this.props.match.url} exact>
+              <section id="main-app-content" className="search-results-container">
+                <div id="results-column-left" className={mapOpenCss}>
+                  <FixedFilters status={this.state.isLoading}
+                                searchProperties={this.searchProperties}
+                                initialState={queryString.parse(this.props.location.search)}
+                                onFiltersClick={this.handleMoreFiltersClick}/>
+                  <PropertyList properties={this.state.properties}
+                                status={this.state.isLoading}
+                                cardSelected={this.state.cardSelected}
+                                onCardHovered={this.handleCardHover}
+                                onCardHoverOut={this.handleCardHoverOut}/>
+                  <Pagination />
+                  <Footer />
                 </div>
-                <div id="map-div">
-                  <MainMap properties={this.state.properties}
-                               onMarkerClick={this.handleMarkerClick}
-                               onMapClick={this.handleMapClick} 
-                               cardHovered={this.state.cardHovered}
-                               initialStateSearch={queryString.parse(this.props.location.search)}
-                               loadingStatus={this.state.isLoading}/>
+                <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
+                  <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
+                  <div className="filter-button">
+                    {/* <FilterToggle /> */}
+                  </div>
+                  <div id="map-div">
+                    <MainMap properties={this.state.properties}
+                                onMarkerClick={this.handleMarkerClick}
+                                onMapClick={this.handleMapClick} 
+                                cardHovered={this.state.cardHovered}
+                                initialStateSearch={queryString.parse(this.props.location.search)}
+                                loadingStatus={this.state.isLoading}/>
+                  </div>
+                  {mapPropertyCard}
                 </div>
-                {mapPropertyCard}
-              </div>
-            </section>
-          </Route>
-          <Route path="/properties/favorites" exact component={Favorites} />
-          <Route path={`${this.props.match.url}/:id`} exact component={PropertyDetails}/>
-          {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
-          atEnter={{ offset: -100 }}
-          atLeave={{ offset: -100 }}
-          atActive={{ offset: 0 }}
-          mapStyles={(styles) => ({
-            transform: `translateX(${styles.offset}%)`,
-          })}/> */}
+              </section>
+            </Route>
+            <Route path="/properties/favorites" exact component={Favorites} />
+            <Route path={`${this.props.match.url}/:id`} exact component={PropertyDetails}/>
+            {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}/> */}
+          </LoadScript>
         </Switch>
       </div>
     )

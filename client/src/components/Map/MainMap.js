@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleMap, LoadScript, OverlayView, Polygon } from '@react-google-maps/api';
+import { GoogleMap, OverlayView, Polygon } from '@react-google-maps/api';
 import Market from './Marker';
 import './Marker.css';
 import { sectorsProvinces } from '../../utils/SectorsProvinces';
@@ -99,29 +99,27 @@ class MainMap extends React.Component {
 
   render() {
     return (
-      <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}>
-          <GoogleMap
-            options={mapOptions}
-            mapContainerStyle={{width: '100%', height: '100%'}}
-            center={this.props.loadingStatus ? this.prevCenter : this.state.centerMap}
-            zoom={this.props.loadingStatus ? this.prevZoom : this.state.zoomLevel}
-            onClick={this.props.onMapClick}>
-              {this.props.properties.map(property => {
-                return <OverlayView
-                  key={property.id}
-                  position={{lat: property.lat, lng: property.lng}}
-                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-                  <Market propertyId={property.id}
-                          handleClick={this.props.onMarkerClick} 
-                          cardHovered={this.props.cardHovered} />
-                </OverlayView>
-              })}
-              <Polygon
-                paths={this.props.loadingStatus ? this.prevPaths : this.state.paths}
-                options={polygonOptions}
-              />
-          </GoogleMap>
-      </LoadScript>
+      <GoogleMap
+        options={mapOptions}
+        mapContainerStyle={{width: '100%', height: '100%'}}
+        center={this.props.loadingStatus ? this.prevCenter : this.state.centerMap}
+        zoom={this.props.loadingStatus ? this.prevZoom : this.state.zoomLevel}
+        onClick={this.props.onMapClick}>
+          {this.props.properties.map(property => {
+            return <OverlayView
+              key={property.id}
+              position={{lat: property.lat, lng: property.lng}}
+              mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
+              <Market propertyId={property.id}
+                      handleClick={this.props.onMarkerClick} 
+                      cardHovered={this.props.cardHovered} />
+            </OverlayView>
+          })}
+          <Polygon
+            paths={this.props.loadingStatus ? this.prevPaths : this.state.paths}
+            options={polygonOptions}
+          />
+      </GoogleMap>
     )
   }
 }
