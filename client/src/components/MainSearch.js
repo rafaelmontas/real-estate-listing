@@ -98,6 +98,7 @@ class MainSearch extends React.Component {
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
+    console.log("Main search will unmount!")
   }
   // componentDidUpdate(prevProps, prevState) {
   //   if(prevState.properties.length === 0) {

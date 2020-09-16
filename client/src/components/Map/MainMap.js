@@ -89,6 +89,10 @@ class MainMap extends React.Component {
           })
         }
       })
+    } else if(prevProps.initialStateSearch.sector === this.props.initialStateSearch.sector) {
+      this.prevCenter = this.state.centerMap;
+      this.prevZoom = this.state.zoomLevel;
+      this.prevPaths = this.state.paths;
     }
   }
 
