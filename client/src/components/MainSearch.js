@@ -18,6 +18,7 @@ import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
 import PropertyDetails from './PropertyDetails';
 import Favorites from './Favorites';
+import DefaultLoad from './DefaultLoad';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
@@ -201,7 +202,7 @@ class MainSearch extends React.Component {
                 onMobileSearchClick={this.handleMobileSearchClick}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
-          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}>
+          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>
             <Route path={this.props.match.url} exact>
               <section id="main-app-content" className="search-results-container">
                 <div id="results-column-left" className={mapOpenCss}>
