@@ -28,12 +28,6 @@ class MapSection extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props.property)
-  }
-
-
-
   render() {
     console.log(this.props.property)
     if(this.props.property.lat === undefined && this.props.property.lng === undefined) {
