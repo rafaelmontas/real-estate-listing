@@ -1,5 +1,5 @@
-// import React from 'react'
-// import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React from 'react'
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 
 // const mapStyles = {
@@ -8,28 +8,54 @@
 //   borderRadius: '4px'
 // };
 
-// class MapSection extends React.Component {
-//   render() {
-//     return (
-//       <div className="map-section">
-//         <h3>Mapa</h3>
-//         <div className="map">
-//           <Map
-//             google={this.props.google}
-//             zoom={16}
-//             mapTypeControl= {false}
-//             streetViewControl= {false}
-//             style={mapStyles}
-//             center={{lat: this.props.property.lat, lng: this.props.property.lng}}
-//             property={this.props.property}>
-//             <Marker position={{ lat: this.props.property.lat, lng: this.props.property.lng}}/>
-//           </Map>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
+const mapOptions = {
+  mapTypeControl: false,
+  streetViewControl: false,
+  // styles: [
+  //   {
+  //     featureType: "poi",
+  //     stylers: [{ visibility: "off" }]
+  //   },
+  //   {
+  //     featureType: "transit.station",
+  //     stylers: [{ visibility: "off" }]
+  //   }
+  // ]
+}
 
-// export default GoogleApiWrapper({
-//   apiKey: process.env.REACT_APP_GOOGLE_API_KEY
-// })(MapSection);
+class MapSection extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log(this.props.property)
+  }
+
+
+
+  render() {
+    console.log(this.props.property)
+    if(this.props.property.lat === undefined && this.props.property.lng === undefined) {
+      return null
+    } else {
+      return (
+        <div className="map-section">
+          <h3>Mapa</h3>
+          <div className="map">
+            <GoogleMap 
+              options={mapOptions}
+              mapContainerStyle={{width: '100%', height: '100%', borderRadius: '4px'}}
+              center={{lat: this.props.property.lat, lng: this.props.property.lng}}
+              zoom={16}>
+                <Marker position={{lat: this.props.property.lat, lng: this.props.property.lng}}/>
+            </GoogleMap>
+          </div>
+        </div>
+      )
+    }
+    
+  }
+}
+
+export default MapSection;
