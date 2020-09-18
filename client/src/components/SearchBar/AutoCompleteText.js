@@ -345,8 +345,8 @@ class AutoCompleteText extends React.Component {
           <button className="back-search-mobile" onClick={this.props.onCloseMobileSearchClick}>
             <i className="fas fa-arrow-left"></i>
           </button>
-          <i className="fas fa-search mobile"></i>
-          <input value={this.state.text} onFocus={this.handleInputFocus}
+          {this.props.loadingStatus ? <ClipLoader css={override} size={20} color={"#fff"} loading={true}/> : <i className="fas fa-search mobile"></i>}
+          <input value={this.state.text === 'All' ? '' : this.state.text} onFocus={this.handleInputFocus}
                                           onBlur={this.handleInputBlur}
                                           onChange={this.onTextChange}
                                           type="text"

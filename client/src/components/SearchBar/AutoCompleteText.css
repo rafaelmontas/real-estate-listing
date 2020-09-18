@@ -4,14 +4,19 @@
 .input-autocomplete {
   display: flex;
   flex: 1 1 auto;
+  position: relative;
+  align-items: center;
 }
 .input-autocomplete .back-search-mobile {
   display: none;
 }
 .input-autocomplete .fa-search.mobile {
-  display: none;
+  position: absolute;
+  left: 12px;
+  color: #B4B3BC;
 }
 .input-autocomplete input {
+  padding-left: 35px;
   color: rgb(59, 65, 68);
   font-size: 16px;
   -webkit-appearance: none;
@@ -24,7 +29,13 @@
 }
 
 /* Loading spinner */
-.input-autocomplete button div {
+.input-autocomplete > div {
+  position: absolute;
+  left: 10px;
+  border: 3px solid #B4B3BC;
+  border-bottom-color: transparent;
+}
+.input-autocomplete div, .input-autocomplete button div {
   animation-name: static;
 }
 @keyframes static {
@@ -167,5 +178,16 @@
   .hauzzy-suggestions-bottom .suggestions-bottom-container .suggestions-column .suggestion-item {
     font-size: 16px;
     margin-top: 15px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .input-autocomplete {
+    align-items: inherit;
+  }
+  .input-autocomplete > div, .input-autocomplete .fa-search.mobile {
+    display: none;
+  }
+  .input-autocomplete input {
+    padding-left: 8px;
   }
 }

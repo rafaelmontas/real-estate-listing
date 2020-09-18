@@ -71,15 +71,15 @@ a {
   height: 40px;
   background-color: #F9FAFA;
   border: 1px solid #d5d9dc;
-  border-radius: 5px 0 0 5px;
-  border-right: 0px;
+  border-radius: 5px;
   font-size: 16px;
-  padding: 5px;
+  padding: 8px;
 }
 .navbar-menu-form input:focus {
   outline: none;
 }
 .navbar-menu-form button {
+  display: none;
   flex: 0 0 44px;
   border-radius: 0 5px 5px 0;
   border: 0px;
@@ -103,7 +103,9 @@ a {
 }
 .navbar-menu-right .map {
   /* border: 1px solid black; */
+  min-width: 75px;
   padding: 6px 15px;
+  text-align: center;
   border-radius: 2px;
   border: 2px solid rgba(0,0,0,.05);
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
@@ -174,6 +176,9 @@ a {
 }
 
 @media only screen and (max-width: 991px) {
+  .navbar-menu-form {
+    flex-grow: 1.5;
+  }
   .navbar-menu-right .menu-item.first, .navbar-menu-right .menu-item.second {
     display: none;
   }
@@ -198,6 +203,13 @@ a {
 @media only screen and (min-width: 992px) {
   .navbar-menu-right {
     flex-grow: 1.2;
+  }
+  .navbar-menu-form input {
+    border-radius: 5px 0 0 5px;
+    border-right: 0px;
+  }
+  .navbar-menu-form button {
+    display: block;
   }
   /* .main-app-container {
     padding-top: 0;
