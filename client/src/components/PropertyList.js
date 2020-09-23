@@ -6,6 +6,15 @@ import CardSkeleton from "./CardSkeleton";
 
 
 class PropertyList extends React.Component {
+  
+  renderSectorName() {
+    if(this.props.sector === 'All') {
+      return null
+    } else {
+      return <h2>{this.props.sector}</h2>
+    }
+  }
+  
   render() {
     let count = 1;
     let cards = Array(10).fill(<CardSkeleton/>);
@@ -14,7 +23,7 @@ class PropertyList extends React.Component {
         <div className="search-results-list-heading">
           <div className="heading-text">
             {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : <h1>Distrito Nacional, SD</h1>}
-            {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : <h2>Naco</h2>}
+            {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
           </div>
         </div>
         <div className="search-results-list-grid">

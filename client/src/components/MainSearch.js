@@ -36,6 +36,7 @@ class MainSearch extends React.Component {
       cardSelected: 0,
       cardHovered: 0
     }
+    // this.lastSearchState = this.state.properties;
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMapClick = this.handleMapClick.bind(this);
     this.handleCardHover = this.handleCardHover.bind(this);
@@ -45,6 +46,7 @@ class MainSearch extends React.Component {
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.searchProperties = this.searchProperties.bind(this);
+    this.backForwardSearch = this.backForwardSearch.bind(this);
     this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
     this.handleCloseMobileSearchClick = this.handleCloseMobileSearchClick.bind(this);
   }
@@ -100,6 +102,35 @@ class MainSearch extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timer);
     console.log("Main search will unmount!")
+  }
+  componentDidUpdate(prevProps) {
+    // Back button pressed
+    console.log(`Main search updated`)
+    window.onpopstate = e => {
+      // console.log(e)
+      console.log(`Main search updated`, e)
+      // window.history.pushState({}, '')
+      // if back button hit between searches
+      if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search !== "") {
+        console.log(queryString.parse(this.props.location.search))
+        const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(this.props.location.search)
+        console.log(property_type)
+        this.backForwardSearch(sector, listing_type, parseInt(minPrice), parseInt(maxPrice), parseInt(bedrooms), parseInt(bathrooms), property_type.split(","))
+        // if back button hit to /properties
+      } else if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search === "") {
+        this.setState({ isLoading: true })
+        this.timer = setTimeout(() => {
+          fetch("/properties")
+            .then(res => res.json())
+            .then(properties => {
+              this.setState({
+                properties: properties,
+                isLoading: false
+              });
+            });
+        }, 1000)
+      }
+    }
   }
   // componentDidUpdate(prevProps, prevState) {
   //   if(prevState.properties.length === 0) {
@@ -168,6 +199,23 @@ class MainSearch extends React.Component {
     })
     window.scrollTo(0, 0);
   }
+  backForwardSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+    this.setState({ isLoading: true })
+    this.timer = setTimeout(() => {
+      fetch(`/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+        .then(response => {
+          return response.json();
+        }).then(properties => {
+          console.log(properties);
+          this.setState({ 
+            properties: properties,
+            isLoading: false,
+            cardSelected: 0,
+            cardHovered: 0
+          })
+        })
+    }, 1000)
+  }
 
   render() {
     let mapOpenCss;
@@ -209,8 +257,10 @@ class MainSearch extends React.Component {
                   <FixedFilters status={this.state.isLoading}
                                 searchProperties={this.searchProperties}
                                 initialState={queryString.parse(this.props.location.search)}
+                                initialPath={this.props.location.path}
                                 onFiltersClick={this.handleMoreFiltersClick}/>
                   <PropertyList properties={this.state.properties}
+                                sector={queryString.parse(this.props.location.search).sector}
                                 status={this.state.isLoading}
                                 cardSelected={this.state.cardSelected}
                                 onCardHovered={this.handleCardHover}

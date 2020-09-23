@@ -70,6 +70,30 @@ class FixedFilters extends React.Component {
       console.log(Object.entries(this.props.initialState).length) 
     }
   }
+  componentDidUpdate(prevProps) {
+    if(this.props.initialState !== prevProps.initialState && this.props.initialPath === prevProps.initialPath) {
+      if (Object.entries(this.props.initialState).length > 0) {
+        const propertyTypesArray = this.props.initialState.property_type.split(",")
+        console.log(propertyTypesArray.includes("Villa"))
+        this.setState({
+          listingType: this.props.initialState.listing_type,
+          minPrice: parseInt(this.props.initialState.minPrice),
+          maxPrice: parseInt(this.props.initialState.maxPrice),
+          bedrooms: parseInt(this.props.initialState.bedrooms),
+          bathrooms: parseInt(this.props.initialState.bathrooms),
+          propertyTypes: {
+            "Apartment": propertyTypesArray.includes("Apartment"),
+            "House": propertyTypesArray.includes("House"),
+            "Villa": propertyTypesArray.includes("Villa"),
+            "Comercial": propertyTypesArray.includes("Comercial"),
+            "Industrial": propertyTypesArray.includes("Industrial"),
+            "Penthouse": propertyTypesArray.includes("Penthouse")
+          }
+        })
+        console.log(Object.entries(this.props.initialState).length) 
+      }
+    }
+  }
 
   handleListingTypeClick() {
     this.setState({

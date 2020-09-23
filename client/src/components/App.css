@@ -369,11 +369,13 @@ a {
   display: none;
 }
 .heading-text h1 {
-  font-size: 14px;
+  font-size: 20px;
+  font-weight: 700;
   color: #3B4144;
 }
 .heading-text h2 {
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 400;
   color: rgb(134, 144, 153);
   font-weight: normal;
 }
@@ -633,6 +635,13 @@ a {
 @media only screen and (max-width: 768px) {
   .fixed-filters {
     z-index: 200;
+  }
+  .heading-text h1 {
+    font-size: 16px;
+    /* font-weight: 400; */
+  }
+  .heading-text h2 {
+    font-size: 14px;
   }
 }
 
