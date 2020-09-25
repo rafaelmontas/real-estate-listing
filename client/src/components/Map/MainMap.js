@@ -71,24 +71,34 @@ class MainMap extends React.Component {
   componentDidUpdate(prevProps) {
     console.log('updated map')
     if(prevProps.initialStateSearch.sector !== this.props.initialStateSearch.sector) {
-      sectorsProvinces.forEach(arrayItem => {
-        if(arrayItem.sector === this.props.initialStateSearch.sector) {
-          const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)
-          const paths = sectorsProvinces[index].paths
-          console.log(index)
-          this.prevCenter = this.state.centerMap;
-          this.prevZoom = this.state.zoomLevel;
-          this.prevPaths = this.state.paths;
-          this.setState({
-            sector: this.props.initialStateSearch.sector,
-            paths: paths,
-            zoomLevel: sectorsProvinces[index].zoomLevel,
-            centerMap: sectorsProvinces[index].centerLocation
-          }, () => {
-            console.log(this.state.paths)
-          })
-        }
-      })
+      // if back button from search to /properties
+      if(this.props.initialStateSearch.sector === undefined) {
+        this.setState({
+            sector: '',
+            paths: [],
+            zoomLevel: 14,
+            centerMap: {lat: 18.473110,lng: -69.934695}
+        })
+      } else {
+        sectorsProvinces.forEach(arrayItem => {
+          if(arrayItem.sector === this.props.initialStateSearch.sector) {
+            const index = sectorsProvinces.findIndex(i => i.sector === arrayItem.sector)
+            const paths = sectorsProvinces[index].paths
+            console.log(index)
+            this.prevCenter = this.state.centerMap;
+            this.prevZoom = this.state.zoomLevel;
+            this.prevPaths = this.state.paths;
+            this.setState({
+              sector: this.props.initialStateSearch.sector,
+              paths: paths,
+              zoomLevel: sectorsProvinces[index].zoomLevel,
+              centerMap: sectorsProvinces[index].centerLocation
+            }, () => {
+              console.log(this.state.paths)
+            })
+          }
+        })
+      }
     } else if(prevProps.initialStateSearch.sector === this.props.initialStateSearch.sector) {
       this.prevCenter = this.state.centerMap;
       this.prevZoom = this.state.zoomLevel;
