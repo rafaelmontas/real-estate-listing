@@ -443,27 +443,30 @@ a {
   display: block;
   height: 100%;
 }
-.search-results-list-grid .home-card-container .home-card .property-card-media .photo-container .top-left-premium {
-  position: absolute;
-  top: 0;
-  padding: 2px 10px;
-  margin: 5px;
-  background-color: #c30000;
-  color: #fff;
-  border-radius: 16px;
-  text-transform: uppercase;
-  font-size: 12px;
-}
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container .top-left-new {
   position: absolute;
   top: 0;
   padding: 2px 10px;
   margin: 5px;
-  background-color: #029a00;
-  color: #fff;
-  border-radius: 16px;
+  background-color: #fff;
+  color: #3434fd;
+  border-radius: 4px;
   text-transform: uppercase;
   font-size: 12px;
+  font-weight: 600;
+}
+.search-results-list-grid .home-card-container .home-card .property-card-media .photo-container .top-left-video {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  padding: 2px 10px;
+  margin: 5px;
+  background-color: #4b4bf5;
+  color: #fff;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
 }
 .search-results-list-grid .home-card-container .home-card .property-card-info {
   padding: 16px;

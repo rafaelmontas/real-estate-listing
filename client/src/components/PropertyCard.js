@@ -18,7 +18,8 @@ class PropertyCard extends React.Component {
             <div className="property-card-media">
               <div className="photo-container">
                 <img src={image} alt="property"/>
-                <div className="top-left-premium">Premium</div>
+                <div className="top-left-new">Nuevo</div>
+                <div className="top-left-video"><i className="fas fa-video"></i></div>
               </div>
             </div>
             <div className="property-card-info">
