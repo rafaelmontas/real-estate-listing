@@ -9,7 +9,7 @@ class CollageGrid extends React.Component {
     }
     else {
       return (
-        <div className="collage-grid">
+        <div className="collage-grid" onClick={this.props.onCollageClick}>
           <div className="media-main">
             <img src={image} alt="property"></img>
             <div className="photos-badge">

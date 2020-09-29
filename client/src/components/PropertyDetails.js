@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import './PropertyDetails.css';
 import ContactFormModal from './PropertyDetails/ContactFormModal';
+import Backdrop from "./Backdrop";
+import PhotosCarousel from './PropertyDetails/PhotosCarousel';
 import CollageGrid from './PropertyDetails/CollageGrid';
 import BrokerSection from './PropertyDetails/BrokerSection';
 import MapSection from './PropertyDetails/MapSection';
@@ -19,9 +21,13 @@ class PropertyDetails extends React.Component {
       similarProperties: [],
       isLoading: false,
       isContactFormLoading: false,
-      ContactFormOpen: false
+      ContactFormOpen: false,
+      carouselOpen: false
     }
     this.handleContactFormClick = this.handleContactFormClick.bind(this);
+    this.handleCollageClick = this.handleCollageClick.bind(this);
+    this.handleCollageCloseClick = this.handleCollageCloseClick.bind(this);
+    this.handleBackdropClick = this.handleBackdropClick.bind(this);
   }
 
   componentDidMount() {
@@ -80,6 +86,17 @@ class PropertyDetails extends React.Component {
     })
   }
 
+  handleCollageClick() {
+    this.setState({carouselOpen: true})
+  }
+  handleCollageCloseClick() {
+    this.setState({carouselOpen: false});
+  }
+
+  handleBackdropClick() {
+    this.setState({carouselOpen: false});
+  }
+
 
   render() {
     let inputSize;
@@ -91,6 +108,8 @@ class PropertyDetails extends React.Component {
 
     return (
       <div>
+        {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
+        {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick}/> : null}
         {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize}/>}
         <div className="details-container">
           <div className="full-details-view">
@@ -116,7 +135,9 @@ class PropertyDetails extends React.Component {
             {/* Header End */}
             <div className="main-content">
               <div className="main-section">
-                <CollageGrid property={this.state.property} loadingStatus={this.state.isLoading}/>
+                <CollageGrid property={this.state.property}
+                             loadingStatus={this.state.isLoading}
+                             onCollageClick={this.handleCollageClick}/>
                 {/* Details Section */}
                 <div className="details-section">
                   {/* Info Header */}

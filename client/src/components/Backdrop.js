@@ -14,7 +14,7 @@ class Backdrop extends React.Component {
   }
   
   render() {
-    return <div  onClick={this.props.onBackdropClick} className="backdrop"></div>
+    return <div  onClick={this.props.onBackdropClick} className="backdrop" style={{background: `${this.props.backgroundColor}`}}></div>
   }
 }
 

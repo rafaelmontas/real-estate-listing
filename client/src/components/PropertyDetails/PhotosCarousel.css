@@ -1,0 +1,56 @@
+.carousel-modal {
+  position: fixed;
+  z-index: 500; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+/* Close button */
+.carousel-modal .carousel-header {
+  display: flex;
+  justify-content: flex-end;
+}
+.carousel-modal .carousel-header .times-x {
+  margin-right: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.carousel-modal .carousel-header .times-x i.fa-times {
+  color: #fff;
+  font-size: 30px;
+}
+
+/* Override css for prev and next arrows */
+.carousel-modal .carousel.carousel-slider .control-arrow {
+  padding: 15px;
+}
+.carousel-modal .carousel .control-arrow, .carousel.carousel-slider button.control-arrow {
+  opacity: 1;
+}
+.carousel-modal .carousel .control-prev.control-arrow:before {
+  border-right: 25px solid #fff;
+}
+.carousel-modal .carousel .control-next.control-arrow:before {
+  border-left: 25px solid #fff;
+}
+.carousel-modal .carousel .control-arrow:before, .carousel.carousel-slider button.control-arrow:before {
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+}
+
+/* Center thumbnails */
+.carousel-modal .carousel-root div.thumbs-wrapper.axis-vertical {
+  text-align: center;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .carousel-modal {
+    right: 50%;
+    bottom: 50%;
+    width: 650px;
+    height: calc(100% - 100px); /* -150px normal*/
+  }
+}

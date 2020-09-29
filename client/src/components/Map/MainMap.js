@@ -23,7 +23,7 @@ const mapOptions = {
 const polygonOptions = {
   // fillColor: "lightblue",
   fillOpacity: 0,
-  strokeColor: "#5998F2",
+  strokeColor: "#1183E6",
   strokeOpacity: 0.8,
   strokeWeight: 2,
   clickable: false,

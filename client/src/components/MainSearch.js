@@ -227,7 +227,7 @@ class MainSearch extends React.Component {
     
     let backdrop;
     if(this.state.sideDrawerOpen || this.state.loginOpen) {
-      backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} />
+      backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>
     }
     
     let mapPropertyCard;
