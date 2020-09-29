@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import "./SideDrawer.css";
 
@@ -14,17 +15,19 @@ class SideDrawer extends React.Component {
       <div className={drawerClasses}>
         <div className="top-div">
           <ul>
-            <li className="search-button button">
+            <li className="search-button button" onClick={this.props.onMobileSearchClick}>
               <div>
                 <i className="fas fa-search"></i>
                 <span>Buscar</span>
               </div>
             </li>
             <li className="favorite-button button">
-              <div>
-                <i className="far fa-heart"></i>
-                <span>Favoritos</span>
-              </div>
+              <Link to="/my-hauzzy/favorites">
+                <div>
+                  <i className="far fa-heart"></i>
+                  <span>Favoritos</span>
+                </div>
+              </Link>
             </li>
             <li className="saved-search-button button">
               <div>
@@ -65,7 +68,7 @@ class SideDrawer extends React.Component {
 
 SideDrawer.propTypes = {
   show: PropTypes.bool.isRequired,
-  onLoginClick: PropTypes.func.isRequired
+  onLoginClick: PropTypes.func
 }
 
 export default SideDrawer;

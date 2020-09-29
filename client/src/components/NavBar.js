@@ -5,6 +5,15 @@ import {Link} from 'react-router-dom';
 import AutoCompleteText from './SearchBar/AutoCompleteText';
 
 class NavBar extends React.Component {
+  
+  renderTopRightButton() {
+    if(this.props.path === '/properties') {
+      return <MapToggleMobile mapOpen={this.props.mapOpen} onMapToggleClick={this.props.onMapToggleClick} />
+    } else {
+      return null
+    }
+  }
+
   render() {
     return (
       <nav className="navbar-fixed-top">
@@ -21,9 +30,8 @@ class NavBar extends React.Component {
                               onMobileSearchClick={this.props.onMobileSearchClick}/>
           </div>
           <div className="navbar-menu-right">
-            <MapToggleMobile mapOpen={this.props.mapOpen}
-                              onMapToggleClick={this.props.onMapToggleClick} />
-            <Link to="/properties/favorites" className="menu-item first"><i className="far fa-heart"></i>Favoritos</Link>
+            {this.renderTopRightButton()}
+            <Link to="/my-hauzzy/favorites" className="menu-item first"><i className="far fa-heart"></i>Favoritos</Link>
             <a href="/" className="menu-item second"><i className="far fa-building"></i>Publicar</a>
             <span className="menu-item button secondary" onClick={this.props.onLoginClick}>Iniciar Sesión</span>
             {/* <a href="/" className="menu-item button secondary">Iniciar Sesión</a> */}
@@ -37,9 +45,9 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   onSideDrawerToggleClick: PropTypes.func.isRequired,
-  mapOpen: PropTypes.bool.isRequired,
-  onMapToggleClick: PropTypes.func.isRequired,
-  onLoginClick: PropTypes.func.isRequired
+  mapOpen: PropTypes.bool,
+  onMapToggleClick: PropTypes.func,
+  onLoginClick: PropTypes.func
 }
 
 export default NavBar;

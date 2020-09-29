@@ -17,7 +17,6 @@ import MapPropertyCard from './MapPropertyCard/MapPropertyCard';
 import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
 import PropertyDetails from './PropertyDetails';
-import Favorites from './Favorites';
 import DefaultLoad from './DefaultLoad';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
@@ -170,7 +169,7 @@ class MainSearch extends React.Component {
 
   handleMobileSearchClick() {
     if(this.state.mobileSearchOpen !== true && window.innerWidth <= 770) {
-      this.setState({mobileSearchOpen: true});
+      this.setState({mobileSearchOpen: true, sideDrawerOpen: false});
     }
   }
   handleCloseMobileSearchClick() {
@@ -239,6 +238,7 @@ class MainSearch extends React.Component {
         {backdrop}
         {this.state.mobileSearchOpen && <AutoCompleteMobile onCloseMobileSearchClick={this.handleCloseMobileSearchClick} initialStateSearch={queryString.parse(this.props.location.search)} search={this.searchProperties}/>}
         <SideDrawer show={this.state.sideDrawerOpen}
+                    onMobileSearchClick={this.handleMobileSearchClick}
                     onLoginClick={this.handleLoginClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
                 mapOpen={this.state.mapToggleOpen}
@@ -247,7 +247,8 @@ class MainSearch extends React.Component {
                 search={this.searchProperties}
                 initialStateSearch={queryString.parse(this.props.location.search)}
                 loadingStatus={this.state.isLoading}
-                onMobileSearchClick={this.handleMobileSearchClick}/>
+                onMobileSearchClick={this.handleMobileSearchClick}
+                path={this.props.location.pathname}/>
         {this.state.loginOpen && <LoginModal />}
         <Switch>
           <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>
@@ -285,7 +286,6 @@ class MainSearch extends React.Component {
                 </div>
               </section>
             </Route>
-            <Route path="/properties/favorites" exact component={Favorites} />
             <Route path={`${this.props.match.url}/:id`} exact component={PropertyDetails}/>
             {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
             atEnter={{ offset: -100 }}
