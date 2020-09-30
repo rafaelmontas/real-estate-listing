@@ -57,7 +57,7 @@ class MyHauzzy extends React.Component {
 
   render() {
     return (
-      <div className="account-container" style={{paddingTop: '66px'}}>
+      <div className="account-container" style={{paddingTop: '106px'}}>
         {this.state.sideDrawerOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/> : null}
         <SideDrawer show={this.state.sideDrawerOpen}
                     onMobileSearchClick={this.handleMobileSearchClick}

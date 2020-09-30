@@ -43,7 +43,7 @@ a {
 .navbar-menu-form .fa-bars {
   font-size: 28px;
   color: #b5b3b3;
-  padding: 8px;
+  padding: 8px 8px 8px 0;
   margin-right: 10px;
 }
 .navbar-menu-form .logo-img {
