@@ -22,6 +22,20 @@ class SecondNav extends React.Component {
       this.setState({itemSelected: 4})
     }
   }
+  componentDidUpdate(prevProps) {
+    if(prevProps.path !== this.props.path) {
+      // set selected nav item
+      if(this.props.path === "/my-hauzzy/listings") {
+        this.setState({itemSelected: 1})
+      } else if(this.props.path === "/my-hauzzy/favorites") {
+        this.setState({itemSelected: 2})
+      } else if(this.props.path === "/my-hauzzy/profile") {
+        this.setState({itemSelected: 3})
+      } else if(this.props.path === "/my-hauzzy/new-listing") {
+        this.setState({itemSelected: 4})
+      }
+    }
+  }
 
   handleItemClick(e) {
     this.setState({itemSelected: parseInt(e.currentTarget.id)})

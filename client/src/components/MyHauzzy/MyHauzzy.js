@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from '../NavBar';
 import SecondNav from './SecondNav';
 import Favorites from './Favorites';
+import Listings from './Listings/Listings';
 import Backdrop from "../Backdrop";
 import SideDrawer from '../SideDrawer';
 import AutoCompleteMobile from '../SearchBar/AutoCompleteMobile';
@@ -89,7 +90,9 @@ class MyHauzzy extends React.Component {
               />
         <SecondNav path={this.props.location.pathname} favCount={this.state.favoritesProperties.slice(0, 3).length}/>
         <div className="my-hauzzy-container">
-          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
+        {/* this.state.favoritesProperties.slice(0, 3) */}
+          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={[]}/>}/>
+          <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={[]}/>}/>
         </div>
         <Footer/>
       </div>
