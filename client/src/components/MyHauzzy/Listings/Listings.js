@@ -17,7 +17,21 @@ class Listings extends React.Component {
         </div>
       )
     } else {
-      return <h1>ok</h1>
+      return (
+        <div className="show-listings">
+          <div className="listings-header">
+            <h1>Mis propiedades</h1>
+            <Link to="/my-hauzzy/new-listing">
+              <span className="new-lsiting-button">Públicar <span>propiedad </span><i className="fas fa-plus-circle"></i></span>
+            </Link>
+          </div>
+          <div className="listings-tabs">
+            <a className="tabs selected">Públicadas (3)</a>
+            <a className="tabs">Pendientes (0)</a>
+            <a className="tabs">Cerradas (0)</a>
+          </div>
+        </div>
+      )
     }
   }
 }

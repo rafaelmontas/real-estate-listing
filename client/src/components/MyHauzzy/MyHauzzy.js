@@ -91,8 +91,8 @@ class MyHauzzy extends React.Component {
         <SecondNav path={this.props.location.pathname} favCount={this.state.favoritesProperties.slice(0, 3).length}/>
         <div className="my-hauzzy-container">
         {/* this.state.favoritesProperties.slice(0, 3) */}
-          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={[]}/>}/>
-          <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={[]}/>}/>
+          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
+          <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)}/>}/>
         </div>
         <Footer/>
       </div>

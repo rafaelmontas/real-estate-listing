@@ -1,4 +1,4 @@
-.empty-listings {
+.empty-listings, .show-listings {
   max-width: 1024px;
   margin: 0 auto;
   padding: 60px 16px 25px;
@@ -39,6 +39,32 @@
   color: #4f4f50;
 }
 
+/* For when there are listing */
+.show-listings .listings-header {
+  border-bottom: none;
+}
+.show-listings .listings-tabs {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  border-bottom: 1px solid #e2e2e2;
+  /* padding-bottom: 6px; */
+}
+.show-listings .listings-tabs .tabs {
+  height: 30px;
+  text-decoration: none;
+  margin-right: 15px;
+  color: #6E7395;
+  cursor: pointer;
+}
+.show-listings .listings-tabs .tabs:hover {
+  color: #1A2258;
+}
+.show-listings .listings-tabs .tabs.selected {
+  color: #1A2258;
+  border-bottom: 1px solid #1A2258;
+}
+
 @media only screen and (min-width: 576px) {
   .listings-header h1 {
     font-size: 33px;
@@ -46,10 +72,17 @@
   .listings-header .new-lsiting-button span {
     display: inline;
   }
+
+  .show-listings .listings-tabs .tabs {
+    margin-right: 25px;
+  }
 }
 /* Iphone 5 specific */
 @media only screen and (device-aspect-ratio: 40/71) {
   .listings-header .new-lsiting-button i {
     display: none;
+  }
+  .show-listings .listings-tabs .tabs {
+    font-size: 13px;
   }
 }
