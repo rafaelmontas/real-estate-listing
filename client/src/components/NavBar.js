@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import MapToggleMobile from './MapToggleMobile';
 import {Link} from 'react-router-dom';
 import AutoCompleteText from './SearchBar/AutoCompleteText';
-import SecondNav from './MyHauzzy/SecondNav';
 
 class NavBar extends React.Component {
   
@@ -39,7 +38,6 @@ class NavBar extends React.Component {
             <a href="/" className="menu-item button primary">Registrarse</a>
           </div>
         </div>
-        {this.props.path !== '/properties' ? <SecondNav path={this.props.path}/> : null}
       </nav>
     )
   }

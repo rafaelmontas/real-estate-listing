@@ -1,20 +1,24 @@
 import React from 'react';
 import NavBar from '../NavBar';
+import SecondNav from './SecondNav';
 import Favorites from './Favorites';
 import Backdrop from "../Backdrop";
 import SideDrawer from '../SideDrawer';
 import AutoCompleteMobile from '../SearchBar/AutoCompleteMobile';
+import Footer from '../Footer';
 
 import queryString from 'query-string'
 import {Route} from 'react-router-dom';
 
+import './MyHauzzy.css'
 
 class MyHauzzy extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sideDrawerOpen: false,
-      mobileSearchOpen: false
+      mobileSearchOpen: false,
+      favoritesProperties: []
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
@@ -28,6 +32,14 @@ class MyHauzzy extends React.Component {
     if(this.props.location.pathname === '/my-hauzzy' || this.props.location.pathname === '/my-hauzzy/') {
       this.props.history.replace({pathname: '/my-hauzzy/favorites'})
     }
+    // Should fetch properties saved as favorites
+    fetch("/properties")
+          .then(res => res.json())
+          .then(favoritesProperties => {
+            console.log(favoritesProperties)
+            this.setState({ favoritesProperties });
+          });
+    window.scrollTo(0, 0);
   }
 
   handleSideDrawerToggleClick() {
@@ -57,7 +69,7 @@ class MyHauzzy extends React.Component {
 
   render() {
     return (
-      <div className="account-container" style={{paddingTop: '106px'}}>
+      <div className="account-container">
         {this.state.sideDrawerOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/> : null}
         <SideDrawer show={this.state.sideDrawerOpen}
                     onMobileSearchClick={this.handleMobileSearchClick}
@@ -75,7 +87,11 @@ class MyHauzzy extends React.Component {
               onMobileSearchClick={this.handleMobileSearchClick}
               path={this.props.location.pathname}
               />
-        <Route path="/my-hauzzy/favorites" exact component={Favorites} />
+        <SecondNav path={this.props.location.pathname} favCount={this.state.favoritesProperties.slice(0, 3).length}/>
+        <div className="my-hauzzy-container">
+          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
+        </div>
+        <Footer/>
       </div>
     )
   }

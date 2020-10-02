@@ -36,12 +36,12 @@ class SecondNav extends React.Component {
             <li className={this.state.itemSelected === 1 ? "nav-item selected" : "nav-item"}
                 id={1}
                 onClick={this.handleItemClick}>
-              <Link to="/my-hauzzy/listings">Mis Propiedades</Link>
+              <Link to="/my-hauzzy/listings">Mis Propiedades<span>0</span></Link>
             </li>
             <li className={this.state.itemSelected === 2 ? "nav-item selected" : "nav-item"}
                 id={2}
                 onClick={this.handleItemClick}>
-              <Link to="/my-hauzzy/favorites">Favoritos</Link>
+                <Link to="/my-hauzzy/favorites">Favoritos<span>{this.props.favCount}</span></Link>
             </li>
             <li className={this.state.itemSelected === 3 ? "nav-item selected" : "nav-item"}
                 id={3}
