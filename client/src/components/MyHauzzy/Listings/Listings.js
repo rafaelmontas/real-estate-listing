@@ -1,5 +1,5 @@
 import React from 'react';
-// import ListingsList from './ListingsList';
+import ListingsList from './ListingsList';
 import {Link, withRouter} from 'react-router-dom';
 import './Listings.css'
 
@@ -94,7 +94,7 @@ class Listings extends React.Component {
           </div>
           <div className="listing-type-container">
             {/* {this.renderTabSelected()} */}
-            {/* <ListingsList/> */}
+            <ListingsList listings={this.props.listings}/>
           </div>
         </div>
       )

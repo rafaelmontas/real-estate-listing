@@ -1,0 +1,67 @@
+.listings-list .list-header {
+  border-bottom: 1px solid #dddee6;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  padding-left: 160px;
+}
+.listings-list .list-header .address-header {
+  font-size: 18px;
+  flex-basis: 35%;
+}
+.listings-list .list-header .right-header {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
+}
+.listings-list .list-header .status-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 16.66%;
+}
+.listings-list .list-header .date-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 16.66%;
+}
+.listings-list .list-header .property-type-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 16.66%;
+}
+.listings-list .list-header .type-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 16.66%;
+}
+.listings-list .list-header .visits-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 16.66%;
+}
+.listings-list .list-header .action-header {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  flex-basis: 5%;
+}
+
+@media only screen and (max-width: 991px) {
+  .listings-list .list-header .address-header {
+    flex-basis: 40%;
+  }
+  .listings-list .list-header .right-header .status-header, .listings-list .list-header .right-header .date-header {
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .listings-list .list-header {
+    display: none;
+  }
+}

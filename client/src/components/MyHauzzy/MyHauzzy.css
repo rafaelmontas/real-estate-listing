@@ -3,7 +3,8 @@
 }
 .account-container .my-hauzzy-container {
   padding-top: 40px;
-  background-color: #F9F9FB;
+  /* background-color: #F9F9FB; */
+  background-color: #fff;
   min-height: 500px;
   border-bottom: 1px solid #e2e2e2;
 }
