@@ -3,6 +3,7 @@ import NavBar from '../NavBar';
 import SecondNav from './SecondNav';
 import Favorites from './Favorites';
 import Listings from './Listings/Listings';
+import ReportEditListing from './Listings/ReportEditListing/ReportEditListing';
 import Backdrop from "../Backdrop";
 import SideDrawer from '../SideDrawer';
 import AutoCompleteMobile from '../SearchBar/AutoCompleteMobile';
@@ -93,6 +94,7 @@ class MyHauzzy extends React.Component {
         {/* this.state.favoritesProperties.slice(0, 3) */}
           <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
           <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)}/>}/>
+          <Route path="/my-hauzzy/listings/:id" exact component={ReportEditListing}/>
         </div>
         <Footer/>
       </div>
