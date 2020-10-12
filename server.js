@@ -22,7 +22,7 @@ app.use("/properties", propertiesRouter)
 app.use("/users", usersRouter)
 app.use("/agents", agentsRouter)
 
-
+// {force: true}
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
