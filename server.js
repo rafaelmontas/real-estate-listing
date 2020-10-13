@@ -2,7 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
+const dotenv = require('dotenv');
 const PORT = process.env.PORT || 5000;
+
+dotenv.config()
 
 // Database
 const db =  require('./models');

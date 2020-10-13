@@ -4,11 +4,28 @@ const db =  require('../models');
 const User = db.user;
 const Property = db.property;
 const Sequelize = require('sequelize');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const Op = Sequelize.Op
 
-usersRouter.get("/:id", (req, res) => {
+
+const verifyToken = (req, res, next) => {
+  const token = req.header('auth-token');
+  if(!token) return res.status(401).send('Access Denied');
+
+  try{
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    req.user = verified;
+    next();
+  } catch(err) {
+    res.status(400).send('Invalid Token');
+  }
+}
+
+usersRouter.get("/:id", verifyToken, (req, res) => {
   User.findByPk(req.params.id, {include: Property})
         .then(user => {
+          console.log(req.user)
           res.status(200).send(user)
         })
         .catch(err => {
@@ -17,14 +34,22 @@ usersRouter.get("/:id", (req, res) => {
         });
 })
 
-usersRouter.post("/", (req, res) => {
-  // const emailExists = User.findOne({ where: { email: req.body.email } })
-  // if(emailExists) return res.status(400).send("Email ya existe")
+// Register
+usersRouter.post("/", async (req, res) => {
+  const emailExists = await User.findOne({ where: { email: req.body.email } })
+  // if email exists
+  if(emailExists !== null) {
+    return res.status(400).send("Email ya existe")
+  }
 
-  const user = User.create({
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+  const user = await User.create({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: hashedPassword
   }).then(user => {
     console.log(user.toJSON())
     res.status(201).send(user)
@@ -34,5 +59,22 @@ usersRouter.post("/", (req, res) => {
   })
 })
 
+// Login
+usersRouter.post("/login", async (req, res) => {
+  const user = await User.findOne({ where: { email: req.body.email } })
+  // Check if email doesn't exist
+  if(user === null) {
+    return res.status(400).send("Email incorrecto")
+  }
+  // Check if password is correct
+  const validPass = await bcrypt.compare(req.body.password, user.password)
+  if(!validPass) return res.status(400).send('Contraseña incorrecta')
+
+  // Create and assign token
+  const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET)
+  res.header('auth-token', token).send(token)
+
+  // res.send('Logged in!')
+})
 
 module.exports = usersRouter;
