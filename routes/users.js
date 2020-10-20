@@ -10,7 +10,7 @@ const Op = Sequelize.Op
 
 
 const verifyToken = (req, res, next) => {
-  const token = req.header('auth-token');
+  const token = req.header('user-auth');
   if(!token) return res.status(401).send('Access Denied');
 
   try{
@@ -21,6 +21,19 @@ const verifyToken = (req, res, next) => {
     res.status(400).send('Invalid Token');
   }
 }
+
+usersRouter.get("/getUser", verifyToken, (req, res) => {
+  User.findByPk(req.user.id)
+        .then(user => {
+          console.log(req.user)
+          res.status(200).send(user)
+        })
+        .catch(err => {
+          console.log(err)
+          res.sendStatus(500);
+        });
+})
+
 
 usersRouter.get("/:id", verifyToken, (req, res) => {
   User.findByPk(req.params.id, {include: Property})
@@ -33,6 +46,7 @@ usersRouter.get("/:id", verifyToken, (req, res) => {
           res.sendStatus(500);
         });
 })
+
 
 // Register
 usersRouter.post("/", async (req, res) => {
@@ -61,10 +75,11 @@ usersRouter.post("/", async (req, res) => {
 
 // Login
 usersRouter.post("/login", async (req, res) => {
+  console.log(req.body.email)
   const user = await User.findOne({ where: { email: req.body.email } })
   // Check if email doesn't exist
   if(user === null) {
-    return res.status(400).send("Email incorrecto")
+    return res.status(400).json("Email incorrecto")
   }
   // Check if password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password)
@@ -72,8 +87,9 @@ usersRouter.post("/login", async (req, res) => {
 
   // Create and assign token
   const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET)
-  res.header('auth-token', token).send(token)
+  // res.header('auth-token', token).send(token)
 
+  res.json(token)
   // res.send('Logged in!')
 })
 

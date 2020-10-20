@@ -161,9 +161,8 @@ class MainSearch extends React.Component {
   }
 
   handleLoginClick() {
-    this.setState({
-      loginOpen: true,
-      sideDrawerOpen: false
+    this.setState((prevState) => {
+      return {loginOpen: !prevState.loginOpen, sideDrawerOpen: false}
     });
   }
 
@@ -249,7 +248,7 @@ class MainSearch extends React.Component {
                 loadingStatus={this.state.isLoading}
                 onMobileSearchClick={this.handleMobileSearchClick}
                 path={this.props.location.pathname}/>
-        {this.state.loginOpen && <LoginModal />}
+        {this.state.loginOpen && <LoginModal onCloseClick={this.handleLoginClick}/>}
         <Switch>
           <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>
             <Route path={this.props.match.url} exact>

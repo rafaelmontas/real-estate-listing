@@ -8,6 +8,24 @@ const history = createBrowserHistory();
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      user: {}
+    }
+  }
+  
+  componentDidMount() {
+    console.log(`${localStorage.getItem('user-jwt')}`)
+    const userJwt = localStorage.getItem('user-jwt')
+    fetch("/users/getUser", {
+      method: 'GET',
+      headers: { 'user-auth': userJwt}
+    }).then(response => response.json())
+      .then(res => console.log(res))
+  }
+
   render() {
     return (
       <BrowserRouter history={history}>
