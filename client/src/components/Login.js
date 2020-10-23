@@ -1,4 +1,5 @@
 import React from 'react';
+import {userContext} from './userContext';
 import './Login.css'
 
 class Login extends React.Component {
@@ -6,7 +7,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isError: false
     }
     this.onInputChange = this.onInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,10 +31,20 @@ class Login extends React.Component {
         email: this.state.email,
         password: this.state.password
       })
-    }).then(response => response.json())
-      .then(res => localStorage.setItem('user-jwt', res))
+    }).then(response => {
+      if(response.status === 200) {
+        return response.json()
+      } else {
+        throw new Error(response.status)
+      }
+    })
+      .then(res => {
+        localStorage.setItem('user-jwt', res)
+        this.context.getUser()
+      })
       .catch((error) => {
         console.error('Error:', error);
+        this.setState({isError: true})
       });
   }
 
@@ -69,4 +81,5 @@ class Login extends React.Component {
   }
 }
 
+Login.contextType = userContext;
 export default Login;

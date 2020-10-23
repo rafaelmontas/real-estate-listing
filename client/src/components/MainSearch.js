@@ -12,6 +12,7 @@ import MainMap from './Map/MainMap';
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
 import LoginModal from './LoginModal';
+import RegisterLoginModal from './Auth/RegisterLoginModal';
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
 import MapPropertyCard from './MapPropertyCard/MapPropertyCard';
 import {Route, Switch} from 'react-router-dom';
@@ -31,6 +32,8 @@ class MainSearch extends React.Component {
       mapToggleOpen: false,
       moreFiltersOpen: false,
       loginOpen: false,
+      registerLoginOpen: false,
+      modalTypeOpen: null,
       mobileSearchOpen: false,
       cardSelected: 0,
       cardHovered: 0
@@ -44,6 +47,10 @@ class MainSearch extends React.Component {
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
     this.handleMapToggleClick = this.handleMapToggleClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleRegisterClick = this.handleRegisterClick.bind(this);
+    this.handleRegisterClose = this.handleRegisterClose.bind(this);
+    this.handleLoginSwitch = this.handleLoginSwitch.bind(this);
+    this.handleRegisterSwitch = this.handleRegisterSwitch.bind(this);
     this.searchProperties = this.searchProperties.bind(this);
     this.backForwardSearch = this.backForwardSearch.bind(this);
     this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
@@ -103,6 +110,10 @@ class MainSearch extends React.Component {
     console.log("Main search will unmount!")
   }
   componentDidUpdate(prevProps) {
+    // Handle login update
+    if(this.props.loginStatus === true && prevProps.loginStatus === false && this.state.loginOpen === true) {
+      this.handleLoginClick()
+    }
     // Back button pressed
     console.log(`Main search updated`)
     window.onpopstate = e => {
@@ -150,7 +161,9 @@ class MainSearch extends React.Component {
   handleBackdropClick() {
     this.setState({
       sideDrawerOpen: false,
-      loginOpen: false
+      loginOpen: false,
+      registerLoginOpen: false,
+      modalTypeOpen: null
     });
   }
   handleMapToggleClick() {
@@ -164,6 +177,22 @@ class MainSearch extends React.Component {
     this.setState((prevState) => {
       return {loginOpen: !prevState.loginOpen, sideDrawerOpen: false}
     });
+  }
+  handleRegisterClick() {
+    this.setState((prevState) => {
+      return {registerLoginOpen: !prevState.registerLoginOpen, sideDrawerOpen: false, modalTypeOpen: 'register'}
+    });
+  }
+  handleRegisterClose() {
+    this.setState((prevState) => {
+      return {registerLoginOpen: !prevState.registerLoginOpen, sideDrawerOpen: false, modalTypeOpen: null}
+    });
+  }
+  handleLoginSwitch() {
+    this.setState({modalTypeOpen: 'login'})
+  }
+  handleRegisterSwitch() {
+    this.setState({modalTypeOpen: 'register'})
   }
 
   handleMobileSearchClick() {
@@ -224,7 +253,7 @@ class MainSearch extends React.Component {
     }
     
     let backdrop;
-    if(this.state.sideDrawerOpen || this.state.loginOpen) {
+    if(this.state.sideDrawerOpen || this.state.loginOpen || this.state.registerLoginOpen) {
       backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>
     }
     
@@ -242,13 +271,15 @@ class MainSearch extends React.Component {
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
                 mapOpen={this.state.mapToggleOpen}
                 onMapToggleClick={this.handleMapToggleClick}
-                onLoginClick={this.handleLoginClick} 
+                onLoginClick={this.handleLoginClick}
+                onRegisterClick={this.handleRegisterClick}
                 search={this.searchProperties}
                 initialStateSearch={queryString.parse(this.props.location.search)}
                 loadingStatus={this.state.isLoading}
                 onMobileSearchClick={this.handleMobileSearchClick}
                 path={this.props.location.pathname}/>
         {this.state.loginOpen && <LoginModal onCloseClick={this.handleLoginClick}/>}
+        {this.state.registerLoginOpen && <RegisterLoginModal modalType={this.state.modalTypeOpen} onCloseClick={this.handleRegisterClose} onLoginSwitch={this.handleLoginSwitch} onRegisterSwitch={this.handleRegisterSwitch}/>}
         <Switch>
           <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>
             <Route path={this.props.match.url} exact>

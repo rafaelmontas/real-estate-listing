@@ -13,6 +13,7 @@ const db =  require('./models');
 // Require Routes
 const propertiesRouter = require('./routes/properties');
 const usersRouter = require('./routes/users');
+const userAuthRouter = require('./routes/userAuth');
 const agentsRouter = require('./routes/agents');
 
 
@@ -23,6 +24,7 @@ app.use(morgan('dev'));
 // Use Routes
 app.use("/properties", propertiesRouter)
 app.use("/users", usersRouter)
+app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
 
 // {force: true}

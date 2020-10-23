@@ -1,0 +1,65 @@
+.register-modal {
+  position: fixed;
+  z-index: 400;
+  background-color: #fff;
+  overflow: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  /* border-radius: 4px; */
+}
+.register-modal .container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px;
+}
+.register-modal .container .register-header {
+  /* text-align: end; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+.register-modal .container .register-header .action-text {
+  text-align: start;
+}.register-modal .container .register-header .action-text h2 {
+  line-height: 2.5rem;
+}
+.register-modal .container .register-header .action-text p {
+  color: #333;
+}
+.register-modal .container .register-header .action-text p span {
+  color: #1080a2;
+  cursor: pointer;
+}
+.register-modal .container .register-header .close-button {
+  padding: 5px;
+}
+.register-modal .container .register-header .close-button:hover {
+  cursor: pointer;
+}
+.register-modal .container .register-header .close-button i.fa-times-circle {
+  font-size: 24px;
+  color: #8a8a8a;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .register-modal {
+    width: 500px;
+    /* before was 150px */
+    height: calc(100% - 200px); 
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+  }
+}
+
