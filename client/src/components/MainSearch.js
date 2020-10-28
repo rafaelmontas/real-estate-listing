@@ -11,7 +11,6 @@ import { LoadScript } from '@react-google-maps/api';
 import MainMap from './Map/MainMap';
 import SideDrawer from "./SideDrawer";
 import Backdrop from "./Backdrop";
-import LoginModal from './LoginModal';
 import RegisterLoginModal from './Auth/RegisterLoginModal';
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
 import MapPropertyCard from './MapPropertyCard/MapPropertyCard';
@@ -31,14 +30,12 @@ class MainSearch extends React.Component {
       sideDrawerOpen: false,
       mapToggleOpen: false,
       moreFiltersOpen: false,
-      loginOpen: false,
       registerLoginOpen: false,
       modalTypeOpen: null,
       mobileSearchOpen: false,
       cardSelected: 0,
       cardHovered: 0
     }
-    // this.lastSearchState = this.state.properties;
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMapClick = this.handleMapClick.bind(this);
     this.handleCardHover = this.handleCardHover.bind(this);
@@ -110,9 +107,13 @@ class MainSearch extends React.Component {
     console.log("Main search will unmount!")
   }
   componentDidUpdate(prevProps) {
-    // Handle login update
-    if(this.props.loginStatus === true && prevProps.loginStatus === false && this.state.loginOpen === true) {
-      this.handleLoginClick()
+    // Handle Register or login update
+    if(this.props.loginStatus === true && prevProps.loginStatus === false && this.state.registerLoginOpen === true) {
+      this.handleRegisterClose()
+    }
+    // Handle Logout mobil
+    if(this.props.loginStatus === false && prevProps.loginStatus === true && this.state.sideDrawerOpen === true) {
+      this.setState({sideDrawerOpen: false})
     }
     // Back button pressed
     console.log(`Main search updated`)
@@ -175,7 +176,7 @@ class MainSearch extends React.Component {
 
   handleLoginClick() {
     this.setState((prevState) => {
-      return {loginOpen: !prevState.loginOpen, sideDrawerOpen: false}
+      return {registerLoginOpen: !prevState.registerLoginOpen, sideDrawerOpen: false, modalTypeOpen: 'login'}
     });
   }
   handleRegisterClick() {
@@ -267,7 +268,8 @@ class MainSearch extends React.Component {
         {this.state.mobileSearchOpen && <AutoCompleteMobile onCloseMobileSearchClick={this.handleCloseMobileSearchClick} initialStateSearch={queryString.parse(this.props.location.search)} search={this.searchProperties}/>}
         <SideDrawer show={this.state.sideDrawerOpen}
                     onMobileSearchClick={this.handleMobileSearchClick}
-                    onLoginClick={this.handleLoginClick} />
+                    onLoginClick={this.handleLoginClick}
+                    onRegisterClick={this.handleRegisterClick} />
         <NavBar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
                 mapOpen={this.state.mapToggleOpen}
                 onMapToggleClick={this.handleMapToggleClick}
@@ -278,7 +280,6 @@ class MainSearch extends React.Component {
                 loadingStatus={this.state.isLoading}
                 onMobileSearchClick={this.handleMobileSearchClick}
                 path={this.props.location.pathname}/>
-        {this.state.loginOpen && <LoginModal onCloseClick={this.handleLoginClick}/>}
         {this.state.registerLoginOpen && <RegisterLoginModal modalType={this.state.modalTypeOpen} onCloseClick={this.handleRegisterClose} onLoginSwitch={this.handleLoginSwitch} onRegisterSwitch={this.handleRegisterSwitch}/>}
         <Switch>
           <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>

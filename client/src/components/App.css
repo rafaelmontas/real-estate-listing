@@ -134,7 +134,7 @@ a {
   margin-right: 10px;
 }
 
-.navbar-menu-right .menu-item .far {
+.navbar-menu-right .menu-item .far, .navbar-menu-right .menu-item .fas {
   padding-right: 5px;
 }
 .navbar-menu-right .menu-item.button.secondary {
@@ -173,6 +173,10 @@ a {
   border: 0px;
   /* border: 1px solid #e2e2e2; */
 }
+.navbar-menu-right .user-login-button button.user-button.active {
+  background-color: #2c7bec;
+  color: #fff;
+}
 .navbar-menu-right .user-login-button button:hover {
   background-color: #2c7bec;
   color: #fff;
@@ -193,6 +197,48 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* Dropdown user info */
+.navbar-menu-right .user-login-button div.hover-class:hover > ul::before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 10px;
+  top: -10px;
+  cursor: pointer;
+}
+
+.navbar-menu-right .user-login-button ul.button-dropdown {
+  display: none;
+  position: absolute;
+  list-style: none;
+  right: 0;
+  top: 42px;
+  width: 185px;
+  background: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: rgba(59, 65, 68, 0.5) 0px 2px 4px 0px;
+  padding: 4px 0px;
+  /* margin-top: 5px; */
+}
+.navbar-menu-right .user-login-button ul.button-dropdown.open {
+  display: block;
+}
+.navbar-menu-right .user-login-button ul.button-dropdown li a {
+  display: block;
+}
+.navbar-menu-right .user-login-button ul.button-dropdown li a:hover {
+  background-color: rgb(232, 233, 234);
+  cursor: pointer;
+}
+.navbar-menu-right .user-login-button ul.button-dropdown li a div {
+  padding: 10px 16px;
+}
+.navbar-menu-right .user-login-button ul.button-dropdown li a div i {
+  margin-right: 5px;
+}
+
 
 /* .navbar-menu-right .menu-item.button.primary:hover {
   background: #f8f8fa;

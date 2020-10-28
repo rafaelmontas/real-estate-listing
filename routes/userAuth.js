@@ -22,7 +22,7 @@ userAuthRouter.post("/", async (req, res) => {
   if(!validPass) return res.status(400).json({msg: 'Contraseña incorrecta'})
 
   // Create and assign token
-  const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET)
+  const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET,  { expiresIn: '2d' })
   // res.header('auth-token', token).send(token)
 
   res.json({ token, user: {id: user.id, name: user.name, email: user.email} })

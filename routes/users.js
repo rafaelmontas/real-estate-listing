@@ -10,31 +10,6 @@ const Op = Sequelize.Op
 const verifyToken = require('../middleware/userAuth')
 
 
-// const verifyToken = (req, res, next) => {
-//   const token = req.header('user-auth');
-//   if(!token) return res.status(401).json({msg: 'Access Denied'});
-
-//   try {
-//     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-//     req.user = verified;
-//     next();
-//   } catch(err) {
-//     res.status(400).send('Invalid Token');
-//   }
-// }
-
-// usersRouter.get("/getUser", verifyToken, (req, res) => {
-//   User.findByPk(req.user.id)
-//         .then(user => {
-//           console.log(req.user)
-//           res.status(200).send({id: user.id, name: user.name, email: user.email})
-//         })
-//         .catch(err => {
-//           console.log(err)
-//           res.sendStatus(500);
-//         });
-// })
-
 
 usersRouter.get("/:id", verifyToken, (req, res) => {
   User.findByPk(req.params.id, {include: Property})
@@ -53,6 +28,7 @@ usersRouter.get("/:id", verifyToken, (req, res) => {
 // @desc Register new users
 // @acces Public
 usersRouter.post("/", async (req, res) => {
+  console.log(req.body)
   const { name, email, password } = req.body
 
   // Simple validation - check if fields are empty
@@ -74,33 +50,14 @@ usersRouter.post("/", async (req, res) => {
       password: hashedPassword
     })
     // Create and assign token
-    const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET, { expiresIn: 3600 })
+    const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET, { expiresIn: '2d' })
     console.log(user.toJSON())
     res.status(201).json({ token, user: {id: user.id, name: user.name, email: user.email} })
   } catch(err) {
-    console.log(err)
-    res.sendStatus(400)
+    console.log(err.errors[0].message)
+    res.status(400).json({msg: err.errors[0].message})
   }
 })
 
-// Login
-// usersRouter.post("/login", async (req, res) => {
-//   const { email, password } = req.body
-//   console.log(req.body.email)
-//   const user = await User.findOne({ where: { email } })
-//   // Check if email doesn't exist
-//   if(!user) return res.status(400).json({msg: 'Email incorrecto'})
-
-//   // Check if password is correct
-//   const validPass = await bcrypt.compare(password, user.password)
-//   if(!validPass) return res.status(400).json({msg: 'Contraseña incorrecta'})
-
-//   // Create and assign token
-//   const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET)
-//   // res.header('auth-token', token).send(token)
-
-//   res.json({ token, user: {id: user.id, name: user.name, email: user.email} })
-//   // res.send('Logged in!')
-// })
 
 module.exports = usersRouter;
