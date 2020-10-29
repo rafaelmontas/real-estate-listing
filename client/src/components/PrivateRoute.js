@@ -1,16 +1,21 @@
-// import React from 'react';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Route, Redirect } from 'react-router-dom';
 import {userContext} from './userContext';
 
 function PrivateRoute ({component: Component, ...rest}) {
   const [loading, setLoading] = useState(true);
+  const status = useContext(userContext);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    console.log(status.isLoggedIn, status.userLoading)
+    if(!status.isLoggedIn && !status.userLoading) {
+      const timer = setTimeout(() => {
+        setLoading(false)
+      }, 300);
+      return () => clearTimeout(timer);  
+    } else {
       setLoading(false)
-    }, 150);
-    return () => clearTimeout(timer);
+    }
   }, [])
 
   return !loading ? (

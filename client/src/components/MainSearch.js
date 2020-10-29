@@ -207,6 +207,7 @@ class MainSearch extends React.Component {
   
   searchProperties(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
+    clearTimeout(this.timer)
     this.timer = setTimeout(() => {
       fetch(`/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
         .then(response => {
@@ -301,7 +302,7 @@ class MainSearch extends React.Component {
                   <Footer />
                 </div>
                 <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
-                  <div className="save-search"><i className="fas fa-bell"></i>Guardar Busqueda</div>
+                  <div className="save-search" style={{display: 'none'}}><i className="fas fa-bell"></i>Guardar Busqueda</div>
                   <div className="filter-button">
                     {/* <FilterToggle /> */}
                   </div>

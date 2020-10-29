@@ -60,7 +60,7 @@ a {
   margin-right: 10px;
   font-size: 28px;
   font-weight: bold;
-  color: #0069ff;
+  color: #505050;
 }
 .navbar-menu-form form {
   display: flex;
@@ -126,7 +126,7 @@ a {
   /* color: #c30000; */
 }
 .navbar-menu-right .menu-item.first:hover, .navbar-menu-right .menu-item.second:hover {
-  background-color: #c30000;
+  background-color: #2c7bec;
   color: #fff;
 }
 
@@ -138,13 +138,13 @@ a {
   padding-right: 5px;
 }
 .navbar-menu-right .menu-item.button.secondary {
-  border: 1px solid #0069ff;
+  border: 1px solid #1c68d4;
   border-radius: 4px;
   color: #0069ff;
   font-weight: 500;
 }
 .navbar-menu-right .menu-item.button.secondary:hover {
-  background-color: #0069ff;
+  background-color: #1c68d4;
   color: #fff;
   cursor: pointer;
 }
@@ -152,13 +152,14 @@ a {
 .navbar-menu-right .menu-item.button.primary {
   /* border: 2px solid rgba(0,0,0,.05);
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.1); */
-  background-color: #0069ff;
+  background-color: #2c7bec;
   color: #fff;
   border-radius: 4px;
   font-weight: 600;
 }
 .navbar-menu-right .menu-item.button.primary:hover {
   cursor: pointer;
+  background-color: #1c68d4;
 }
 .navbar-menu-right .user-login-button button {
   cursor: pointer;
