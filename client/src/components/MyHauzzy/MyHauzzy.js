@@ -1,7 +1,10 @@
 import React from 'react';
+import axios from 'axios';
+import {userContext} from '../userContext';
 import NavBar from '../NavBar';
 import SecondNav from './SecondNav';
 import Favorites from './Favorites';
+import Profile from './Profile/Profile';
 import Listings from './Listings/Listings';
 import ReportEditListing from './Listings/ReportEditListing/ReportEditListing';
 import Backdrop from "../Backdrop";
@@ -20,7 +23,8 @@ class MyHauzzy extends React.Component {
     this.state = {
       sideDrawerOpen: false,
       mobileSearchOpen: false,
-      favoritesProperties: []
+      favoritesProperties: [],
+      user: null
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this);
     this.handleBackdropClick = this.handleBackdropClick.bind(this);
@@ -34,7 +38,18 @@ class MyHauzzy extends React.Component {
     if(this.props.location.pathname === '/my-hauzzy' || this.props.location.pathname === '/my-hauzzy/') {
       this.props.history.replace({pathname: '/my-hauzzy/favorites'})
     }
-    // Should fetch properties saved as favorites
+    // Get user profile with properties
+    const userJwt = localStorage.getItem('user-jwt')
+    axios.get(`/users/${this.context.user.id}`, {
+      headers: { 'user-auth': userJwt }
+    })
+      .then(user => {
+        console.log(user.data)
+        this.setState({user: user.data})
+      })
+      .catch(err => console.log(err.response.data))
+
+    // Propertie for UI test
     fetch("/properties")
           .then(res => res.json())
           .then(favoritesProperties => {
@@ -93,6 +108,7 @@ class MyHauzzy extends React.Component {
         <div className="my-hauzzy-container">
         {/* this.state.favoritesProperties.slice(0, 3) */}
           <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
+          <Route path="/my-hauzzy/profile" exact render={()=> <Profile user={this.state.user}/>}/>
           <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)}/>}/>
           <Route path="/my-hauzzy/listings/:id" exact component={ReportEditListing}/>
         </div>
@@ -101,4 +117,6 @@ class MyHauzzy extends React.Component {
     )
   }
 }
+
+MyHauzzy.contextType = userContext;
 export default MyHauzzy;

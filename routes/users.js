@@ -75,7 +75,7 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
   if(!email || !password) return res.status(400).json({msg: 'Ingresar Email y Contraseña'})
 
   // Check if Email already exists
-  const user = await User.findOne({ where: { email } })
+  const user = await User.findByPk(req.user.id)
   if(!user) return res.status(400).send({msg: 'Usuario no existe'})
 
   // Check if password is correct
@@ -94,8 +94,8 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
       console.log(infoToUpdate)
 
-      const updatedUser = User.update(infoToUpdate, {where: { id: user.id }})
-      console.log(updatedUser)
+      await User.update(infoToUpdate, {where: { id: user.id }})
+
       res.status(200).json({msg: 'Perfil actualizado'})
     } else if(password && new_password) {
       // Hash new password
@@ -113,8 +113,8 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
       console.log(infoToUpdate)
       
-      const updatedUser = User.update(info, {where: { id: user.id }})
-      console.log(updatedUser)
+      await User.update(info, {where: { id: user.id }})
+      
       res.status(200).json({msg: 'Perfil actualizado con nueva contraseña'})
     }
   } catch(err) {
