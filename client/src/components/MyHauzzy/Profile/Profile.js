@@ -28,13 +28,7 @@ class Profile extends React.Component {
       this.setState({
         name: this.props.user.name,
         email: this.props.user.email,
-        phone: '8296483530',
-      })
-    } else {
-      this.setState({
-        // name: this.props.user.name,
-        // email: this.props.user.email,
-        phone: '8296483530',
+        phone: this.props.user.phone_number ? this.props.user.phone_number : ''
       })
     }
   }
@@ -42,7 +36,8 @@ class Profile extends React.Component {
     if(prevProps.user !== this.props.user) {
       this.setState({
         name: this.props.user.name,
-        email: this.props.user.email
+        email: this.props.user.email,
+        phone: this.props.user.phone_number ? this.props.user.phone_number : ''
       })
     }
   }
