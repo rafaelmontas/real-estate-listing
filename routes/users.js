@@ -63,6 +63,9 @@ usersRouter.post("/", async (req, res) => {
   }
 })
 
+// @route PUT users/:id
+// @desc Update existing users
+// @acces Private
 usersRouter.put("/:id", verifyToken, async (req, res) => {
   const { name, email, phone_number, password, new_password } = req.body
   console.log(req.params, req.body)
@@ -123,5 +126,35 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
   }
 })
 
+// @route DELETE users/:id
+// @desc Delete existing users
+// @acces Private
+usersRouter.delete("/:id", verifyToken, async (req, res) => {
+  const password = req.body.password
+  console.log(password)
+  
+  // Verify that the user to be deleted is the same as the one deleting
+  console.log(`User requesting delete: ${req.user.id} for user: ${Number(req.params.id)}`)
+  if(req.user.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+
+  // Simple validation - check if password is empty
+  if(!password) return res.status(401).json({msg: 'Confirmar Contraseña'})
+
+  // Get user to be deleted
+  const user = await User.findByPk(req.user.id)
+  if(!user) return res.status(404).send({msg: 'Usuario no existe'})
+
+  // Check if password is correct
+  const validPass = await bcrypt.compare(password, user.password)
+  if(!validPass) return res.status(401).json({msg: 'Contraseña incorrecta'})
+
+  try {
+    await user.destroy()
+    res.sendStatus(204)
+  } catch(err) {
+    console.log(err.errors[0].message)
+    res.status(500).json({msg: err.errors[0].message})
+  }  
+})
 
 module.exports = usersRouter;
