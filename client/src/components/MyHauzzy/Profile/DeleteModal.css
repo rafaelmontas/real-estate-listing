@@ -1,0 +1,75 @@
+.delete-modal {
+  position: fixed;
+  z-index: 400;
+  background-color: #fff;
+  overflow: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  /* border-radius: 4px; */
+}
+.delete-modal .delete-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #d84848e0;
+  color: #fff;
+  font-weight: 700;
+}
+.delete-modal .delete-header i {
+  font-size: 20px;
+  cursor: pointer;
+}
+.delete-modal .delete-body {
+  display: flex;
+  padding: 15px 20px;
+  align-items: center;
+}
+.delete-modal .delete-body i {
+  font-size: 26px;
+  color: #d84848e0;
+  margin-right: 15px;
+}
+.delete-modal .delete-body span {
+  color: #484848;
+}
+
+.delete-modal .delete-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+.delete-modal .delete-actions div {
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-modal .delete-actions div.delete-cancel {
+  margin-right: 10px;
+  border: 1px solid #e2e2e2;
+  background-color: #f3f3f3;
+}
+.delete-modal .delete-actions div.delete-ok {
+  background-color: #d84848e0;
+  color: #fff;
+  font-weight: 600;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .delete-modal {
+    width: 400px;
+    /* before was 150px */
+    height: calc(100% - 420px); 
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+  }
+}
+

@@ -3,6 +3,9 @@ import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import Msg from './Msg';
+import Backdrop from '../../Backdrop';
+import DeleteModal from './DeleteModal'
+import {userContext} from '../../userContext';
 import './Profile.css'
 
 class Profile extends React.Component {
@@ -16,10 +19,14 @@ class Profile extends React.Component {
       newPassword: '',
       successMsg: '',
       errMsg: '',
-      status: null
+      status: null,
+      deleteOpen: false
     }
     this.onInputChange = this.onInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+    this.handleBackdropClick = this.handleBackdropClick.bind(this)
   }
 
   componentDidMount() {
@@ -78,6 +85,37 @@ class Profile extends React.Component {
           })
         })
   }
+
+  handleDeleteClick() {
+    this.setState({deleteOpen: true})
+  }
+  handleDelete() {
+    const body = {password: this.state.password}
+    console.log(body)
+    const userJwt = localStorage.getItem('user-jwt')
+    axios.delete(`/users/${this.props.user.id}`, {
+      headers: {
+        'user-auth': userJwt
+      }
+    })
+        .then(() => this.context.logOut())
+        .catch(err => {
+          console.log(err.response.data.msg)
+          this.setState({
+            successMsg: '',
+            errMsg: err.response.data.msg,
+            status: err.response.status
+          })
+        })
+
+  }
+
+  handleBackdropClick() {
+    this.setState({
+      deleteOpen: false
+    });
+  }
+
   renderMessage() {
     if(this.state.successMsg || this.state.errMsg) {
       if(this.state.successMsg) {
@@ -92,6 +130,8 @@ class Profile extends React.Component {
     if(this.props.user) {
       return (
         <div className="profile-page">
+          {this.state.deleteOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+          {this.state.deleteOpen && <DeleteModal onCancelClick={this.handleBackdropClick} onDeleteConfirm={this.handleDelete}/>}
           {this.renderMessage()}
           <h1 className="profile-header">Editar perfil</h1>
           <div className="profile-info">
@@ -144,7 +184,7 @@ class Profile extends React.Component {
                   {/* <Link to="/my-hauzzy/profile/update"> */}
                     <button type="submit" className="update-profile">Actualizar Perfil</button>
                   {/* </Link> */}
-                  <span className="delete-button">Eliminar cuenta?</span>
+                  <span className="delete-button" onClick={this.handleDeleteClick}>Eliminar cuenta?</span>
                 </div>
               </div>
             </form>
@@ -157,4 +197,5 @@ class Profile extends React.Component {
   }
 }
 
+Profile.contextType = userContext;
 export default Profile;
