@@ -36,10 +36,14 @@ app.use("/agents", agentsRouter)
   // })
 // }
 
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+})
+
 
 // {force: true}
-db.sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-  })
-})
+// db.sequelize.sync().then(() => {
+//   app.listen(PORT, () => {
+//     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+//   })
+// })
