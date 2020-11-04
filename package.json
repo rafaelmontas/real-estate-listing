@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Real Estate Project",
   "main": "server.js",
-  "engines" : { "node" : "12.16.1" },
+  "engines": {
+    "node": "12.16.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -21,7 +23,7 @@
   "homepage": "https://github.com/rafaelmontas/real-estate-project#readme",
   "dependencies": {
     "@material-ui/core": "^4.9.14",
-    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",

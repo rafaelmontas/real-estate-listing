@@ -5,7 +5,7 @@ const User = db.user;
 const Property = db.property;
 const Sequelize = require('sequelize');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Op = Sequelize.Op
 const verifyToken = require('../middleware/userAuth')
 
