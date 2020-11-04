@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
@@ -27,9 +28,18 @@ app.use("/users", usersRouter)
 app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
 
+// Serve static assets
+// if(process.env.NODE_ENV === 'development') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')))
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  // })
+// }
+
+
 // {force: true}
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
   })
 })
