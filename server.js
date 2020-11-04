@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
@@ -20,7 +20,7 @@ const agentsRouter = require('./routes/agents');
 
 // Middlewares
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 // Use Routes
 app.use("/properties", propertiesRouter)
