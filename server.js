@@ -29,7 +29,7 @@ app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
 
 // Serve static assets
-if(process.env.NODE_ENV === 'aws-development') {
+if(process.env.NODE_ENV === 'development') {
   app.use(express.static(path.join(__dirname, 'client', 'build')))
   // app.get('*', (req, res) => {
   //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
