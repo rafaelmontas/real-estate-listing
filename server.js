@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
@@ -20,7 +20,7 @@ const agentsRouter = require('./routes/agents');
 
 // Middlewares
 app.use(bodyParser.json());
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 // Use Routes
 app.use("/properties", propertiesRouter)
@@ -29,21 +29,21 @@ app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
 
 // Serve static assets
-// if(process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'aws-development') {
   app.use(express.static(path.join(__dirname, 'client', 'build')))
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  // })
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-})
+// app.listen(PORT, () => {
+//   console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+// })
 
 
 // {force: true}
-// db.sequelize.sync().then(() => {
-//   app.listen(PORT, () => {
-//     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-//   })
-// })
+db.sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+  })
+})
