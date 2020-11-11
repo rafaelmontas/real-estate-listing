@@ -4,18 +4,15 @@ const morgan = require('morgan');
 const app = express();
 const dotenv = require('dotenv');
 const PORT = process.env.PORT || 5000;
+const db =  require('./models'); // Import Database
 
 dotenv.config()
-
-// Database
-const db =  require('./models');
 
 // Require Routes
 const propertiesRouter = require('./routes/properties');
 const usersRouter = require('./routes/users');
 const userAuthRouter = require('./routes/userAuth');
 const agentsRouter = require('./routes/agents');
-
 
 // Middlewares
 app.use(morgan('dev'));
