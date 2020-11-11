@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
 const PORT = process.env.PORT || 5000;
@@ -19,7 +18,6 @@ const agentsRouter = require('./routes/agents');
 
 
 // Middlewares
-app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // Use Routes
