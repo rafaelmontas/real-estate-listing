@@ -91,7 +91,7 @@ class MainSearch extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch("/properties" + this.props.location.search)
+      fetch("/api/properties" + this.props.location.search)
         .then(res => res.json())
         .then(properties => {
           this.setState({
@@ -131,7 +131,7 @@ class MainSearch extends React.Component {
       } else if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search === "") {
         this.setState({ isLoading: true })
         this.timer = setTimeout(() => {
-          fetch("/properties")
+          fetch("/api/properties")
             .then(res => res.json())
             .then(properties => {
               this.setState({
@@ -209,7 +209,7 @@ class MainSearch extends React.Component {
     this.setState({ isLoading: true })
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      fetch(`/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      fetch(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
         .then(response => {
           return response.json();
         }).then(properties => {
@@ -231,7 +231,7 @@ class MainSearch extends React.Component {
   backForwardSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch(`/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      fetch(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
         .then(response => {
           return response.json();
         }).then(properties => {

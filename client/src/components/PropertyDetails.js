@@ -35,13 +35,13 @@ class PropertyDetails extends React.Component {
     this.timer = setTimeout(() => {
       this.setState( {isContactFormLoading: false} )
     }, 2000)
-    fetch(`/properties/${this.props.match.params.id}`)
+    fetch(`/api/properties/${this.props.match.params.id}`)
           .then(res => res.json())
           .then(property => {
             console.log(property)
             this.setState({ property });
           });
-    fetch("/properties")
+    fetch("/api/properties")
           .then(res => res.json())
           .then(similarProperties => {
             console.log(similarProperties)
@@ -65,7 +65,7 @@ class PropertyDetails extends React.Component {
         isContactFormLoading: true
       })
       this.timer = setTimeout(() => {
-        fetch(`/properties/${this.props.match.params.id}`)
+        fetch(`/api/properties/${this.props.match.params.id}`)
           .then(res => res.json())
           .then(property => {
             console.log(property)
