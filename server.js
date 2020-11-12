@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
 const PORT = process.env.PORT || 5000;
@@ -15,10 +16,11 @@ const userAuthRouter = require('./routes/userAuth');
 const agentsRouter = require('./routes/agents');
 
 // Middlewares
+app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // Use Routes
-app.use("/properties", propertiesRouter)
+app.use("/api/properties", propertiesRouter)
 app.use("/users", usersRouter)
 app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
