@@ -18,6 +18,7 @@ import {Route, Switch} from 'react-router-dom';
 // import { AnimatedRoute } from 'react-router-transition';
 import PropertyDetails from './PropertyDetails';
 import DefaultLoad from './DefaultLoad';
+import axios from 'axios';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
@@ -91,14 +92,19 @@ class MainSearch extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch("/api/properties" + this.props.location.search)
-        .then(res => res.json())
-        .then(properties => {
-          this.setState({
-            properties: properties,
-            isLoading: false
-          });
-        });
+      axios.get(`/api/properties${this.props.location.search}`)
+            .then(properties => {
+              this.setState({
+                properties: properties.data,
+                isLoading: false
+              });
+            })
+            .catch(err => {
+              console.log(err.response.data, err.response.status)
+              if(err.response.status === 500) {
+                this.props.history.replace('/error/500')
+              }
+            })
     }, 2000)
     console.log(queryString.parse(this.props.location.search).sector, queryString.parse(this.props.location.search));
   }
@@ -131,14 +137,19 @@ class MainSearch extends React.Component {
       } else if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search === "") {
         this.setState({ isLoading: true })
         this.timer = setTimeout(() => {
-          fetch("/api/properties")
-            .then(res => res.json())
-            .then(properties => {
-              this.setState({
-                properties: properties,
-                isLoading: false
-              });
-            });
+          axios.get("/api/properties")
+              .then(properties => {
+                this.setState({
+                  properties: properties.data,
+                  isLoading: false
+                });
+              })
+              .catch(err => {
+                console.log(err.response.data, err.response.status)
+                if(err.response.status === 500) {
+                  this.props.history.replace('/error/500')
+                }
+              })
         }, 1000)
       }
     }
@@ -209,18 +220,22 @@ class MainSearch extends React.Component {
     this.setState({ isLoading: true })
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      fetch(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
-        .then(response => {
-          return response.json();
-        }).then(properties => {
-          console.log(properties);
-          this.setState({ 
-            properties: properties,
-            isLoading: false,
-            cardSelected: 0,
-            cardHovered: 0
+      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+          .then(properties => {
+            console.log(properties);
+            this.setState({ 
+              properties: properties.data,
+              isLoading: false,
+              cardSelected: 0,
+              cardHovered: 0
+            })  
           })
-        })
+          .catch(err => {
+            console.log(err.response.data, err.response.status)
+            if(err.response.status === 500) {
+              this.props.history.replace('/error/500')
+            }
+          })
     }, 2000)
     this.props.history.push({
       pathname: "/properties",
@@ -231,18 +246,22 @@ class MainSearch extends React.Component {
   backForwardSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      fetch(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
-        .then(response => {
-          return response.json();
-        }).then(properties => {
-          console.log(properties);
-          this.setState({ 
-            properties: properties,
-            isLoading: false,
-            cardSelected: 0,
-            cardHovered: 0
+      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+          .then(properties => {
+            console.log(properties);
+            this.setState({ 
+              properties: properties.data,
+              isLoading: false,
+              cardSelected: 0,
+              cardHovered: 0
+            })
           })
-        })
+          .catch(err => {
+            console.log(err.response.data, err.response.status)
+            if(err.response.status === 500) {
+              this.props.history.replace('/error/500')
+            }
+          })
     }, 1000)
   }
 
