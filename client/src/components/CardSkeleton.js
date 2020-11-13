@@ -3,7 +3,8 @@ import Skeleton from "react-loading-skeleton";
 
 
 class CardSkeleton extends React.Component {
-  render() {
+
+  renderSkeleton() {
     return (
       <div className="home-card-container">
         <div className="home-card" style={{boxShadow: 'none'}}>
@@ -22,6 +23,23 @@ class CardSkeleton extends React.Component {
             </div>
           </a>
         </div>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div style={{width: '100%', display: 'flex', flexWrap: 'wrap'}}>
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
+        {this.renderSkeleton()}
       </div>
     )
   }

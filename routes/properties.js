@@ -26,8 +26,8 @@ function isEmpty(obj) {
 }
 propertiesRouter.get("/", (req, res) => {
   if(isEmpty(req.query)) {
-    Property.findAll().then(properties => {
-      res.status(200).send(properties);
+    Property.findAndCountAll().then(properties => {
+      res.status(200).json({properties: properties.rows, count: properties.count});
     }).catch(err => {
       console.log(err);
       res.sendStatus(500);
@@ -84,7 +84,7 @@ propertiesRouter.get("/", (req, res) => {
         [Op.eq]: req.query.sector
       }
     }
-    Property.findAll({
+    Property.findAndCountAll({
       // where: req.query
       where: {
         sector: sector,
@@ -99,7 +99,7 @@ propertiesRouter.get("/", (req, res) => {
         }
       }
     }).then(properties => {
-      res.status(200).send(properties);
+      res.status(200).json({properties: properties.rows, count: properties.count});
       console.log(req.params, req.query)
     }).catch(err => {
       console.log(req.query);

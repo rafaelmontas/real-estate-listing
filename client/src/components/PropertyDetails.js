@@ -11,6 +11,7 @@ import MapSection from './PropertyDetails/MapSection';
 import AgentSection from './PropertyDetails/AgentSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
+import axios from 'axios';
 import Footer from './Footer';
 
 class PropertyDetails extends React.Component {
@@ -35,18 +36,28 @@ class PropertyDetails extends React.Component {
     this.timer = setTimeout(() => {
       this.setState( {isContactFormLoading: false} )
     }, 2000)
-    fetch(`/api/properties/${this.props.match.params.id}`)
-          .then(res => res.json())
-          .then(property => {
-            console.log(property)
-            this.setState({ property });
-          });
-    fetch("/api/properties")
-          .then(res => res.json())
-          .then(similarProperties => {
-            console.log(similarProperties)
-            this.setState({ similarProperties });
-          });
+    axios.get(`/api/properties/${this.props.match.params.id}`)
+        .then(property => {
+          console.log(property.data)
+          this.setState({ property: property.data });
+        })
+        .catch(err => {
+          console.log(err.response.data, err.response.status)
+          if(err.response.status === 500) {
+            this.props.history.replace('/error/500')
+          }
+        })
+    axios.get("/api/properties")
+        .then(similarProperties => {
+          console.log(similarProperties.data)
+          this.setState({ similarProperties: similarProperties.data.properties });
+        })
+        .catch(err => {
+          console.log(err.response.data, err.response.status)
+          if(err.response.status === 500) {
+            this.props.history.replace('/error/500')
+          }
+        })
     window.scrollTo(0, 0);
   }
   componentDidUpdate(prevProps, prevState) {

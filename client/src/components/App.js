@@ -7,6 +7,7 @@ import {userContext} from './userContext';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
+import InternalServerError500 from './ErrorPages/InternalServerError500';
 const history = createBrowserHistory();
 
 
@@ -81,6 +82,7 @@ class App extends React.Component {
             <Route path="/" exact component={Home} />
             <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
+            <Route path="/error/500" component={InternalServerError500}/>
           </Switch>
         </BrowserRouter>
       </userContext.Provider>

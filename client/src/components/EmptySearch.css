@@ -1,0 +1,17 @@
+.search-result-empty {
+  margin: 8px;
+}
+.search-result-empty .search-empty-header {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 1.33;
+  color: #3B4144;
+}
+.search-result-empty .search-empty-body {
+  display: flex;
+  place-content: center;
+}
+.search-result-empty .search-empty-body img {
+  width: 250px;
+  height: 250px;
+}
