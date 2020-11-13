@@ -50,7 +50,7 @@ class PropertyDetails extends React.Component {
     axios.get("/api/properties")
         .then(similarProperties => {
           console.log(similarProperties.data)
-          this.setState({ similarProperties: similarProperties.data });
+          this.setState({ similarProperties: similarProperties.data.properties });
         })
         .catch(err => {
           console.log(err.response.data, err.response.status)

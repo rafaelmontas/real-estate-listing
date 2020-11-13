@@ -35,7 +35,8 @@ class MainSearch extends React.Component {
       modalTypeOpen: null,
       mobileSearchOpen: false,
       cardSelected: 0,
-      cardHovered: 0
+      cardHovered: 0,
+      listingCount: null
     }
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
     this.handleMapClick = this.handleMapClick.bind(this);
@@ -94,8 +95,10 @@ class MainSearch extends React.Component {
     this.timer = setTimeout(() => {
       axios.get(`/api/properties${this.props.location.search}`)
             .then(properties => {
+              console.log(properties.data)
               this.setState({
-                properties: properties.data,
+                properties: properties.data.properties,
+                listingCount: properties.data.count,
                 isLoading: false
               });
             })
@@ -140,7 +143,8 @@ class MainSearch extends React.Component {
           axios.get("/api/properties")
               .then(properties => {
                 this.setState({
-                  properties: properties.data,
+                  properties: properties.data.properties,
+                  listingCount: properties.data.count,
                   isLoading: false
                 });
               })
@@ -224,7 +228,8 @@ class MainSearch extends React.Component {
           .then(properties => {
             console.log(properties);
             this.setState({ 
-              properties: properties.data,
+              properties: properties.data.properties,
+              listingCount: properties.data.count,
               isLoading: false,
               cardSelected: 0,
               cardHovered: 0
@@ -250,7 +255,8 @@ class MainSearch extends React.Component {
           .then(properties => {
             console.log(properties);
             this.setState({ 
-              properties: properties.data,
+              properties: properties.data.properties,
+              listingCount: properties.data.count,
               isLoading: false,
               cardSelected: 0,
               cardHovered: 0
@@ -316,8 +322,9 @@ class MainSearch extends React.Component {
                                 status={this.state.isLoading}
                                 cardSelected={this.state.cardSelected}
                                 onCardHovered={this.handleCardHover}
-                                onCardHoverOut={this.handleCardHoverOut}/>
-                  <Pagination />
+                                onCardHoverOut={this.handleCardHoverOut}
+                                listingCount={this.state.listingCount}/>
+                  {this.state.listingCount !== 0 ? <Pagination /> : null}
                   <Footer />
                 </div>
                 <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
