@@ -8,6 +8,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import axios from 'axios';
 import InternalServerError500 from './ErrorPages/InternalServerError500';
+import pageNotFound404 from './ErrorPages/pageNotFound404';
 const history = createBrowserHistory();
 
 
@@ -83,6 +84,7 @@ class App extends React.Component {
             <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/error/500" component={InternalServerError500}/>
+            <Route component={pageNotFound404}/>
           </Switch>
         </BrowserRouter>
       </userContext.Provider>
