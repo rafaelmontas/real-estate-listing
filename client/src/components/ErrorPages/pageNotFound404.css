@@ -1,0 +1,59 @@
+.not-found-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* height: 100vh; */
+  padding: 24px;
+}
+.not-found-page .not-found-text h1 {
+  font-size: 34px;
+  line-height: 42px;
+  color: rgb(13, 69, 153);
+}
+.not-found-page .not-found-text h2 {
+  font-size: 20px;
+  color: rgb(13, 69, 153);
+}
+.not-found-page .not-found-text a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid rgb(0, 106, 255);
+  border-radius: 4px;
+  padding: 9px 20px;
+  cursor: pointer;
+  background-color: rgb(0, 106, 255);
+  display: inline-block;
+  margin: 32px 0px 0px;
+  color: #fff;
+}
+.not-found-page .not-found-text a:hover {
+  background-color: #1c68d4;
+}
+
+.img-404 img {
+  width: 250px;
+  height: 250px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .not-found-page {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .not-found-page .not-found-text h1 {
+    font-size: 60px;
+    line-height: 75px;
+  }
+  .not-found-page .not-found-text h2 {
+    font-size: 26px;
+    line-height: 42px;
+  }
+  .img-404 img {
+    width: 450px;
+    height: 450px;
+  }
+}
