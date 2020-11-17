@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import AutoCompleteText from './SearchBar/AutoCompleteText';
 import {userContext} from './userContext';
 import { withRouter } from "react-router-dom";
+import logo from '../demo_img/0eb86999-974c-4800-aa96-e72345e58e00_200x200.png';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -132,8 +133,7 @@ class NavBar extends React.Component {
             <span onClick={this.props.onSideDrawerToggleClick} className="toggle bars">
               <i className="fas fa-bars"></i>
             </span>
-            <span className="logo-img"><i className="fas fa-home"></i></span>
-            <Link to="/"><span className="brand-logo-name">hauzzy</span></Link>
+            <img src={logo} className="brand-logo"/>
             <AutoCompleteText search={this.props.search}
                               initialStateSearch={this.props.initialStateSearch}
                               loadingStatus={this.props.loadingStatus}

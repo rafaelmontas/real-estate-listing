@@ -46,21 +46,11 @@ a {
   padding: 8px 8px 8px 0;
   margin-right: 10px;
 }
-.navbar-menu-form .logo-img {
-  background-color: #0069ff;
-  padding: 6px;
-  border-radius: 4px;
-}
-.navbar-menu-form .logo-img .fa-home {
-  font-size: 24px;
-  color: #fff;
-}
-.navbar-menu-form .brand-logo-name {
-  padding: 8px;
-  margin-right: 10px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #505050;
+.navbar-menu-form .brand-logo {
+  width: 140px;
+  height: 140px;
+  margin-right: 8px;
+  margin-left: -5px;
 }
 .navbar-menu-form form {
   display: flex;
@@ -249,7 +239,7 @@ a {
 /************************************* Media Queries **************************************/
 
 @media only screen and (max-width: 767px) {
-  .navbar-menu-form .logo-img, .navbar-menu-form .logo-img .fa-home, .navbar-menu-form .brand-logo-name {
+  .navbar-menu-form .brand-logo {
     display: none;
   }
 
