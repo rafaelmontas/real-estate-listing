@@ -47,10 +47,7 @@ a {
   margin-right: 10px;
 }
 .navbar-menu-form .brand-logo {
-  width: 140px;
-  height: 140px;
   margin-right: 8px;
-  margin-left: -5px;
 }
 .navbar-menu-form form {
   display: flex;
