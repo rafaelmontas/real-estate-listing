@@ -1,4 +1,5 @@
 import React from 'react';
+import LandingPage from './LandingPage/LandingPage';
 import Home from './Home';
 import MainSearch from './MainSearch';
 import MyHauzzy from './MyHauzzy/MyHauzzy';
@@ -80,7 +81,7 @@ class App extends React.Component {
       <userContext.Provider value={value}>
         <BrowserRouter history={history}>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact component={LandingPage} />
             <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/error/500" component={InternalServerError500}/>
