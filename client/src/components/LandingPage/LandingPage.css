@@ -53,7 +53,7 @@ nav#header .nav-container .contact-button span {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 0 60px 80px;
+  padding: 0 16px 80px;
 }
 .content-container .top-section .left-info {
   flex-basis: 45%;
@@ -61,11 +61,16 @@ nav#header .nav-container .contact-button span {
   padding-bottom: 70px;
 }
 .content-container .top-section .left-info h1 {
-  font-size: 36px;
-  margin-bottom: 25px;
+  font-size: 35px;
+  margin-bottom: 20px;
+  font-family: 'Ramaraja', serif;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: #313131;
 }
 .content-container .top-section .left-info p {
-  font-size: 20px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 24px;
   margin-bottom: 40px;
 }
 .content-container .top-section .left-info form {
@@ -134,6 +139,10 @@ nav#header .nav-container .contact-button span {
   .content-container .section {
     flex-direction: row;
     align-items: center;
+    padding: 0 60px 80px;
+  }
+  .content-container .top-section .left-info h1 {
+    font-size: 45px;
   }
   .content-container .top-section .left-info form input {
     flex-grow: 0.4;

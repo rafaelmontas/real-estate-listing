@@ -21,7 +21,7 @@ class LandingPage extends React.Component {
         <main className="content-container">
           <section className="top-section section">
             <div className="left-info">
-              <h1>Una plataforma <br/>de bienes raices innovadora</h1>
+              <h1>Una plataforma de bienes raices innovadora</h1>
               <p>Obten acceso a una red inmobiliaria y comienza a conectar con clientes</p>
               <form>
                 <input type="email" placeholder="Correo electrónico"/>
