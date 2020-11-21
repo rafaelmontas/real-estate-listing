@@ -2,6 +2,7 @@ import React from 'react';
 import './LandingPage.css';
 import logo from '../../demo_img/brand-logo-vf.svg';
 import rightMap from '../../demo_img/right-img-2.png';
+import connectionImg from '../../demo_img/contact-form.png'
 
 class LandingPage extends React.Component {
   render() {
@@ -32,8 +33,15 @@ class LandingPage extends React.Component {
               <img src={rightMap}/>
             </div>
           </section>
-          <section className="solutions-section section">
-
+          <section className="connection-section section">
+            <div className="connection-img">
+              <img src={connectionImg}/>
+            </div>
+            <div className="connection-text">
+              <h1>Deja que los clientes se acerquen</h1>
+              <p>Posicionate frente a clientes potenciales que están buscando propiedades
+                 y gestiona con las herramientas que necesitas para responder de manera rapida, efectiva y ampliar tu red de clientes</p>
+            </div>
           </section>
         </main>
       </div>

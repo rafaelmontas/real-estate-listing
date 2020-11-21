@@ -48,12 +48,15 @@ nav#header .nav-container .contact-button span {
   max-width: 1280px;
   margin: 0 auto;
   padding-top: 70px;
+  background-color: #fafafa;
 }
 .content-container .section {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 0 16px 80px;
+}
+.content-container .top-section {
+  padding: 0 16px 30px;
 }
 .content-container .top-section .left-info {
   flex-basis: 45%;
@@ -106,20 +109,37 @@ nav#header .nav-container .contact-button span {
   font-size: 16px;
   margin-left: 8px;
 }
-.content-container .top-section .right-info {
-  /* margin-right: 30px; */
-}
 .content-container .top-section .right-info img {
-  max-width: 100%;
-  width: 650px;
+  max-width: 650px;
+  width: 100%;
   height: auto;
 }
 
 /* Solutions Section */
-.content-container .solutions-section {
-  height: 600px;
+.content-container .connection-section {
   margin-bottom: 50px;
-  background-color: #e3e3e3;
+  padding: 30px 16px 50px 0;
+  flex-direction: column-reverse;
+}
+.content-container .connection-section img {
+  width: 100%;
+  max-width: 675px;
+}
+.content-container .connection-section .connection-text {
+  padding: 16px;
+  margin-bottom: 50px;
+}
+.content-container .connection-section .connection-text h1 {
+  font-family: 'Ramaraja', serif;
+  font-size: 35px;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: #313131;
+}
+.content-container .connection-section .connection-text p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 24px;
 }
 
 
@@ -139,12 +159,23 @@ nav#header .nav-container .contact-button span {
   .content-container .section {
     flex-direction: row;
     align-items: center;
-    padding: 0 60px 80px;
+    /* padding: 0 60px 80px; */
+  }
+  .content-container .top-section {
+    padding: 0 60px 50px;
   }
   .content-container .top-section .left-info h1 {
     font-size: 45px;
   }
   .content-container .top-section .left-info form input {
     flex-grow: 0.4;
+  }
+  .content-container .connection-section {
+    margin-bottom: 50px;
+    padding: 50px 60px 50px 0;
+  }
+  .content-container .connection-section .connection-text {
+    flex-basis: 40%;
+    margin-bottom: 0;
   }
 }
