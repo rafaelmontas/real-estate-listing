@@ -50,11 +50,12 @@ class MyHauzzy extends React.Component {
       .catch(err => console.log(err.response.data))
 
     // Propertie for UI test
-    fetch("/properties")
+    // Pendign to modify to correct
+    fetch("/api/properties")
           .then(res => res.json())
           .then(favoritesProperties => {
             console.log(favoritesProperties)
-            this.setState({ favoritesProperties });
+            this.setState({ favoritesProperties: favoritesProperties.properties });
           });
     window.scrollTo(0, 0);
   }
