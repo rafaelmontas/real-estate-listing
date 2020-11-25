@@ -44,6 +44,7 @@ nav#header .nav-container .contact-button span {
   padding: 10px;
 }
 .content-container {
+  text-align: center;
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -59,7 +60,7 @@ nav#header .nav-container .contact-button span {
   padding: 0 16px 30px;
 }
 .content-container .top-section .left-info {
-  flex-basis: 45%;
+  /* flex-basis: 45%; */
   /* padding: 90px 0; */
   padding-bottom: 70px;
 }
@@ -109,21 +110,40 @@ nav#header .nav-container .contact-button span {
   font-size: 16px;
   margin-left: 8px;
 }
+.content-container .top-section .right-info {
+  width: 100%;
+}
 .content-container .top-section .right-info img {
-  max-width: 650px;
+  /* max-width: 650px; */
   width: 100%;
   height: auto;
 }
 
 /* Solutions Section */
+.content-container .connection-text::before {
+  content: ' ';
+    line-height: 0px;
+    position: absolute;
+    top: 0;
+    height: 14px;
+    width: 54px;
+    background-color: #EAA306;
+    left: 50%;
+    margin-left: -27px;
+    left: 0;
+    margin-left: 0;
+}
 .content-container .connection-section {
   margin-bottom: 50px;
   padding: 30px 16px 50px 0;
   flex-direction: column-reverse;
 }
+.content-container .connection-section .connection-img {
+  width: 100%;
+}
 .content-container .connection-section img {
   width: 100%;
-  max-width: 675px;
+  max-width: 750px;
 }
 .content-container .connection-section .connection-text {
   padding: 16px;
@@ -142,7 +162,65 @@ nav#header .nav-container .contact-button span {
   font-size: 24px;
 }
 
-
+/* Like card section */
+.content-container .like-card-section {
+  /* margin-bottom: 50px; */
+  padding: 50px 16px;
+}
+.content-container .like-card-section .left-info {
+  /* flex-grow: 1; */
+  margin-bottom: 50px;
+  flex-basis: 50%;
+}
+.content-container .like-card-section .left-info h1 {
+  font-family: 'Ramaraja', serif;
+  font-size: 35px;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: #313131;
+}
+.content-container .like-card-section .left-info p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 24px;
+}
+.content-container .like-card-section .like-card {
+  width: 100%;
+}
+.content-container .like-card-section .like-card img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+/* Mockup section */
+.content-container .mockup-section {
+  flex-direction: column-reverse;
+  margin-bottom: 50px;
+  padding: 50px 16px;
+}
+.content-container .mockup-section .mockup-side {
+  width: 100%;
+}
+.content-container .mockup-section img {
+  width: 100%;
+  max-width: 750px;
+}
+.content-container .mockup-section .right-info {
+  padding: 16px;
+  margin-bottom: 50px;
+}
+.content-container .mockup-section .right-info h1 {
+  font-family: 'Ramaraja', serif;
+  font-size: 35px;
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: #313131;
+}
+.content-container .mockup-section .right-info p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 24px;
+}
 
 
 
@@ -156,6 +234,9 @@ nav#header .nav-container .contact-button span {
   nav#header .nav-container .nav-logo-menu span {
     display: flex;
   }
+  .content-container {
+    text-align: left;
+  }
   .content-container .section {
     flex-direction: row;
     align-items: center;
@@ -164,18 +245,51 @@ nav#header .nav-container .contact-button span {
   .content-container .top-section {
     padding: 0 60px 50px;
   }
+  .content-container .top-section .left-info {
+    flex-basis: 45%;
+  }
   .content-container .top-section .left-info h1 {
     font-size: 45px;
   }
   .content-container .top-section .left-info form input {
     flex-grow: 0.4;
   }
+  .content-container .top-section .right-info {
+    max-width: 55%;
+  }
   .content-container .connection-section {
     margin-bottom: 50px;
     padding: 50px 60px 50px 0;
   }
+  .content-container .connection-section .connection-img {
+    max-width: 55%;
+  }
   .content-container .connection-section .connection-text {
     flex-basis: 40%;
     margin-bottom: 0;
+  }
+  /* Like Card */
+  .content-container .like-card-section {
+    padding: 50px 60px;
+  }
+  .content-container .like-card-section .left-info {
+    margin-bottom: 0;
+  }
+  .content-container .like-card-section .like-card {
+    max-width: 50%;
+    text-align: right;
+  }
+  /* Mockup section */
+  .content-container .mockup-section {
+    padding: 50px 60px;
+  }
+  .content-container .mockup-section .mockup-side {
+    max-width: 60%;
+  }
+  .content-container .mockup-section img {
+    margin-left: -35px;
+  }
+  .content-container .mockup-section .right-info {
+    flex-basis: 40%;
   }
 }
