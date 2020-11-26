@@ -23,7 +23,7 @@ class LandingPage extends React.Component {
               <img src={rightMap}/>
             </div>
           </section>
-          <section className="connection-section section">
+          <section className="connection-section section" id="features-section">
             <div className="connection-img">
               <img src={connectionImg}/>
             </div>
