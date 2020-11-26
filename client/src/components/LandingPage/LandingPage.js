@@ -6,6 +6,7 @@ import rightMap from '../../demo_img/right-img-2.png';
 import connectionImg from '../../demo_img/contact-form.png'
 import macbookMockup from '../../demo_img/macBook-iphone.png'
 import likeCard from '../../demo_img/like-card.png'
+import LandingFooter from './LandingFooter';
 
 class LandingPage extends React.Component {
   render() {
@@ -54,6 +55,7 @@ class LandingPage extends React.Component {
             </div>
           </section>
         </main>
+        <LandingFooter/>
       </div>
     )
   }

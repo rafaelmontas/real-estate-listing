@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="142px" height="32px" viewBox="0 0 142 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>brand-logo-vf</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="brand-logo-vf" transform="translate(2.000000, 1.000000)">
+            <path d="M16.5,6.9663776 L2.34128578,19.5221685 C1.8062423,19.9966391 1.5,20.6775228 1.5,21.3926409 L1.5,26.9615365 C1.5,27.6518924 1.77982203,28.2768924 2.23223305,28.7293035 C2.68464406,29.1817145 3.30964406,29.4615365 4,29.4615365 L29,29.4615365 C29.6903559,29.4615365 30.3153559,29.1817145 30.767767,28.7293035 C31.220178,28.2768924 31.5,27.6518924 31.5,26.9615365 L31.5,21.3926409 C31.5,20.6775228 31.1937577,19.9966391 30.6587142,19.5221685 L16.5,6.9663776 Z" id="Polygon" stroke="#1765CD" stroke-width="3"></path>
+            <polyline id="Path-2" stroke="#4491F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="0 14.9615365 16.5 0.961536504 33 14.9615365"></polyline>
+            <text id="hauzzy" font-family="HiraKakuStdN-W8, Hiragino Kaku Gothic StdN" font-size="24" font-weight="600" fill="#FFFFFF">
+                <tspan x="43" y="24.9615365">hauzzy</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
