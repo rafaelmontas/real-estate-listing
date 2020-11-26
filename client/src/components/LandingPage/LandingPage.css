@@ -23,13 +23,15 @@
 .content-container .top-section .left-info h1 {
   font-size: 35px;
   margin-bottom: 20px;
-  font-family: 'Ramaraja', serif;
+  /* font-family: 'Ramaraja', serif; */
+  font-family: 'Domine', serif;
   line-height: 1.1;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   color: #313131;
 }
 .content-container .top-section .left-info p {
-  font-family: 'Crimson Pro', serif;
+  /* font-family: 'Crimson Pro', serif; */
+  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
   margin-bottom: 40px;
 }
@@ -60,16 +62,18 @@
   margin-bottom: 50px;
 }
 .content-container .connection-section .connection-text h1 {
-  font-family: 'Ramaraja', serif;
-  font-size: 35px;
+  /* font-family: 'Ramaraja', serif; */
+  font-family: 'Domine', serif;
+  font-size: 30px;
   margin-bottom: 20px;
   line-height: 1.1;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   color: #313131;
 }
 .content-container .connection-section .connection-text p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 24px;
+  /* font-family: 'Crimson Pro', serif; */
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
 }
 
 /* Like card section */
@@ -83,15 +87,17 @@
   flex-basis: 50%;
 }
 .content-container .like-card-section .left-info h1 {
-  font-family: 'Ramaraja', serif;
-  font-size: 35px;
+  /* font-family: 'Ramaraja', serif; */
+  font-family: 'Domine', serif;
+  font-size: 30px;
   margin-bottom: 20px;
   line-height: 1.1;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   color: #313131;
 }
 .content-container .like-card-section .left-info p {
-  font-family: 'Crimson Pro', serif;
+  /* font-family: 'Crimson Pro', serif; */
+  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
 }
 .content-container .like-card-section .like-card {
@@ -120,15 +126,17 @@
   margin-bottom: 50px;
 }
 .content-container .mockup-section .right-info h1 {
-  font-family: 'Ramaraja', serif;
-  font-size: 35px;
+  /* font-family: 'Ramaraja', serif; */
+  font-family: 'Domine', serif;
+  font-size: 30px;
   margin-bottom: 20px;
   line-height: 1.1;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   color: #313131;
 }
 .content-container .mockup-section .right-info p {
-  font-family: 'Crimson Pro', serif;
+  /* font-family: 'Crimson Pro', serif; */
+  font-family: 'Open Sans', sans-serif;
   font-size: 24px;
 }
 
@@ -150,7 +158,7 @@
     flex-basis: 45%;
   }
   .content-container .top-section .left-info h1 {
-    font-size: 45px;
+    font-size: 40px;
   }
   .content-container .top-section .right-info {
     max-width: 55%;

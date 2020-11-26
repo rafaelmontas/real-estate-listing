@@ -10,12 +10,12 @@ class LandingFooter extends React.Component {
           <div className="social-media">
             <ul>
               <li>
-                <a href="#">
+                <a href="https://www.facebook.com/Hauzzy-RD-102543455038391" target="blank">
                   <i className="fab fa-facebook-square"></i>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="https://www.instagram.com/hauzzyrd/" target="blank">
                   <i className="fab fa-instagram"></i>
                 </a>
               </li>
