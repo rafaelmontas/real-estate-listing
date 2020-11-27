@@ -9,16 +9,46 @@ import likeCard from '../../demo_img/like-card.png'
 import LandingFooter from './LandingFooter';
 
 class LandingPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      submitSuccess: null
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    if(this.state.email !== '') {
+      this.setState({
+        email: '',
+        submitSuccess: true
+      })
+    }
+  }
+  handleEmailChange(value) {
+    console.log(value)
+    this.setState({email: value})
+  }
+
   render() {
     return (
       <div className="main-body">
-        <LandingNavbar/>
+        <LandingNavbar onSubmit={this.handleSubmit}
+                       submitStatus={this.state.submitSuccess}
+                       onEmailChange={this.handleEmailChange}
+                       emailValue={this.state.email}/>
         <main className="content-container">
           <section className="top-section section">
             <div className="left-info">
               <h1>Una plataforma de bienes raices innovadora</h1>
               <p>Obten acceso a una red inmobiliaria y comienza a conectar con clientes</p>
-              <LandingForm/>
+              <LandingForm onSubmit={this.handleSubmit}
+                           submitStatus={this.state.submitSuccess}
+                           onEmailChange={this.handleEmailChange}
+                           emailValue={this.state.email}/>
             </div>
             <div className="right-info">
               <img src={rightMap}/>
