@@ -21,6 +21,9 @@ nav#header.scrolled {
   left: 0;
   /* background-color: lightblue; */
 }
+nav#header.scrolled .nav-container {
+  justify-content: center;
+}
 nav#header .nav-container {
   padding: 12px 16px;
   display: flex;

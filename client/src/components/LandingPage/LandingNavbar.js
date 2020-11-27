@@ -36,7 +36,7 @@ class LandingNavbar extends React.Component {
   render() {
     if(this.state.scrolled) {
       return (
-        <nav id="header" className={this.state.scrolled && "scrolled" }>
+        <nav id="header" className={this.state.scrolled ? "scrolled" : null}>
           <div className="nav-container">
             <LandingForm onSubmit={this.props.onSubmit} submitStatus={this.props.submitStatus} onEmailChange={this.props.onEmailChange} emailValue={this.props.emailValue}/>
           </div>
@@ -44,7 +44,7 @@ class LandingNavbar extends React.Component {
       )
     } else {
       return (
-        <nav id="header" className={this.state.scrolled && "scrolled" }>
+        <nav id="header" className={this.state.scrolled ? "scrolled" : null}>
           <div className="nav-container">
             <div className="nav-logo-menu">
               <img src={logo} className="brand-logo"/>
