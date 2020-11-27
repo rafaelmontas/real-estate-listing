@@ -13,7 +13,7 @@ class ReportEditListing extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    fetch(`/properties/${this.props.match.params.id}`)
+    fetch(`/api/properties/${this.props.match.params.id}`)
           .then(res => res.json())
           .then(listing => {
             console.log(listing)
