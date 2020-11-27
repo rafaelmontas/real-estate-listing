@@ -7,6 +7,10 @@ import connectionImg from '../../demo_img/contact-form.png'
 import macbookMockup from '../../demo_img/macBook-iphone.png'
 import likeCard from '../../demo_img/like-card.png'
 import LandingFooter from './LandingFooter';
+import ReactNotifications from 'react-notifications-component';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -26,6 +30,17 @@ class LandingPage extends React.Component {
         email: '',
         submitSuccess: true
       })
+      store.addNotification({
+        title: 'Listo!',
+        message: 'Te mantendremos al tanto de nuestras novedades.',
+        type: 'success',
+        container: 'top-right',
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000
+        }
+      })
     }
   }
   handleEmailChange(value) {
@@ -40,6 +55,7 @@ class LandingPage extends React.Component {
                        submitStatus={this.state.submitSuccess}
                        onEmailChange={this.handleEmailChange}
                        emailValue={this.state.email}/>
+        <ReactNotifications isMobile={true} breakpoint/>
         <main className="content-container">
           <section className="top-section section">
             <div className="left-info">
