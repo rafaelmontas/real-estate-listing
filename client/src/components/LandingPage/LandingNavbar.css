@@ -43,6 +43,7 @@ nav#header .nav-container .nav-logo-menu span {
   margin-left: 20px;
   align-items: center;
   padding: 6px;
+  margin-top: 8px;
 }
 nav#header .nav-container .nav-logo-menu span:hover {
   cursor: pointer;
@@ -54,6 +55,9 @@ nav#header .nav-container .contact-button span {
   border-radius: 4px;
   font-weight: 600;
   padding: 10px;
+}
+nav#header .nav-container .contact-button span:hover {
+  cursor: pointer;
 }
 
 

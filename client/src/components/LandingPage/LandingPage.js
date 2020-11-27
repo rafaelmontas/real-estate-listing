@@ -19,8 +19,10 @@ class LandingPage extends React.Component {
       email: '',
       submitSuccess: null
     }
+    this.inputRef = React.createRef()
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
+    this.focusInput = this.focusInput.bind(this)
   }
 
   handleSubmit(e) {
@@ -48,13 +50,18 @@ class LandingPage extends React.Component {
     this.setState({email: value})
   }
 
+  focusInput() {
+    this.inputRef.current.focus()
+  }
+
   render() {
     return (
       <div className="main-body">
         <LandingNavbar onSubmit={this.handleSubmit}
                        submitStatus={this.state.submitSuccess}
                        onEmailChange={this.handleEmailChange}
-                       emailValue={this.state.email}/>
+                       emailValue={this.state.email}
+                       focusInput={this.focusInput}/>
         <ReactNotifications isMobile={true} breakpoint/>
         <main className="content-container">
           <section className="top-section section">
@@ -64,7 +71,8 @@ class LandingPage extends React.Component {
               <LandingForm onSubmit={this.handleSubmit}
                            submitStatus={this.state.submitSuccess}
                            onEmailChange={this.handleEmailChange}
-                           emailValue={this.state.email}/>
+                           emailValue={this.state.email}
+                           inputRef={this.inputRef}/>
             </div>
             <div className="right-info">
               <img src={rightMap}/>

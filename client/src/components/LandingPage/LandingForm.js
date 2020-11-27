@@ -17,20 +17,6 @@ class LandingForm extends React.Component {
       return <button type="submit">Enviar <i className="fas fa-arrow-right"></i></button>
     }
   }
-  renderInputOrShare() {
-    // if(this.props.submitStatus) {
-    //   return (
-    //     <LandingShare/>
-    //   )
-    // } else {
-    //   return (
-    //     <form className="landing-email-form" onSubmit={this.props.onSubmit}>
-    //       <input type="email" placeholder="Correo electrónico" value={this.props.emailValue} onChange={(e) => this.props.onEmailChange(e.target.value)}/>
-    //       <button type="submit">Enviar <i className="fas fa-arrow-right"></i></button>
-    //     </form>
-    //   )
-    // }
-  }
 
   render() {
     if(this.props.submitStatus) {
@@ -40,7 +26,10 @@ class LandingForm extends React.Component {
     } else {
       return (
         <form className="landing-email-form" onSubmit={this.props.onSubmit}>
-          <input type="email" placeholder="Correo electrónico" value={this.props.emailValue} onChange={(e) => this.props.onEmailChange(e.target.value)}/>
+          <input type="email"
+                 placeholder="Correo electrónico"
+                 value={this.props.emailValue} onChange={(e) => this.props.onEmailChange(e.target.value)}
+                 ref={this.props.inputRef}/>
           <button type="submit">Enviar <i className="fas fa-arrow-right"></i></button>
         </form>
       )
