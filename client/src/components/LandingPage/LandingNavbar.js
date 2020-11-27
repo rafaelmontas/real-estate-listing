@@ -10,7 +10,7 @@ class LandingNavbar extends React.Component {
     this.state = {
       scrolled: false
     }
-    this.handleScroll = this.handleScroll.bind(this);
+    this.handleScroll = this.handleScroll.bind(this)
   }
 
   componentDidMount() {
@@ -38,7 +38,10 @@ class LandingNavbar extends React.Component {
       return (
         <nav id="header" className={this.state.scrolled ? "scrolled" : null}>
           <div className="nav-container">
-            <LandingForm onSubmit={this.props.onSubmit} submitStatus={this.props.submitStatus} onEmailChange={this.props.onEmailChange} emailValue={this.props.emailValue}/>
+            <LandingForm onSubmit={this.props.onSubmit}
+                         submitStatus={this.props.submitStatus}
+                         onEmailChange={this.props.onEmailChange}
+                         emailValue={this.props.emailValue}/>
           </div>
         </nav>
       )
@@ -48,10 +51,12 @@ class LandingNavbar extends React.Component {
           <div className="nav-container">
             <div className="nav-logo-menu">
               <img src={logo} className="brand-logo"/>
-              <Link to="features-section" smooth={true} offset={-38}><span>Caracteristicas <i className="fas fa-angle-down"></i></span></Link>
+              <Link to="features-section" smooth={true} offset={-38}>
+                <span>Caracteristicas <i className="fas fa-angle-down"></i></span>
+              </Link>
             </div>
             <div className="contact-button">
-              <span>Contactanos</span>
+              <span onClick={this.props.focusInput}>Registrate</span>
             </div>
           </div>
         </nav>
