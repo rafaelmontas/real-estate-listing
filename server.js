@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
@@ -17,7 +16,10 @@ const agentsRouter = require('./routes/agents');
 
 // Middlewares
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+if(NODE_ENV !== 'production') {
+  const morgan = require('morgan');
+  app.use(morgan('dev'))
+}
 
 // Use Routes
 app.use("/api/properties", propertiesRouter)
@@ -26,7 +28,7 @@ app.use("/user-auth", userAuthRouter)
 app.use("/agents", agentsRouter)
 
 // Serve static assets
-if(process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')))
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
