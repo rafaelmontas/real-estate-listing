@@ -3,6 +3,7 @@ import logo from '../../demo_img/brand-logo-vf.svg';
 import { Link, animateScroll as scroll } from "react-scroll";
 import LandingForm from './LandingForm';
 import './LandingNavbar.css';
+import ReactGA from 'react-ga';
 
 class LandingNavbar extends React.Component {
   constructor(props) {
@@ -31,6 +32,12 @@ class LandingNavbar extends React.Component {
       this.setState({scrolled: false})
     }
   }
+  handleFeaturesClick() {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Features button clicked'
+    })
+  }
 
   
   render() {
@@ -51,7 +58,7 @@ class LandingNavbar extends React.Component {
           <div className="nav-container">
             <div className="nav-logo-menu">
               <img src={logo} className="brand-logo"/>
-              <Link to="features-section" smooth={true} offset={-38}>
+              <Link to="features-section" smooth={true} offset={-38} onClick={this.handleFeaturesClick}>
                 <span>Caracteristicas <i className="fas fa-angle-down"></i></span>
               </Link>
             </div>
