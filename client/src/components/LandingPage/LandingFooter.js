@@ -1,6 +1,7 @@
 import React from 'react';
 import './LandingFooter.css';
 import logo from '../../demo_img/brand-logo-white.svg';
+import ReactGA from 'react-ga';
 
 class LandingFooter extends React.Component {
   render() {
@@ -10,14 +11,20 @@ class LandingFooter extends React.Component {
           <div className="social-media">
             <ul>
               <li>
-                <a href="https://www.facebook.com/Hauzzy-RD-102543455038391" target="blank">
+                <ReactGA.OutboundLink eventLabel="Link to Facebook Page"
+                                      to="https://www.facebook.com/Hauzzy-RD-102543455038391"
+                                      target="_blank"
+                                      action="Facebook Page Clicked">
                   <i className="fab fa-facebook-square"></i>
-                </a>
+                </ReactGA.OutboundLink>
               </li>
               <li>
-                <a href="https://www.instagram.com/hauzzyrd/" target="blank">
+                <ReactGA.OutboundLink eventLabel="Link to Instagram Page"
+                                      to="https://www.instagram.com/hauzzyrd/"
+                                      target="_blank"
+                                      action="Instagram Page Clicked">
                   <i className="fab fa-instagram"></i>
-                </a>
+                </ReactGA.OutboundLink>
               </li>
             </ul>
           </div>
