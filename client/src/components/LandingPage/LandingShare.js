@@ -4,9 +4,6 @@ import {FacebookShareButton, WhatsappShareButton, FacebookIcon, WhatsappIcon} fr
 import ReactGA from 'react-ga';
 
 class LandingShare extends React.Component {
-  // componentDidMount() {
-  //   ReactGA.initialize('UA-184126949-1');
-  // }
 
   handleFBClick() {
     ReactGA.event({

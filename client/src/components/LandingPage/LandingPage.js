@@ -27,7 +27,6 @@ class LandingPage extends React.Component {
   }
   componentDidMount() {
     // Track page visit GA
-    console.log('GA Init', window.location.pathname)
     ReactGA.initialize('UA-184126949-1');
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname)
