@@ -11,6 +11,7 @@ import ReactNotifications from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
+import ReactGA from 'react-ga';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -23,6 +24,13 @@ class LandingPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.focusInput = this.focusInput.bind(this)
+  }
+  componentDidMount() {
+    // Track page visit GA
+    console.log('GA Init', window.location.pathname)
+    ReactGA.initialize('G-WFH68VZSHT');
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname)
   }
 
   handleSubmit(e) {
