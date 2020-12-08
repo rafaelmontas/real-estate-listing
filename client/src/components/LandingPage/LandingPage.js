@@ -51,6 +51,10 @@ class LandingPage extends React.Component {
           duration: 5000
         }
       })
+      ReactGA.event({
+        category: 'Form',
+        action: 'Email form submitted'
+      })
     }
   }
   handleEmailChange(value) {
@@ -60,6 +64,10 @@ class LandingPage extends React.Component {
 
   focusInput() {
     this.inputRef.current.focus()
+    ReactGA.event({
+      category: 'Button',
+      action: 'Button clicked to focus input field'
+    })
   }
 
   render() {
