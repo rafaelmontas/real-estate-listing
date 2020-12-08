@@ -34,8 +34,8 @@ class App extends React.Component {
     // Check token and load user
     this.getUser()
     // Init Google Analytics
-    console.log('GA Init', window.location.pathname)
-    ReactGA.initialize('UA-184126949-1');
+    // console.log('GA Init', window.location.pathname)
+    // ReactGA.initialize('UA-184126949-1');
   }
 
   getUser() {
