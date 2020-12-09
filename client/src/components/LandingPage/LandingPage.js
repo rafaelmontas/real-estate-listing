@@ -12,6 +12,7 @@ import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class LandingPage extends React.Component {
     ReactGA.initialize('UA-184126949-1');
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname)
+    hotjar.initialize(2147929, 6);
   }
 
   handleSubmit(e) {
