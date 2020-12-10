@@ -62,7 +62,7 @@ class LandingNavbar extends React.Component {
                 <span>Caracteristicas <i className="fas fa-angle-down"></i></span>
               </Link>
             </div>
-            <div className="contact-button">
+            <div className={this.props.convertion ? "contact-button hidden" : "contact-button"}>
               <span onClick={this.props.focusInput}>Registrate</span>
             </div>
           </div>

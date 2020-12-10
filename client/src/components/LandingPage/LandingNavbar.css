@@ -49,6 +49,9 @@ nav#header .nav-container .nav-logo-menu span:hover {
   cursor: pointer;
   color: #186FE1;
 }
+nav#header .nav-container .contact-button.hidden {
+  display: none;
+}
 nav#header .nav-container .contact-button span {
   background-color: #2c7bec;
   color: #fff;

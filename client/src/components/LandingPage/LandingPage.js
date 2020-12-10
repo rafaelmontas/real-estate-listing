@@ -77,7 +77,8 @@ class LandingPage extends React.Component {
                        submitStatus={this.state.submitSuccess}
                        onEmailChange={this.handleEmailChange}
                        emailValue={this.state.email}
-                       focusInput={this.focusInput}/>
+                       focusInput={this.focusInput}
+                       convertion={this.state.submitSuccess}/>
         <ReactNotifications isMobile={true} breakpoint/>
         <main className="content-container">
           <section className="top-section section">
