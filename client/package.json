@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "animate.css": "^4.1.1",
     "axios": "^0.20.0",
+    "ga-gtag": "^1.0.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
     "react": "^16.13.1",

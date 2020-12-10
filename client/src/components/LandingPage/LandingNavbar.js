@@ -3,7 +3,7 @@ import logo from '../../demo_img/brand-logo-vf.svg';
 import { Link, animateScroll as scroll } from "react-scroll";
 import LandingForm from './LandingForm';
 import './LandingNavbar.css';
-import ReactGA from 'react-ga';
+import gtag from '../../utils/GaUtils';
 
 class LandingNavbar extends React.Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class LandingNavbar extends React.Component {
     }
   }
   handleFeaturesClick() {
-    ReactGA.event({
-      category: 'Button',
-      action: 'Features button clicked'
+    gtag('event', 'click', {
+      event_category: 'engagement',
+      event_label: 'Features button clicked'
     })
   }
 

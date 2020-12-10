@@ -10,7 +10,7 @@ import { createBrowserHistory } from "history";
 import axios from 'axios';
 import InternalServerError500 from './ErrorPages/InternalServerError500';
 import pageNotFound404 from './ErrorPages/pageNotFound404';
-import ReactGA from 'react-ga';
+import { hotjar } from 'react-hotjar';
 const history = createBrowserHistory();
 
 
@@ -33,9 +33,8 @@ class App extends React.Component {
   componentDidMount() {
     // Check token and load user
     this.getUser()
-    // Init Google Analytics
-    // console.log('GA Init', window.location.pathname)
-    // ReactGA.initialize('UA-184126949-1');
+    // Init hotjar
+    if(process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
   }
 
   getUser() {

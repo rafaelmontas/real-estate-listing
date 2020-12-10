@@ -11,8 +11,7 @@ import ReactNotifications from 'react-notifications-component';
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
-import ReactGA from 'react-ga';
-import { hotjar } from 'react-hotjar';
+import gtag, { gaInit } from '../../utils/GaUtils';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -27,11 +26,11 @@ class LandingPage extends React.Component {
     this.focusInput = this.focusInput.bind(this)
   }
   componentDidMount() {
-    // Track page visit GA
-    ReactGA.initialize('UA-184126949-1');
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname)
-    hotjar.initialize(2147929, 6);
+    // Track page views GA
+    gaInit('G-WFH68VZSHT', { send_page_view: false })
+    gtag('event', 'page_view', {
+      page_title: 'Landing Page'
+    })
   }
 
   handleSubmit(e) {
@@ -52,9 +51,9 @@ class LandingPage extends React.Component {
           duration: 5000
         }
       })
-      ReactGA.event({
-        category: 'Form',
-        action: 'Email form submitted'
+      gtag('event', 'form_submit', {
+        event_category: 'engagement',
+        event_label: 'Email form submitted'
       })
     }
   }
@@ -65,9 +64,9 @@ class LandingPage extends React.Component {
 
   focusInput() {
     this.inputRef.current.focus()
-    ReactGA.event({
-      category: 'Button',
-      action: 'Button clicked to focus input field'
+    gtag('event', 'click', {
+      event_category: 'engagement',
+      event_label: 'Button clicked to focus input field'
     })
   }
 

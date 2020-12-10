@@ -1,9 +1,28 @@
 import React from 'react';
 import './LandingFooter.css';
 import logo from '../../demo_img/brand-logo-white.svg';
-import ReactGA from 'react-ga';
+import gtag from '../../utils/GaUtils';
 
 class LandingFooter extends React.Component {
+  
+  handleFbClick(e) {
+    e.preventDefault()
+    gtag('event', 'click', {
+      event_category: 'outbound',
+      event_label: 'Facebook Page Clicked'
+    })
+    window.open("https://www.facebook.com/Hauzzy-RD-102543455038391", "_blank")
+  }
+  handleIgClick(e) {
+    e.preventDefault()
+    gtag('event', 'click', {
+      event_category: 'outbound',
+      event_label: 'Instagram Page Clicked'
+    })
+    window.open("https://www.instagram.com/hauzzyrd", "_blank")
+  }
+
+
   render() {
     return (
       <footer className="landing-footer">
@@ -11,20 +30,18 @@ class LandingFooter extends React.Component {
           <div className="social-media">
             <ul>
               <li>
-                <ReactGA.OutboundLink eventLabel="Link to Facebook Page"
-                                      to="https://www.facebook.com/Hauzzy-RD-102543455038391"
-                                      target="_blank"
-                                      action="Facebook Page Clicked">
+                <a href="https://www.facebook.com/Hauzzy-RD-102543455038391"
+                   target="blank"
+                   onClick={this.handleFbClick}>
                   <i className="fab fa-facebook-square"></i>
-                </ReactGA.OutboundLink>
+                </a>
               </li>
               <li>
-                <ReactGA.OutboundLink eventLabel="Link to Instagram Page"
-                                      to="https://www.instagram.com/hauzzyrd/"
-                                      target="_blank"
-                                      action="Instagram Page Clicked">
+                <a href="https://www.instagram.com/hauzzyrd"
+                  target="blank"
+                  onClick={this.handleIgClick}>
                   <i className="fab fa-instagram"></i>
-                </ReactGA.OutboundLink>
+                </a>
               </li>
             </ul>
           </div>
