@@ -12,6 +12,7 @@ import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import gtag, { gaInit } from '../../utils/GaUtils';
+import axios from 'axios';
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -35,26 +36,53 @@ class LandingPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    let listId;
+    let apiKey;
+    if(process.env.NODE_ENV === 'production') {
+      listId = process.env.REACT_APP_SENDGRID_WAITING_LIST_ID;
+      apiKey = process.env.REACT_APP_SENDGRID_PROD_API_KEY
+    } else {
+      listId = process.env.REACT_APP_SENDGRID_TEST_LIST_ID;
+      apiKey = process.env.REACT_APP_SENDGRID_DEV_API_KEY
+    }
+    const body = {
+      list_ids: [`${listId}`],
+      contacts: [{email: this.state.email}]
+    }
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      }
+    }
+    console.log(body, config)
     if(this.state.email !== '') {
-      this.setState({
-        email: '',
-        submitSuccess: true
-      })
-      store.addNotification({
-        title: 'Listo!',
-        message: 'Te mantendremos al tanto de nuestras novedades.',
-        type: 'success',
-        container: 'top-right',
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000
-        }
-      })
-      gtag('event', 'form_submit', {
-        event_category: 'engagement',
-        event_label: 'Email form submitted'
-      })
+      axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
+          .then(res => {
+            console.log(res.data)
+            this.setState({
+              email: '',
+              submitSuccess: true
+            })
+            store.addNotification({
+              title: 'Listo!',
+              message: 'Te mantendremos al tanto de nuestras novedades.',
+              type: 'success',
+              container: 'top-right',
+              animationIn: ["animate__animated", "animate__fadeIn"],
+              animationOut: ["animate__animated", "animate__fadeOut"],
+              dismiss: {
+                duration: 5000
+              }
+            })
+            gtag('event', 'form_submit', {
+              event_category: 'engagement',
+              event_label: 'Email form submitted'
+            })
+          })
+          .catch(err => {
+            console.log(err.response.data, err.response.status)
+          })
     }
   }
   handleEmailChange(value) {
