@@ -114,8 +114,8 @@ class LandingPage extends React.Component {
         <main className="content-container">
           <section className="top-section section">
             <div className="left-info">
-              <h1>Una plataforma de bienes raices innovadora</h1>
-              <p>Obten acceso a una red inmobiliaria y comienza a conectar con clientes</p>
+              <h1>Una plataforma inmobiliaria innovadora</h1>
+              <p>Registrate para ser notificado cuando puedas publicar tus propiedades.</p>
               <LandingForm onSubmit={this.handleSubmit}
                            submitStatus={this.state.submitSuccess}
                            onEmailChange={this.handleEmailChange}
@@ -133,14 +133,13 @@ class LandingPage extends React.Component {
             <div className="connection-text">
               <h1>Deja que los clientes se acerquen</h1>
               <p>Posicionate frente a clientes potenciales que están buscando propiedades
-                 y gestiona con las herramientas que necesitas para responder de manera rapida, efectiva y ampliar tu red de clientes</p>
+                 y gestiona tus clientes de manera rapida y efectiva.</p>
             </div>
           </section>
           <section className="like-card-section section">
             <div className="left-info">
-              <h1>Deja que los clientes se acerquen</h1>
-              <p>Posicionate frente a clientes potenciales que están buscando propiedades
-                 y gestiona con las herramientas que necesitas para responder de manera rapida, efectiva y ampliar tu red de clientes</p>
+              <h1>Conoce la popularidad de tus propiedades</h1>
+              <p>Mantente al tanto de tus propiedades guardadas y facilitale a tus clientes compartirlas.</p>
             </div>
             <div className="like-card">
               <img src={likeCard} alt="showing like feature"/>
@@ -151,9 +150,8 @@ class LandingPage extends React.Component {
               <img src={macbookMockup} alt="showing agent dashboard"/>
             </div>
             <div className="right-info">
-              <h1>Deja que los clientes se acerquen</h1>
-              <p>Posicionate frente a clientes potenciales que están buscando propiedades
-                 y gestiona con las herramientas que necesitas para responder de manera rapida, efectiva y ampliar tu red de clientes</p>
+              <h1>Tu portafolio en un solo lugar</h1>
+              <p>Maneja todo tu inventario inmobiliario con las herramientas que necesitas y comienza a conectar con clientes.</p>
             </div>
           </section>
         </main>
