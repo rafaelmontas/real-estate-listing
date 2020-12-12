@@ -11,7 +11,7 @@ import axios from 'axios';
 import InternalServerError500 from './ErrorPages/InternalServerError500';
 import pageNotFound404 from './ErrorPages/pageNotFound404';
 import { hotjar } from 'react-hotjar';
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 
 class App extends React.Component {
@@ -32,7 +32,7 @@ class App extends React.Component {
   
   componentDidMount() {
     // Check token and load user
-    this.getUser()
+    // this.getUser()
     // Init hotjar
     if(process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
   }
@@ -82,12 +82,13 @@ class App extends React.Component {
     }
     return (
       <userContext.Provider value={value}>
-        <BrowserRouter history={history}>
+        {/* history={history} */}
+        <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
-            <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
-            <Route path="/error/500" component={InternalServerError500}/>
+            {/* <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} /> */}
+            {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
+            {/* <Route path="/error/500" component={InternalServerError500}/> */}
             <Route component={pageNotFound404}/>
           </Switch>
         </BrowserRouter>

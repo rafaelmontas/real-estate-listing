@@ -55,11 +55,11 @@ class LandingPage extends React.Component {
         'Content-Type': 'application/json'
       }
     }
-    console.log(body, config)
+    // console.log(body, config)
     if(this.state.email !== '') {
       axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
           .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
               email: '',
               submitSuccess: true
@@ -81,12 +81,15 @@ class LandingPage extends React.Component {
             })
           })
           .catch(err => {
-            console.log(err.response.data, err.response.status)
+            // console.log(err.response.data, err.response.status)
+            this.setState({
+              submitSuccess: false
+            })
           })
     }
   }
   handleEmailChange(value) {
-    console.log(value)
+    // console.log(value)
     this.setState({email: value})
   }
 
@@ -120,12 +123,12 @@ class LandingPage extends React.Component {
                            inputRef={this.inputRef}/>
             </div>
             <div className="right-info">
-              <img src={rightMap}/>
+              <img src={rightMap} alt="promotion of map based property search"/>
             </div>
           </section>
           <section className="connection-section section" id="features-section">
             <div className="connection-img">
-              <img src={connectionImg}/>
+              <img src={connectionImg} alt="promotion of contact form on website"/>
             </div>
             <div className="connection-text">
               <h1>Deja que los clientes se acerquen</h1>
@@ -140,12 +143,12 @@ class LandingPage extends React.Component {
                  y gestiona con las herramientas que necesitas para responder de manera rapida, efectiva y ampliar tu red de clientes</p>
             </div>
             <div className="like-card">
-              <img src={likeCard}/>
+              <img src={likeCard} alt="showing like feature"/>
             </div>
           </section>
           <section className="mockup-section section">
             <div className="mockup-side">
-              <img src={macbookMockup}/>
+              <img src={macbookMockup} alt="showing agent dashboard"/>
             </div>
             <div className="right-info">
               <h1>Deja que los clientes se acerquen</h1>
