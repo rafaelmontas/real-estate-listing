@@ -12,6 +12,7 @@ import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 import axios from 'axios';
 
 class LandingPage extends React.Component {
@@ -32,6 +33,10 @@ class LandingPage extends React.Component {
     gtag('event', 'page_view', {
       page_title: 'Landing Page'
     })
+    // Init Facebook Pixel
+    ReactPixel.init('587601035409958')
+    ReactPixel.pageView(); // For tracking page view
+    // ReactPixel.track('test_event_code', 'TEST98714');
   }
 
   handleSubmit(e) {
