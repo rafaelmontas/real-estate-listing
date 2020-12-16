@@ -13,6 +13,7 @@
     "axios": "^0.20.0",
     "ga-gtag": "^1.0.1",
     "prop-types": "^15.7.2",
+    "public-ip": "^4.0.3",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

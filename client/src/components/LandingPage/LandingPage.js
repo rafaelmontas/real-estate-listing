@@ -13,6 +13,7 @@ import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import gtag, { gaInit } from '../../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
+import publicIp from "public-ip";
 import axios from 'axios';
 
 class LandingPage extends React.Component {
@@ -27,7 +28,7 @@ class LandingPage extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.focusInput = this.focusInput.bind(this)
   }
-  componentDidMount() {
+  async componentDidMount() {
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
       gaInit('G-JQMJWEW91Q', { send_page_view: false })  
@@ -38,8 +39,11 @@ class LandingPage extends React.Component {
       page_title: 'Landing Page'
     })
     // Init Facebook Pixel
-    if(process.env.NODE_ENV === 'production') {
-      ReactPixel.init('689804211678157')  
+    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      console.log('Internal IP')
+      return null
+    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')
     } else {
       ReactPixel.init('587601035409958')
     }
