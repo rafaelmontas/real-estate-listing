@@ -11,6 +11,7 @@ import axios from 'axios';
 import InternalServerError500 from './ErrorPages/InternalServerError500';
 import pageNotFound404 from './ErrorPages/pageNotFound404';
 import { hotjar } from 'react-hotjar';
+import publicIp from "public-ip";
 // const history = createBrowserHistory();
 
 
@@ -30,11 +31,11 @@ class App extends React.Component {
     this.logOut = this.logOut.bind(this);
   }
   
-  componentDidMount() {
+  async componentDidMount() {
     // Check token and load user
     // this.getUser()
     // Init hotjar
-    if(process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
+    if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
   }
 
   getUser() {
