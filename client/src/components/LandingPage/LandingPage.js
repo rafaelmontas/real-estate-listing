@@ -137,7 +137,7 @@ class LandingPage extends React.Component {
             </div>
             <div className="connection-text">
               <h1>Deja que los clientes se acerquen</h1>
-              <p>Posicionate frente a clientes potenciales que están buscando propiedades
+              <p>Posiciónate frente a clientes potenciales que están buscando propiedades
                  y gestiona tus clientes de manera rapida y efectiva.</p>
             </div>
           </section>
