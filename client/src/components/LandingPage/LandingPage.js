@@ -96,6 +96,7 @@ class LandingPage extends React.Component {
               event_category: 'engagement',
               event_label: 'Email form submitted'
             })
+            ReactPixel.track('Lead', {})
           })
           .catch(err => {
             // console.log(err.response.data, err.response.status)
