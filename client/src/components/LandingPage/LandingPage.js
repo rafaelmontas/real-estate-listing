@@ -29,12 +29,20 @@ class LandingPage extends React.Component {
   }
   componentDidMount() {
     // Track page views GA
-    gaInit('G-WFH68VZSHT', { send_page_view: false })
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: false })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: false })
+    }
     gtag('event', 'page_view', {
       page_title: 'Landing Page'
     })
     // Init Facebook Pixel
-    ReactPixel.init('587601035409958')
+    if(process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')  
+    } else {
+      ReactPixel.init('587601035409958')
+    }
     ReactPixel.pageView(); // For tracking page view
     // ReactPixel.track('test_event_code', 'TEST98714');
   }
