@@ -18,10 +18,13 @@ class AgentDashboard extends React.Component {
 
   render() {
     return (
-      <div className="agent-dashboard-container">
-        <AgentNavbar 
-          onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
-        />
+      // <div className="agent-dashboard-container">
+      //   <AgentNavbar 
+      //     onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
+      //   />
+      // </div>
+      <div>
+        dashoard
       </div>
     )
   }

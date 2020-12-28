@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import AgentsApp from './components/AgentsApp/AgentsApp'
+import {BrowserRouter} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 const parsedData = window.location.host.split(".");
@@ -13,7 +14,9 @@ if(parsedData.length >= 3 && subDomain !== 'www') {
   if(subDomain === 'agent') {
     ReactDOM.render(
       <React.StrictMode>
-        <AgentsApp />
+        <BrowserRouter>
+          <AgentsApp />
+        </BrowserRouter>
       </React.StrictMode>,
       document.getElementById('root')
     );  

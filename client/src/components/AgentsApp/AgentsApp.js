@@ -1,21 +1,25 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import AgentDashboard from './AgentDashboard';
+import Account from './Account';
 import AgentLogin from './AgentLogin'
 import './AgentsApp.css'
+import { withRouter } from "react-router";
 
 class AgentsApp extends React.Component {
+  componentDidMount() {
+    if(this.props.location.pathname === '/') {
+      this.props.history.replace({pathname: '/account/dashboard'})
+    }
+  }
   render() {
     return (
-      <BrowserRouter>
         <Switch>
-          <Route path="/dashboard" exact component={AgentDashboard}/>
-          {/* <Route path="/agent/login" exact component={AgentLogin}/> */}
+          <Route path="/account" component={Account}/>
+          {/* <Route path="/login" exact component={AgentLogin}/> */}
           {/* <Route path="/solutions" exact component={AgentLogin}/> */}
         </Switch>
-      </BrowserRouter>
     )
   }
 }
 
-export default AgentsApp;
+export default withRouter(AgentsApp);

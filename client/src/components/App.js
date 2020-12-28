@@ -87,8 +87,8 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            {/* <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} /> */}
-            {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
+            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
+            <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             {/* <Route path="/error/500" component={InternalServerError500}/> */}
             <Route component={pageNotFound404}/>
           </Switch>
