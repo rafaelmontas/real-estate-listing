@@ -36,18 +36,20 @@
 #agent-header .agent-nav-container .agent-navbar-right {
   display: none;
 }
-#agent-header .agent-nav-container .agent-navbar-right .go-home-link {
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link {
   margin-right: 10px;
 }
-#agent-header .agent-nav-container .agent-navbar-right .go-home-link a {
-  padding: 6px 10px;
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a {
+  padding: 8px 10px;
   color: rgb(59, 65, 68);
+  border-radius: 4px;
 }
-#agent-header .agent-nav-container .agent-navbar-right .go-home-link a:hover {
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a:hover {
   color: #0052CC;
+  background-color: #E1EDFF;
 }
-#agent-header .agent-nav-container .agent-navbar-right .go-home-link a i {
-  margin-left: 5px;
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a i {
+  margin-right: 5px;
 }
 
 /* Agent Profile Button */

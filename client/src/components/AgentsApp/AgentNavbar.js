@@ -15,8 +15,8 @@ class AgentNavbar extends React.Component {
             </a>
           </div>
           <div className="agent-navbar-right">
-            <div className="go-home-link">
-              <a href="//hauzzy.com" target="_blank">Ir a hauzzy.com <i className="fas fa-external-link-alt"></i></a>
+            <div className="new-listing-link">
+              <a href="//hauzzy.com" target="_blank"><i className="fas fa-plus"></i> Publicar Propiedad</a>
             </div>
             <div className="agent-hover-button">
               <button type="button" className="agent-profile-button">
