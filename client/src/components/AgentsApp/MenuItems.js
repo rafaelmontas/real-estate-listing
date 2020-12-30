@@ -36,7 +36,15 @@ class MenuItems extends React.Component {
               <Link to="/account/new-listing">
                 <div>
                   <i className="fas fa-plus"></i>
-                  <span>Publicar Propiedad</span>
+                  <span>Nueva Propiedad</span>
+                </div>
+              </Link>
+            </li>
+            <li className="profile-button button">
+              <Link to="/account/profile">
+                <div>
+                  <i className="fas fa-user-circle"></i>
+                  <span>Mi Perfil</span>
                 </div>
               </Link>
             </li>
@@ -45,12 +53,12 @@ class MenuItems extends React.Component {
         <div className="bottom-div">
           <ul>
             {/* <div className="hauzzy-button button"> */}
-              <Link to="//hauzzy.com" target="_blank" className="button" style={{display: 'block'}}>
+              <Link to="//hauzzy.com" target="_blank" className="button">
                 <i className="fas fa-external-link-alt"></i>
                 <span>Ir a hauzzy.com</span>
               </Link>
             {/* </div> */}
-            <div className="logout-button button" style={{cursor: 'pointer'}}>
+            <div className="logout-button button">
               <i className="fas fa-sign-out-alt"></i>
               <span>Cerrar Sesión</span>
             </div>
