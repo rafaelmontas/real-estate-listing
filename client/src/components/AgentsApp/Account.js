@@ -1,11 +1,11 @@
 import React from 'react'
 import Backdrop from "../Backdrop"
-import MenuItems from './MenuItems'
+// import MenuItems from './MenuItems'
 import SideDrawer from './SideDrawer'
 import AgentNavbar from './AgentNavbar'
 import Structure from './Structure'
-import AgentDashboard from './AgentDashboard'
-import { Route } from 'react-router-dom'
+// import AgentDashboard from './AgentDashboard'
+// import { Route } from 'react-router-dom'
 
 class Account extends React.Component {
   constructor(props) {
@@ -38,10 +38,7 @@ class Account extends React.Component {
         {this.state.sideDrawerOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
         <SideDrawer showClass={this.state.sideDrawerOpen}/>
         <AgentNavbar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}/>
-        <Structure>
-          <MenuItems/>
-        </Structure>
-        {/* <Route path="/account/dashboard" exact component={AgentDashboard}/> */}
+        <Structure/>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import Account from './Account';
-import AgentLogin from './AgentLogin'
+// import AgentLogin from './AgentLogin'
 import './AgentsApp.css'
 import { withRouter } from "react-router";
 

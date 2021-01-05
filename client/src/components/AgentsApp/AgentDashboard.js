@@ -1,5 +1,6 @@
 import React from 'react';
-import AgentNavbar from './AgentNavbar';
+import KpiCards from './Dashboard/KpiCards'
+import './AgentDashboard.css'
 
 class AgentDashboard extends React.Component {
   constructor(props) {
@@ -18,13 +19,10 @@ class AgentDashboard extends React.Component {
 
   render() {
     return (
-      // <div className="agent-dashboard-container">
-      //   <AgentNavbar 
-      //     onSideDrawerToggleClick={this.handleSideDrawerToggleClick}
-      //   />
-      // </div>
-      <div>
-        dashoard
+      <div className="dashboard-content-right">
+        <div className="top-dash-container">
+          <KpiCards/>
+        </div>
       </div>
     )
   }

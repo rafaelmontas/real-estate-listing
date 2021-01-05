@@ -1,4 +1,7 @@
 import React from 'react'
+import MenuItems from './MenuItems'
+import AgentDashboard from './AgentDashboard'
+import { Route } from 'react-router-dom'
 import './AgentsApp'
 
 class Structure extends React.Component {
@@ -8,11 +11,11 @@ class Structure extends React.Component {
         <div className="structure">
           <div className="left-side-structure">
             <div className="left-menu-structure">
-              {this.props.children}
+              <MenuItems/>
             </div>
           </div>
           <div className="right-side-structure">
-            right
+            <Route path="/account/dashboard" exact component={AgentDashboard}/>
           </div>
         </div>
       </section>
