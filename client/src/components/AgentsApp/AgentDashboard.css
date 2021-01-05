@@ -1,0 +1,100 @@
+.dashboard-content-right {
+  padding: 16px;
+}
+
+/* Top dashboad container - KPI Cards */
+.dashboard-content-right .top-dash-container .top-container-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+.dashboard-content-right .top-dash-container .kpi-card {
+  width: 50%;
+}
+.dashboard-content-right .top-dash-container .kpi-card#kpi-1 {
+  width: 100%;
+}
+.dashboard-content-right .top-dash-container .kpi-card .card-inner {
+  height: 50px;
+  background-color: #fff;
+}
+.dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .data-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+.dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .title-text {
+  margin-top: 2px;
+  margin-left: 8px;
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 767px) {
+  #card-1, #card-2, #card-3, #card-4 {
+    border-style: solid;
+    border-color: #e2e2e2;
+  }
+  #card-1 {
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+  }
+  #card-2 {
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 0 4px;
+  }
+  #card-3 {
+    border-width: 0 1px 1px 0;
+    border-radius: 0 0 4px 0;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .dashboard-content-right .top-dash-container {
+    margin: 0 -8px;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card {
+    width: 50%;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner {
+    height: 100px;
+    margin: 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.15)
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .data-text {
+    font-size: 30px;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .title-text {
+    margin-top: 2px;
+    margin-left: 10px;
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .dashboard-content-right {
+    padding: 25px;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card {
+    width: 33.3%;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card#kpi-1 {
+    width: 33.3%;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner {
+    height: 115px;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text {
+    flex-direction: column;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .data-text {
+    font-size: 34px;
+  }
+  .dashboard-content-right .top-dash-container .kpi-card .card-inner .inner-text .title-text {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+

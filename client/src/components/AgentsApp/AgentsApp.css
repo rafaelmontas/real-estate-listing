@@ -1,0 +1,142 @@
+.agent-dashboard-container {
+  padding-top: 60px;
+  background-color: #FAFBFC;
+}
+/* Navbar */
+#agent-header {
+  height: 60px;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px 0 rgb(128 128 128 / 10%);
+}
+#agent-header .agent-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 12px 16px;
+  max-width: 1280px;
+}
+/* Left */
+#agent-header .agent-nav-container .agent-navbar-left {
+  display: flex;
+  align-items: center;
+}
+#agent-header .agent-nav-container .agent-navbar-left .toggle-bars {
+  margin-right: 20px;
+}
+#agent-header .agent-nav-container .agent-navbar-left .toggle-bars i {
+  font-size: 25px;
+}
+/* Right */
+#agent-header .agent-nav-container .agent-navbar-right {
+  display: none;
+}
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link {
+  margin-right: 10px;
+}
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a {
+  padding: 8px 10px;
+  color: rgb(59, 65, 68);
+  border-radius: 4px;
+}
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a:hover {
+  color: #0052CC;
+  background-color: #E1EDFF;
+}
+#agent-header .agent-nav-container .agent-navbar-right .new-listing-link a i {
+  margin-right: 5px;
+}
+
+/* Agent Profile Button */
+.agent-navbar-right .agent-hover-button {
+  position: relative;
+}
+.agent-navbar-right .agent-hover-button button.agent-profile-button {
+  padding: 4px 10px;
+  cursor: pointer;
+  color: rgb(59, 65, 68);
+  border-radius: 4px;
+  border: 0px;
+  background-color: #fff;
+}
+.agent-navbar-right .agent-hover-button button.agent-profile-button:hover {
+  background-color: #E1EDFF;
+  color: #0052CC;
+}
+.agent-navbar-right .agent-hover-button button.agent-profile-button .inner-agent-info {
+  display: flex;
+  align-items: center;
+}
+.agent-navbar-right .agent-hover-button button.agent-profile-button .inner-agent-info i {
+  font-size: 26px;
+  margin-right: 5px;
+}
+.agent-navbar-right .agent-hover-button button.agent-profile-button .inner-agent-info .agent-name-email {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Structure styles */
+.structure {
+  display: flex;
+  justify-content: flex-end;
+  /* padding: 12px 16px; */
+}
+.structure .left-side-structure {
+  display: none;
+  border-right: 1px solid #f5f5f5;
+  box-shadow: 0 2px 4px 0 rgb(128 128 128 / 10%);
+}
+.structure .left-side-structure .left-menu-structure {
+  height: 100%;
+}
+.structure .right-side-structure {
+  width: 100%;
+  height: 600px;
+}
+.structure .left-side-structure .left-menu-structure {
+  /* position: fixed;
+  top: 0px;
+  bottom: 0px; */
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* #agent-header .agent-nav-container {
+    padding: 12px 30px;
+  } */
+  #agent-header .agent-nav-container .agent-navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  /* Structure styles */
+  /* .structure {
+    padding: 12px 30px;
+  } */
+}
+@media only screen and (min-width: 992px) {
+  #agent-header .agent-nav-container .agent-navbar-left .toggle-bars {
+    display: none;
+  }
+  /* Structure styles */
+  .structure .left-side-structure {
+    display: block;
+    width: 20%;
+    position: fixed;
+    top: 60px;
+    bottom: 0px;
+    left: 0px;
+  }
+  .structure .right-side-structure {
+    width: 80%;
+  }
+}
