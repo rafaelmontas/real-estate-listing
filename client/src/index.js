@@ -9,27 +9,27 @@ import * as serviceWorker from './serviceWorker';
 const parsedData = window.location.host.split(".");
 const subDomain = parsedData[0];
 
-if(parsedData.length >= 3 && subDomain !== 'www') {
-  console.log(parsedData,parsedData.includes('agent'))
-  if(subDomain === 'agent') {
-    ReactDOM.render(
-      <React.StrictMode>
-        <BrowserRouter>
-          <AgentsApp />
-        </BrowserRouter>
-      </React.StrictMode>,
-      document.getElementById('root')
-    );  
-  }
-} else {
-  console.log(window.location.host)
+// if(parsedData.length >= 3 && subDomain !== 'www') {
+//   console.log(parsedData,parsedData.includes('agent'))
+//   if(subDomain === 'agent') {
+//     ReactDOM.render(
+//       <React.StrictMode>
+//         <BrowserRouter>
+//           <AgentsApp />
+//         </BrowserRouter>
+//       </React.StrictMode>,
+//       document.getElementById('root')
+//     );  
+//   }
+// } else {
+//   console.log(window.location.host)
   ReactDOM.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
     document.getElementById('root')
   );
-}
+// }
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

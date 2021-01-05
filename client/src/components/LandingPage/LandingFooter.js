@@ -47,7 +47,7 @@ class LandingFooter extends React.Component {
           </div>
           <div className="copyrights">
             <img src={logo} className="brand-logo"/>
-            <span>&copy; 2020 hauzzy</span>
+            <span>&copy; 2021 hauzzy</span>
           </div>
         </div>
       </footer>
