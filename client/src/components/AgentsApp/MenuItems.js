@@ -9,7 +9,7 @@ class MenuItems extends React.Component {
         <div className="top-div">
           <ul>
             <li className="dashboard-button button">
-              <Link to="/account/dashboard">
+              <Link to="/account/dashboard" onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-tachometer-alt"></i>
                   <span>Dashboard</span>
@@ -17,7 +17,7 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="listings-button button">
-              <Link to="/account/listings">
+              <Link to="/account/listings" onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="far fa-building"></i>
                   <span>Mis Propiedades</span>
@@ -25,7 +25,7 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="performance-button button">
-              <Link to="/account/performance">
+              <Link to="/account/performance" onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-chart-line"></i>
                   <span>Desempeño</span>
@@ -33,7 +33,7 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="new-listing-button button">
-              <Link to="/account/new-listing">
+              <Link to="/account/new-listing" onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-plus"></i>
                   <span>Nueva Propiedad</span>
@@ -41,7 +41,7 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="profile-button button">
-              <Link to="/account/profile">
+              <Link to="/account/profile" onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-user-circle"></i>
                   <span>Mi Perfil</span>

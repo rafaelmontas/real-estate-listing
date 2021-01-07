@@ -10,7 +10,7 @@ class SideDrawer extends React.Component {
     }
     return (
       <div className={drawerClasses}>
-        <MenuItems/>
+        <MenuItems onSidedrawerClick={this.props.onSidedrawerClick}/>
       </div>
     )
   }

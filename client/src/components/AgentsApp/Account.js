@@ -15,6 +15,7 @@ class Account extends React.Component {
     }
     this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this)
     this.handleBackdropClick = this.handleBackdropClick.bind(this)
+    this.handleSidedrawerClick = this.handleSidedrawerClick.bind(this)
   }
 
   componentDidMount() {
@@ -31,12 +32,15 @@ class Account extends React.Component {
   handleBackdropClick() {
     this.setState({sideDrawerOpen: false});
   }
+  handleSidedrawerClick() {
+    this.setState({sideDrawerOpen: false});
+  }
 
   render() {
     return (
       <div className="agent-dashboard-container">
         {this.state.sideDrawerOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
-        <SideDrawer showClass={this.state.sideDrawerOpen}/>
+        <SideDrawer showClass={this.state.sideDrawerOpen} onSidedrawerClick={this.handleSideDrawerToggleClick}/>
         <AgentNavbar onSideDrawerToggleClick={this.handleSideDrawerToggleClick}/>
         <Structure/>
       </div>
