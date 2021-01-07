@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import logo from '../../demo_img/brand-logo-vf.svg';
 
 class AgentNavbar extends React.Component {
@@ -16,7 +17,7 @@ class AgentNavbar extends React.Component {
           </div>
           <div className="agent-navbar-right">
             <div className="new-listing-link">
-              <a href="//hauzzy.com" target="_blank"><i className="fas fa-plus"></i> Nueva Propiedad</a>
+              <Link to="/account/new-listing"><i className="fas fa-plus"></i> Nueva Propiedad</Link>
             </div>
             <div className="agent-hover-button">
               <button type="button" className="agent-profile-button">

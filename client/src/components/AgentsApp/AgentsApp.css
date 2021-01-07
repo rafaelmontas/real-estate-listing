@@ -43,6 +43,7 @@
   padding: 8px 10px;
   color: rgb(59, 65, 68);
   border-radius: 4px;
+  text-decoration: none;
 }
 #agent-header .agent-nav-container .agent-navbar-right .new-listing-link a:hover {
   color: #0052CC;
@@ -102,7 +103,7 @@
 }
 .structure .right-side-structure {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 60px);
 }
 .structure .left-side-structure .left-menu-structure {
   /* position: fixed;
