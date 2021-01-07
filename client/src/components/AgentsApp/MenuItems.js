@@ -1,15 +1,52 @@
 import React from 'react'
+import { withRouter } from "react-router";
 import {Link} from 'react-router-dom';
 import './MenuItems.css'
 
 class MenuItems extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      navSelected: 0
+    }
+    this.handleNavLinkSelection = this.handleNavLinkSelection.bind(this)
+  }
+
+  componentDidMount() {
+    // set selected nav item
+    this.handleNavLinkSelection()
+  }
+  componentDidUpdate(prevProps) {
+    // set selected nav item
+    if(prevProps.location.pathname !== this.props.location.pathname) {
+      console.log('url changed')
+      this.handleNavLinkSelection()
+    }
+  }
+
+  handleNavLinkSelection() {
+    if(this.props.location.pathname === "/account/dashboard" || this.props.location.pathname === "/account/dashboard/") {
+      this.setState({navSelected: 1})
+    } else if(this.props.location.pathname === "/account/listings" || this.props.location.pathname === "/account/listings/") {
+      this.setState({navSelected: 2})
+    } else if(this.props.location.pathname === "/account/performance" || this.props.location.pathname === "/account/performance/") {
+      this.setState({navSelected: 3})
+    } else if(this.props.location.pathname === "/account/new-listing" || this.props.location.pathname === "/account/new-listing/") {
+      this.setState({navSelected: 4})
+    } else if(this.props.location.pathname === "/account/profile" || this.props.location.pathname === "/account/profile/") {
+      this.setState({navSelected: 5})
+    }
+  }
+
   render() {
     return (
       <div className="menu-items">
         <div className="top-div">
           <ul>
             <li className="dashboard-button button">
-              <Link to="/account/dashboard" onClick={this.props.onSidedrawerClick}>
+              <Link to="/account/dashboard"
+                    className={this.state.navSelected === 1 ? "nav-link selected" : "nav-link"}
+                    onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-tachometer-alt"></i>
                   <span>Dashboard</span>
@@ -17,7 +54,9 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="listings-button button">
-              <Link to="/account/listings" onClick={this.props.onSidedrawerClick}>
+              <Link to="/account/listings"
+                    className={this.state.navSelected === 2 ? "nav-link selected" : "nav-link"}
+                    onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="far fa-building"></i>
                   <span>Mis Propiedades</span>
@@ -25,7 +64,9 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="performance-button button">
-              <Link to="/account/performance" onClick={this.props.onSidedrawerClick}>
+              <Link to="/account/performance"
+                    className={this.state.navSelected === 3 ? "nav-link selected" : "nav-link"}
+                    onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-chart-line"></i>
                   <span>Desempeño</span>
@@ -33,7 +74,9 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="new-listing-button button">
-              <Link to="/account/new-listing" onClick={this.props.onSidedrawerClick}>
+              <Link to="/account/new-listing"
+                    className={this.state.navSelected === 4 ? "nav-link selected" : "nav-link"}
+                    onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-plus"></i>
                   <span>Nueva Propiedad</span>
@@ -41,7 +84,9 @@ class MenuItems extends React.Component {
               </Link>
             </li>
             <li className="profile-button button">
-              <Link to="/account/profile" onClick={this.props.onSidedrawerClick}>
+              <Link to="/account/profile"
+                    className={this.state.navSelected === 5 ? "nav-link selected" : "nav-link"}
+                    onClick={this.props.onSidedrawerClick}>
                 <div>
                   <i className="fas fa-user-circle"></i>
                   <span>Mi Perfil</span>
@@ -69,4 +114,4 @@ class MenuItems extends React.Component {
   }
 }
 
-export default MenuItems
+export default withRouter(MenuItems)
