@@ -8,7 +8,7 @@ import image from "../../../demo_img/house1.png"
 class ListingCard extends React.Component {
   render() {
     return (
-      <Link to={`/my-hauzzy/listings/${this.props.listing.id}`}>
+      <Link to={`${this.props.linkTo}/${this.props.listing.id}`}>
         <div className="listing-card-container">
           <div className="listing-card-item">
             <div className="listing-photo">

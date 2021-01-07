@@ -33,6 +33,75 @@
   font-weight: 300;
 }
 
+/* Bottom top listing container */
+.dashboard-content-right .bottom-top-listings {
+  margin-top: 60px;
+  /* height: 300px; */
+  /* background-color: rgb(236 236 236); */
+}
+.dashboard-content-right .bottom-top-listings .top-listings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #4c4c4c;
+  margin-bottom: 10px;
+}
+.dashboard-content-right .bottom-top-listings .empty-list-container {
+  margin-top: 80px;
+  /* height: 100%;
+  min-height: 300px; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+}
+.dashboard-content-right .bottom-top-listings .empty-list-container span.text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.dashboard-content-right .bottom-top-listings .empty-list-container a {
+  padding: 12px;
+  background-color: #1657D7;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dashboard-content-right .bottom-top-listings .empty-list-container a i {
+  margin-left: 5px;
+}
+.dashboard-content-right .bottom-top-listings .top-listings-header h1 {
+  flex-basis: 100%;
+}
+.dashboard-content-right .bottom-top-listings .top-listings-header .top-listings-sub-headers {
+  display: none;
+  /* flex-basis: 45%; */
+}
+.dashboard-content-right .bottom-top-listings .top-listings-header .top-listings-sub-headers span {
+  font-weight: 600;
+}
+
+.dashboard-content-right .bottom-top-listings .top-listings-list .listing-actions {
+  display: none;
+}
+.dashboard-content-right .bottom-top-listings .top-listings-list .right-info-container .sections {
+  flex-basis: 20%;
+}
+.dashboard-content-right .bottom-top-listings .top-listings-list .right-info-container .listing-status span {
+  padding: 6px;
+  background-color: green;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+}
+/* Footer */
+.dashboard-content-right .landing-footer {
+  margin: 0 -16px -16px;
+}
+
 @media only screen and (max-width: 767px) {
   #card-1, #card-2, #card-3, #card-4 {
     border-style: solid;
@@ -49,6 +118,16 @@
   #card-3 {
     border-width: 0 1px 1px 0;
     border-radius: 0 0 4px 0;
+  }
+  /*  */
+  .dashboard-content-right .bottom-top-listings .top-listings-list .listing-details {
+    padding-left: 0;
+  }
+  .dashboard-content-right .bottom-top-listings .top-listings-list .listing-details .info-container {
+    padding-right: 0;
+  }
+  .dashboard-content-right .bottom-top-listings .top-listings-list .listing-details .info-container .listing-stats span.mts {
+    display: none;
   }
 }
 @media only screen and (min-width: 768px) {
@@ -71,6 +150,31 @@
     margin-top: 2px;
     margin-left: 10px;
     font-size: 20px;
+  }
+  /* Bottom top listings */
+  .dashboard-content-right .bottom-top-listings .top-listings-header h1 {
+    flex-basis: 50.8%;
+  }
+  .dashboard-content-right .bottom-top-listings .top-listings-header .top-listings-sub-headers {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .dashboard-content-right .bottom-top-listings .top-listings-header .top-listings-sub-headers span {
+    display: flex;
+    justify-content: center;
+    flex-basis: 20%;
+  }
+  .dashboard-content-right
+  .bottom-top-listings
+  .top-listings-header
+  .top-listings-sub-headers
+  span.listing-status,
+  .dashboard-content-right
+  .bottom-top-listings
+  .top-listings-header
+  .top-listings-sub-headers span.listing-date {
+    display: none;
   }
 }
 @media only screen and (min-width: 992px) {
@@ -96,5 +200,24 @@
     margin-left: 0;
     margin-top: 5px;
   }
+
+  .dashboard-content-right .bottom-top-listings .top-listings-header h1 {
+    flex-basis: 44.9%;
+  }
+  .dashboard-content-right
+  .bottom-top-listings
+  .top-listings-header
+  .top-listings-sub-headers
+  span.listing-status,
+  .dashboard-content-right
+  .bottom-top-listings
+  .top-listings-header
+  .top-listings-sub-headers span.listing-date {
+    display: flex;
+  }
+  /* Footer */
+.dashboard-content-right .landing-footer {
+  margin: 0 -25px -25px;
+}
 }
 
