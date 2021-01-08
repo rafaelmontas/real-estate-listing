@@ -27,9 +27,14 @@
   align-items: center;
   padding: 8px 8px;
   border-radius: 4px;
+  text-decoration: none;
 }
-.menu-items ul li a:hover {
-  background-color: #E1EDFF;
+.menu-items ul li a:hover, .menu-items ul li a.nav-link.selected {
+  background-color: #EBECF0;
+}
+.menu-items ul li a.nav-link.selected {
+  color: #0152CC;
+  font-weight: 400;
 }
 .menu-items ul li a div {
   width: 100%;
@@ -42,6 +47,7 @@
 }
 .menu-items .bottom-div ul a {
   display: block;
+  text-decoration: none;
 }
 .menu-items .bottom-div ul a:first-child {
   margin-bottom: 4px;
