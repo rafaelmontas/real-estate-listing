@@ -110,7 +110,9 @@ class MyHauzzy extends React.Component {
         {/* this.state.favoritesProperties.slice(0, 3) */}
           <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
           <Route path="/my-hauzzy/profile" exact render={()=> <Profile user={this.state.user}/>}/>
-          <Route path="/my-hauzzy/listings" exact render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)}/>}/>
+          <Route path="/my-hauzzy/listings"
+                 exact
+                 render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)} linkTo="/my-hauzzy/listings" linkToNew="/my-hauzzy/new-listing"/>}/>
           <Route path="/my-hauzzy/listings/:id" exact component={ReportEditListing}/>
         </div>
         <Footer/>

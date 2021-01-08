@@ -54,16 +54,6 @@ class Listings extends React.Component {
     })
     console.log(e.currentTarget.id)
   }
-
-  renderTabSelected() {
-    if (this.state.tabSelected === 'tab-1') {
-      return <h1>Tab1 selected</h1>
-    } else if (this.state.tabSelected === 'tab-2') {
-      return <h1>Tab2 selected</h1>
-    } else if (this.state.tabSelected === 'tab-3') {
-      return <h1>Tab3 selected</h1>
-    }
-  }
   
   render() {
     if(this.props.listings.length === 0) {
@@ -71,11 +61,11 @@ class Listings extends React.Component {
         <div className="empty-listings">
           <div className="listings-header">
             <h1>Mis propiedades</h1>
-            <Link to="/my-hauzzy/new-listing">
-              <span className="new-lsiting-button">Públicar <span>propiedad </span><i className="fas fa-plus-circle"></i></span>
+            <Link to={this.props.linkToNew}>
+              <span className="new-lsiting-button">Publicar <span>propiedad </span><i className="fas fa-plus-circle"></i></span>
             </Link>
           </div>
-          <div className="listings">No tienes propiedades públicadas.</div>
+          <div className="listings">No tienes propiedades publicadas.</div>
         </div>
       )
     } else {
@@ -83,18 +73,17 @@ class Listings extends React.Component {
         <div className="show-listings">
           <div className="listings-header">
             <h1>Mis propiedades</h1>
-            <Link to="/my-hauzzy/new-listing">
-              <span className="new-lsiting-button">Públicar <span>propiedad </span><i className="fas fa-plus-circle"></i></span>
+            <Link to={this.props.linkToNew}>
+              <span className="new-lsiting-button">Publicar <span>propiedad </span><i className="fas fa-plus-circle"></i></span>
             </Link>
           </div>
           <div className="listings-tabs">
-            <a className={this.state.tabSelected === 'tab-1' ? 'tabs selected' : 'tabs'} id="tab-1" onClick={this.handleTabClick}>Públicadas (3)</a>
+            <a className={this.state.tabSelected === 'tab-1' ? 'tabs selected' : 'tabs'} id="tab-1" onClick={this.handleTabClick}>Publicadas (3)</a>
             <a className={this.state.tabSelected === 'tab-2' ? 'tabs selected' : 'tabs'} id="tab-2" onClick={this.handleTabClick}>Pendientes (0)</a>
             <a className={this.state.tabSelected === 'tab-3' ? 'tabs selected' : 'tabs'} id="tab-3" onClick={this.handleTabClick}>Cerradas (0)</a>
           </div>
           <div className="listing-type-container">
-            {/* {this.renderTabSelected()} */}
-            <ListingsList listings={this.props.listings}/>
+            <ListingsList listings={this.props.listings} linkTo={this.props.linkTo}/>
           </div>
         </div>
       )
