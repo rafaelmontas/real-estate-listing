@@ -1,8 +1,10 @@
 import React from 'react'
 import Listings from '../../MyHauzzy/Listings/Listings'
+import AgentListingDetails from './AgentListingDetails'
 import axios from 'axios';
 import CircularProgressSpinner from '../../CircularProgressSpinner'
 import './AgentListings.css'
+import { Route } from 'react-router-dom';
 
 class AgentListings extends React.Component {
   constructor(props) {
@@ -28,14 +30,19 @@ class AgentListings extends React.Component {
       })
     }, 1000)
   }
+  componentWillUnmount() {
+    console.log('unmounted 1')
+  }
   render() {
     if(this.state.isLoading) {
       return <CircularProgressSpinner/>
     } else {
       return (
-        <div className="listings-content-right">
-          <Listings listings={this.state.listings} linkTo="/account/listings" linkToNew="/account/new-listing"/>
-        </div>
+          <Route path={this.props.match.url} exact>
+            <div className="listings-content-right">
+              <Listings listings={this.state.listings} linkTo="/account/listings" linkToNew="/account/new-listing"/>
+            </div>
+          </Route>
       )
     }
   }

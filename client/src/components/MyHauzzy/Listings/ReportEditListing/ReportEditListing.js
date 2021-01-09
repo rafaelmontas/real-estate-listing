@@ -1,6 +1,8 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
 import image from "../../../../demo_img/house1.png"
+import {Link} from 'react-router-dom';
+import { withRouter } from "react-router";
 import './ReportEditListing.css'
 
 class ReportEditListing extends React.Component {
@@ -26,7 +28,7 @@ class ReportEditListing extends React.Component {
       <div className="report-edit-container">
         <div className="re-header">
           <div className="back-button">
-            <span onClick={() => this.props.history.goBack()}><i className="fas fa-angle-left"></i>Volver atrás</span>
+            <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
           </div>
           <div className="share-button">
             <span><i className="far fa-share-square"></i>Compartir</span>
@@ -75,4 +77,4 @@ class ReportEditListing extends React.Component {
   }
 }
 
-export default ReportEditListing;
+export default withRouter(ReportEditListing);

@@ -1,0 +1,21 @@
+.agent-listing-details-container {
+  padding: 16px;
+}
+.agent-listing-details-container .report-edit-container {
+  padding: 0 0 25px;
+}
+.agent-listing-details-container .report-edit-container .re-header {
+  padding: 0 0 12px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .agent-listing-details-container .report-edit-container .re-listing-container .listing-left .listing-info {
+    top: 85px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .agent-listing-details-container {
+    padding: 25px;
+  }
+}
