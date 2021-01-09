@@ -40,7 +40,7 @@ class ListingsList extends React.Component {
             </div>
           </div>
           {this.props.listings.map(listing => {
-            return <ListingCard key={listing.id} listing={listing} linkTo='/my-hauzzy/listings'/>
+            return <ListingCard key={listing.id} listing={listing} linkTo={this.props.linkTo}/>
           })}
         </div>
       )

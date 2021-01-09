@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from "react-router";
+import { withRouter, matchPath } from "react-router";
 import {Link} from 'react-router-dom';
 import './MenuItems.css'
 
@@ -25,9 +25,17 @@ class MenuItems extends React.Component {
   }
 
   handleNavLinkSelection() {
+    const match = matchPath(this.props.location.pathname, {
+      path: "/account/listings/:id",
+      exact: false,
+      strict: false
+    });
+    console.log(match)
     if(this.props.location.pathname === "/account/dashboard" || this.props.location.pathname === "/account/dashboard/") {
       this.setState({navSelected: 1})
-    } else if(this.props.location.pathname === "/account/listings" || this.props.location.pathname === "/account/listings/") {
+    } else if(this.props.location.pathname == "/account/listings" || this.props.location.pathname == "/account/listings/") {
+      this.setState({navSelected: 2})
+    } else if(match) {
       this.setState({navSelected: 2})
     } else if(this.props.location.pathname === "/account/performance" || this.props.location.pathname === "/account/performance/") {
       this.setState({navSelected: 3})

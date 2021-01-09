@@ -1,0 +1,30 @@
+.listings-content-right {
+  padding: 16px;
+}
+.listings-content-right .show-listings, .listings-content-right .empty-listings {
+  padding: 0;
+}
+.listings-content-right .show-listings .listing-type-container .listings-list .listing-status span {
+  padding: 6px;
+  background-color: green;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 767px) {
+  .listings-content-right .show-listings .listing-details {
+    padding-left: 0;
+  }
+  .listings-content-right .show-listings .listing-details .address-section .info-container {
+    padding-right: 0;
+  }
+  .listings-content-right .show-listings .listing-details .address-section .info-container .listing-stats span.mts {
+    display: none;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .listings-content-right {
+    padding: 25px;
+  } 
+}

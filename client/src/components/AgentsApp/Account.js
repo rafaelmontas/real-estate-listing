@@ -1,11 +1,8 @@
 import React from 'react'
 import Backdrop from "../Backdrop"
-// import MenuItems from './MenuItems'
 import SideDrawer from './SideDrawer'
 import AgentNavbar from './AgentNavbar'
 import Structure from './Structure'
-// import AgentDashboard from './AgentDashboard'
-// import { Route } from 'react-router-dom'
 
 class Account extends React.Component {
   constructor(props) {

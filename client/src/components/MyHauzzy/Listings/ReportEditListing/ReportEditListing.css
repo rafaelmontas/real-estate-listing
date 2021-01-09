@@ -14,7 +14,7 @@
 .report-edit-container .re-header .back-button {
   padding: 8px 0;
 }
-.back-button span, .share-button span {
+.back-button a, .share-button span {
   display: flex;
   align-items: center;
   cursor: pointer;
