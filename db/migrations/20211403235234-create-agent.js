@@ -17,11 +17,24 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone_number: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       alt_phone_number: {
+        allowNull: true,
         type: Sequelize.STRING
+      },
+      agent_license: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      brokerage_name: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      status_active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       password: {
         allowNull: false,
