@@ -41,6 +41,7 @@ app.listen(PORT, () => {
 
 
 // {force: true}
+// db.agent.drop()
 // db.sequelize.sync().then(() => {
 //   app.listen(PORT, () => {
 //     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);

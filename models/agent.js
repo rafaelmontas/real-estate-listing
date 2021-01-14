@@ -7,16 +7,45 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: {
+        msg: "Email ya existe"
+      },
+      validate: {
+        notEmpty: true,
+        isEmail: {
+          msg: "Favor ingresar un email valido"
+        },
+        isLowercase: true
+      }
     },
     phone_number: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
-    alt_phone_number: DataTypes.STRING,
+    alt_phone_number: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        min: 6
+      }
+    },
+    agent_license: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    brokerage_name: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    status_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   }, {});
   Agent.associate = function(models) {
