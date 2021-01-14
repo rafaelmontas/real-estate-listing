@@ -103,12 +103,7 @@
 }
 .structure .right-side-structure {
   width: 100%;
-  height: calc(100vh - 60px);
-}
-.structure .left-side-structure .left-menu-structure {
-  /* position: fixed;
-  top: 0px;
-  bottom: 0px; */
+  min-height: calc(100vh - 60px);
 }
 
 

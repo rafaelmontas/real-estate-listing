@@ -3,8 +3,9 @@ import MenuItems from './MenuItems'
 import AgentDashboard from './AgentDashboard'
 import AgentListings from './Listings/AgentListings'
 import AgentListingDetails from './Listings/AgentListingDetails'
+import AgentProfile from './Profile/AgentProfile'
 import { Route } from 'react-router-dom'
-import './AgentsApp'
+import './AgentsApp.css'
 
 class Structure extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class Structure extends React.Component {
             <Route path="/account/dashboard" component={AgentDashboard}/>
             <Route path="/account/listings" exact component={AgentListings}/>
             <Route path="/account/listings/:id" component={AgentListingDetails}/>
+            <Route path="/account/profile" component={AgentProfile}/>
           </div>
         </div>
       </section>
