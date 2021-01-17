@@ -1,9 +1,10 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Account from './Account';
-// import AgentLogin from './AgentLogin'
-import './AgentsApp.css'
+import AgentSignUp from './AgentSignUp'
+import AgentLogin from './AgentLogin';
 import { withRouter } from "react-router";
+import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
   componentDidMount() {
@@ -15,7 +16,8 @@ class AgentsApp extends React.Component {
     return (
         <Switch>
           <Route path="/account" component={Account}/>
-          {/* <Route path="/login" exact component={AgentLogin}/> */}
+          <Route path="/signup" exact component={AgentSignUp}/>
+          <Route path="/login" exact component={AgentLogin}/>
           {/* <Route path="/solutions" exact component={AgentLogin}/> */}
         </Switch>
     )
