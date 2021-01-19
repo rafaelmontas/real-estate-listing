@@ -3,7 +3,12 @@ module.exports = (sequelize, DataTypes) => {
   const Agent = sequelize.define('agent', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Favor ingresar su nombre"
+        }
+      }
     },
     email: {
       type: DataTypes.STRING,
@@ -12,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         msg: "Email ya existe"
       },
       validate: {
-        notEmpty: true,
+        notEmpty: {
+          msg: "Favor ingresar un email"
+        },
         isEmail: {
           msg: "Favor ingresar un email valido"
         },
@@ -31,8 +38,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
-        min: 6
+        notEmpty: {
+          msg: "Favor ingresar contraseña"
+        },
+        len: {
+          args: [6, 500],
+          msg: "Contraseña debe de tener un mínimo de 6 caracteres"
+        }
       }
     },
     agent_license: {
