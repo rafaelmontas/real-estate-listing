@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {agentContext} from './agentContext';
 import axios from 'axios';
 import ErrorMsg from '../Auth/ErrorMsg';
 
@@ -28,7 +29,7 @@ class AgentLoginForm extends React.Component {
           .then(res => {
             console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
-            // this.context.getUser()
+            this.context.getAgent()
           })
           .catch(err => {
             console.log(err.response.data, err.response.status)
@@ -67,4 +68,5 @@ class AgentLoginForm extends React.Component {
   }
 }
 
+AgentLoginForm.contextType = agentContext;
 export default AgentLoginForm

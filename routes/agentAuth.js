@@ -4,7 +4,7 @@ const db =  require('../models');
 const Agent = db.agent;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-// const verifyToken = require('../middleware/userAuth')
+const verifyToken = require('../middleware/agentAuth')
 
 
 // @route POST /agent-auth
@@ -28,5 +28,19 @@ agentAuthRouter.post("/", async (req, res) => {
 })
 
 
+// @route GET /agent-auth/agent
+// @desc Get agent data
+// @acces Private
+agentAuthRouter.get("/agent", verifyToken, (req, res) => {
+  Agent.findByPk(req.agent.id)
+        .then(agent => {
+          console.log(req.agent)
+          res.status(200).json({id: agent.id, name: agent.name, email: agent.email})
+        })
+        .catch(err => {
+          console.log(err)
+          res.sendStatus(500);
+        });
+})
 
 module.exports = agentAuthRouter;
