@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../../demo_img/brand-logo-vf.svg';
+import {agentContext} from './agentContext';
 
 class AgentNavbar extends React.Component {
   render() {
@@ -23,7 +24,7 @@ class AgentNavbar extends React.Component {
               <button type="button" className="agent-profile-button">
                 <div className="inner-agent-info">
                   <i className="fas fa-user-circle"></i>
-                  <div className="agent-name-email">Rafael Montas</div>
+                  <div className="agent-name-email">{this.context.agent.name || this.context.agent.email}</div>
                 </div>
               </button>
             </div>
@@ -34,4 +35,5 @@ class AgentNavbar extends React.Component {
   }
 }
 
+AgentNavbar.contextType = agentContext;
 export default AgentNavbar;
