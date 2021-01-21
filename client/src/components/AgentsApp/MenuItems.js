@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, matchPath } from "react-router";
 import {Link} from 'react-router-dom';
+import {agentContext} from './agentContext';
 import './MenuItems.css'
 
 class MenuItems extends React.Component {
@@ -10,6 +11,7 @@ class MenuItems extends React.Component {
       navSelected: 0
     }
     this.handleNavLinkSelection = this.handleNavLinkSelection.bind(this)
+    this.onLogOutclick = this.onLogOutclick.bind(this)
   }
 
   componentDidMount() {
@@ -44,6 +46,9 @@ class MenuItems extends React.Component {
     } else if(this.props.location.pathname === "/account/profile" || this.props.location.pathname === "/account/profile/") {
       this.setState({navSelected: 5})
     }
+  }
+  onLogOutclick() {
+    return this.context.logOut()
   }
 
   render() {
@@ -111,7 +116,7 @@ class MenuItems extends React.Component {
                 <span>Ir a hauzzy.com</span>
               </Link>
             {/* </div> */}
-            <div className="logout-button button">
+            <div className="logout-button button" onClick={this.onLogOutclick}>
               <i className="fas fa-sign-out-alt"></i>
               <span>Cerrar Sesión</span>
             </div>
@@ -122,4 +127,5 @@ class MenuItems extends React.Component {
   }
 }
 
+MenuItems.contextType = agentContext;
 export default withRouter(MenuItems)

@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {agentContext} from './agentContext';
 import axios from 'axios';
 import ErrorMsg from '../Auth/ErrorMsg';
+import { withRouter } from "react-router";
 
 class AgentLoginForm extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class AgentLoginForm extends React.Component {
             console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
             this.context.getAgent()
+            // this.props.history.push('/account/dashboard')
           })
           .catch(err => {
             console.log(err.response.data, err.response.status)
@@ -43,7 +45,7 @@ class AgentLoginForm extends React.Component {
         {this.state.errorMsg && <ErrorMsg errorMsg={this.state.errorMsg}/>}
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email"
+          <input type="email" name="email" autoComplete="email" id="email"
                 value={this.state.email}
                 placeholder="Dirección de email"
                 onChange={this.onInputChange}
@@ -51,7 +53,7 @@ class AgentLoginForm extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password" id="password"
+          <input type="password" name="password" autoComplete="current-password" id="password"
                 value={this.state.password}
                 placeholder="Constraseña"
                 onChange={this.onInputChange}
@@ -69,4 +71,4 @@ class AgentLoginForm extends React.Component {
 }
 
 AgentLoginForm.contextType = agentContext;
-export default AgentLoginForm
+export default withRouter(AgentLoginForm)

@@ -6,6 +6,7 @@ import AgentLogin from './AgentLogin';
 import { withRouter } from "react-router";
 import axios from 'axios';
 import {agentContext} from './agentContext';
+import PrivateAccount from './PrivateAccount'
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -45,6 +46,9 @@ class AgentsApp extends React.Component {
             error: {msg: '', status: null},
             agentLoading: false
           })
+          if(!this.props.location.pathname.includes('/account')) {
+            this.props.history.push('/account/dashboard')
+          }
         })
         .catch(err => {
           console.log(err.response.data, err.response.status)
@@ -77,7 +81,7 @@ class AgentsApp extends React.Component {
     return (
       <agentContext.Provider value={value}>
         <Switch>
-          <Route path="/account" component={Account}/>
+          <PrivateAccount path="/account" component={Account}/>
           <Route path="/signup" exact component={AgentSignUp}/>
           <Route path="/login" exact component={AgentLogin}/>
           {/* <Route path="/solutions" exact component={AgentLogin}/> */}
