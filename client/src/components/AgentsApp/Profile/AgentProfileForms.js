@@ -1,6 +1,5 @@
 import React from 'react'
 import NumberFormat from 'react-number-format';
-import axios from 'axios';
 
 class AgentProfileForms extends React.Component {
   constructor(props) {
@@ -19,15 +18,6 @@ class AgentProfileForms extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // componentDidMount() {
-  //   // Get agent profile
-  //   const agentJwt = localStorage.getItem('agent-jwt')
-  //   axios.get(`/agents/${this.context.agent.id}`, {headers: { 'agent-auth': agentJwt }})
-  //         .then(agent => {
-  //           console.log(agent.data)
-  //         })
-  //         .catch(err => console.log(err.response.data))
-  // }
 
   onInputChange(e) {
     this.setState({

@@ -5,6 +5,9 @@ import CircularProgressSpinner from '../../CircularProgressSpinner'
 import NumberFormat from 'react-number-format';
 import {agentContext} from '../agentContext';
 import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import dateFormat from 'dateformat'
 import './AgentProfile.css'
 
 class AgentProfile extends React.Component {
@@ -14,9 +17,11 @@ class AgentProfile extends React.Component {
       agent: {},
       isLoading: false,
       successMsg: '',
-      errMsg: ''
+      errMsg: '',
+      alertOpen: false
     }
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
   componentDidMount() {
     this.setState({ isLoading: true })
@@ -42,17 +47,33 @@ class AgentProfile extends React.Component {
             agent: res.data.updatedAgent,
             successMsg: res.data.msg,
             status: res.status,
-            errMsg: ''
+            errMsg: '',
+            alertOpen: true
           })
+          this.timer = setTimeout(() => {
+            window.location.reload();
+          }, 5000)
         })
         .catch(err => {
           console.log(err.response.data.msg)
           this.setState({
             successMsg: '',
             errMsg: err.response.data.msg,
-            status: err.response.status
+            status: err.response.status,
+            alertOpen:true
           })
         })
+  }
+
+  handleClose() {
+    this.setState({alertOpen: false})
+  }
+  renderAlert() {
+    if(this.state.status === 200) {
+      return <MuiAlert elevation={6} variant="filled" severity="success">{this.state.successMsg}</MuiAlert>
+    } else {
+      return <MuiAlert elevation={6} variant="filled" severity="error">{this.state.errMsg}</MuiAlert>
+    }
   }
 
   renderPhones() {
@@ -85,6 +106,13 @@ class AgentProfile extends React.Component {
     } else {
       return (
         <div className="agent-profile-component">
+          <Snackbar open={this.state.alertOpen}
+                    autoHideDuration={4000}
+                    anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    onClose={this.handleClose}
+                    style={{top: '92px'}}>
+            {this.renderAlert()}
+          </Snackbar>
           <div className="agent-container">
             <main className="main-left">
               <div className="agent-header profile-cards">
@@ -104,7 +132,7 @@ class AgentProfile extends React.Component {
                 </div>
                 <div className="bottom-info">
                   <div className="member-since-info">
-                    <span>{`Miembro desde: ${this.state.agent.createdAt}`}</span>
+                    <span>{`Miembro desde: ${dateFormat(this.state.agent.createdAt, "dd/mm/yy")}`}</span>
                     <span>8 Propiedades</span>
                   </div>
                 </div>
