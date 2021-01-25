@@ -8,6 +8,8 @@ import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import dateFormat from 'dateformat'
+import Backdrop from '../../Backdrop'
+import DeleteModal from '../../MyHauzzy/Profile/DeleteModal'
 import './AgentProfile.css'
 
 class AgentProfile extends React.Component {
@@ -18,10 +20,14 @@ class AgentProfile extends React.Component {
       isLoading: false,
       successMsg: '',
       errMsg: '',
-      alertOpen: false
+      alertOpen: false,
+      deleteOpen: false
     }
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+    this.handleBackdropClick = this.handleBackdropClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     this.setState({ isLoading: true })
@@ -64,6 +70,25 @@ class AgentProfile extends React.Component {
           })
         })
   }
+  handleDelete() {
+    const agentJwt = localStorage.getItem('agent-jwt')
+    axios.delete(`/agents/${this.state.agent.id}`, {
+      headers: {
+        'agent-auth': agentJwt
+      }
+    })
+        .then(() => this.context.logOut())
+        .catch(err => {
+          console.log(err.response.data.msg)
+          this.setState({
+            successMsg: '',
+            errMsg: err.response.data.msg,
+            status: err.response.status,
+            alertOpen:true
+          })
+        })
+
+  }
 
   handleClose() {
     this.setState({alertOpen: false})
@@ -74,6 +99,14 @@ class AgentProfile extends React.Component {
     } else {
       return <MuiAlert elevation={6} variant="filled" severity="error">{this.state.errMsg}</MuiAlert>
     }
+  }
+  handleDeleteClick() {
+    this.setState({deleteOpen: true})
+  }
+  handleBackdropClick() {
+    this.setState({
+      deleteOpen: false
+    });
   }
 
   renderPhones() {
@@ -113,6 +146,8 @@ class AgentProfile extends React.Component {
                     style={{top: '92px'}}>
             {this.renderAlert()}
           </Snackbar>
+          {this.state.deleteOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+          {this.state.deleteOpen && <DeleteModal onCancelClick={this.handleBackdropClick} onDeleteConfirm={this.handleDelete}/>}
           <div className="agent-container">
             <main className="main-left">
               <div className="agent-header profile-cards">
@@ -139,7 +174,7 @@ class AgentProfile extends React.Component {
               </div>
               <CompletionCard/>
               <div className="agent-edits profile-cards">
-                <AgentProfileForms agent={this.state.agent} handleUpdate={this.handleUpdate}/>
+                <AgentProfileForms agent={this.state.agent} handleUpdate={this.handleUpdate} onDeleteClick={this.handleDeleteClick}/>
               </div>
             </main>
             <aside className="aside-info">

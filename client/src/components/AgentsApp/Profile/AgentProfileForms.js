@@ -124,7 +124,7 @@ class AgentProfileForms extends React.Component {
         <div className="profile-actions">
           <button type="submit" className="update-profile">Actualizar Perfil</button>
           <span className="delete-button"
-          // onClick={this.handleDeleteClick}
+          onClick={this.props.onDeleteClick}
           >Eliminar cuenta?</span>
         </div>
       </form>
