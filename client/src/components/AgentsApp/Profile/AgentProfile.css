@@ -118,6 +118,7 @@
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+  min-width: 150px;
 }
 .agent-profile-component .agent-container .agent-edit-forms .profile-actions span.delete-button {
   font-size: 12px;

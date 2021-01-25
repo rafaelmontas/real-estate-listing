@@ -143,4 +143,26 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
   }
 })
 
+// @route DELETE agents/:id
+// @desc Delete existing agents
+// @acces Private
+agentsRouter.delete("/:id", verifyToken, async (req, res) => {
+  // Verify that the agent to be deleted is the same as the one deleting
+  console.log(`Agent requesting delete: ${req.agent.id} for agent: ${Number(req.params.id)}`)
+  if(req.agent.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+
+  // Get agent to be deleted
+  const agent = await Agent.findByPk(req.agent.id)
+  if(!agent) return res.status(404).send({msg: 'Usuario no existe'})
+
+  try {
+    await agent.destroy()
+    res.sendStatus(204)
+  } catch(err) {
+    console.log(err.errors[0].message)
+    res.status(500).json({msg: err.errors[0].message})
+  }  
+})
+
+
 module.exports = agentsRouter;
