@@ -58,6 +58,10 @@ module.exports = (sequelize, DataTypes) => {
     status_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    reset_token: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {});
   Agent.associate = function(models) {

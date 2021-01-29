@@ -63,7 +63,7 @@ class AgentLoginForm extends React.Component {
           <button type="submit">Iniciar Sesión</button>
         </div>
         <p className="terms-privacy">
-          <Link>Olvidaste tu contraseña?</Link>
+          <Link to="/forgot-password">Olvidaste tu contraseña?</Link>
         </p>
       </form>
     )

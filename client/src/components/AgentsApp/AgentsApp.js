@@ -7,6 +7,8 @@ import { withRouter } from "react-router";
 import axios from 'axios';
 import {agentContext} from './agentContext';
 import PrivateAccount from './PrivateAccount'
+import AgentForgotPassword from './AgentForgotPassword'
+import AgentResetPassword from './AgentResetPassword'
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -84,7 +86,8 @@ class AgentsApp extends React.Component {
           <PrivateAccount path="/account" component={Account}/>
           <Route path="/signup" exact component={AgentSignUp}/>
           <Route path="/login" exact component={AgentLogin}/>
-          {/* <Route path="/solutions" exact component={AgentLogin}/> */}
+          <Route path="/forgot-password" exact component={AgentForgotPassword}/>
+          <Route path="/reset-password/:token" exact component={AgentResetPassword}/>
         </Switch>
       </agentContext.Provider>
     )
