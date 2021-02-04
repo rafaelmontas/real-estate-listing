@@ -10,6 +10,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import dateFormat from 'dateformat'
 import Backdrop from '../../Backdrop'
 import DeleteModal from '../../MyHauzzy/Profile/DeleteModal'
+import AgentProfilePicture from './AgentProfilePicture'
 import './AgentProfile.css'
 
 class AgentProfile extends React.Component {
@@ -154,7 +155,7 @@ class AgentProfile extends React.Component {
                 <div className="top-info">
                   <div className="top-info-left">
                     <div className="agent-img">
-  
+                      <AgentProfilePicture/>
                     </div>
                     <div className="agent-info-text">
                       <h3>{this.state.agent.name}</h3>
