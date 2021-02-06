@@ -1,0 +1,21 @@
+.agent-info-text {
+  display: flex;
+  align-items: center;
+}
+.agent-info-text img {
+  height: 70px;
+  width: 70px;
+  background-color: #e3e3e3;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.agent-profile-picture-form input {
+  display: none;
+}
+.agent-profile-picture-form label {
+  color: blue;
+  font-size: 14px;
+}
+.agent-profile-picture-form label:hover {
+  cursor: pointer;
+}

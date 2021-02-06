@@ -154,13 +154,7 @@ class AgentProfile extends React.Component {
               <div className="agent-header profile-cards">
                 <div className="top-info">
                   <div className="top-info-left">
-                    <div className="agent-img">
-                      <AgentProfilePicture/>
-                    </div>
-                    <div className="agent-info-text">
-                      <h3>{this.state.agent.name}</h3>
-                      <span>Agente Inmobiliario</span>
-                    </div>
+                    <AgentProfilePicture agentName={this.state.agent.name}/>
                   </div>
                   <div className="top-info-right">
                     <span>Perfil público</span>
