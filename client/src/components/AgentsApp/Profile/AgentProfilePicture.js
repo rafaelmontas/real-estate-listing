@@ -9,7 +9,7 @@ class AgentProfilePicture extends React.Component {
     super(props)
     this.state = {
       profilePicture: null,
-      file: '',
+      file: this.props.profilePicture,
       successMsg: '',
       errMsg: '',
       status: null,
@@ -22,35 +22,38 @@ class AgentProfilePicture extends React.Component {
 
   handleChange(e) {
     console.log(e.target.files[0])
-    this.setState({profilePicture: e.target.files[0], isLoading: true}, () => {
-      const formData = new FormData()
-      formData.append('profileImg', this.state.profilePicture)
-      axios.post('/agents/1/profile-pictures', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-            .then(res => {
-              console.log(res.data)
-              this.setState({
-                file: res.data.file,
-                successMsg: res.data.msg,
-                status: res.status,
-                errMsg: '',
-                alertOpen: true,
-                isLoading: false
+    this.setState({profilePicture: e.target.files[0]}, () => {
+      if(this.state.profilePicture !== undefined) {
+        this.setState({isLoading: true})
+        const formData = new FormData()
+        formData.append('profileImg', this.state.profilePicture)
+        axios.post('/agents/1/profile-pictures', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+              .then(res => {
+                console.log(res.data)
+                this.setState({
+                  file: res.data.file,
+                  successMsg: res.data.msg,
+                  status: res.status,
+                  errMsg: '',
+                  alertOpen: true,
+                  isLoading: false
+                })
               })
-            })
-            .catch(err => {
-              console.log(err.response.data.msg)
-              this.setState({
-                successMsg: '',
-                status: err.response.status,
-                errMsg: err.response.data.msg,
-                alertOpen: true,
-                isLoading: false
+              .catch(err => {
+                console.log(err.response.data.msg)
+                this.setState({
+                  successMsg: '',
+                  status: err.response.status,
+                  errMsg: err.response.data.msg,
+                  alertOpen: true,
+                  isLoading: false
+                })
               })
-            })
+      }
     })
   }
 
