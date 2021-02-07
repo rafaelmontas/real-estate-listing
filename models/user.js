@@ -29,7 +29,14 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     }
-  }, {});
+  }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ['email']
+      }
+    ]
+  });
   // User.associate = function(models) {
   //   User.hasMany(models.property, {
   //     onDelete: "SET DEFAULT",

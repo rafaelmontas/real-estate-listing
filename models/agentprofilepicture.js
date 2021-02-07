@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     location: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     agent_id: {

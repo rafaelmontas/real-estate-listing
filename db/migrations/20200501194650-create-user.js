@@ -32,7 +32,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }).then(() => queryInterface.addIndex('users', {fields: ['email'], unique: true}))
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('users');

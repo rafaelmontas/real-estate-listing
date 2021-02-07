@@ -63,7 +63,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     }
-  }, {});
+  }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ['email']
+      }
+    ]
+  });
   Agent.associate = function(models) {
     // associations can be defined here
   };

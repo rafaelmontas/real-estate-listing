@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false
       },
       location: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       agent_id: {
