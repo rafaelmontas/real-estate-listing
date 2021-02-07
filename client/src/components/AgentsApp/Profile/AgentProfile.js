@@ -10,6 +10,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import dateFormat from 'dateformat'
 import Backdrop from '../../Backdrop'
 import DeleteModal from '../../MyHauzzy/Profile/DeleteModal'
+import AgentProfilePicture from './AgentProfilePicture'
 import './AgentProfile.css'
 
 class AgentProfile extends React.Component {
@@ -153,13 +154,8 @@ class AgentProfile extends React.Component {
               <div className="agent-header profile-cards">
                 <div className="top-info">
                   <div className="top-info-left">
-                    <div className="agent-img">
-  
-                    </div>
-                    <div className="agent-info-text">
-                      <h3>{this.state.agent.name}</h3>
-                      <span>Agente Inmobiliario</span>
-                    </div>
+                    <AgentProfilePicture agentName={this.state.agent.name}
+                                         profilePicture={this.state.agent['AgentProfilePicture'] ? this.state.agent['AgentProfilePicture'].location : ''}/>
                   </div>
                   <div className="top-info-right">
                     <span>Perfil público</span>

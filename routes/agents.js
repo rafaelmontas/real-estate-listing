@@ -3,18 +3,32 @@ const agentsRouter = express.Router();
 const db =  require('../models');
 const Agent = db.agent;
 const Property = db.property;
-const Sequelize = require('sequelize');
+const AgentProfilePicture = db.AgentProfilePicture
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/agentAuth')
 // const Op = Sequelize.Op
+
+// Use nested route
+const agentsProfilePicturesRouter =  require('./agentsProfilePictures')
+agentsRouter.use('/:id/profile-pictures', agentsProfilePicturesRouter)
 
 agentsRouter.get("/:id", verifyToken, (req, res) => {
   // Verify that agent requested is the same as the one requesting
   console.log(`Agent requesting: ${req.agent.id} for agent: ${Number(req.params.id)}`)
   if(req.agent.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
   
-  Agent.findByPk(req.params.id, {include: Property})
+  Agent.findByPk(req.params.id, {
+    include: [
+      {
+        model: Property
+      },
+      {
+        model: AgentProfilePicture,
+        attributes: ['location']
+      }
+    ]
+  })
         .then(agent => {
           res.status(200).send(agent)
         })
