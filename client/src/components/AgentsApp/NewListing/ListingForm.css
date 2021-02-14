@@ -1,0 +1,81 @@
+.new-listing-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-listing-container .MuiPaper-root {
+  padding: 24px 0;
+  background-color: #FAFBFC;
+  width: 100%;
+}
+.new-listing-container .step-content {
+  max-width: 900px;
+}
+.new-listing-container .action-buttons {
+  margin-top: 25px;
+}
+
+
+
+/* Basic Step */
+.new-listing-container .step-content .basic-info-container > h3 {
+  margin: 25px 0 10px;
+  color: #505357;
+}
+.new-listing-container .step-content .basic-info-container .listing-container {
+  margin-top: 25px;
+  padding: 20px;
+}
+.new-listing-container .step-content .basic-info-container .listing-container h3 {
+  font-weight: 600;
+  color: #3e4246;
+  margin-bottom: 20px;
+}
+.new-listing-container .step-content .basic-info-container .property-type {
+  min-height: 150px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 15%);
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.basic-info-container .property-type .property-type-options fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  margin: 0;
+}
+.basic-info-container .property-type .property-type-options fieldset label {
+  padding: 12px 36px;
+  text-align: center;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 100%;
+  margin: 0 0 12px;
+}
+.basic-info-container .property-type .property-type-options fieldset label:last-child {
+  margin-right: 0;
+}
+.basic-info-container .property-type .property-type-options fieldset label:hover {
+  color: #216bff;
+}
+.basic-info-container .property-type .property-type-options fieldset label.selected {
+  background-color: #f0f6ff;
+  border-color: #216bff;
+  color: #216bff;
+}
+.basic-info-container .property-type .property-type-options fieldset label input {
+  display: none;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .basic-info-container .property-type .property-type-options fieldset label {
+    min-width: 190px;
+    margin: 0 25px 12px 0;
+  }
+}
