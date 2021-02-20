@@ -6,6 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import CircularProgressSpinner from '../../CircularProgressSpinner'
 import BasicInfo from './BasicInfo'
+import Details from './Details'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import './ListingForm.css'
 
@@ -21,13 +22,18 @@ class ListingForm extends React.Component {
       lat: null,
       lng: null,
       propertyType: '',
-      listingType: ''
+      listingType: '',
+      // Step 1
+      bedrooms: null,
+      bathrooms: null
     }
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
+
+    this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
   componentDidMount() {
@@ -60,6 +66,10 @@ class ListingForm extends React.Component {
     console.log([input], e.target.value)
     this.setState({[input]: e.target.value})
   }
+  handleSelectChange = (optionSelected, value) => {
+    console.log(optionSelected, value)
+    this.setState({[optionSelected]: parseInt(value)})
+  }
   handleAddressChange = address => {
     this.setState({propertyAddress: address})
   }
@@ -81,7 +91,9 @@ class ListingForm extends React.Component {
                   propertyType={this.state.propertyType}
                   listingType={this.state.listingType}/>
       case 1:
-        return <h1>Detalles</h1>
+        return <Details
+                  bedrooms={this.state.bedrooms}
+                  handleChange={this.handleSelectChange}/>
       case 2:
         return <h1>Fotos</h1>
       case 3:

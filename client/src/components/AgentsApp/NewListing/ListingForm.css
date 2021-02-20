@@ -10,10 +10,11 @@
   width: 100%;
 }
 .new-listing-container .step-content {
+  width: 100%;
   max-width: 900px;
 }
 .new-listing-container .action-buttons {
-  margin-top: 25px;
+  margin: 30px 0;
 }
 
 
@@ -23,7 +24,7 @@
   margin: 25px 0 10px;
   color: #505357;
 }
-.new-listing-container .step-content .basic-info-container .listing-container {
+.new-listing-container .step-content .listing-container {
   margin-top: 25px;
   padding: 20px;
   min-height: 150px;
@@ -31,7 +32,7 @@
   background-color: #fff;
   border-radius: 4px;
 }
-.new-listing-container .step-content .basic-info-container .listing-container h3 {
+.new-listing-container .step-content .listing-container h3 {
   font-weight: 600;
   color: #3e4246;
   margin-bottom: 20px;
@@ -126,6 +127,99 @@
   margin: 0;
 }
 
+
+/* Details Step */
+.details-info-container .listing-beds-baths-mts {
+  display: flex;
+  flex-direction: column;
+}
+.details-info-container .listing-beds-baths-mts .listing-options {
+  margin-bottom: 15px;
+}
+.details-info-container .listing-beds-baths-mts .listing-options:last-child {
+  margin-bottom: 0;
+}
+.details-info-container .listing-beds-baths-mts .listing-options label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgb(42, 42, 51);
+  font-weight: 700;
+}
+.details-info-container .listing-beds-baths-mts > div > div {
+  width: 100%;
+
+}
+.details-info-container .listing-beds-baths-mts > div > div > div {
+  min-height: 42px;
+}
+/* Mts */
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option {
+  display: flex;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input {
+  appearance: none;
+  width: 100%;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border: 1px solid rgb(209, 209, 213);
+  border-radius: 4px;
+  box-sizing: border-box;
+  caret-color: rgb(0, 106, 255);
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  color: rgb(42, 42, 51);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: auto;
+
+  padding-right: 0px;
+  border-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover,
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus {
+  border-color: rgb(0, 106, 255);
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option label {
+  appearance: none;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border-width: 1px 1px 1px 0px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-image: initial;
+  border-top-color: rgb(209, 209, 213);
+  border-right-color: rgb(209, 209, 213);
+  border-bottom-color: rgb(209, 209, 213);
+  border-radius: 0px 4px 4px 0px;
+  box-sizing: border-box;
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: auto;
+  color: rgb(89, 107, 130);
+  width: auto;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  user-select: none;
+  border-left-style: initial;
+  border-left-color: initial;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus ~ label {
+  border-color: rgb(0, 106, 255);
+}
+
 @media only screen and (min-width: 768px) {
   .basic-info-container .property-type .property-type-options fieldset label,
   .listing-type-options label {
@@ -138,5 +232,13 @@
   }
   .property-address .autocomplete-dropdown-container {
     width: 75%;
+  }
+  /* Details */
+  .details-info-container .listing-beds-baths-mts {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .details-info-container .listing-beds-baths-mts .listing-options {
+    width: 32%;
   }
 }
