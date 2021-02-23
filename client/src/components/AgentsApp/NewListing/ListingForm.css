@@ -153,10 +153,12 @@
   min-height: 42px;
 }
 /* Mts */
-.details-info-container .listing-beds-baths-mts .listing-options .mts-option {
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option {
   display: flex;
 }
-.details-info-container .listing-beds-baths-mts .listing-options .mts-option input {
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input {
   appearance: none;
   width: 100%;
   margin: 0px;
@@ -181,10 +183,13 @@
   border-bottom-right-radius: 0px;
 }
 .details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover,
-.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus {
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:hover,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:focus {
   border-color: rgb(0, 106, 255);
 }
-.details-info-container .listing-beds-baths-mts .listing-options .mts-option label {
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option label {
   appearance: none;
   margin: 0px;
   padding: 9px 16px;
@@ -216,7 +221,9 @@
   border-left-color: initial;
 }
 .details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover ~ label,
-.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus ~ label {
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:hover ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:focus ~ label {
   border-color: rgb(0, 106, 255);
 }
 
@@ -237,6 +244,7 @@
   .details-info-container .listing-beds-baths-mts {
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .details-info-container .listing-beds-baths-mts .listing-options {
     width: 32%;

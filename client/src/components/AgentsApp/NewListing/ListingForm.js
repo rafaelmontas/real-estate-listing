@@ -25,7 +25,9 @@ class ListingForm extends React.Component {
       listingType: '',
       // Step 1
       bedrooms: null,
-      bathrooms: null
+      bathrooms: null,
+      mts: null,
+      price: null
     }
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
@@ -64,7 +66,15 @@ class ListingForm extends React.Component {
   // Handle fields change
   handleChange = input => e => {
     console.log([input], e.target.value)
-    this.setState({[input]: e.target.value})
+    if(input === 'mts' || input === 'price') {
+      if(isNaN(parseInt(e.target.value))) {
+        this.setState({[input]: null})    
+      } else {
+        this.setState({[input]: parseInt(e.target.value)})  
+      }
+    } else {
+      this.setState({[input]: e.target.value})
+    }
   }
   handleSelectChange = (optionSelected, value) => {
     console.log(optionSelected, value)
@@ -93,7 +103,11 @@ class ListingForm extends React.Component {
       case 1:
         return <Details
                   bedrooms={this.state.bedrooms}
-                  handleChange={this.handleSelectChange}/>
+                  bathrooms={this.state.bathrooms}
+                  handleChange={this.handleChange}
+                  handleSelectChange={this.handleSelectChange}
+                  listingMts={this.state.mts}
+                  listingPrice={this.state.price}/>
       case 2:
         return <h1>Fotos</h1>
       case 3:
