@@ -26,8 +26,29 @@ class ListingForm extends React.Component {
       // Step 1
       bedrooms: null,
       bathrooms: null,
+      parking: null,
       mts: null,
-      price: null
+      price: null,
+      amenities: {
+        halfBath: false,
+        aC: false,
+        gameZone: false,
+        laundryRoom: false,
+        socialArea: false,
+        elevator: false,
+        balcony: false,
+        familyRoom: false,
+        centralGas: false,
+        gym: false,
+        serviceRoom: false,
+        jacuzzy: false,
+        lobby: false,
+        pool: false,
+        floor: false,
+        powerPlant: false,
+        security: false,
+        wiCloset: false
+      }
     }
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
@@ -36,6 +57,7 @@ class ListingForm extends React.Component {
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
 
     this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.handleChecks = this.handleChecks.bind(this)
   }
 
   componentDidMount() {
@@ -89,6 +111,15 @@ class ListingForm extends React.Component {
     this.setState({propertyAddress: value,lat: latLng.lat, lng: latLng.lng})
     console.log(value, latLng)
   }
+  handleChecks(e) {
+    e.persist()
+    this.setState(prevState => ({
+      amenities: {
+        ...prevState.amenities,
+        [e.target.name]: e.target.checked  
+      }
+    }))
+  }
 
   getStepContent() {
     switch(this.state.activeStep) {
@@ -104,10 +135,13 @@ class ListingForm extends React.Component {
         return <Details
                   bedrooms={this.state.bedrooms}
                   bathrooms={this.state.bathrooms}
+                  parking={this.state.parking}
                   handleChange={this.handleChange}
                   handleSelectChange={this.handleSelectChange}
                   listingMts={this.state.mts}
-                  listingPrice={this.state.price}/>
+                  listingPrice={this.state.price}
+                  amenities={this.state.amenities}
+                  onChecks={this.handleChecks}/>
       case 2:
         return <h1>Fotos</h1>
       case 3:
