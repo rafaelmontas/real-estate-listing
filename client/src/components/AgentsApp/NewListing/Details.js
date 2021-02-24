@@ -177,6 +177,13 @@ class Details extends React.Component {
             </div>
           </div>
         </div>
+        <div className="listing-description listing-container">
+          <h3>Descripción Detallada</h3>
+          <p>Destacar caracteristicas como renovaciones, remodelaciones o cualquier detalle importante sobre la propiedad.</p>
+          <div className="text-area-container">
+            <textarea value={this.props.description} name="description" rows="6" onChange={this.props.handleChange('description')}/>
+          </div>
+        </div>
       </div>
     )
   }

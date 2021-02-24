@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
@@ -48,7 +47,8 @@ class ListingForm extends React.Component {
         powerPlant: false,
         security: false,
         wiCloset: false
-      }
+      },
+      description: ''
     }
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
@@ -141,7 +141,8 @@ class ListingForm extends React.Component {
                   listingMts={this.state.mts}
                   listingPrice={this.state.price}
                   amenities={this.state.amenities}
-                  onChecks={this.handleChecks}/>
+                  onChecks={this.handleChecks}
+                  description={this.state.description}/>
       case 2:
         return <h1>Fotos</h1>
       case 3:
@@ -176,7 +177,7 @@ class ListingForm extends React.Component {
             <Button
               disabled={this.state.activeStep === 0}
               onClick={this.prevStep}
-              className={'classes.backButton'}>
+              className={'back-button'}>
               Atras
             </Button>
             <Button variant="contained" color="primary" onClick={this.nextStep}>

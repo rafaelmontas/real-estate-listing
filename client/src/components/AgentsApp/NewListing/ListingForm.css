@@ -278,7 +278,46 @@
 .details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-label:hover {
   color: #216bff;
 }
-
+/* Description */
+.step-content .details-info-container .listing-description h3 {
+  margin-bottom: 10px;
+}
+.details-info-container .listing-description p {
+  color: rgb(42, 42, 51);
+  text-transform: none;
+  font-family: "Open Sans", Tahoma, Geneva, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.details-info-container .listing-description .text-area-container textarea {
+  appearance: none;
+  width: 100%;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border: 1px solid rgb(209, 209, 213);
+  border-radius: 4px;
+  box-sizing: border-box;
+  caret-color: rgb(0, 106, 255);
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  color: rgb(42, 42, 51);
+  -webkit-font-smoothing: antialiased;
+  text-transform: none;
+  font-family: "Open Sans", Tahoma, Geneva, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  resize: vertical;
+  min-height: 164px;
+  height: auto;
+  vertical-align: top;
+}
+.details-info-container .listing-description .text-area-container textarea:hover {
+  border-color: rgb(0, 106, 255);
+}
 
 @media only screen and (min-width: 768px) {
   .basic-info-container .property-type .property-type-options fieldset label,
