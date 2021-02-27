@@ -90,6 +90,59 @@ class ListingForm extends React.Component {
   prevStep = () => {
     this.setState({activeStep: this.state.activeStep - 1})
   }
+  // Render next button
+  renderNextButton() {
+    switch(this.state.activeStep) {
+      case 0:
+        if(this.state.propertyAddress && this.state.propertyType && this.state.listingType) {
+          return (
+            <Button variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        } else {
+          return (
+            <Button
+              disabled={true}
+              variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        }
+      case 1:
+        if(this.state.bedrooms && this.state.bathrooms && this.state.parking && this.state.mts && this.state.price) {
+          return (
+            <Button variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        } else {
+          return (
+            <Button
+              disabled={true}
+              variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        }
+      case 2:
+        if(this.state.imageFiles.length !== 0) {
+          return (
+            <Button variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        } else {
+          return (
+            <Button
+              disabled={true}
+              variant="contained" color="primary" onClick={this.nextStep}>
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            </Button>
+          )
+        }
+    }
+  }
   
   // Handle fields change
   handleChange = input => e => {
@@ -199,9 +252,7 @@ class ListingForm extends React.Component {
               className={'back-button'}>
               Atras
             </Button>
-            <Button variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
-            </Button>
+            {this.renderNextButton()}
           </div>
         </div>
       )
