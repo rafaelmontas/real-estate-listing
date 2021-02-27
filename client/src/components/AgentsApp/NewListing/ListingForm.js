@@ -7,6 +7,7 @@ import CircularProgressSpinner from '../../CircularProgressSpinner'
 import BasicInfo from './BasicInfo'
 import Details from './Details'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+import Photos from './Photos'
 import './ListingForm.css'
 
 
@@ -48,16 +49,21 @@ class ListingForm extends React.Component {
         security: false,
         wiCloset: false
       },
-      description: ''
+      description: '',
+      // Step 2
+      imageFiles: []
     }
     this.nextStep = this.nextStep.bind(this)
     this.prevStep = this.prevStep.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
-
+    // Step 1
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleChecks = this.handleChecks.bind(this)
+    // Step 2
+    this.onDrop = this.onDrop.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
@@ -120,6 +126,21 @@ class ListingForm extends React.Component {
       }
     }))
   }
+  onDrop = (imageFiles) => {
+    console.log(imageFiles);
+    this.setState({
+      imageFiles: this.state.imageFiles.concat(imageFiles.map(file => Object.assign(file, {preview: URL.createObjectURL(file)})))
+    })
+  }
+  handleRemove = imageName => e => {
+    // find the image's index
+    const imageIndex = this.state.imageFiles.findIndex(e => e.name === imageName)
+    console.log(imageIndex)
+    // remove the item from array
+    this.state.imageFiles.splice(imageIndex, 1)
+    // update the array
+    this.setState([...this.state.imageFiles])
+  }
 
   getStepContent() {
     switch(this.state.activeStep) {
@@ -144,9 +165,10 @@ class ListingForm extends React.Component {
                   onChecks={this.handleChecks}
                   description={this.state.description}/>
       case 2:
-        return <h1>Fotos</h1>
-      case 3:
-        return <h1>confirm</h1>
+        return <Photos
+                 handleDrop={this.onDrop}
+                 handleRemove={this.handleRemove}
+                 imageFiles={this.state.imageFiles}/>
     }
   }
 
@@ -166,9 +188,6 @@ class ListingForm extends React.Component {
             <Step key='Fotos'>
               <StepLabel>Fotos</StepLabel>
             </Step>
-            <Step key='Confirmar'>
-              <StepLabel>Confirmar</StepLabel>
-            </Step>
           </Stepper>
           <div className="step-content">
             {this.getStepContent()}
@@ -181,7 +200,7 @@ class ListingForm extends React.Component {
               Atras
             </Button>
             <Button variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Enviar' : 'Siguiente'}
+              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
             </Button>
           </div>
         </div>
