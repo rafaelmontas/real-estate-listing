@@ -66,4 +66,12 @@ db.property.hasMany(db.PropertyPictures, {
   onUpdate: 'SET DEFAULT'
 });
 
+// Property Amenities Relations
+db.PropertyAmenities.belongsTo(db.property, {foreignKey: 'property_id'});
+db.property.hasOne(db.PropertyAmenities, {
+  foreignKey: 'property_id',
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+});
+
 module.exports = db;
