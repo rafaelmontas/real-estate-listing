@@ -97,7 +97,7 @@ class ListingForm extends React.Component {
         if(this.state.propertyAddress && this.state.propertyType && this.state.listingType) {
           return (
             <Button variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+              Siguiente
             </Button>
           )
         } else {
@@ -105,7 +105,7 @@ class ListingForm extends React.Component {
             <Button
               disabled={true}
               variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+              Siguiente
             </Button>
           )
         }
@@ -113,7 +113,7 @@ class ListingForm extends React.Component {
         if(this.state.bedrooms && this.state.bathrooms && this.state.parking && this.state.mts && this.state.price) {
           return (
             <Button variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+              Siguiente
             </Button>
           )
         } else {
@@ -121,15 +121,15 @@ class ListingForm extends React.Component {
             <Button
               disabled={true}
               variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+              Siguiente
             </Button>
           )
         }
       case 2:
         if(this.state.imageFiles.length !== 0) {
           return (
-            <Button variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+            <Button variant="contained" type="submit" color="primary">
+              Publicar
             </Button>
           )
         } else {
@@ -137,7 +137,7 @@ class ListingForm extends React.Component {
             <Button
               disabled={true}
               variant="contained" color="primary" onClick={this.nextStep}>
-              {this.state.activeStep ===  2 ? 'Publicar' : 'Siguiente'}
+              Publicar
             </Button>
           )
         }
@@ -194,6 +194,10 @@ class ListingForm extends React.Component {
     // update the array
     this.setState([...this.state.imageFiles])
   }
+  handleSubmit(e) {
+    e.preventDefault()
+    console.log('submitted')
+  }
 
   getStepContent() {
     switch(this.state.activeStep) {
@@ -242,18 +246,18 @@ class ListingForm extends React.Component {
               <StepLabel>Fotos</StepLabel>
             </Step>
           </Stepper>
-          <div className="step-content">
+          <form onSubmit={this.handleSubmit} className="step-content">
             {this.getStepContent()}
-          </div>
-          <div className="action-buttons">
-            <Button
-              disabled={this.state.activeStep === 0}
-              onClick={this.prevStep}
-              className={'back-button'}>
-              Atras
-            </Button>
-            {this.renderNextButton()}
-          </div>
+            <div className="action-buttons">
+              <Button
+                disabled={this.state.activeStep === 0}
+                onClick={this.prevStep}
+                className={'back-button'}>
+                Atras
+              </Button>
+              {this.renderNextButton()}
+            </div>
+          </form>
         </div>
       )
     }
