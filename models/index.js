@@ -58,4 +58,12 @@ db.agent.hasOne(db.AgentProfilePicture, {
   onUpdate: 'SET DEFAULT'
 });
 
+// Property Pictures Relations
+db.PropertyPictures.belongsTo(db.property, {foreignKey: 'property_id'});
+db.property.hasMany(db.PropertyPictures, {
+  foreignKey: 'property_id',
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+});
+
 module.exports = db;
