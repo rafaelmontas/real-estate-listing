@@ -11,19 +11,19 @@ module.exports = {
       },
       province: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       province_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       sector: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       sector_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       listing_price: {
         type: Sequelize.INTEGER,
@@ -58,7 +58,8 @@ module.exports = {
         allowNull: false
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: true
       },
       bedrooms: {
         type: Sequelize.INTEGER,
@@ -78,7 +79,7 @@ module.exports = {
       },
       street_number: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       property_type: {
         type: Sequelize.STRING,
@@ -89,10 +90,10 @@ module.exports = {
         allowNull: true,
         defaultValue: false
       },
-      listing_status: {
-        type: Sequelize.STRING,
+      listing_active: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: "Pending"
+        defaultValue: false
       },
       status_change_timestamp: {
         type: Sequelize.DATE,

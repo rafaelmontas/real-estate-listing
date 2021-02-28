@@ -3,19 +3,19 @@ module.exports = (sequelize, DataTypes) => {
   const Property = sequelize.define('property', {
     province: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     province_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     sector: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     sector_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     listing_price: {
       type: DataTypes.INTEGER,
@@ -50,7 +50,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     description: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     bedrooms: {
       type: DataTypes.INTEGER,
@@ -70,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     street_number: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     property_type: {
       type: DataTypes.STRING,
@@ -81,10 +82,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: false
     },
-    listing_status: {
-      type: DataTypes.STRING,
+    listing_active: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "Pending"
+      defaultValue: false
     },
     status_change_timestamp: {
       type: DataTypes.DATE,
