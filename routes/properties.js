@@ -5,18 +5,15 @@ const Property = db.property;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
+
+// Use nested route
+const propertyPicturesRouter = require('./propertyPictures')
+propertiesRouter.use('/:id/pictures', propertyPicturesRouter)
+
+
 // @route GET /properties/
 // @desc Get All Properties
 // @access Public
-// propertiesRouter.get("/", (req, res) => {
-//   Property.findAll().then(properties => {
-//     res.status(200).send(properties);
-//   }).catch(err => {
-//     console.log(err);
-//     res.sendStatus(500);
-//   });
-// })
-
 function isEmpty(obj) {
   for(var key in obj) {
       if(obj.hasOwnProperty(key))
@@ -110,14 +107,6 @@ propertiesRouter.get("/", (req, res) => {
   
 });
   
-  
-//   .then(properties => {
-//     res.status(200).send(properties);
-//   }).catch(err => {
-//     console.log(err);
-//     res.sendStatus(500);
-//   });
-// })
 
 // @route GET /properties/:id
 // @desc Get One Property
