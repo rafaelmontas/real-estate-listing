@@ -3,6 +3,7 @@ import MenuItems from './MenuItems'
 import AgentDashboard from './AgentDashboard'
 import AgentListings from './Listings/AgentListings'
 import AgentListingDetails from './Listings/AgentListingDetails'
+import ListingForm from './NewListing/ListingForm'
 import AgentProfile from './Profile/AgentProfile'
 import { Route } from 'react-router-dom'
 import './AgentsApp.css'
@@ -21,6 +22,7 @@ class Structure extends React.Component {
             <Route path="/account/dashboard" component={AgentDashboard}/>
             <Route path="/account/listings" exact component={AgentListings}/>
             <Route path="/account/listings/:id" component={AgentListingDetails}/>
+            <Route path="/account/new-listing" component={ListingForm}/>
             <Route path="/account/profile" component={AgentProfile}/>
           </div>
         </div>

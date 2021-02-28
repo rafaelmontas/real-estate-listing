@@ -1,0 +1,449 @@
+.new-listing-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-listing-container .MuiPaper-root {
+  padding: 24px 0;
+  background-color: #FAFBFC;
+  width: 100%;
+}
+.new-listing-container .step-content {
+  width: 100%;
+  max-width: 900px;
+}
+.new-listing-container .action-buttons {
+  margin: 30px 0;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/* Basic Step */
+.new-listing-container .step-content .basic-info-container > h3 {
+  margin: 25px 0 10px;
+  color: #505357;
+}
+.new-listing-container .step-content .listing-container {
+  margin-top: 25px;
+  padding: 20px;
+  min-height: 150px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 15%);
+  background-color: #fff;
+  border-radius: 4px;
+}
+.new-listing-container .step-content .listing-container h3 {
+  font-weight: 600;
+  color: #3e4246;
+  margin-bottom: 20px;
+}
+/* Search */
+.new-listing-container .step-content .basic-info-container .property-address h3 {
+  margin-bottom: 5px;
+}
+.new-listing-container .step-content .basic-info-container .property-address span {
+  display: block;
+  margin-bottom: 20px;
+  color: #216bff;
+}
+.basic-info-container .property-address .address-search-input {
+  width: 100%;
+  height: 40px;
+  /* background-color: #F9FAFA; */
+  border: 1px solid #d5d9dc;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 8px;
+  color: rgb(59, 65, 68);
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.property-address .autocomplete-dropdown-container {
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgb(6 44 82 / 10%), 0 2px 16px 0 rgb(33 43 54 / 8%);
+  width: 100%;
+}
+.property-address .autocomplete-dropdown-container .suggestion-item {
+  min-height: 50px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.property-address .autocomplete-dropdown-container .suggestion-item--active {
+  background-color: #f4f5f7;
+  min-height: 50px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+/* Property Type */
+.basic-info-container .property-type .property-type-options fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+  margin: 0;
+}
+.basic-info-container .property-type .property-type-options fieldset label,
+.listing-type-options label {
+  padding: 12px 36px;
+  text-align: center;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 100%;
+  margin: 0 0 12px;
+}
+.basic-info-container .property-type .property-type-options fieldset label:last-child,
+.listing-type-options label:last-child {
+  margin-right: 0;
+}
+.basic-info-container .property-type .property-type-options fieldset label:hover,
+.listing-type-options label:hover {
+  color: #216bff;
+}
+.basic-info-container .property-type .property-type-options fieldset label.selected,
+.listing-type-options label.selected {
+  background-color: #f0f6ff;
+  border-color: #216bff;
+  color: #216bff;
+}
+.basic-info-container .property-type label input {
+  display: none;
+}
+
+/* Listing Type */
+.basic-info-container .property-type .listing-type-container {
+  margin-top: 25px;
+}
+.basic-info-container .property-type .listing-type-container .listing-type-options {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+
+/* Details Step */
+.details-info-container .listing-beds-baths-mts {
+  display: flex;
+  flex-direction: column;
+}
+.details-info-container .listing-beds-baths-mts .listing-options {
+  margin-bottom: 15px;
+}
+.details-info-container .listing-beds-baths-mts .listing-options:last-child {
+  margin-bottom: 0;
+}
+.details-info-container .listing-beds-baths-mts .listing-options label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgb(42, 42, 51);
+  font-weight: 700;
+}
+.details-info-container .listing-beds-baths-mts > div > div {
+  width: 100%;
+
+}
+.details-info-container .listing-beds-baths-mts > div > div > div {
+  min-height: 42px;
+}
+/* Mts */
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option {
+  display: flex;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input {
+  appearance: none;
+  width: 100%;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border: 1px solid rgb(209, 209, 213);
+  border-radius: 4px;
+  box-sizing: border-box;
+  caret-color: rgb(0, 106, 255);
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  color: rgb(42, 42, 51);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: auto;
+
+  padding-right: 0px;
+  border-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover,
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:hover,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:focus {
+  border-color: rgb(0, 106, 255);
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option label {
+  appearance: none;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border-width: 1px 1px 1px 0px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-image: initial;
+  border-top-color: rgb(209, 209, 213);
+  border-right-color: rgb(209, 209, 213);
+  border-bottom-color: rgb(209, 209, 213);
+  border-radius: 0px 4px 4px 0px;
+  box-sizing: border-box;
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  height: auto;
+  color: rgb(89, 107, 130);
+  width: auto;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  user-select: none;
+  border-left-style: initial;
+  border-left-color: initial;
+}
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:hover ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .mts-option input:focus ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:hover ~ label,
+.details-info-container .listing-beds-baths-mts .listing-options .price-option input:focus ~ label {
+  border-color: rgb(0, 106, 255);
+}
+/* Amenities */
+/* .details-info-container .listing-amenities .checkbox-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+} */
+.details-info-container .listing-amenities .checkbox-container .amenity-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-input {
+  position: static;
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(209, 209, 213);
+
+  /* appearance: none;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  background: rgb(255, 255, 255);
+  border: 2px solid rgb(209, 209, 213);
+  cursor: pointer;
+  margin: 0px;
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px; */
+}
+/* .details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-input:hover {
+  appearance: none;
+  border-color: rgb(0, 106, 255);
+} */
+.details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-input:checked {
+  background-color: rgb(0, 106, 255);
+  border-color: rgb(0, 106, 255);
+  color: #fff;
+}
+.details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-label {
+  margin-left: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.details-info-container .listing-amenities .checkbox-container .amenity-info .amenity-label:hover {
+  color: #216bff;
+}
+/* Description */
+.step-content .details-info-container .listing-description h3,
+.step-content .photos-container .listing-photos h3 {
+  margin-bottom: 10px;
+}
+.details-info-container .listing-description p,
+.photos-container .listing-photos p {
+  color: rgb(42, 42, 51);
+  text-transform: none;
+  font-family: "Open Sans", Tahoma, Geneva, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.details-info-container .listing-description .text-area-container textarea {
+  appearance: none;
+  width: 100%;
+  margin: 0px;
+  padding: 9px 16px;
+  background-color: rgb(246, 246, 250);
+  border: 1px solid rgb(209, 209, 213);
+  border-radius: 4px;
+  box-sizing: border-box;
+  caret-color: rgb(0, 106, 255);
+  cursor: text;
+  outline: none;
+  box-shadow: none;
+  color: rgb(42, 42, 51);
+  -webkit-font-smoothing: antialiased;
+  text-transform: none;
+  font-family: "Open Sans", Tahoma, Geneva, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  resize: vertical;
+  min-height: 164px;
+  height: auto;
+  vertical-align: top;
+}
+.details-info-container .listing-description .text-area-container textarea:hover {
+  border-color: rgb(0, 106, 255);
+}
+
+/* Photos */
+.photos-container .listing-photos > p {
+  margin-bottom: 20px;
+}
+.photos-container .listing-photos .upload-container .upload-component {
+  border: 2px dashed rgb(167, 166, 171);
+  cursor: pointer;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+.photos-container .listing-photos .upload-container .upload-component:hover {
+  border: 2px dashed rgb(0, 106, 255);
+}
+.photos-container .listing-photos .upload-container .upload-component span {
+  margin-bottom: 10px;
+}
+.photos-container .listing-photos .upload-container .upload-component span i {
+  font-size: 40px;
+}
+.photos-container .listing-photos .upload-container .upload-component p {
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+/* Preview */
+.photos-container .listing-photos .upload-container .image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px -4px 0;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb {
+  width: 100%;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner {
+  height: 150px;
+  margin: 4px;
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner::before {
+  content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner:hover::before {
+  opacity: 1;
+  /* cursor: pointer; */
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner .remove-image {
+  color: #fff;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.photos-container .listing-photos .upload-container .image-preview .thumb .thumb-inner .remove-image i {
+  font-size: 20px;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .basic-info-container .property-type .property-type-options fieldset label,
+  .listing-type-options label {
+    min-width: 190px;
+    margin: 0 25px 12px 0;
+  }
+  /* Search */
+  .basic-info-container .property-address .address-search-input {
+    width: 75%;
+  }
+  .property-address .autocomplete-dropdown-container {
+    width: 75%;
+  }
+  /* Details */
+  .details-info-container .listing-beds-baths-mts {
+    flex-direction: row;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+  }
+  .details-info-container .listing-beds-baths-mts .listing-options {
+    width: 32%;
+    margin-right: 12px;
+  }
+  .details-info-container .listing-beds-baths-mts .listing-options:nth-child(3) {
+    margin-right: 0;
+  }
+  /* Amenities */
+  .details-info-container .listing-amenities .checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .details-info-container .listing-amenities .checkbox-container .amenity-info {
+    width: 32%;
+  }
+  /* Preview */
+  .photos-container .listing-photos .upload-container .image-preview .thumb {
+    width: 33.3%;
+  }
+}
+
+@media only screen and (min-width: 991px) {
+  /* Preview */
+  .photos-container .listing-photos .upload-container .image-preview .thumb {
+    width: 25%;
+  }
+}
