@@ -5,18 +5,17 @@ const Property = db.property;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
+
+// Use nested route
+const propertyPicturesRouter = require('./propertyPictures')
+propertiesRouter.use('/:id/pictures', propertyPicturesRouter)
+// Use nested route
+const propertyAmenitiesRouter = require('./propertyAmenities')
+propertiesRouter.use('/:id/amenities', propertyAmenitiesRouter)
+
 // @route GET /properties/
 // @desc Get All Properties
 // @access Public
-// propertiesRouter.get("/", (req, res) => {
-//   Property.findAll().then(properties => {
-//     res.status(200).send(properties);
-//   }).catch(err => {
-//     console.log(err);
-//     res.sendStatus(500);
-//   });
-// })
-
 function isEmpty(obj) {
   for(var key in obj) {
       if(obj.hasOwnProperty(key))
@@ -110,14 +109,6 @@ propertiesRouter.get("/", (req, res) => {
   
 });
   
-  
-//   .then(properties => {
-//     res.status(200).send(properties);
-//   }).catch(err => {
-//     console.log(err);
-//     res.sendStatus(500);
-//   });
-// })
 
 // @route GET /properties/:id
 // @desc Get One Property
@@ -132,6 +123,30 @@ propertiesRouter.get("/:id", (req, res) => {
               res.sendStatus(500);
             });
 })
+
+
+// @route POST /properties/
+// @desc Register new properties
+// @acces Public
+propertiesRouter.post("/", async (req, res) => {
+  console.log(req.body)
+  const { listing_address, property_type, listing_type, bedrooms, bathrooms, half_bathrooms, parking_spaces, square_meters, listing_price, agent_id } = req.body
+  // Check if fields are empty
+  if(!listing_address || !property_type || !listing_type || !bedrooms || !bathrooms || !half_bathrooms || !parking_spaces || !square_meters || !listing_price || !agent_id) {
+    return res.status(400).json({msg: 'Favor seleccionar todos los campos obligatorios.'})
+  }
+
+  // Create Listing
+  try {
+    const listing = await Property.create(req.body)
+    console.log(listing.toJSON())
+    res.status(200).json({msg: 'Propiedad Publicada', listing_id: listing.id})
+  } catch(err) {
+    console.log(err.errors[0].message)
+    res.status(400).json({msg: err.errors[0].message})
+  }
+})
+
 
 
 module.exports = propertiesRouter;

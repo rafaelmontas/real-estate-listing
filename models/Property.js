@@ -65,9 +65,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    street_name: {
+    listing_address: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    street_name: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     street_number: {
       type: DataTypes.INTEGER,
