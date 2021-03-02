@@ -1,11 +1,6 @@
 {
   "development": {
-    "username": "rafaelmontas",
-    "password": null,
-    "database": "real_estate_listing",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": 0
+    "use_env_variable": "RDS_HOSTNAME"
   },
   "test": {
     "username": "root",
