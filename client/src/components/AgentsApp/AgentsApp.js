@@ -28,7 +28,7 @@ class AgentsApp extends React.Component {
   }
 
   componentDidMount() {
-    this.getAgent()
+    // this.getAgent()
     if(this.props.location.pathname === '/') {
       this.props.history.replace({pathname: '/account/dashboard'})
     }
