@@ -8,6 +8,10 @@ import BasicInfo from './BasicInfo'
 import Details from './Details'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import Photos from './Photos'
+import Confirm from './Confirm'
+import {agentContext} from '../agentContext'
+import axios from 'axios';
+import LoadingBackdrop from './LoadingBackdrop'
 import './ListingForm.css'
 
 
@@ -16,6 +20,8 @@ class ListingForm extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
+      submitLoading: false,
+      status: null,
       activeStep: 0,
       // Step 0
       propertyAddress: '',
@@ -26,6 +32,7 @@ class ListingForm extends React.Component {
       // Step 1
       bedrooms: null,
       bathrooms: null,
+      halfBathrooms: null,
       parking: null,
       mts: null,
       price: null,
@@ -47,7 +54,10 @@ class ListingForm extends React.Component {
         floor: false,
         powerPlant: false,
         security: false,
-        wiCloset: false
+        wiCloset: false,
+        furnished: false,
+        securitySystem: false,
+        hardwoodFloor: false
       },
       description: '',
       // Step 2
@@ -64,6 +74,8 @@ class ListingForm extends React.Component {
     // Step 2
     this.onDrop = this.onDrop.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    // Handle submit
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -194,9 +206,48 @@ class ListingForm extends React.Component {
     // update the array
     this.setState([...this.state.imageFiles])
   }
+
   handleSubmit(e) {
     e.preventDefault()
+    this.setState({submitLoading: true})
     console.log('submitted')
+    const body = {
+      listing_address: this.state.propertyAddress,
+      lat: this.state.lat,
+      lng: this.state.lng,
+      property_type: this.state.propertyType,
+      listing_type: this.state.listingType,
+      bedrooms: this.state.bedrooms,
+      bathrooms: this.state.bathrooms,
+      half_bathrooms: this.state.halfBathrooms,
+      parking_spaces: this.state.parking,
+      square_meters: this.state.mts,
+      listing_price: this.state.price,
+      description: this.state.description,
+      agent_id: this.context.agent.id
+    }
+    const formData = new FormData()
+    for(let i = 0; i < this.state.imageFiles.length; i++) {
+      formData.append('listing-pictures', this.state.imageFiles[i])
+    }
+
+    axios.post('/api/properties', body)
+          .then(res => {
+            console.log(res.data.msg, res.data.listing_id)
+            const amenitiesBody = this.state.amenities
+            return axios.post(`/api/properties/${res.data.listing_id}/amenities`, amenitiesBody)
+          })
+          .then(res => {
+            console.log(res.data.msg, res.data.listing_id)
+            return axios.post(`/api/properties/${res.data.listing_id}/pictures`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+          })
+          .then(res => {
+            console.log(res.data.msg)
+            this.setState({submitLoading: false, status: res.status})
+          })
+          .catch(err => {
+            console.log(err.response.data.msg, err.response.status)
+          })
   }
 
   getStepContent() {
@@ -213,6 +264,7 @@ class ListingForm extends React.Component {
         return <Details
                   bedrooms={this.state.bedrooms}
                   bathrooms={this.state.bathrooms}
+                  halfBathrooms={this.state.halfBathrooms}
                   parking={this.state.parking}
                   handleChange={this.handleChange}
                   handleSelectChange={this.handleSelectChange}
@@ -232,35 +284,38 @@ class ListingForm extends React.Component {
   render() {
     if(this.state.isLoading) {
       return <CircularProgressSpinner/>
+    } else if(this.state.status === 200) {
+      return <Confirm/>
     } else {
-      return (
-        <div className="new-listing-container">
-          <Stepper activeStep={this.state.activeStep} alternativeLabel>
-            <Step key='Información basica'>
-              <StepLabel>Información basica</StepLabel>
-            </Step>
-            <Step key='Detalles'>
-              <StepLabel>Detalles</StepLabel>
-            </Step>
-            <Step key='Fotos'>
-              <StepLabel>Fotos</StepLabel>
-            </Step>
-          </Stepper>
-          <form onSubmit={this.handleSubmit} className="step-content">
-            {this.getStepContent()}
-            <div className="action-buttons">
-              <Button
-                disabled={this.state.activeStep === 0}
-                onClick={this.prevStep}
-                className={'back-button'}>
-                Atras
-              </Button>
-              {this.renderNextButton()}
-            </div>
-          </form>
-        </div>
-      )
-    }
+        return (
+          <div className="new-listing-container">
+            {this.state.submitLoading && <LoadingBackdrop backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+            <Stepper activeStep={this.state.activeStep} alternativeLabel>
+              <Step key='Información basica'>
+                <StepLabel>Información basica</StepLabel>
+              </Step>
+              <Step key='Detalles'>
+                <StepLabel>Detalles</StepLabel>
+              </Step>
+              <Step key='Fotos'>
+                <StepLabel>Fotos</StepLabel>
+              </Step>
+            </Stepper>
+            <form onSubmit={this.handleSubmit} className="step-content">
+              {this.getStepContent()}
+              <div className="action-buttons">
+                <Button
+                  disabled={this.state.activeStep === 0}
+                  onClick={this.prevStep}
+                  className={'back-button'}>
+                  Atras
+                </Button>
+                {this.renderNextButton()}
+              </div>
+            </form>
+          </div>
+        )
+      }
   }
 }
 
@@ -275,4 +330,5 @@ function insertScript() {
   head.appendChild(script)
 }
 
+ListingForm.contextType = agentContext;
 export default ListingForm;

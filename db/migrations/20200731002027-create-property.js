@@ -73,9 +73,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      street_name: {
+      listing_address: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      street_name: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       street_number: {
         type: Sequelize.INTEGER,

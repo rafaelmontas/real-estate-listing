@@ -398,6 +398,38 @@
   font-size: 20px;
 }
 
+/* Confirm */
+.confirmation-container {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.confirmation-container i {
+  font-size: 50px;
+  color: #4dbf4d;
+  margin-bottom: 20px;
+}
+.confirmation-container h1 {
+  margin-bottom: 10px;
+}
+.confirmation-container p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.confirmation-container a {
+  text-decoration: none;
+  padding: 12px;
+  background-color: #1657D7;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
 
 
 @media only screen and (min-width: 768px) {
@@ -416,12 +448,12 @@
   /* Details */
   .details-info-container .listing-beds-baths-mts {
     flex-direction: row;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     flex-wrap: wrap;
   }
   .details-info-container .listing-beds-baths-mts .listing-options {
     width: 32%;
-    margin-right: 12px;
+    /* margin-right: 12px; */
   }
   .details-info-container .listing-beds-baths-mts .listing-options:nth-child(3) {
     margin-right: 0;

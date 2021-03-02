@@ -15,6 +15,13 @@ const bathOptions = [
   { value: '4', label: '4' },
   { value: '5', label: '5' },
 ];
+const halfBathOptions = [
+  { value: '0', label: '0' },
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+];
 const parkingOptions = [
   { value: '1', label: '1' },
   { value: '2', label: '2' },
@@ -40,6 +47,10 @@ class Details extends React.Component {
   handleBathroomChange = (optionSelected) => {
     console.log(optionSelected)
     this.props.handleSelectChange('bathrooms', optionSelected.value)
+  }
+  handleHalfBathroomChange = (optionSelected) => {
+    console.log(optionSelected)
+    this.props.handleSelectChange('halfBathrooms', optionSelected.value)
   }
   handleParkingChange = (optionSelected) => {
     console.log(optionSelected)
@@ -67,6 +78,15 @@ class Details extends React.Component {
               onChange={this.handleBathroomChange}
               isSearchable={false}
               value={this.props.bathrooms && {label: `${this.props.bathrooms}`, value: `${this.props.bathrooms}`}}/>
+          </div>
+          <div className="listing-options">
+            <label>Medio Baños</label>
+            <Select
+              options={halfBathOptions}
+              placeholder="Seleccionar..."
+              onChange={this.handleHalfBathroomChange}
+              isSearchable={false}
+              value={this.props.halfBathrooms !== null ? {label: `${this.props.halfBathrooms}`, value: `${this.props.halfBathrooms}`}: ''}/>
           </div>
           <div className="listing-options">
             <label>Parqueos</label>
@@ -112,6 +132,10 @@ class Details extends React.Component {
               <label htmlFor="a/c" className="amenity-label">Aire Acondicionado</label>
             </div>
             <div className="amenity-info">
+              <input id="furnished" name="furnished" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.furnished}/>
+              <label htmlFor="furnished" className="amenity-label">Amueblado</label>
+            </div>
+            <div className="amenity-info">
               <input id="games-zone" name="gameZone" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.gameZone}/>
               <label htmlFor="games-zone" className="amenity-label">Área de Juegos</label>
             </div>
@@ -130,6 +154,10 @@ class Details extends React.Component {
             <div className="amenity-info">
               <input id="balcony" name="balcony" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.balcony}/>
               <label htmlFor="balcony" className="amenity-label">Balcón</label>
+            </div>
+            <div className="amenity-info">
+              <input id="securitySystem" name="securitySystem" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.securitySystem}/>
+              <label htmlFor="securitySystem" className="amenity-label">Cámaras de Seguridad</label>
             </div>
             <div className="amenity-info">
               <input id="family-room" name="familyRoom" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.familyRoom}/>
@@ -158,6 +186,10 @@ class Details extends React.Component {
             <div className="amenity-info">
               <input id="pool" name="pool" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.pool}/>
               <label htmlFor="pool" className="amenity-label">Piscina</label>
+            </div>
+            <div className="amenity-info">
+              <input id="hardwoodFloor" name="hardwoodFloor" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.hardwoodFloor}/>
+              <label htmlFor="hardwoodFloor" className="amenity-label">Piso de Madera</label>
             </div>
             <div className="amenity-info">
               <input id="floor" name="floor" type="checkbox" className="amenity-input" onChange={this.props.onChecks} checked={this.props.amenities.floor}/>
