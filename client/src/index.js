@@ -11,7 +11,7 @@ const subDomain = parsedData[0];
 
 if(parsedData.length >= 3 && subDomain !== 'www') {
   console.log(parsedData,parsedData.includes('agent'))
-  if(subDomain !== 'agent') {
+  // if(subDomain !== 'agent') {
     ReactDOM.render(
       <React.StrictMode>
         <BrowserRouter>
@@ -20,7 +20,7 @@ if(parsedData.length >= 3 && subDomain !== 'www') {
       </React.StrictMode>,
       document.getElementById('root')
     );  
-  }
+  // }
 } else {
   console.log(window.location.host)
   ReactDOM.render(
