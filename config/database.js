@@ -1,25 +1,10 @@
-// const Sequelize = require('sequelize');
-
-// // Option 1: Passing parameters separately
-// const db = new Sequelize('real_estate_listing', 'rafaelmontas', '', {
-//   host: 'localhost',
-//   dialect: 'postgres',
-
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     acquire: 30000,
-//     idle: 10000
-//   }
-// });
-
-
-// db.authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(err => {
-//     console.error('Unable to connect to the database:', err);
-//   });
-
-  // module.exports = db;
+require('dotenv').config();
+module.exports = {
+  "development": {
+      "username": process.env.RDS_USERNAME,
+      "password": process.env.RDS_PASSWORD,
+      "database": process.env.RDS_DB_NAME,
+      "host": process.env.RDS_HOSTNAME,
+      "dialect": "postgres"
+  }
+}
