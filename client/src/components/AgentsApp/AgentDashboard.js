@@ -14,22 +14,22 @@ class AgentDashboard extends React.Component {
       topListings: []
     }
   }
-  // componentDidMount() {
-  //   this.setState({ isLoading: true })
-  //   this.timer = setTimeout(() => {
-  //     axios.get('/api/properties')
-  //     .then(topListings => {
-  //       console.log(topListings.data)
-  //       this.setState({topListings: topListings.data.properties, isLoading: false})
-  //     })
-  //     .catch(err => {
-  //       console.log(err.response.data, err.response.status)
-  //       if(err.response.status === 500) {
-  //         this.props.history.replace('/error/500')
-  //       }
-  //     })
-  //   }, 1000)
-  // }
+  componentDidMount() {
+    this.setState({ isLoading: true })
+    this.timer = setTimeout(() => {
+      axios.get('/api/properties')
+      .then(topListings => {
+        console.log(topListings.data)
+        this.setState({topListings: topListings.data.properties, isLoading: false})
+      })
+      .catch(err => {
+        console.log(err.response.data, err.response.status)
+        if(err.response.status === 500) {
+          this.props.history.replace('/error/500')
+        }
+      })
+    }, 1000)
+  }
   renderBottomDiv() {
     if(this.state.topListings.length === 0) {
       return (
