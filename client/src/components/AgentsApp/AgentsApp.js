@@ -28,7 +28,11 @@ class AgentsApp extends React.Component {
   }
 
   componentDidMount() {
+    // Get agent info
     this.getAgent()
+    // Add background color to doby
+    document.body.classList.toggle("background")
+    // Redirect
     if(this.props.location.pathname === '/') {
       this.props.history.replace({pathname: '/account/dashboard'})
     }

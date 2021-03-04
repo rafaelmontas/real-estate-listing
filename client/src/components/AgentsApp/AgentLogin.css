@@ -1,5 +1,6 @@
 .agent-login-container {
-  min-height: 100vh;
+  min-height: 100%;
+  padding: 50px 16px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,6 +9,9 @@
 .agent-login-container .inner-login {
   width: 100%;
   max-width: 450px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
+  border-radius: 4px;
 }
 .agent-login-container .inner-login .agent-login {
   padding: 25px;
@@ -16,6 +20,10 @@
 .agent-login-container .inner-login .agent-login .login-header {
   margin-bottom: 16px;
   text-align: center;
+}
+.agent-login-container .inner-login .agent-login .login-header img {
+  width: 185px;
+  margin: 0 0 10px 5px;
 }
 .agent-login-container .inner-login .agent-login .login-header h2 {
   font-size: 22px;
@@ -85,11 +93,9 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .agent-login-container .inner-login {
-    /* height: 400px; */
-    background-color: #fff;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
-    border-radius: 4px;
+  .agent-login-container {
+    min-height: 100vh;
+    padding: 16px;
   }
   .agent-login-container .inner-login .agent-login .login-header h2 {
     font-size: 24px;

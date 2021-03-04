@@ -1,5 +1,6 @@
 .agent-signup-container {
-  min-height: 100vh;
+  min-height: 100%;
+  padding: 50px 16px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,6 +9,9 @@
 .agent-signup-container .inner-signup {
   width: 100%;
   max-width: 450px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
+  border-radius: 4px;
 }
 .agent-signup-container .inner-signup .agent-register {
   padding: 25px;
@@ -17,9 +21,13 @@
   margin-bottom: 16px;
   text-align: center;
 }
+.agent-signup-container .inner-signup .agent-register .register-header img {
+  width: 185px;
+  margin: 0 0 10px 5px;
+}
 .agent-signup-container .inner-signup .agent-register .register-header h2 {
   font-size: 22px;
-  line-height: 2.5rem;
+  /* line-height: 2.5rem; */
 }
 .agent-signup-container .inner-signup .agent-register .register-header p {
   color: #333;
@@ -100,11 +108,9 @@
   color: #006AFF;
 }
 @media only screen and (min-width: 768px) {
-  .agent-signup-container .inner-signup {
-    /* height: 400px; */
-    background-color: #fff;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
-    border-radius: 4px;
+  .agent-signup-container {
+    min-height: 100vh;
+    padding: 16px;
   }
   .agent-signup-container .inner-signup .agent-register .register-header h2 {
     font-size: 24px;
