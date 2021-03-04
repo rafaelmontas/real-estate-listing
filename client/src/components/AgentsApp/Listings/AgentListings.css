@@ -4,6 +4,12 @@
 .listings-content-right .show-listings, .listings-content-right .empty-listings {
   padding: 0;
 }
+.listings-content-right .show-listings .listings-header {
+  margin-bottom: 30px;
+}
+.listings-content-right .show-listings .listings-tabs {
+  display: none;
+}
 .listings-content-right .show-listings .listing-type-container .listings-list .listing-status span {
   padding: 6px;
   background-color: green;

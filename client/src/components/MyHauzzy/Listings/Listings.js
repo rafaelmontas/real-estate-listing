@@ -12,17 +12,17 @@ class Listings extends React.Component {
     this.handleTabClick = this.handleTabClick.bind(this)
   }
 
-  componentDidMount() {
-    if(this.props.location.search === '') {
-      this.props.history.push({
-        search: '?status=active'
-      })
-    } else if(this.props.location.search === '?status=pending') {
-      this.setState({tabSelected: 'tab-2'})
-    } else if(this.props.location.search === '?status=closed') {
-      this.setState({tabSelected: 'tab-3'})
-    }
-  }
+  // componentDidMount() {
+  //   if(this.props.location.search === '') {
+  //     this.props.history.push({
+  //       search: '?status=active'
+  //     })
+  //   } else if(this.props.location.search === '?status=pending') {
+  //     this.setState({tabSelected: 'tab-2'})
+  //   } else if(this.props.location.search === '?status=closed') {
+  //     this.setState({tabSelected: 'tab-3'})
+  //   }
+  // }
   componentDidUpdate(prevProps) {
     // Handle back button update
     if(prevProps.location.search !== this.props.location.search) {
