@@ -26,7 +26,7 @@ class AgentLogin extends React.Component {
 
   render() {
     if(this.state.loading) {
-      return <div style={{height: '100vh'}}><CircularProgressSpinner/></div>
+      return <div style={{height: '100%'}}><CircularProgressSpinner/></div>
     } else {
       return (
         <div className="agent-login-container">
