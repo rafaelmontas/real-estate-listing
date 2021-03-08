@@ -1,6 +1,7 @@
 import React from 'react'
 import Listings from '../../MyHauzzy/Listings/Listings'
-import AgentListingDetails from './AgentListingDetails'
+// import AgentListingDetails from './AgentListingDetails'
+import {agentContext} from '../agentContext';
 import axios from 'axios';
 import CircularProgressSpinner from '../../CircularProgressSpinner'
 import './AgentListings.css'
@@ -17,10 +18,10 @@ class AgentListings extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      axios.get('/api/properties')
+      axios.get(`/agents/${this.context.agent.id}/properties`)
       .then(listings => {
         console.log(listings.data)
-        this.setState({listings: listings.data.properties, isLoading: false})
+        this.setState({listings: listings.data.listings, isLoading: false})
       })
       .catch(err => {
         console.log(err.response.data, err.response.status)
@@ -48,4 +49,5 @@ class AgentListings extends React.Component {
   }
 }
 
+AgentListings.contextType = agentContext;
 export default AgentListings

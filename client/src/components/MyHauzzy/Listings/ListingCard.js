@@ -1,11 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import NumberFormat from 'react-number-format';
+import dateFormat from 'dateformat'
 import './ListingCard.css';
 
 import image from "../../../demo_img/house1.png"
 
 class ListingCard extends React.Component {
+
+  renderPropertyType() {
+    if(this.props.listing.property_type === "apartment") {
+      return <span>Apartamento</span>
+    } else if(this.props.listing.property_type === "house") {
+      return <span>Casa</span>
+    } else if(this.props.listing.property_type === "villa") {
+      return <span>Villa</span>
+    } else if(this.props.listing.property_type === "penthouse") {
+      return <span>Penthouse</span>
+    }
+  }
+
   render() {
     return (
       <Link to={`${this.props.linkTo}/${this.props.listing.id}`}>
@@ -17,7 +31,7 @@ class ListingCard extends React.Component {
             <div className="listing-details">
               <div className="address-section sections">
                 <div className="info-container">
-                  <div className="listing-address">{`C/ ${this.props.listing.street_name} ${this.props.listing.street_number}`}</div>
+                  <div className="listing-address">{this.props.listing.listing_address}</div>
                   <div className="listing-sector">{this.props.listing.sector}</div>
                   <div className="listing-stats">
                     <span className="stats beds">{this.props.listing.bedrooms} hab</span>
@@ -32,19 +46,21 @@ class ListingCard extends React.Component {
               </div>
               <div className="right-info-container">
                 <div className="listing-status sections">
-                  <span>Activa</span>
+                  <span className={this.props.listing.listing_active ? "active" : "pending"}>
+                    {this.props.listing.listing_active ? "Activa" : "Pendiente"}
+                  </span>
                 </div>
                 <div className="listing-date sections">
-                  <span>25 Jul 2020</span>
+                  <span>{dateFormat(this.props.listing.createdAt, "dd/mm/yy")}</span>
                 </div>
                 <div className="property-type sections">
-                  <span>Apartamento</span>
+                  {this.renderPropertyType()}
                 </div>
                 <div className="listing-type sections">
-                  <span>En venta</span>
+                  <span>{this.props.listing.listing_type === "sale" ? "En venta" : "Alquiler"}</span>
                 </div>
                 <div className="listing-visits sections">  
-                  <span><i className="far fa-eye"></i> 15</span>
+                  <span><i className="far fa-eye"></i> 0</span>
                 </div>
                 <div className="listing-actions sections">  
                   <span className="edit-button"><i className="far fa-edit"></i></span>

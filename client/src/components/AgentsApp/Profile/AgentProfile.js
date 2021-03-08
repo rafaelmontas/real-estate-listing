@@ -164,7 +164,7 @@ class AgentProfile extends React.Component {
                 <div className="bottom-info">
                   <div className="member-since-info">
                     <span>{`Miembro desde: ${dateFormat(this.state.agent.createdAt, "dd/mm/yy")}`}</span>
-                    <span>8 Propiedades</span>
+                    {/* <span>8 Propiedades</span> */}
                   </div>
                 </div>
               </div>
