@@ -13,6 +13,10 @@ const verifyToken = require('../middleware/agentAuth')
 const agentsProfilePicturesRouter =  require('./agentsProfilePictures')
 agentsRouter.use('/:id/profile-pictures', agentsProfilePicturesRouter)
 
+const agentsPropertiesRouter = require('./agentsProperties')
+agentsRouter.use('/:id/properties', agentsPropertiesRouter)
+
+
 agentsRouter.get("/:id", verifyToken, (req, res) => {
   // Verify that agent requested is the same as the one requesting
   console.log(`Agent requesting: ${req.agent.id} for agent: ${Number(req.params.id)}`)
