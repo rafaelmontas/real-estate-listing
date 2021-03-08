@@ -76,7 +76,7 @@ class MenuItems extends React.Component {
                 </div>
               </Link>
             </li>
-            <li className="performance-button button">
+            {/* <li className="performance-button button">
               <Link to="/account/performance"
                     className={this.state.navSelected === 3 ? "nav-link selected" : "nav-link"}
                     onClick={this.props.onSidedrawerClick}>
@@ -85,7 +85,7 @@ class MenuItems extends React.Component {
                   <span>Desempeño</span>
                 </div>
               </Link>
-            </li>
+            </li> */}
             <li className="new-listing-button button">
               <Link to="/account/new-listing"
                     className={this.state.navSelected === 4 ? "nav-link selected" : "nav-link"}
