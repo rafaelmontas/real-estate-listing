@@ -231,7 +231,7 @@ class ListingForm extends React.Component {
       formData.append('listing-pictures', this.state.imageFiles[i])
     }
 
-    axios.post('/api/properties', body)
+    axios.post(`/agents/${this.context.agent.id}/properties`, body)
           .then(res => {
             console.log(res.data.msg, res.data.listing_id)
             const amenitiesBody = this.state.amenities
