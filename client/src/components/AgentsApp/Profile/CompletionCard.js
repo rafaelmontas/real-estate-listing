@@ -5,7 +5,7 @@ class CompletionCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      completion: null
+      completion: 0
     }
   }
 
