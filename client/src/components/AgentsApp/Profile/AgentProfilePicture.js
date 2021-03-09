@@ -27,7 +27,7 @@ class AgentProfilePicture extends React.Component {
         this.setState({isLoading: true})
         const formData = new FormData()
         formData.append('profileImg', this.state.profilePicture)
-        axios.post('/agents/1/profile-pictures', formData, {
+        axios.post(`/agents/${this.props.agentId}/profile-pictures`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
