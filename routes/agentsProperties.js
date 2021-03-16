@@ -1,6 +1,8 @@
 const express = require('express');
 const db =  require('../models');
 const Property = db.property;
+const PropertyAmenities = db.PropertyAmenities;
+const PropertyPictures = db.PropertyPictures;
 const agentsPropertiesRouter = express.Router({mergeParams: true});
 
 
@@ -16,7 +18,10 @@ agentsPropertiesRouter.get('/', async (req, res) => {
 
 agentsPropertiesRouter.get('/:propertyId', async (req, res) => {
   try {
-    const listing = await Property.findOne({where: {id: req.params.propertyId, agent_id: req.params.id}})
+    const listing = await Property.findOne({
+      where: {id: req.params.propertyId, agent_id: req.params.id},
+      include: [{model: PropertyAmenities}, {model: PropertyPictures, attributes: ['id', 'location', 'original_name']}]
+    })
     console.log(listing.toJSON())
     res.status(200).json({listing: listing, msg: 'agent property'})
   } catch(err) {

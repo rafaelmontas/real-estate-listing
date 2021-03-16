@@ -3,24 +3,29 @@ import NumberFormat from 'react-number-format';
 import image from "../../../../demo_img/house1.png"
 import {Link} from 'react-router-dom';
 import { withRouter } from "react-router";
+import axios from 'axios';
+import ListingEditForm from './ListingEditForm'
 import './ReportEditListing.css'
 
 class ReportEditListing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
       listing: {}
     }
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    fetch(`/api/properties/${this.props.match.params.id}`)
-          .then(res => res.json())
-          .then(listing => {
-            console.log(listing)
-            this.setState({ listing });
-          });
+    axios.get(`/agents/${this.props.id}/properties/${this.props.match.params.id}`)
+    .then(listing => {
+      console.log(listing)
+      this.setState({listing: listing.data.listing, isLoading: false});
+    })
+    .catch(err => {
+      console.log(err.response.data, err.response.status)
+    })
   }
 
   render() {
@@ -30,9 +35,9 @@ class ReportEditListing extends React.Component {
           <div className="back-button">
             <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
           </div>
-          <div className="share-button">
+          {/* <div className="share-button">
             <span><i className="far fa-share-square"></i>Compartir</span>
-          </div>
+          </div> */}
         </div>
         <div className="re-listing-container">
           <div className="listing-left">
@@ -41,8 +46,8 @@ class ReportEditListing extends React.Component {
                 <img src={image}/>
                 <div className="listing-details-over">
                   <div className="listing-details-top">
-                    <span className="street-info">{`C/ ${this.state.listing.street_name} #${this.state.listing.street_number}`}</span>
-                    <span className="sector-province">{`${this.state.listing.sector}, ${this.state.listing.province}`}</span>
+                    <span className="street-info">{this.state.listing.listing_address}</span>
+                    {/* <span className="sector-province">{`${this.state.listing.sector}, ${this.state.listing.province}`}</span> */}
                   </div>
                   <div className="listing-details-bottom">
                     <span className="price-info listing-stats">
@@ -60,16 +65,16 @@ class ReportEditListing extends React.Component {
               <div className="performance-preview">
                 <div className="performance">
                   <span>Visitas<i className="far fa-eye"></i></span>
-                  <span>5</span>
+                  <span>0</span>
                 </div>
                 <div className="preview">
-                  <span>Ver propiedad</span>
+                  <span>Status: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="listing-right">
-            <h2>right side</h2>
+            {!this.state.isLoading && <ListingEditForm listing={this.state.listing}/>}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReportEditListing from '../../MyHauzzy/Listings/ReportEditListing/ReportEditListing'
-// import { withRouter } from "react-router";
+import {agentContext} from '../agentContext';
 import './AgentListingDetails.css'
 
 class AgentListingDetails extends React.Component {
@@ -10,10 +10,11 @@ class AgentListingDetails extends React.Component {
   render() {
     return (
       <div className="agent-listing-details-container">
-        <ReportEditListing linkTo="/account/listings"/>
+        <ReportEditListing linkTo="/account/listings" id={this.context.agent.id}/>
       </div>
     )
   }
 }
 
+AgentListingDetails.contextType = agentContext
 export default AgentListingDetails
