@@ -37,161 +37,14 @@ const parkingOptions = [
 class ListingEditForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isLoading: true,
-      listingAddress: this.props.listing.listing_address,
-      lat: null,
-      lng: null,
-      propertyType: this.props.listing.property_type,
-      listingType: this.props.listing.listing_type,
-      bedrooms: this.props.listing.bedrooms,
-      bathrooms: this.props.listing.bathrooms,
-      halfBathrooms: this.props.listing.half_bathrooms,
-      parking: this.props.listing.parking_spaces,
-      mts: this.props.listing.square_meters,
-      price: this.props.listing.listing_price,
-      amenities: {
-        halfBath: this.props.listing['PropertyAmenity'].half_bathrooms,
-        aC: this.props.listing['PropertyAmenity'].air_conditioner,
-        gameZone: this.props.listing['PropertyAmenity'].game_zone,
-        laundryRoom: this.props.listing['PropertyAmenity'].laundry_room,
-        socialArea: this.props.listing['PropertyAmenity'].social_area,
-        elevator: this.props.listing['PropertyAmenity'].elevator,
-        balcony: this.props.listing['PropertyAmenity'].balcony,
-        familyRoom: this.props.listing['PropertyAmenity'].family_room,
-        centralGas: this.props.listing['PropertyAmenity'].shared_gas,
-        gym: this.props.listing['PropertyAmenity'].gym,
-        serviceRoom: this.props.listing['PropertyAmenity'].service_room,
-        jacuzzy: this.props.listing['PropertyAmenity'].jacuzzy,
-        lobby: this.props.listing['PropertyAmenity'].lobby,
-        pool: this.props.listing['PropertyAmenity'].swimming_pool,
-        floor: this.props.listing['PropertyAmenity'].marble_floor,
-        powerPlant: this.props.listing['PropertyAmenity'].power_plant,
-        security: this.props.listing['PropertyAmenity'].security,
-        wiCloset: this.props.listing['PropertyAmenity'].walk_in_closet,
-        furnished: this.props.listing['PropertyAmenity'].furnished,
-        securitySystem: this.props.listing['PropertyAmenity'].security_system,
-        hardwoodFloor: this.props.listing['PropertyAmenity'].hardwood_floor
-      },
-      description: this.props.listing.description,
-      imageFiles: this.props.listing['PropertyPictures'],
-      imageToUpload: [],
-      imageToDelete: []
-    }
-    this.handleAddressChange = this.handleAddressChange.bind(this)
-    this.handleAddressSelect = this.handleAddressSelect.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    // Details
-    this.handleBedroomChange = this.handleBedroomChange.bind(this)
-    this.handleChecks = this.handleChecks.bind(this)
-    // Photos
-    this.handleDrop = this.handleDrop.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
-    if(!window.google) {
-      insertScript()
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        console.log('places api mounted')
-      }, 2000)
-    } else {
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        console.log('places api already mounted')
-      }, 1000)
-    }
     console.log(this.props.listing)
   }
 
-  handleAddressChange = address => {
-    this.setState({listingAddress: address})
-  }
-  handleAddressSelect = async value => {
-    const results = await geocodeByAddress(value)
-    const latLng = await getLatLng(results[0])
-    this.setState({listingAddress: value,lat: latLng.lat, lng: latLng.lng})
-    console.log(value, latLng)
-  }
-  handleChange = input => e => {
-    console.log([input], e.target.value)
-    if(input === 'mts' || input === 'price') {
-      if(isNaN(parseInt(e.target.value))) {
-        this.setState({[input]: null})    
-      } else {
-        this.setState({[input]: parseInt(e.target.value)})  
-      }
-    } else {
-      this.setState({[input]: e.target.value})
-    }
-  }
-  // handleSelectChange = (optionSelected, value) => {
-  //   console.log(optionSelected, value)
-  //   this.setState({[optionSelected]: parseInt(value)})
-  // }
-
-  // Details
-  handleBedroomChange = (optionSelected) => {
-    this.setState({bedrooms: parseInt(optionSelected.value)})
-  }
-  handleBathroomChange = (optionSelected) => {
-    this.setState({bathrooms: parseInt(optionSelected.value)})
-  }
-  handleHalfBathroomChange = (optionSelected) => {
-    this.setState({halfBathrooms: parseInt(optionSelected.value)})
-  }
-  handleParkingChange = (optionSelected) => {
-    this.setState({parking: parseInt(optionSelected.value)})
-  }
-  handleChecks(e) {
-    e.persist()
-    this.setState(prevState => ({
-      amenities: {
-        ...prevState.amenities,
-        [e.target.name]: e.target.checked  
-      }
-    }))
-  }
-  handleDrop = (imageFiles) => {
-    console.log(imageFiles);
-    this.setState({
-      imageFiles: this.state.imageFiles.concat(imageFiles.map(file => Object.assign(file, {location: URL.createObjectURL(file)}))),
-      imageToUpload: this.state.imageToUpload.concat(imageFiles)
-    })
-  }
-  handleRemove = imageName => e => {
-    // find the image's index
-    let imageIndex;
-    if(this.state.imageFiles.findIndex(e => e.original_name === imageName) === -1) {
-      imageIndex = this.state.imageFiles.findIndex(e => e.name === imageName)
-    } else {
-      imageIndex = this.state.imageFiles.findIndex(e => e.original_name === imageName)
-    }
-    console.log(imageIndex)
-    // Add to array of images to delete if image in db
-    if(this.state.imageFiles[imageIndex].id) {
-      console.log(this.state.imageFiles[imageIndex].id)
-      this.setState({
-        imageToDelete: this.state.imageToDelete.concat([this.state.imageFiles[imageIndex].id])
-      })
-    }
-
-    // remove the item from array
-    this.state.imageFiles.splice(imageIndex, 1)
-    // update the array
-    this.setState([...this.state.imageFiles])
-    
-    // Remove image to upload
-    if(this.state.imageToUpload.findIndex(e => e.name === imageName) !== -1) {
-      const uploadIndex = this.state.imageToUpload.findIndex(e => e.name === imageName)
-      this.state.imageToUpload.splice(uploadIndex, 1)
-      this.setState([...this.state.imageToUpload])
-    }
-  }
-
   render() {
-    if(this.state.isLoading) {
+    if(this.props.isLoading) {
       return <div></div>
     } else {
       return (
@@ -200,9 +53,9 @@ class ListingEditForm extends React.Component {
             <h3>Ubicación de la Propiedad</h3>
             <span>Especificar dirección con número (#)</span>
             <PlacesAutocomplete 
-              value={this.state.listingAddress}
-              onChange={this.handleAddressChange}
-              onSelect={this.handleAddressSelect}
+              value={this.props.listingAddress}
+              onChange={this.props.handleAddressChange}
+              onSelect={this.props.handleAddressSelect}
               searchOptions={{componentRestrictions: { country: "do" }, types: ['address'], fields: ['address_components']}}>
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                   <div>
@@ -245,9 +98,9 @@ class ListingEditForm extends React.Component {
                     valueLabel = 'Naves'
                   }
                   return (
-                    <label key={value} className={this.state.propertyType === value ? "type-option selected" : "type-option"}>
+                    <label key={value} className={this.props.propertyType === value ? "type-option selected" : "type-option"}>
                       {valueLabel}
-                      <input type="radio" name="propertyType" value={value} onChange={this.handleChange('propertyType')}/>
+                      <input type="radio" name="propertyType" value={value} onChange={this.props.handleChange('property_type')}/>
                     </label>
                   )
                 })}
@@ -256,13 +109,13 @@ class ListingEditForm extends React.Component {
             <div className="listing-type-container">
               <h3>Tipo de Publicación</h3>
               <div className="listing-type-options">
-                <label className={this.state.listingType === 'sale' ? "type-option selected" : "type-option"}>
+                <label className={this.props.listingType === 'sale' ? "type-option selected" : "type-option"}>
                   Venta
-                  <input type="radio" name="listingType" value="sale" onChange={this.handleChange('listingType')}/>
+                  <input type="radio" name="listingType" value="sale" onChange={this.props.handleChange('listing_type')}/>
                 </label>
-                <label className={this.state.listingType === 'rent' ? "type-option selected" : "type-option"}>
+                <label className={this.props.listingType === 'rent' ? "type-option selected" : "type-option"}>
                   Alquiler
-                  <input type="radio" name="listingType" value="rent" onChange={this.handleChange('listingType')}/>
+                  <input type="radio" name="listingType" value="rent" onChange={this.props.handleChange('listing_type')}/>
                 </label>
               </div>
             </div>
@@ -274,36 +127,36 @@ class ListingEditForm extends React.Component {
               <Select
                 options={bedOptions}
                 placeholder="Seleccionar..."
-                onChange={this.handleBedroomChange}
+                onChange={this.props.handleBedroomChange}
                 isSearchable={false}
-                value={this.state.bedrooms && {label: `${this.state.bedrooms}`, value: `${this.state.bedrooms}`}}/>
+                value={this.props.bedrooms && {label: `${this.props.bedrooms}`, value: `${this.props.bedrooms}`}}/>
             </div>
             <div className="listing-options">
               <label>Baños</label>
               <Select
                 options={bathOptions}
                 placeholder="Seleccionar..."
-                onChange={this.handleBathroomChange}
+                onChange={this.props.handleBathroomChange}
                 isSearchable={false}
-                value={this.state.bathrooms && {label: `${this.state.bathrooms}`, value: `${this.state.bathrooms}`}}/>
+                value={this.props.bathrooms && {label: `${this.props.bathrooms}`, value: `${this.props.bathrooms}`}}/>
             </div>
             <div className="listing-options">
               <label>Medio Baños</label>
               <Select
                 options={halfBathOptions}
                 placeholder="Seleccionar..."
-                onChange={this.handleHalfBathroomChange}
+                onChange={this.props.handleHalfBathroomChange}
                 isSearchable={false}
-                value={this.state.halfBathrooms !== null ? {label: `${this.state.halfBathrooms}`, value: `${this.state.halfBathrooms}`}: ''}/>
+                value={this.props.halfBathrooms !== null ? {label: `${this.props.halfBathrooms}`, value: `${this.props.halfBathrooms}`}: ''}/>
             </div>
             <div className="listing-options">
               <label>Parqueos</label>
               <Select
                 options={parkingOptions}
                 placeholder="Seleccionar..."
-                onChange={this.handleParkingChange}
+                onChange={this.props.handleParkingChange}
                 isSearchable={false}
-                value={this.state.parking && {label: `${this.state.parking}`, value: `${this.state.parking}`}}/>
+                value={this.props.parking && {label: `${this.props.parking}`, value: `${this.props.parking}`}}/>
             </div>
             <div className="listing-options">
               <label>Metros Cuadrados</label>
@@ -311,8 +164,8 @@ class ListingEditForm extends React.Component {
                 <input id="mts-input"
                       type="text"
                       pattern="[0-9]+"
-                      onChange={this.handleChange('mts')}
-                      value={this.state.mts === null ? '' : this.state.mts}/>
+                      onChange={this.props.handleChange('square_meters')}
+                      value={this.props.mts === null ? '' : this.props.mts}/>
                 <label htmlFor="mts-input">Mts2</label>
               </div>
             </div>
@@ -322,8 +175,8 @@ class ListingEditForm extends React.Component {
                 <input id="price-input"
                       type="text"
                       pattern="[0-9]+"
-                      onChange={this.handleChange('price')}
-                      value={this.state.price === null ? '' : this.state.price}/>
+                      onChange={this.props.handleChange('listing_price')}
+                      value={this.props.price === null ? '' : this.props.price}/>
                 <label htmlFor="price-input">US$</label>
               </div>
             </div>
@@ -333,87 +186,87 @@ class ListingEditForm extends React.Component {
             <h3>Amenidades</h3>
             <div className="checkbox-container">
               <div className="amenity-info">
-                <input id="1/2" name="halfBath" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.halfBath}/>
+                <input id="1/2" name="half_bathrooms" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.half_bathrooms}/>
                 <label htmlFor="1/2" className="amenity-label">1/2 Baño</label>
               </div>
               <div className="amenity-info">
-                <input id="a/c" name="aC" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.aC}/>
+                <input id="a/c" name="air_conditioner" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.air_conditioner}/>
                 <label htmlFor="a/c" className="amenity-label">Aire Acondicionado</label>
               </div>
               <div className="amenity-info">
-                <input id="furnished" name="furnished" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.furnished}/>
+                <input id="furnished" name="furnished" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.furnished}/>
                 <label htmlFor="furnished" className="amenity-label">Amueblado</label>
               </div>
               <div className="amenity-info">
-                <input id="games-zone" name="gameZone" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.gameZone}/>
+                <input id="games-zone" name="game_zone" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.game_zone}/>
                 <label htmlFor="games-zone" className="amenity-label">Área de Juegos</label>
               </div>
               <div className="amenity-info">
-                <input id="laundry-room" name="laundryRoom" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.laundryRoom}/>
+                <input id="laundry-room" name="laundry_room" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.laundry_room}/>
                 <label htmlFor="laundry-room" className="amenity-label">Área de Lavado</label>
               </div>
               <div className="amenity-info">
-                <input id="social-area" name="socialArea" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.socialArea}/>
+                <input id="social-area" name="social_area" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.social_area}/>
                 <label htmlFor="social-area" className="amenity-label">Área Social</label>
               </div>
               <div className="amenity-info">
-                <input id="elevator" name="elevator" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.elevator}/>
+                <input id="elevator" name="elevator" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.elevator}/>
                 <label htmlFor="elevator" className="amenity-label">Ascensor</label>
               </div>
               <div className="amenity-info">
-                <input id="balcony" name="balcony" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.balcony}/>
+                <input id="balcony" name="balcony" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.balcony}/>
                 <label htmlFor="balcony" className="amenity-label">Balcón</label>
               </div>
               <div className="amenity-info">
-                <input id="securitySystem" name="securitySystem" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.securitySystem}/>
+                <input id="securitySystem" name="security_system" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.security_system}/>
                 <label htmlFor="securitySystem" className="amenity-label">Cámaras de Seguridad</label>
               </div>
               <div className="amenity-info">
-                <input id="family-room" name="familyRoom" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.familyRoom}/>
+                <input id="family-room" name="family_room" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.family_room}/>
                 <label htmlFor="family-room" className="amenity-label">Family Room</label>
               </div>
               <div className="amenity-info">
-                <input id="central-gas" name="centralGas" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.centralGas}/>
+                <input id="central-gas" name="shared_gas" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.shared_gas}/>
                 <label htmlFor="central-gas" className="amenity-label">Gas Común</label>
               </div>
               <div className="amenity-info">
-                <input id="gym" type="checkbox" name="gym" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.gym}/>
+                <input id="gym" type="checkbox" name="gym" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.gym}/>
                 <label htmlFor="gym" className="amenity-label">Gimnasio</label>
               </div>
               <div className="amenity-info">
-                <input id="service-room"  name="serviceRoom" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.serviceRoom}/>
+                <input id="service-room"  name="service_room" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.service_room}/>
                 <label htmlFor="service-room" className="amenity-label">Habitación de Servicio</label>
               </div>
               <div className="amenity-info">
-                <input id="jacuzzi" name="jacuzzy" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.jacuzzy}/>
+                <input id="jacuzzi" name="jacuzzy" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.jacuzzy}/>
                 <label htmlFor="jacuzzi" className="amenity-label">Jacuzzi</label>
               </div>
               <div className="amenity-info">
-                <input id="lobby" name="lobby" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.lobby}/>
+                <input id="lobby" name="lobby" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.lobby}/>
                 <label htmlFor="lobby" className="amenity-label">Lobby</label>
               </div>
               <div className="amenity-info">
-                <input id="pool" name="pool" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.pool}/>
+                <input id="pool" name="swimming_pool" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.swimming_pool}/>
                 <label htmlFor="pool" className="amenity-label">Piscina</label>
               </div>
               <div className="amenity-info">
-                <input id="hardwoodFloor" name="hardwoodFloor" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.hardwoodFloor}/>
+                <input id="hardwoodFloor" name="hardwood_floor" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.hardwood_floor}/>
                 <label htmlFor="hardwoodFloor" className="amenity-label">Piso de Madera</label>
               </div>
               <div className="amenity-info">
-                <input id="floor" name="floor" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.floor}/>
+                <input id="floor" name="marble_floor" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.marble_floor}/>
                 <label htmlFor="floor" className="amenity-label">Piso de Marmol</label>
               </div>
               <div className="amenity-info">
-                <input id="power-plant" name="powerPlant" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.powerPlant}/>
+                <input id="power-plant" name="power_plant" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.power_plant}/>
                 <label htmlFor="power-plant" className="amenity-label">Planta Eléctrica</label>
               </div>
               <div className="amenity-info">
-                <input id="security" name="security" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.security}/>
+                <input id="security" name="security" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.security}/>
                 <label htmlFor="security" className="amenity-label">Seguridad 24/7</label>
               </div>
               <div className="amenity-info">
-                <input id="wi-closet" name="wiCloset" type="checkbox" className="amenity-input" onChange={this.handleChecks} checked={this.state.amenities.wiCloset}/>
+                <input id="wi-closet" name="walk_in_closet" type="checkbox" className="amenity-input" onChange={this.props.handleChecks} checked={this.props.amenities.walk_in_closet}/>
                 <label htmlFor="wi-closet" className="amenity-label">Walk In Closet</label>
               </div>
             </div>
@@ -423,7 +276,7 @@ class ListingEditForm extends React.Component {
             <h3>Descripción Detallada</h3>
             <p>Destacar caracteristicas como renovaciones, remodelaciones o cualquier detalle importante sobre la propiedad.</p>
             <div className="text-area-container">
-              <textarea value={this.state.description} name="description" rows="6" onChange={this.handleChange('description')}/>
+              <textarea value={this.props.listing.description} name="description" rows="6" onChange={this.props.handleChange('description')}/>
             </div>
           </div>
           {/* Photos */}
@@ -431,7 +284,7 @@ class ListingEditForm extends React.Component {
             <h3>Fotos de la Propiedad</h3>
             <p>Subir imagenes en formato: jpg, png o jpeg. Propiedades con fotos de calidad llaman más la atención</p>
             <div className="upload-container">
-              <Dropzone onDrop={this.handleDrop} accept="image/*" multiple>
+              <Dropzone onDrop={this.props.handleDrop} accept="image/*" multiple>
                 {({getRootProps, getInputProps}) => (
                   <div {...getRootProps()} className="upload-component">
                     <input {...getInputProps()}/>
@@ -441,12 +294,12 @@ class ListingEditForm extends React.Component {
                 )}
               </Dropzone>
               <div className="image-preview">
-                {this.state.imageFiles.map(image => (
+                {this.props.imageFiles.map(image => (
                   <div className="thumb" key={image.original_name || image.name}>
                     <div className="thumb-inner">
                       <img src={image.location}/>
                       <span className="remove-image">
-                        <i className="fas fa-trash-alt" onClick={this.handleRemove(image.original_name || image.name)}></i>
+                        <i className="fas fa-trash-alt" onClick={this.props.handleRemove(image.original_name || image.name)}></i>
                       </span>
                     </div>
                   </div>
@@ -460,14 +313,5 @@ class ListingEditForm extends React.Component {
   }
 }
 
-function insertScript() {
-  const {head} = document
-  const script = document.createElement('script')
-  script.id = 'newListingTag'
-  script.type = 'text/javascript'
-  script.async = false
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places&language=es`
-  head.appendChild(script)
-}
 
 export default ListingEditForm
