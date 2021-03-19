@@ -1,0 +1,75 @@
+.update-modal {
+  position: fixed;
+  z-index: 400;
+  background-color: #fff;
+  overflow: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  /* border-radius: 4px; */
+}
+.update-modal .update-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #369dcee0;
+  color: #fff;
+  font-weight: 700;
+}
+.update-modal .update-header i {
+  font-size: 20px;
+  cursor: pointer;
+}
+.update-modal .update-body {
+  display: flex;
+  padding: 15px 20px;
+  align-items: center;
+}
+.update-modal .update-body i {
+  font-size: 26px;
+  color: #369dcee0;
+  margin-right: 15px;
+}
+.update-modal .update-body span {
+  color: #484848;
+}
+
+.update-modal .update-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+.update-modal .update-actions div {
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.update-modal .update-actions div.update-cancel {
+  margin-right: 10px;
+  border: 1px solid #e2e2e2;
+  background-color: #f3f3f3;
+}
+.update-modal .update-actions div.update-ok {
+  background-color: #369dcee0;
+  color: #fff;
+  font-weight: 600;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .update-modal {
+    width: 400px;
+    /* before was 150px */
+    height: calc(100% - 400px); 
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+  }
+}
+

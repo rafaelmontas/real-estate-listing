@@ -48,7 +48,7 @@ class ListingEditForm extends React.Component {
       return <div></div>
     } else {
       return (
-        <div className="listing-edit-section">
+        <form className="listing-edit-section" onSubmit={this.props.onUpdate}>
           <div className="property-address listing-container">
             <h3>Ubicación de la Propiedad</h3>
             <span>Especificar dirección con número (#)</span>
@@ -307,7 +307,10 @@ class ListingEditForm extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+          <div className="listing-edit-action">
+            <button type="submit" className="update-listing">Guardar Cambios</button>
+          </div>
+        </form>
       )
     }
   }

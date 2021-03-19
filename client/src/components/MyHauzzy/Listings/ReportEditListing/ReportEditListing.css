@@ -465,6 +465,23 @@
   right: 10px;
   cursor: pointer;
 }
+/* Submit button */
+.listing-edit-section .listing-edit-action {
+  margin: 20px 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.listing-edit-section .listing-edit-action .update-listing {
+  display: block;
+  padding: 12px;
+  border: 0px;
+  background-color: #2674de;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 100%;
+}
 
 @media only screen and (min-width: 768px) {
   .report-edit-container .re-listing-container {
@@ -526,6 +543,10 @@
   /* Photos */
   .listing-edit-section .listing-photos .upload-container .image-preview .thumb {
     width: 50%;
+  }
+  /* Submit Button */
+  .listing-edit-section .listing-edit-action .update-listing {
+    min-width: 150px;
   }
 }
 

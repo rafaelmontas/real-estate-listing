@@ -7,6 +7,8 @@ import axios from 'axios';
 import ListingEditForm from './ListingEditForm'
 import ListingMap from './ListingMap'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+// import Backdrop from '../../../Backdrop'
+// import UpdateModal from '../../../AgentsApp/Listings/UpdateModal'
 import './ReportEditListing.css'
 
 class ReportEditListing extends React.Component {
@@ -15,9 +17,9 @@ class ReportEditListing extends React.Component {
     this.state = {
       isLoading: true,
       listing: {},
-      // imageFiles: this.props.listing['PropertyPictures'],
       imageToUpload: [],
-      imageToDelete: []
+      imageToDelete: [],
+      updateOpen: false
     }
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
@@ -29,6 +31,9 @@ class ReportEditListing extends React.Component {
     this.handleChecks = this.handleChecks.bind(this)
     this.handleDrop = this.handleDrop.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    // this.handleUpdateClick = this.handleUpdateClick.bind(this)
+    // this.handleBackdropClick = this.handleBackdropClick.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
   componentDidMount() {
@@ -187,10 +192,25 @@ class ReportEditListing extends React.Component {
       })
     }
   }
+  // Form Submit
+  // handleUpdateClick() {
+  //   this.setState({updateOpen: true})
+  // }
+  // handleBackdropClick() {
+  //   this.setState({
+  //     updateOpen: false
+  //   });
+  // }
+  handleUpdate(e) {
+    e.preventDefault()
+    console.log('updated...')
+  }
 
   render() {
     return (
       <div className="report-edit-container">
+        {/* {this.state.updateOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+        {this.state.updateOpen && <UpdateModal onCancelClick={this.handleBackdropClick} onUpdateConfirm={this.handleUpdate}/>} */}
         <div className="re-header">
           <div className="back-button">
             <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
@@ -228,7 +248,7 @@ class ReportEditListing extends React.Component {
                   <span>0</span>
                 </div>
                 <div className="preview">
-                  <span>Status: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
+                  <span>Estatus: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
                 </div>
               </div>
               {!this.state.isLoading && <ListingMap latLng={{lat: this.state.listing.lat, lng: this.state.listing.lng}}/>}
@@ -258,7 +278,9 @@ class ReportEditListing extends React.Component {
                                         handleChecks={this.handleChecks}
                                         imageFiles={this.state.listing['PropertyPictures']}
                                         handleDrop={this.handleDrop}
-                                        handleRemove={this.handleRemove}/>}
+                                        handleRemove={this.handleRemove}
+                                        onUpdateClick={this.handleUpdateClick}
+                                        onUpdate={this.handleUpdate}/>}
           </div>
         </div>
       </div>
