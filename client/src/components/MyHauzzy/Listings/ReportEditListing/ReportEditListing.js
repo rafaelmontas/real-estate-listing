@@ -7,6 +7,9 @@ import axios from 'axios';
 import ListingEditForm from './ListingEditForm'
 import ListingMap from './ListingMap'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import LoadingBackdrop from '../../../AgentsApp/NewListing/LoadingBackdrop'
 // import Backdrop from '../../../Backdrop'
 // import UpdateModal from '../../../AgentsApp/Listings/UpdateModal'
 import './ReportEditListing.css'
@@ -19,7 +22,11 @@ class ReportEditListing extends React.Component {
       listing: {},
       imageToUpload: [],
       imageToDelete: [],
-      updateOpen: false
+      alertOpen: false,
+      successMsg: '',
+      errMsg: '',
+      status: null,
+      updateLoading: false
     }
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
@@ -34,6 +41,7 @@ class ReportEditListing extends React.Component {
     // this.handleUpdateClick = this.handleUpdateClick.bind(this)
     // this.handleBackdropClick = this.handleBackdropClick.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   componentDidMount() {
@@ -203,12 +211,86 @@ class ReportEditListing extends React.Component {
   // }
   handleUpdate(e) {
     e.preventDefault()
-    console.log('updated...')
+    const body = this.state.listing
+    console.log(body, 'update...')
+    this.setState({updateLoading: true})
+    
+    const amenities = body['PropertyAmenity']
+    axios.put(`/api/properties/${this.props.match.params.id}/amenities/${this.state.listing['PropertyAmenity'].id}`, amenities)
+      .then(res => {
+        console.log(res.data.msg)
+        if(this.state.imageToUpload.length > 0) {
+          const formData = new FormData()
+          for(let i = 0; i < this.state.imageToUpload.length; i++) {
+            formData.append('listing-pictures', this.state.imageToUpload[i])
+          }
+          return axios.post(`/api/properties/${this.props.match.params.id}/pictures`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+        }
+      })
+      .then(res => {
+        this.state.imageToUpload.length > 0 && console.log(res.data.msg)
+        if(this.state.imageToDelete.length > 0) {
+          return axios({
+            method: 'delete',
+            url: `/api/properties/${this.props.match.params.id}/pictures`,
+            data: {
+              ids: this.state.imageToDelete
+            }
+          })
+        }
+      })
+      .then(res => {
+        this.state.imageToDelete.length > 0 && console.log(res.data.msg)
+        return axios.put(`/agents/${this.props.id}/properties/${this.props.match.params.id}`, body)
+      })
+      .then(res => {
+        console.log(res.data.msg)
+        this.setState({
+          listing: res.data.updatedListing,
+          successMsg: res.data.msg,
+          status: res.status,
+          errMsg: '',
+          alertOpen: true,
+          imageToDelete: [],
+          imageToUpload: [],
+          updateLoading: false
+        })
+      })
+      .catch(err => {
+        console.log(err.response.data.msg)
+        this.setState({
+          successMsg: '',
+          errMsg: err.response.data.msg,
+          status: err.response.status,
+          alertOpen: true
+        })
+      })
   }
+
+  // Alert
+  handleClose() {
+    this.setState({alertOpen: false})
+  }
+  renderAlert() {
+    if(this.state.status === 200) {
+      return <MuiAlert elevation={6} variant="filled" severity="success">{this.state.successMsg}</MuiAlert>
+    } else {
+      return <MuiAlert elevation={6} variant="filled" severity="error">{this.state.errMsg}</MuiAlert>
+    }
+  }
+
 
   render() {
     return (
       <div className="report-edit-container">
+        {this.state.updateLoading && <LoadingBackdrop backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+        <Snackbar open={this.state.alertOpen}
+                      autoHideDuration={4000}
+                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                      onClose={this.handleClose}
+                      style={{top: '92px'}}>
+              {this.renderAlert()}
+            </Snackbar>
         {/* {this.state.updateOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
         {this.state.updateOpen && <UpdateModal onCancelClick={this.handleBackdropClick} onUpdateConfirm={this.handleUpdate}/>} */}
         <div className="re-header">
@@ -223,7 +305,7 @@ class ReportEditListing extends React.Component {
           <div className="listing-left">
             <div className="listing-info">
               <div className="listing-photo">
-                <img src={image}/>
+                <img src={!this.state.isLoading && this.state.listing['PropertyPictures'][0].location}/>
                 <div className="listing-details-over">
                   <div className="listing-details-top">
                     <span className="street-info">{this.state.listing.listing_address}</span>
@@ -256,31 +338,31 @@ class ReportEditListing extends React.Component {
           </div>
           <div className="listing-right">
             {!this.state.isLoading && <ListingEditForm
-                                        listing={this.state.listing}
-                                        isLoading={this.state.isLoading}
-                                        listingAddress={this.state.listing.listing_address}
-                                        handleAddressChange={this.handleAddressChange}
-                                        handleAddressSelect={this.handleAddressSelect}
-                                        propertyType={this.state.listing.property_type}
-                                        handleChange={this.handleChange}
-                                        listingType={this.state.listing.listing_type}
-                                        bedrooms={this.state.listing.bedrooms}
-                                        handleBedroomChange={this.handleBedroomChange}
-                                        bathrooms={this.state.listing.bathrooms}
-                                        handleBathroomChange={this.handleBathroomChange}
-                                        halfBathrooms={this.state.listing.half_bathrooms}
-                                        handleHalfBathroomChange={this.handleHalfBathroomChange}
-                                        parking={this.state.listing.parking_spaces}
-                                        handleParkingChange={this.handleParkingChange}
-                                        mts={this.state.listing.square_meters}
-                                        price={this.state.listing.listing_price}
-                                        amenities={this.state.listing['PropertyAmenity']}
-                                        handleChecks={this.handleChecks}
-                                        imageFiles={this.state.listing['PropertyPictures']}
-                                        handleDrop={this.handleDrop}
-                                        handleRemove={this.handleRemove}
-                                        onUpdateClick={this.handleUpdateClick}
-                                        onUpdate={this.handleUpdate}/>}
+                                            listing={this.state.listing}
+                                            isLoading={this.state.isLoading}
+                                            listingAddress={this.state.listing.listing_address}
+                                            handleAddressChange={this.handleAddressChange}
+                                            handleAddressSelect={this.handleAddressSelect}
+                                            propertyType={this.state.listing.property_type}
+                                            handleChange={this.handleChange}
+                                            listingType={this.state.listing.listing_type}
+                                            bedrooms={this.state.listing.bedrooms}
+                                            handleBedroomChange={this.handleBedroomChange}
+                                            bathrooms={this.state.listing.bathrooms}
+                                            handleBathroomChange={this.handleBathroomChange}
+                                            halfBathrooms={this.state.listing.half_bathrooms}
+                                            handleHalfBathroomChange={this.handleHalfBathroomChange}
+                                            parking={this.state.listing.parking_spaces}
+                                            handleParkingChange={this.handleParkingChange}
+                                            mts={this.state.listing.square_meters}
+                                            price={this.state.listing.listing_price}
+                                            amenities={this.state.listing['PropertyAmenity']}
+                                            handleChecks={this.handleChecks}
+                                            imageFiles={this.state.listing['PropertyPictures']}
+                                            handleDrop={this.handleDrop}
+                                            handleRemove={this.handleRemove}
+                                            onUpdateClick={this.handleUpdateClick}
+                                            onUpdate={this.handleUpdate}/>}
           </div>
         </div>
       </div>

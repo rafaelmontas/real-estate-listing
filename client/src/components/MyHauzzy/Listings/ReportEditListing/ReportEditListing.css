@@ -469,7 +469,7 @@
 .listing-edit-section .listing-edit-action {
   margin: 20px 0 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .listing-edit-section .listing-edit-action .update-listing {
   display: block;

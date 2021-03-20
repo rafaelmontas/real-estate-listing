@@ -48,5 +48,28 @@ agentsPropertiesRouter.post('/', async (req, res) => {
   }
 })
 
+agentsPropertiesRouter.put('/:propertyId', async (req, res) => {
+  req.body.listing_active = false
+  delete req.body['PropertyAmenity']
+  delete req.body['PropertyPictures']
+  delete req.body.createdAt
+  delete req.body.updatedAt
+  console.log(req.body, 'update...')
+  try {
+    const updateListing = await Property.update(req.body, {
+      where: {id: req.params.propertyId, agent_id: req.params.id}
+    })
+    const updatedListing = await Property.findOne({
+      where: {id: req.params.propertyId, agent_id: req.params.id},
+      include: [{model: PropertyAmenities}, {model: PropertyPictures, attributes: ['id', 'location', 'original_name']}]
+    })
+    console.log(updatedListing.toJSON(), 'update...')
+    res.status(200).json({msg: 'Propiedad Actualizada. En proceso de verificación.', updatedListing: updatedListing})
+  } catch (err) {
+    console.log(err.errors[0].message)
+    res.status(400).json({msg: 'Algo salió mal. Intentalo de nuevo.'})
+  }
+})
+
 
 module.exports = agentsPropertiesRouter;
