@@ -41,4 +41,18 @@ propertyAmenitiesRouter.post('/', async (req, res) => {
   }
 })
 
+propertyAmenitiesRouter.put('/:amenityId', async (req, res) => {
+  try {
+    const updatedAmenities = await PropertyAmenities.update(req.body, {
+      where: {id: req.params.amenityId, property_id: req.params.id},
+      returning: true
+    })
+    console.log(updatedAmenities[1][0])
+    res.status(200).json({msg: 'Amenidades Actualizadas.'})
+  } catch(err) {
+    console.log(err.errors[0].message)
+    res.status(400).json({msg: 'Algo salió mal. Intentalo de nuevo.'})
+  }
+})
+
 module.exports = propertyAmenitiesRouter

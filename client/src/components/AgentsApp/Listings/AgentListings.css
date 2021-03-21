@@ -10,9 +10,16 @@
 .listings-content-right .show-listings .listings-tabs {
   display: none;
 }
-.listings-content-right .show-listings .listing-type-container .listings-list .listing-status span {
+.listings-content-right .show-listings .listing-type-container .listings-list .listing-status span.active {
   padding: 6px;
   background-color: green;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.listings-content-right .show-listings .listing-type-container .listings-list .listing-status span.pending {
+  padding: 6px;
+  background-color: #abab20;
   color: #fff;
   border-radius: 4px;
   font-weight: 600;

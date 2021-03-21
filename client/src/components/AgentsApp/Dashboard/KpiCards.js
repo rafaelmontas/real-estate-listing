@@ -7,7 +7,7 @@ class KpiCards extends React.Component {
         <div className="kpi-card" id="kpi-1">
           <div className="card-inner" id="card-1">
             <div className="inner-text">
-              <span className="data-text">5</span>
+              <span className="data-text">{this.props.listingCount}</span>
               <span className="title-text">Propiedades</span>
             </div>
           </div>

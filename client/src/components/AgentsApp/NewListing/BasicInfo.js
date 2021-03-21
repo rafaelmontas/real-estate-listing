@@ -1,7 +1,7 @@
 import React from 'react'
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 
-const listingTypes = ['apartment', 'house', 'villa', 'penthouse', 'comercial', 'industrial']
+const listingTypes = ['apartment', 'house', 'villa', 'penthouse']
 
 class BasicInfo extends React.Component {
   constructor(props) {

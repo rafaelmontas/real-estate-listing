@@ -70,14 +70,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedProgressBars() {
+export default function CustomizedProgressBars(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       {/* <FacebookCircularProgress />
       <br /> */}
-      <BorderLinearProgress variant="determinate" value={45} />
+      <BorderLinearProgress variant="determinate" value={props.completion} />
     </div>
   );
 }

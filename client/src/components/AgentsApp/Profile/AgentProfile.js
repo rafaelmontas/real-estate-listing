@@ -155,39 +155,35 @@ class AgentProfile extends React.Component {
                 <div className="top-info">
                   <div className="top-info-left">
                     <AgentProfilePicture agentName={this.state.agent.name}
+                                         agentId={this.state.agent.id}
                                          profilePicture={this.state.agent['AgentProfilePicture'] ? this.state.agent['AgentProfilePicture'].location : ''}/>
                   </div>
-                  <div className="top-info-right">
+                  {/* <div className="top-info-right">
                     <span>Perfil público</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="bottom-info">
                   <div className="member-since-info">
                     <span>{`Miembro desde: ${dateFormat(this.state.agent.createdAt, "dd/mm/yy")}`}</span>
-                    <span>8 Propiedades</span>
+                    {/* <span>8 Propiedades</span> */}
                   </div>
                 </div>
               </div>
-              <CompletionCard/>
+              <CompletionCard
+                hasPicture={Boolean(this.state.agent['AgentProfilePicture'])}
+                hasNumber={Boolean(this.state.agent.phone_number)}
+                hasListings={Boolean(this.state.agent.properties && this.state.agent.properties.length)}
+                />
               <div className="agent-edits profile-cards">
                 <AgentProfileForms agent={this.state.agent} handleUpdate={this.handleUpdate} onDeleteClick={this.handleDeleteClick}/>
               </div>
             </main>
             <aside className="aside-info">
-              <CompletionCard/>
-              <div className="profile-preview profile-cards">
-                <div className="profile-preview-container">
-                  <h3>Vista preliminar</h3>
-                  <div className="agent-preview">
-                    <img src="https://s3.amazonaws.com/real.estate.dom/agent.jpg" alt="Agent profile picture"/>
-                    <div className="agent-text">
-                      <h5>{this.state.agent.name}</h5>
-                      {this.renderPhones()}
-                      <span className="properties-listed">Propiedades (15)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CompletionCard
+                hasPicture={Boolean(this.state.agent['AgentProfilePicture'])}
+                hasNumber={Boolean(this.state.agent.phone_number)}
+                hasListings={Boolean(this.state.agent.properties && this.state.agent.properties.length)}
+                />
             </aside>
           </div>
         </div>

@@ -65,6 +65,16 @@ propertyPicturesRouter.post('/', (req, res) => {
   })
 })
 
+propertyPicturesRouter.delete('/', async (req, res) => {
+  console.log(req.body.ids)
+  try {
+    await PropertyPictures.destroy({where: {id: req.body.ids}})
+    res.status(200).json({msg: 'Fotos eliminadas!'})
+  } catch(err) {
+    res.status(400).json({msg: err})
+  }
+})
+
 
 
 module.exports = propertyPicturesRouter
