@@ -71,5 +71,19 @@ agentsPropertiesRouter.put('/:propertyId', async (req, res) => {
   }
 })
 
+agentsPropertiesRouter.delete('/:propertyId', async (req, res) => {
+  // Get listing to be deleted
+  const listing = await Property.findOne({where: {id: req.params.propertyId, agent_id: req.params.id}})
+  if(!listing) return res.status(404).send({msg: 'Propiedad no existe'})
+
+  try {
+    await listing.destroy()
+    res.sendStatus(204)
+  } catch (err) {
+    console.log(err.errors[0].message)
+    res.status(500).json({msg: err.errors[0].message})
+  }
+})
+
 
 module.exports = agentsPropertiesRouter;

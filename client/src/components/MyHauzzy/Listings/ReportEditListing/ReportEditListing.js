@@ -10,8 +10,8 @@ import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import LoadingBackdrop from '../../../AgentsApp/NewListing/LoadingBackdrop'
-// import Backdrop from '../../../Backdrop'
-// import UpdateModal from '../../../AgentsApp/Listings/UpdateModal'
+import Backdrop from '../../../Backdrop'
+import DeleteListingModal from '../../../AgentsApp/Listings/DeleteListingModal'
 import './ReportEditListing.css'
 
 class ReportEditListing extends React.Component {
@@ -26,7 +26,8 @@ class ReportEditListing extends React.Component {
       successMsg: '',
       errMsg: '',
       status: null,
-      updateLoading: false
+      updateLoading: false,
+      deleteOpen: false
     }
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
@@ -38,8 +39,9 @@ class ReportEditListing extends React.Component {
     this.handleChecks = this.handleChecks.bind(this)
     this.handleDrop = this.handleDrop.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-    // this.handleUpdateClick = this.handleUpdateClick.bind(this)
-    // this.handleBackdropClick = this.handleBackdropClick.bind(this)
+    this.handleDeleteClick = this.handleDeleteClick.bind(this)
+    this.handleBackdropClick = this.handleBackdropClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
@@ -201,14 +203,29 @@ class ReportEditListing extends React.Component {
     }
   }
   // Form Submit
-  // handleUpdateClick() {
-  //   this.setState({updateOpen: true})
-  // }
-  // handleBackdropClick() {
-  //   this.setState({
-  //     updateOpen: false
-  //   });
-  // }
+  handleDeleteClick() {
+    this.setState({deleteOpen: true})
+  }
+  handleBackdropClick() {
+    this.setState({
+      deleteOpen: false
+    });
+  }
+  handleDelete() {
+    console.log('delete click...')
+    axios.delete(`/agents/${this.props.id}/properties/${this.state.listing.id}`)
+      .then(res => {
+        this.props.history.replace({pathname: '/account/listings'})
+      })
+      .catch(err => {
+        this.setState({
+            successMsg: '',
+            errMsg: err.response.data.msg,
+            status: err.response.status,
+            alertOpen:true
+          })
+      })
+  }
   handleUpdate(e) {
     e.preventDefault()
     const body = this.state.listing
@@ -278,6 +295,14 @@ class ReportEditListing extends React.Component {
       return <MuiAlert elevation={6} variant="filled" severity="error">{this.state.errMsg}</MuiAlert>
     }
   }
+  // Render Image
+  renderImage() {
+    if(!this.state.isLoading && this.state.listing['PropertyPictures'][0]) {
+      return <img src={this.state.listing['PropertyPictures'][0].location}/>  
+    } else {
+      return <img />
+    }
+  }
 
 
   render() {
@@ -291,8 +316,8 @@ class ReportEditListing extends React.Component {
                       style={{top: '92px'}}>
               {this.renderAlert()}
             </Snackbar>
-        {/* {this.state.updateOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
-        {this.state.updateOpen && <UpdateModal onCancelClick={this.handleBackdropClick} onUpdateConfirm={this.handleUpdate}/>} */}
+        {this.state.deleteOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+        {this.state.deleteOpen && <DeleteListingModal onCancelClick={this.handleBackdropClick} onDeleteConfirm={this.handleDelete}/>}
         <div className="re-header">
           <div className="back-button">
             <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
@@ -305,7 +330,7 @@ class ReportEditListing extends React.Component {
           <div className="listing-left">
             <div className="listing-info">
               <div className="listing-photo">
-                <img src={!this.state.isLoading && this.state.listing['PropertyPictures'][0].location}/>
+                {this.renderImage()}
                 <div className="listing-details-over">
                   <div className="listing-details-top">
                     <span className="street-info">{this.state.listing.listing_address}</span>
@@ -361,7 +386,7 @@ class ReportEditListing extends React.Component {
                                             imageFiles={this.state.listing['PropertyPictures']}
                                             handleDrop={this.handleDrop}
                                             handleRemove={this.handleRemove}
-                                            onUpdateClick={this.handleUpdateClick}
+                                            onDeleteClick={this.handleDeleteClick}
                                             onUpdate={this.handleUpdate}/>}
           </div>
         </div>

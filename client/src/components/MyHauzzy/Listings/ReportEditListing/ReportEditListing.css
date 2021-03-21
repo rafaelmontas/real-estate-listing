@@ -480,7 +480,16 @@
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  min-width: 100%;
+  min-width: 50%;
+}
+.listing-edit-section .listing-edit-action .delete-listing {
+  background: none;
+  border: navajowhite;
+  cursor: pointer;
+  color: #c75c1d;
+}
+.listing-edit-section .listing-edit-action .delete-listing:hover {
+  color: red;
 }
 
 @media only screen and (min-width: 768px) {

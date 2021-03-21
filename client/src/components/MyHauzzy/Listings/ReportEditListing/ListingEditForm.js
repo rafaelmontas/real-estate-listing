@@ -309,6 +309,7 @@ class ListingEditForm extends React.Component {
           </div>
           <div className="listing-edit-action">
             <button type="submit" className="update-listing">Guardar Cambios</button>
+            <button type="button" className="delete-listing" onClick={this.props.onDeleteClick}>Eliminar Propiedad</button>
           </div>
         </form>
       )

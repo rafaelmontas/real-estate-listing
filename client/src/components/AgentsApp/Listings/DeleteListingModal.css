@@ -1,4 +1,4 @@
-.update-modal {
+.delete-modal {
   position: fixed;
   z-index: 400;
   background-color: #fff;
@@ -9,50 +9,50 @@
   top: 0;
   /* border-radius: 4px; */
 }
-.update-modal .update-header {
+.delete-modal .delete-header {
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
-  background-color: #369dcee0;
+  background-color: #d84848e0;
   color: #fff;
   font-weight: 700;
 }
-.update-modal .update-header i {
+.delete-modal .delete-header i {
   font-size: 20px;
   cursor: pointer;
 }
-.update-modal .update-body {
+.delete-modal .delete-body {
   display: flex;
   padding: 15px 20px;
   align-items: center;
 }
-.update-modal .update-body i {
+.delete-modal .delete-body i {
   font-size: 26px;
-  color: #369dcee0;
+  color: #d84848e0;
   margin-right: 15px;
 }
-.update-modal .update-body span {
+.delete-modal .delete-body span {
   color: #484848;
 }
 
-.update-modal .update-actions {
+.delete-modal .delete-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 15px 20px;
 }
-.update-modal .update-actions div {
+.delete-modal .delete-actions div {
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
 }
-.update-modal .update-actions div.update-cancel {
+.delete-modal .delete-actions div.delete-cancel {
   margin-right: 10px;
   border: 1px solid #e2e2e2;
   background-color: #f3f3f3;
 }
-.update-modal .update-actions div.update-ok {
-  background-color: #369dcee0;
+.delete-modal .delete-actions div.delete-ok {
+  background-color: #d84848e0;
   color: #fff;
   font-weight: 600;
 }
@@ -60,10 +60,10 @@
 
 
 @media only screen and (min-width: 768px) {
-  .update-modal {
+  .delete-modal {
     width: 400px;
     /* before was 150px */
-    height: calc(100% - 400px); 
+    height: calc(100% - 420px); 
     left: 50%;
     right: 50%;
     top: 50%;
