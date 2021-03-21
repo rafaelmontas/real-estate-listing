@@ -41,19 +41,19 @@ class Details extends React.Component {
   }
 
   handleBedroomChange = (optionSelected) => {
-    console.log(optionSelected)
+    // console.log(optionSelected)
     this.props.handleSelectChange('bedrooms', optionSelected.value)
   }
   handleBathroomChange = (optionSelected) => {
-    console.log(optionSelected)
+    // console.log(optionSelected)
     this.props.handleSelectChange('bathrooms', optionSelected.value)
   }
   handleHalfBathroomChange = (optionSelected) => {
-    console.log(optionSelected)
+    // console.log(optionSelected)
     this.props.handleSelectChange('halfBathrooms', optionSelected.value)
   }
   handleParkingChange = (optionSelected) => {
-    console.log(optionSelected)
+    // console.log(optionSelected)
     this.props.handleSelectChange('parking', optionSelected.value)
   }
 

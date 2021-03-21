@@ -14,13 +14,13 @@ class AgentLogin extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(this.context.isLoggedIn, this.context.agentLoading)
+    // console.log(this.context.isLoggedIn, this.context.agentLoading)
     this.timer = setTimeout(() => {
       if(this.context.isLoggedIn) {
         this.props.history.push('/account/dashboard')
       }
       this.setState({loading: false})
-      console.log(this.context.isLoggedIn, this.context.agentLoading)
+      // console.log(this.context.isLoggedIn, this.context.agentLoading)
     }, 1000)
   }
 

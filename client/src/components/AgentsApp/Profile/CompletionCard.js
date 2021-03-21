@@ -12,7 +12,7 @@ class CompletionCard extends React.Component {
   componentDidMount() {
     const arr = [this.props.hasListings, this.props.hasPicture, this.props.hasNumber]
     const count = arr.filter(Boolean).length
-    console.log(count)
+    // console.log(count)
 
     if(count === 1) {
       this.setState({completion: 33})

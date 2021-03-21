@@ -50,7 +50,7 @@ class ReportEditListing extends React.Component {
     window.scrollTo(0, 0);
     axios.get(`/agents/${this.props.id}/properties/${this.props.match.params.id}`)
     .then(listing => {
-      console.log(listing)
+      // console.log(listing)
       this.setState({listing: listing.data.listing});
     })
     .catch(err => {
@@ -60,12 +60,12 @@ class ReportEditListing extends React.Component {
       insertScript()
       this.timer = setTimeout(() => {
         this.setState({isLoading: false})
-        console.log('places api mounted')
+        // console.log('places api mounted')
       }, 2000)
     } else {
       this.timer = setTimeout(() => {
         this.setState({isLoading: false})
-        console.log('places api already mounted')
+        // console.log('places api already mounted')
       }, 1000)
     }
   }

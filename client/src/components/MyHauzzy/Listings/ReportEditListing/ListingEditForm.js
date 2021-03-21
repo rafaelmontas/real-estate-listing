@@ -39,9 +39,9 @@ class ListingEditForm extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-    console.log(this.props.listing)
-  }
+  // componentDidMount() {
+  //   console.log(this.props.listing)
+  // }
 
   render() {
     if(this.props.isLoading) {

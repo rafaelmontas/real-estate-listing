@@ -37,7 +37,7 @@ class AgentProfile extends React.Component {
       const agentJwt = localStorage.getItem('agent-jwt')
       axios.get(`/agents/${this.context.agent.id}`, {headers: { 'agent-auth': agentJwt }})
             .then(agent => {
-              console.log(agent.data)
+              // console.log(agent.data)
               this.setState({agent: agent.data, isLoading: false})
             })
             .catch(err => console.log(err.response.data))
@@ -49,7 +49,7 @@ class AgentProfile extends React.Component {
     const agentJwt = localStorage.getItem('agent-jwt')
     axios.put(`/agents/${this.state.agent.id}`, body, {headers: {'agent-auth': agentJwt}})
         .then(res => {
-          console.log(res.data.msg, res.data.updatedAgent)
+          // console.log(res.data.msg, res.data.updatedAgent)
           this.setState({
             agent: res.data.updatedAgent,
             successMsg: res.data.msg,
@@ -62,7 +62,7 @@ class AgentProfile extends React.Component {
           }, 5000)
         })
         .catch(err => {
-          console.log(err.response.data.msg)
+          // console.log(err.response.data.msg)
           this.setState({
             successMsg: '',
             errMsg: err.response.data.msg,
@@ -80,7 +80,7 @@ class AgentProfile extends React.Component {
     })
         .then(() => this.context.logOut())
         .catch(err => {
-          console.log(err.response.data.msg)
+          // console.log(err.response.data.msg)
           this.setState({
             successMsg: '',
             errMsg: err.response.data.msg,

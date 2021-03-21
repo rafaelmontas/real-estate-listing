@@ -83,12 +83,12 @@ class ListingForm extends React.Component {
       insertScript()
       this.timer = setTimeout(() => {
         this.setState({isLoading: false})
-        console.log('places api mounted')
+        // console.log('places api mounted')
       }, 2000)
     } else {
       this.timer = setTimeout(() => {
         this.setState({isLoading: false})
-        console.log('places api already mounted')
+        // console.log('places api already mounted')
       }, 1000)
     }
   }
@@ -158,7 +158,7 @@ class ListingForm extends React.Component {
   
   // Handle fields change
   handleChange = input => e => {
-    console.log([input], e.target.value)
+    // console.log([input], e.target.value)
     if(input === 'mts' || input === 'price') {
       if(isNaN(parseInt(e.target.value))) {
         this.setState({[input]: null})    
@@ -170,7 +170,7 @@ class ListingForm extends React.Component {
     }
   }
   handleSelectChange = (optionSelected, value) => {
-    console.log(optionSelected, value)
+    // console.log(optionSelected, value)
     this.setState({[optionSelected]: parseInt(value)})
   }
   handleAddressChange = address => {
@@ -180,7 +180,7 @@ class ListingForm extends React.Component {
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
     this.setState({propertyAddress: value,lat: latLng.lat, lng: latLng.lng})
-    console.log(value, latLng)
+    // console.log(value, latLng)
   }
   handleChecks(e) {
     e.persist()
@@ -192,7 +192,7 @@ class ListingForm extends React.Component {
     }))
   }
   onDrop = (imageFiles) => {
-    console.log(imageFiles);
+    // console.log(imageFiles);
     this.setState({
       imageFiles: this.state.imageFiles.concat(imageFiles.map(file => Object.assign(file, {preview: URL.createObjectURL(file)})))
     })
@@ -200,7 +200,7 @@ class ListingForm extends React.Component {
   handleRemove = imageName => e => {
     // find the image's index
     const imageIndex = this.state.imageFiles.findIndex(e => e.name === imageName)
-    console.log(imageIndex)
+    // console.log(imageIndex)
     // remove the item from array
     this.state.imageFiles.splice(imageIndex, 1)
     // update the array
@@ -210,7 +210,7 @@ class ListingForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.setState({submitLoading: true})
-    console.log('submitted')
+    // console.log('submitted')
     const body = {
       listing_address: this.state.propertyAddress,
       lat: this.state.lat,
@@ -233,16 +233,16 @@ class ListingForm extends React.Component {
 
     axios.post(`/agents/${this.context.agent.id}/properties`, body)
           .then(res => {
-            console.log(res.data.msg, res.data.listing_id)
+            // console.log(res.data.msg, res.data.listing_id)
             const amenitiesBody = this.state.amenities
             return axios.post(`/api/properties/${res.data.listing_id}/amenities`, amenitiesBody)
           })
           .then(res => {
-            console.log(res.data.msg, res.data.listing_id)
+            // console.log(res.data.msg, res.data.listing_id)
             return axios.post(`/api/properties/${res.data.listing_id}/pictures`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
           })
           .then(res => {
-            console.log(res.data.msg)
+            // console.log(res.data.msg)
             this.setState({submitLoading: false, status: res.status})
           })
           .catch(err => {

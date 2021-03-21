@@ -39,13 +39,13 @@ class AgentsApp extends React.Component {
   }
 
   getAgent() {
-    console.log('getAgent called!!!')
-    console.log(`${localStorage.getItem('agent-jwt')}`)
+    // console.log('getAgent called!!!')
+    // console.log(`${localStorage.getItem('agent-jwt')}`)
     const agentJwt = localStorage.getItem('agent-jwt')
     this.setState({agentLoading: true})
     axios({method: 'get', url: '/agent-auth/agent', headers: {'agent-auth': agentJwt}})
         .then(agent => {
-          console.log(agent.data)
+          // console.log(agent.data)
           this.setState({
             agent: agent.data,
             isLoggedIn: true,
@@ -57,7 +57,7 @@ class AgentsApp extends React.Component {
           }
         })
         .catch(err => {
-          console.log(err.response.data, err.response.status)
+          // console.log(err.response.data, err.response.status)
           localStorage.removeItem('agent-jwt')
           this.setState({
             agent: null,

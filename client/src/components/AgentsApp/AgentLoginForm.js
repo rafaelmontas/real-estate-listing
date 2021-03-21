@@ -25,10 +25,10 @@ class AgentLoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const body = {email: this.state.email, password: this.state.password}
-    console.log(body)
+    // console.log(body)
     axios.post('/agent-auth', body)
           .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
             this.context.getAgent()
             // this.props.history.push('/account/dashboard')

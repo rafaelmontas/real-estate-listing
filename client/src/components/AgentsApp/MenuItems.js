@@ -21,7 +21,7 @@ class MenuItems extends React.Component {
   componentDidUpdate(prevProps) {
     // set selected nav item
     if(prevProps.location.pathname !== this.props.location.pathname) {
-      console.log('url changed')
+      // console.log('url changed')
       this.handleNavLinkSelection()
     }
   }
@@ -32,7 +32,7 @@ class MenuItems extends React.Component {
       exact: false,
       strict: false
     });
-    console.log(match)
+    // console.log(match)
     if(this.props.location.pathname === "/account/dashboard" || this.props.location.pathname === "/account/dashboard/") {
       this.setState({navSelected: 1})
     } else if(this.props.location.pathname == "/account/listings" || this.props.location.pathname == "/account/listings/") {

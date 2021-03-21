@@ -20,11 +20,11 @@ class AgentListings extends React.Component {
     this.timer = setTimeout(() => {
       axios.get(`/agents/${this.context.agent.id}/properties`)
       .then(listings => {
-        console.log(listings.data)
+        // console.log(listings.data)
         this.setState({listings: listings.data.listings, isLoading: false})
       })
       .catch(err => {
-        console.log(err.response.data, err.response.status)
+        // console.log(err.response.data, err.response.status)
         if(err.response.status === 500) {
           this.props.history.replace('/error/500')
         }
@@ -32,7 +32,7 @@ class AgentListings extends React.Component {
     }, 1000)
   }
   componentWillUnmount() {
-    console.log('unmounted 1')
+    // console.log('unmounted 1')
   }
   render() {
     if(this.state.isLoading) {

@@ -21,7 +21,7 @@ class AgentDashboard extends React.Component {
     this.timer = setTimeout(() => {
       axios.get(`/agents/${this.context.agent.id}/properties`)
       .then(topListings => {
-        console.log(topListings.data)
+        // console.log(topListings.data)
         this.setState({
           // topListings: topListings.data.properties,
           listingCount: topListings.data.count,
@@ -29,7 +29,7 @@ class AgentDashboard extends React.Component {
         })
       })
       .catch(err => {
-        console.log(err.response.data, err.response.status)
+        // console.log(err.response.data, err.response.status)
         if(err.response.status === 500) {
           this.props.history.replace('/error/500')
         }

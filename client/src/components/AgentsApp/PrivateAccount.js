@@ -7,7 +7,7 @@ function PrivateAccount ({component: Component, ...rest}) {
   const status = useContext(agentContext);
 
   useEffect(() => {
-    console.log(status.isLoggedIn, status.agentLoading)
+    // console.log(status.isLoggedIn, status.agentLoading)
     if(!status.isLoggedIn && !status.agentLoading) {
       const timer = setTimeout(() => {
         setLoading(false)

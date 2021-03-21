@@ -4,9 +4,9 @@ import {agentContext} from '../agentContext';
 import './AgentListingDetails.css'
 
 class AgentListingDetails extends React.Component {
-  componentWillUnmount() {
-    console.log('unmounted 2')
-  }
+  // componentWillUnmount() {
+  //   console.log('unmounted 2')
+  // }
   render() {
     return (
       <div className="agent-listing-details-container">
