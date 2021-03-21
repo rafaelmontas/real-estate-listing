@@ -19,6 +19,13 @@ class ListingCard extends React.Component {
       return <span>Penthouse</span>
     }
   }
+  renderImage() {
+    if(this.props.listing['PropertyPictures'][0]) {
+      return <img src={this.props.listing['PropertyPictures'][0].location}/>  
+    } else {
+      return <img />
+    }
+  }
 
   render() {
     return (
@@ -26,7 +33,7 @@ class ListingCard extends React.Component {
         <div className="listing-card-container">
           <div className="listing-card-item">
             <div className="listing-photo">
-              <img src={image}/>
+              {this.renderImage()}
             </div>
             <div className="listing-details">
               <div className="address-section sections">

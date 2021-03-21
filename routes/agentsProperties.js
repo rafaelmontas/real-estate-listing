@@ -8,7 +8,10 @@ const agentsPropertiesRouter = express.Router({mergeParams: true});
 
 agentsPropertiesRouter.get('/', async (req, res) => {
   try {
-    const listings = await Property.findAndCountAll({where: {agent_id: req.params.id}})
+    const listings = await Property.findAndCountAll({
+      where: {agent_id: req.params.id},
+       include: [{model: PropertyPictures, attributes: ['location']}]
+    })
     console.log('all properties')
     res.status(200).json({listings: listings.rows, count: listings.count, msg: 'agent properties'})
   } catch(err) {
