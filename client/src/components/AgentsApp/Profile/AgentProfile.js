@@ -169,7 +169,11 @@ class AgentProfile extends React.Component {
                   </div>
                 </div>
               </div>
-              <CompletionCard/>
+              <CompletionCard
+                hasPicture={Boolean(this.state.agent['AgentProfilePicture'])}
+                hasNumber={Boolean(this.state.agent.phone_number)}
+                hasListings={Boolean(this.state.agent.properties && this.state.agent.properties.length)}
+                />
               <div className="agent-edits profile-cards">
                 <AgentProfileForms agent={this.state.agent} handleUpdate={this.handleUpdate} onDeleteClick={this.handleDeleteClick}/>
               </div>
