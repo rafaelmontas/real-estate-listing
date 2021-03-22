@@ -10,7 +10,8 @@ agentsPropertiesRouter.get('/', async (req, res) => {
   try {
     const listings = await Property.findAndCountAll({
       where: {agent_id: req.params.id},
-       include: [{model: PropertyPictures, attributes: ['location']}]
+      include: [{model: PropertyPictures, attributes: ['location']}],
+      distinct: true
     })
     console.log('all properties')
     res.status(200).json({listings: listings.rows, count: listings.count, msg: 'agent properties'})
