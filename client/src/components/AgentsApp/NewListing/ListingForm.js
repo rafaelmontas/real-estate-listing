@@ -12,6 +12,9 @@ import Confirm from './Confirm'
 import {agentContext} from '../agentContext'
 import axios from 'axios';
 import LoadingBackdrop from './LoadingBackdrop'
+import gtag, { gaInit } from '../../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
+import publicIp from "public-ip";
 import './ListingForm.css'
 
 
@@ -78,7 +81,7 @@ class ListingForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if(!window.google) {
       insertScript()
       this.timer = setTimeout(() => {
@@ -91,6 +94,28 @@ class ListingForm extends React.Component {
         // console.log('places api already mounted')
       }, 1000)
     }
+    // Track page views GA
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent New Listing Page', user_id: this.context.agent.id })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent New Listing Page', user_id: this.context.agent.id })
+    }
+    gtag('config', 'G-WFH68VZSHT', {
+      page_title: 'Agent New Listing Page',
+      page_path: '/account/new-listing',
+      send_page_view: false,
+      user_id: this.context.agent.id
+    })
+    // Init Facebook Pixel
+    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      console.log('Internal IP')
+      return null
+    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')
+    } else {
+      ReactPixel.init('587601035409958')
+    }
+    ReactPixel.pageView(); // For tracking page view
   }
 
   // Proceed to next stap

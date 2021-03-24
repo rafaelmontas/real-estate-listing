@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 import ListingCard from '../MyHauzzy/Listings/ListingCard'
 import CircularProgressSpinner from '../CircularProgressSpinner'
 import {agentContext} from './agentContext';
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
+import publicIp from "public-ip";
 import './AgentDashboard.css'
 
 class AgentDashboard extends React.Component {
@@ -16,7 +19,7 @@ class AgentDashboard extends React.Component {
       listingCount: 0
     }
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
       axios.get(`/agents/${this.context.agent.id}/properties`)
@@ -27,6 +30,7 @@ class AgentDashboard extends React.Component {
           listingCount: topListings.data.count,
           isLoading: false
         })
+        
       })
       .catch(err => {
         // console.log(err.response.data, err.response.status)
@@ -36,6 +40,28 @@ class AgentDashboard extends React.Component {
       })
       this.setState({isLoading: false})
     }, 1000)
+    // Track page views GA
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Main Dashboard', user_id: this.context.agent.id })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent Main Dashboard', user_id: this.context.agent.id })
+    }
+    gtag('config', 'G-WFH68VZSHT', {
+      page_title: 'Agent Main Dashboard',
+      page_path: '/account/dashboard',
+      send_page_view: false,
+      user_id: this.context.agent.id
+    })
+    // Init Facebook Pixel
+    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      console.log('Internal IP')
+      return null
+    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')
+    } else {
+      ReactPixel.init('587601035409958')
+    }
+    ReactPixel.pageView(); // For tracking page view
   }
   renderBottomDiv() {
     if(this.state.topListings.length === 0) {

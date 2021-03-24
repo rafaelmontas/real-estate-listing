@@ -9,6 +9,8 @@ import {agentContext} from './agentContext';
 import PrivateAccount from './PrivateAccount'
 import AgentForgotPassword from './AgentForgotPassword'
 import AgentResetPassword from './AgentResetPassword'
+import { hotjar } from 'react-hotjar';
+import publicIp from "public-ip";
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -27,11 +29,13 @@ class AgentsApp extends React.Component {
     this.logOut = this.logOut.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // Get agent info
     this.getAgent()
     // Add background color to doby
     document.body.classList.toggle("background")
+    // Init hotjar
+    if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
     // Redirect
     if(this.props.location.pathname === '/') {
       this.props.history.replace({pathname: '/account/dashboard'})

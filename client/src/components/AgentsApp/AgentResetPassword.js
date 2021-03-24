@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import gtag, { gaInit } from '../../utils/GaUtils';
 import './AgentForgotPassword.css';
 
 class AgentResetPassword extends React.Component {
@@ -17,6 +18,20 @@ class AgentResetPassword extends React.Component {
     this.onInputChange = this.onInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClose = this.handleClose.bind(this)
+  }
+
+  componentDidMount() {
+    // Track page views GA
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Reset Password Page' })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent Reset Password Page' })
+    }
+    gtag('config', 'G-WFH68VZSHT', {
+      page_title: 'Agent Reset Password Page',
+      page_path: '/reset-password/:token',
+      send_page_view: false
+    })
   }
 
   onInputChange(e) {

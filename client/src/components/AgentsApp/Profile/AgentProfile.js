@@ -11,6 +11,9 @@ import dateFormat from 'dateformat'
 import Backdrop from '../../Backdrop'
 import DeleteModal from '../../MyHauzzy/Profile/DeleteModal'
 import AgentProfilePicture from './AgentProfilePicture'
+import gtag, { gaInit } from '../../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
+import publicIp from "public-ip";
 import './AgentProfile.css'
 
 class AgentProfile extends React.Component {
@@ -30,7 +33,7 @@ class AgentProfile extends React.Component {
     this.handleBackdropClick = this.handleBackdropClick.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
       // Get agent profile
@@ -42,6 +45,28 @@ class AgentProfile extends React.Component {
             })
             .catch(err => console.log(err.response.data))
     }, 1000)
+    // Track page views GA
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Profile Page', user_id: this.context.agent.id })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent Profile Page', user_id: this.context.agent.id })
+    }
+    gtag('config', 'G-WFH68VZSHT', {
+      page_title: 'Agent Profile Page',
+      page_path: '/account/profile',
+      send_page_view: false,
+      user_id: this.context.agent.id
+    })
+    // Init Facebook Pixel
+    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      console.log('Internal IP')
+      return null
+    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')
+    } else {
+      ReactPixel.init('587601035409958')
+    }
+    ReactPixel.pageView(); // For tracking page view
   }
 
   handleUpdate(body) {
