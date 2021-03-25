@@ -1,8 +1,10 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('properties', [{
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -29,11 +31,12 @@ module.exports = {
         close_price: null,
         close_date: null,
         agent_id: null,
-        user_id: 1,
+        user_id: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -59,12 +62,13 @@ module.exports = {
         status_change_timestamp: null,
         close_price: null,
         close_date: null,
-        agent_id: 1,
+        agent_id: uuidv4(),
         user_id: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -90,12 +94,13 @@ module.exports = {
         status_change_timestamp: null,
         close_price: null,
         close_date: null,
-        agent_id: 1,
+        agent_id: uuidv4(),
         user_id: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -121,12 +126,13 @@ module.exports = {
         status_change_timestamp: null,
         close_price: null,
         close_date: null,
-        agent_id: 1,
+        agent_id: uuidv4(),
         user_id: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -152,12 +158,13 @@ module.exports = {
         status_change_timestamp: null,
         close_price: null,
         close_date: null,
-        agent_id: 1,
+        agent_id: uuidv4(),
         user_id: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
+        id: uuidv4(),
         province: "Distrito Nacional",
         province_id: 1,
         sector: "Ensanche Naco",
@@ -183,7 +190,7 @@ module.exports = {
         status_change_timestamp: null,
         close_price: null,
         close_date: null,
-        agent_id: 1,
+        agent_id: uuidv4(),
         user_id: null,
         createdAt: new Date(),
         updatedAt: new Date()

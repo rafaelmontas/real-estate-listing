@@ -1,5 +1,6 @@
 'use strict';
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,6 +8,7 @@ module.exports = {
     const hashedPassword = await bcrypt.hash("montas", salt);
 
     return queryInterface.bulkInsert('agents', [{
+      id: uuidv4(),
       name: 'Rafael Agent',
       email: "rafael@gmail.com",
       phone_number: "8296483530",

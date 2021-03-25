@@ -41,7 +41,7 @@ propertyPicturesRouter.post('/', (req, res) => {
     req.files.forEach(item => {
       item.original_name = item.originalname
       item.storage_class = item.storageClass
-      item.property_id = Number(req.params.id)
+      item.property_id = req.params.id
 
       delete item.fieldname
       delete item.originalname
@@ -53,13 +53,14 @@ propertyPicturesRouter.post('/', (req, res) => {
       delete item.etag
       delete item.versionId
     })
-
+    console.log(req.files)
     PropertyPictures.bulkCreate(req.files, {returning: true})
     .then(data => {
       console.log('fotos cargadas', req.files, data)
       res.status(200).json({msg: 'Fotos cargadas!'})
     })
     .catch(err => {
+      console.log(err)
       res.status(400).json({msg: err})
     })
   })

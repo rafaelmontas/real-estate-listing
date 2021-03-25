@@ -71,7 +71,7 @@ class ListingCard extends React.Component {
                 </div>
                 <div className="listing-actions sections">  
                   <span className="edit-button"><i className="far fa-edit"></i></span>
-                  <span className="delete-button"><i className="far fa-trash-alt"></i></span>
+                  {/* <span className="delete-button"><i className="far fa-trash-alt"></i></span> */}
                 </div>
               </div>
             </div>

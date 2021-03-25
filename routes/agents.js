@@ -19,8 +19,8 @@ agentsRouter.use('/:id/properties', agentsPropertiesRouter)
 
 agentsRouter.get("/:id", verifyToken, (req, res) => {
   // Verify that agent requested is the same as the one requesting
-  console.log(`Agent requesting: ${req.agent.id} for agent: ${Number(req.params.id)}`)
-  if(req.agent.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`Agent requesting: ${req.agent.id} for agent: ${req.params.id}`)
+  if(req.agent.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
   
   Agent.findByPk(req.params.id, {
     include: [
@@ -88,8 +88,8 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
   console.log(req.params, req.body)
 
   // Verify that agent trying to update is the same as the one updating
-  console.log(`Agent requesting update: ${req.agent.id} for agent: ${Number(req.params.id)}`)
-  if(req.agent.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`Agent requesting update: ${req.agent.id} for agent: ${req.params.id}`)
+  if(req.agent.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
   
   // Simple validation - check if fields are empty
   if(!name || !email || !password) return res.status(400).json({msg: 'Ingresar nombre, email y contraseña'})
@@ -166,8 +166,8 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
 // @acces Private
 agentsRouter.delete("/:id", verifyToken, async (req, res) => {
   // Verify that the agent to be deleted is the same as the one deleting
-  console.log(`Agent requesting delete: ${req.agent.id} for agent: ${Number(req.params.id)}`)
-  if(req.agent.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`Agent requesting delete: ${req.agent.id} for agent: ${req.params.id}`)
+  if(req.agent.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
 
   // Get agent to be deleted
   const agent = await Agent.findByPk(req.agent.id)

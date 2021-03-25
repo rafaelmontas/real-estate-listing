@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('property_amenities', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       half_bathrooms: {
         type: Sequelize.BOOLEAN,
@@ -93,7 +93,7 @@ module.exports = {
         defaultValue: false
       },
       property_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false
       },
       createdAt: {

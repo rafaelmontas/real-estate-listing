@@ -16,6 +16,7 @@ agentsPropertiesRouter.get('/', async (req, res) => {
     console.log('all properties')
     res.status(200).json({listings: listings.rows, count: listings.count, msg: 'agent properties'})
   } catch(err) {
+    console.log(err)
     res.status(400).json('There was an error.')
   }
 })

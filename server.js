@@ -44,7 +44,7 @@ if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'productio
 
 // {force: true}
 // db.agent.drop()
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
   })

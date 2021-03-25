@@ -25,15 +25,15 @@ class AgentSignUpForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const body = {name: this.state.name, email: this.state.email, password: this.state.password}
-    console.log(body)
+    // console.log(body)
     axios.post('/agents', body)
           .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
             this.context.getAgent()
           })
           .catch(err => {
-            console.log(err.response.data, err.response.status)
+            // console.log(err.response.data, err.response.status)
             this.setState({errorMsg: err.response.data.msg})
           })
   }

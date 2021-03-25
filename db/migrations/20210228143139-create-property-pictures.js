@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('property_pictures', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       original_name: {
         type: Sequelize.STRING,
@@ -49,7 +49,7 @@ module.exports = {
         allowNull: true
       },
       property_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false
       },
       createdAt: {

@@ -66,11 +66,10 @@ agentAuthRouter.put("/forgot-password", async (req, res) => {
     template_id: 'd-dd67e2cd23984cb9955ab7373d47b076',
     personalizations: [
       {
-        to: [{email: 'rafaelmontas1@gmail.com'}],
+        to: [{email: agent.email}],
         dynamic_template_data: {
           name: agent.name,
-          // Change to https when ready to production
-          link_reset: `http://agent.myhauzzy.com:3000/reset-password/${token}`
+          link_reset: `https://agent.hauzzy.com/reset-password/${token}`
         }
       }
     ]

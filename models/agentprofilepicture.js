@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const AgentProfilePicture = sequelize.define('AgentProfilePicture', {
+    id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
+    },
     original_name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -38,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     agent_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       unique: true
     }

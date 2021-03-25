@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const PropertyAmenities = sequelize.define('PropertyAmenities', {
+    id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
+    },
     half_bathrooms: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
@@ -86,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     property_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       unique: true
     }

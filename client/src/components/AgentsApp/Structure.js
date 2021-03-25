@@ -5,10 +5,17 @@ import AgentListings from './Listings/AgentListings'
 import AgentListingDetails from './Listings/AgentListingDetails'
 import ListingForm from './NewListing/ListingForm'
 import AgentProfile from './Profile/AgentProfile'
+import {agentContext} from './agentContext';
 import { Route } from 'react-router-dom'
+
 import './AgentsApp.css'
 
 class Structure extends React.Component {
+  
+  // componentDidMount() {
+  //   insertScript()
+  // }
+
   render() {
     return (
       <section className="structure-container">
@@ -31,4 +38,16 @@ class Structure extends React.Component {
   }
 }
 
+function insertScript() {
+  const {head} = document
+  const script = document.createElement('script')
+  script.id = 'newListingTag'
+  script.type = 'text/javascript'
+  script.async = true
+  script.src = `https://survey.survicate.com/workspaces/de7bad5c0a5f47614be2f53b36b09535/web_surveys.js`
+  head.appendChild(script)
+}
+
+
+Structure.contextType = agentContext;
 export default Structure

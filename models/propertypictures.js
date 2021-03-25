@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const PropertyPictures = sequelize.define('PropertyPictures', {
+    id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
+    },
     original_name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -42,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     property_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false
     }
   }, {

@@ -5,9 +5,9 @@ module.exports = {
     return queryInterface.createTable('properties', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       province: {
         type: Sequelize.STRING,
@@ -112,11 +112,11 @@ module.exports = {
         allowNull: true
       },
       agent_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: true
       },
       user_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: true
       },
       createdAt: {

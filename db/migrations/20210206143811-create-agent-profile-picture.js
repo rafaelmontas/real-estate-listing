@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('agent_profile_pictures', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       original_name: {
         type: Sequelize.STRING,
@@ -45,7 +45,7 @@ module.exports = {
         allowNull: false
       },
       agent_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false
       },
       createdAt: {

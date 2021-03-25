@@ -17,7 +17,7 @@ class AgentSignUp extends React.Component {
     }
   }
   async componentDidMount() {
-    console.log(this.context.isLoggedIn, this.context.agentLoading)
+    // console.log(this.context.isLoggedIn, this.context.agentLoading)
     this.timer = setTimeout(() => {
       if(this.context.isLoggedIn) {
         this.props.history.push('/account/dashboard')
