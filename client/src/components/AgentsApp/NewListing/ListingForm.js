@@ -269,6 +269,11 @@ class ListingForm extends React.Component {
           .then(res => {
             // console.log(res.data.msg)
             this.setState({submitLoading: false, status: res.status})
+            gtag('event', 'new_listing', {
+              event_category: 'engagement',
+              event_label: 'new_listing_submitted'
+            })
+            ReactPixel.trackCustom('NewListing', {content_name: '/account/new-listing'})
           })
           .catch(err => {
             console.log(err.response.data.msg, err.response.status)

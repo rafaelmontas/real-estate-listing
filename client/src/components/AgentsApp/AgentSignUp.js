@@ -45,7 +45,7 @@ class AgentSignUp extends React.Component {
     } else {
       ReactPixel.init('587601035409958')
     }
-    ReactPixel.pageView(); // For tracking page view
+    ReactPixel.pageView({content_name: '/signup'}); // For tracking page view
   }
   render() {
     if(this.state.loading) {

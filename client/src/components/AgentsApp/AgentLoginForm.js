@@ -4,6 +4,8 @@ import {agentContext} from './agentContext';
 import axios from 'axios';
 import ErrorMsg from '../Auth/ErrorMsg';
 import { withRouter } from "react-router";
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 
 class AgentLoginForm extends React.Component {
   constructor(props) {
@@ -32,7 +34,12 @@ class AgentLoginForm extends React.Component {
             localStorage.setItem('agent-jwt', res.data.token)
             this.context.getAgent()
             // this.props.history.push('/account/dashboard')
-          })
+            gtag('event', 'login', {
+              event_category: 'engagement',
+              event_label: 'Agent Login'
+            })
+            ReactPixel.trackCustom('AgentLogin', {content_name: '/login'})
+            })
           .catch(err => {
             console.log(err.response.data, err.response.status)
             this.setState({errorMsg: err.response.data.msg})

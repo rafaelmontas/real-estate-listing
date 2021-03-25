@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom'
 import {agentContext} from './agentContext';
 import axios from 'axios'
 import ErrorMsg from '../Auth/ErrorMsg';
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 
 class AgentSignUpForm extends React.Component {
   constructor(props) {
@@ -31,6 +33,11 @@ class AgentSignUpForm extends React.Component {
             // console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
             this.context.getAgent()
+            gtag('event', 'sign_up', {
+              event_category: 'engagement',
+              event_label: 'Agent Registered'
+            })
+            ReactPixel.track('CompleteRegistration', {content_name: '/signup'})
           })
           .catch(err => {
             // console.log(err.response.data, err.response.status)
