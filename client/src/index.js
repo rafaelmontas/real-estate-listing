@@ -9,8 +9,11 @@ import * as serviceWorker from './serviceWorker';
 const parsedData = window.location.host.split(".");
 const subDomain = parsedData[0];
 
+// Remove console.log() from production
+if (process.env.NODE_ENV !== "development") console.log = () => {};
+
 if(parsedData.length >= 3 && subDomain !== 'www') {
-  // console.log(parsedData,parsedData.includes('agent'))
+  console.log(parsedData,parsedData.includes('agent'))
   if(subDomain === 'agent') {
     ReactDOM.render(
       <React.StrictMode>
