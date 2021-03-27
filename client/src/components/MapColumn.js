@@ -59,5 +59,5 @@ MapColumn.propTypes = {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY
+  apiKey: process.env.NODE_ENV === 'production' ? process.env.REACT_APP_GOOGLE_API_KEY_PROD : process.env.REACT_APP_GOOGLE_API_KEY
 })(MapColumn);

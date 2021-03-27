@@ -288,6 +288,13 @@ class MainSearch extends React.Component {
     if(window.innerWidth <= 770 && this.state.cardSelected) {
       mapPropertyCard = <MapPropertyCard properties={this.state.properties} identifier={this.state.cardSelected}/>
     }
+
+    let mapsApiKey;
+    if(process.env.NODE_ENV === 'production') {
+      mapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY_PROD
+    } else {
+      mapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY
+    }
     return (
       <div className="main-app-container">
         {backdrop}
@@ -308,7 +315,7 @@ class MainSearch extends React.Component {
                 path={this.props.location.pathname}/>
         {this.state.registerLoginOpen && <RegisterLoginModal modalType={this.state.modalTypeOpen} onCloseClick={this.handleRegisterClose} onLoginSwitch={this.handleLoginSwitch} onRegisterSwitch={this.handleRegisterSwitch}/>}
         <Switch>
-          <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`} loadingElement={<DefaultLoad/>}>
+          <LoadScript googleMapsApiKey={`${mapsApiKey}`} loadingElement={<DefaultLoad/>}>
             <Route path={this.props.match.url} exact>
               <section id="main-app-content" className="search-results-container">
                 <div id="results-column-left" className={mapOpenCss}>

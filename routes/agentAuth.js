@@ -59,7 +59,13 @@ agentAuthRouter.put("/forgot-password", async (req, res) => {
   const token = jwt.sign({id: agent.id}, process.env.TOKEN_SECRET, { expiresIn: '2h' })
 
   // Email settings
-  sgMail.setApiKey(process.env.SENDGRID_DEV_EMAIL_API_KEY)
+  let sgKey;
+  if(process.env.NODE_ENV === 'production') {
+    sgKey = process.env.SENDGRID_PROD_EMAIL_API_KEY
+  } else {
+    sgKey = process.env.SENDGRID_DEV_EMAIL_API_KEY
+  }
+  sgMail.setApiKey(sgKey)
   const msg = {
     from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
     reply_to: 'noreply@hauzzy.com',

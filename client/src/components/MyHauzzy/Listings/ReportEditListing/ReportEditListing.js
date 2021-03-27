@@ -396,12 +396,19 @@ class ReportEditListing extends React.Component {
 }
 
 function insertScript() {
+  let mapsApiKey;
+  if(process.env.NODE_ENV === 'production') {
+    mapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY_PROD
+  } else {
+    mapsApiKey = process.env.REACT_APP_GOOGLE_API_KEY
+  }
+
   const {head} = document
   const script = document.createElement('script')
   script.id = 'newListingTag'
   script.type = 'text/javascript'
   script.async = false
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places&language=es`
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places&language=es`
   head.appendChild(script)
 }
 
