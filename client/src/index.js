@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== "development") console.log = () => {};
 
 if(parsedData.length >= 3 && subDomain !== 'www') {
   console.log(parsedData,parsedData.includes('agent'))
-  if(subDomain === 'agent') {
+  if(subDomain !== 'agent') {
     ReactDOM.render(
       <React.StrictMode>
         <BrowserRouter>
