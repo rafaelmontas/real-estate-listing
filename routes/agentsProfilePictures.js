@@ -12,7 +12,7 @@ const s3 = new aws.S3()
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'agents-profile-pictures',
+    bucket: process.env.NODE_ENV === 'production' ? 'agent-profile-pictures-production' : 'agents-profile-pictures',
     acl: 'public-read',
     metadata: (req, file, cb) => {
       cb(null, {fieldName: file.fieldname, agentId: req.params.id})
