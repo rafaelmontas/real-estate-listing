@@ -116,14 +116,14 @@
 }
 .content-container .like-card-section .like-card img {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   height: auto;
 }
 /* Mockup section */
 .content-container .mockup-section {
   flex-direction: column-reverse;
   margin-bottom: 50px;
-  padding: 50px 16px;
+  padding: 50px 16px 50px 0;
 }
 .content-container .mockup-section .mockup-side {
   width: 100%;
@@ -179,7 +179,7 @@
     padding: 50px 60px;
   }
   .content-container .connection-section .connection-img {
-    max-width: 55%;
+    max-width: 60%;
   }
   .content-container .connection-section .connection-text {
     flex-basis: 40%;
@@ -198,15 +198,12 @@
   }
   /* Mockup section */
   .content-container .mockup-section {
-    padding: 50px 60px;
+    padding: 50px 60px 50px 0;
   }
   .content-container .mockup-section .mockup-side {
-    max-width: 60%;
-  }
-  .content-container .mockup-section img {
-    margin-left: -35px;
+    max-width: 55%;
   }
   .content-container .mockup-section .right-info {
-    flex-basis: 40%;
+    flex-basis: 45%;
   }
 }

@@ -6,7 +6,7 @@ import rightDashboard from '../../demo_img/dashboard.png'
 import searchImg from '../../demo_img/search.png'
 import connectionImg from '../../demo_img/contact-form.png'
 import macbookMockup from '../../demo_img/macBook-iphone.png'
-import likeCard from '../../demo_img/like-card.png'
+import listing from '../../demo_img/listing.png'
 import LandingFooter from './LandingFooter';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
@@ -63,9 +63,8 @@ class LandingPage extends React.Component {
               <img src={searchImg} alt="promotion of contact form on website"/>
             </div>
             <div className="connection-text">
-              <h1>Deja que los clientes se acerquen</h1>
-              <p>Posiciónate frente a clientes potenciales que están buscando propiedades
-                 y gestiona tus clientes de manera rapida y efectiva.</p>
+              <h1>Información relevante en tus manos</h1>
+              <p>Hauzzy empodera a los usuarios con información actualizada en un diseño moderno y facil de usar.</p>
             </div>
           </section>
           <section className="like-card-section section">
@@ -74,16 +73,17 @@ class LandingPage extends React.Component {
               <p>Mantente al tanto de tus propiedades guardadas y facilitale a tus clientes compartirlas.</p>
             </div>
             <div className="like-card">
-              <img src={likeCard} alt="showing like feature"/>
+              <img src={listing} alt="showing like feature"/>
             </div>
           </section>
           <section className="mockup-section section">
             <div className="mockup-side">
-              <img src={macbookMockup} alt="showing agent dashboard"/>
+              <img src={connectionImg} alt="showing agent dashboard"/>
             </div>
             <div className="right-info">
-              <h1>Tu portafolio en un solo lugar</h1>
-              <p>Maneja todo tu inventario inmobiliario con las herramientas que necesitas y comienza a conectar con clientes.</p>
+              <h1>Deja que los clientes se acerquen</h1>
+              <p>Posiciónate frente a clientes potenciales que están buscando propiedades
+                 y gestiona tus clientes de manera rapida y efectiva.</p>
             </div>
           </section>
         </main>
