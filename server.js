@@ -37,15 +37,15 @@ if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'productio
   })
 }
 
-// app.listen(PORT, () => {
-//   console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-// })
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+})
 
 
 // {force: true}
 // db.agent.drop()
-db.sequelize.sync({force: true}).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-  })
-})
+// db.sequelize.sync({force: true}).then(() => {
+//   app.listen(PORT, () => {
+//     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
+//   })
+// })

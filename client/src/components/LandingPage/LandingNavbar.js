@@ -4,6 +4,7 @@ import { Link, animateScroll as scroll } from "react-scroll";
 import LandingForm from './LandingForm';
 import './LandingNavbar.css';
 import gtag from '../../utils/GaUtils';
+import {Link as LinkTo} from 'react-router-dom';
 
 class LandingNavbar extends React.Component {
   constructor(props) {
@@ -45,10 +46,7 @@ class LandingNavbar extends React.Component {
       return (
         <nav id="header" className={this.state.scrolled ? "scrolled" : null}>
           <div className="nav-container">
-            <LandingForm onSubmit={this.props.onSubmit}
-                         submitStatus={this.props.submitStatus}
-                         onEmailChange={this.props.onEmailChange}
-                         emailValue={this.props.emailValue}/>
+            <LandingForm/>
           </div>
         </nav>
       )
@@ -62,8 +60,9 @@ class LandingNavbar extends React.Component {
                 <span>Caracteristicas <i className="fas fa-angle-down"></i></span>
               </Link>
             </div>
-            <div className={this.props.convertion ? "contact-button hidden" : "contact-button"}>
-              <span onClick={this.props.focusInput}>Registrate</span>
+            <div className="signup-login-buttons">
+              <a href="http://agent.myhauzzy.com:3000/signup" className="signup-button">Registrate</a>
+              <a href="http://agent.myhauzzy.com:3000/login" className="login-button">Iniciar Sesión</a>
             </div>
           </div>
         </nav>

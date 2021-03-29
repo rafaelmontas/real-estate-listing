@@ -1,33 +1,21 @@
 import React from 'react';
 import './LandingPage.css';
 import LandingNavbar from './LandingNavbar';
-import LandingForm from './LandingForm';
 import rightMap from '../../demo_img/right-img-2.png';
+import rightDashboard from '../../demo_img/dashboard.png'
+import searchImg from '../../demo_img/search.png'
 import connectionImg from '../../demo_img/contact-form.png'
 import macbookMockup from '../../demo_img/macBook-iphone.png'
 import likeCard from '../../demo_img/like-card.png'
 import LandingFooter from './LandingFooter';
-import ReactNotifications from 'react-notifications-component';
-import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 import gtag, { gaInit } from '../../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
 import publicIp from "public-ip";
-import axios from 'axios';
 
 class LandingPage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      submitSuccess: null
-    }
-    this.inputRef = React.createRef()
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEmailChange = this.handleEmailChange.bind(this)
-    this.focusInput = this.focusInput.bind(this)
-  }
+
   async componentDidMount() {
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
@@ -38,115 +26,41 @@ class LandingPage extends React.Component {
     gtag('event', 'page_view', {
       page_title: 'Landing Page'
     })
-    // Init Facebook Pixel
-    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
-      console.log('Internal IP')
-      return null
-    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
-      ReactPixel.init('689804211678157')
-    } else {
-      ReactPixel.init('587601035409958')
-    }
-    ReactPixel.pageView(); // For tracking page view
-    // ReactPixel.track('test_event_code', 'TEST98714');
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    let listId;
-    let apiKey;
-    if(process.env.NODE_ENV === 'production') {
-      listId = process.env.REACT_APP_SENDGRID_WAITING_LIST_ID;
-      apiKey = process.env.REACT_APP_SENDGRID_PROD_API_KEY
-    } else {
-      listId = process.env.REACT_APP_SENDGRID_TEST_LIST_ID;
-      apiKey = process.env.REACT_APP_SENDGRID_DEV_API_KEY
-    }
-    const body = {
-      list_ids: [`${listId}`],
-      contacts: [{email: this.state.email}]
-    }
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+    try {
+      // Init Facebook Pixel
+      if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+        console.log('Internal IP')
+        return null
+      } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+        ReactPixel.init('689804211678157')
+      } else {
+        ReactPixel.init('587601035409958')
       }
+      ReactPixel.pageView(); // For tracking page view
+    } catch(err) {
+      console.log(err)
+      this.props.history.replace({pathname: '/error/500'})
     }
-    // console.log(body, config)
-    if(this.state.email !== '') {
-      axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
-          .then(res => {
-            // console.log(res.data)
-            this.setState({
-              email: '',
-              submitSuccess: true
-            })
-            store.addNotification({
-              title: 'Listo!',
-              message: 'Te mantendremos al tanto de nuestras novedades.',
-              type: 'success',
-              container: 'top-right',
-              animationIn: ["animate__animated", "animate__fadeIn"],
-              animationOut: ["animate__animated", "animate__fadeOut"],
-              dismiss: {
-                duration: 5000
-              }
-            })
-            gtag('event', 'form_submit', {
-              event_category: 'engagement',
-              event_label: 'Email form submitted'
-            })
-            ReactPixel.track('Lead', {})
-          })
-          .catch(err => {
-            // console.log(err.response.data, err.response.status)
-            this.setState({
-              submitSuccess: false
-            })
-          })
-    }
-  }
-  handleEmailChange(value) {
-    // console.log(value)
-    this.setState({email: value})
-  }
-
-  focusInput() {
-    this.inputRef.current.focus()
-    gtag('event', 'click', {
-      event_category: 'engagement',
-      event_label: 'Button clicked to focus input field'
-    })
   }
 
   render() {
     return (
       <div className="main-body">
-        <LandingNavbar onSubmit={this.handleSubmit}
-                       submitStatus={this.state.submitSuccess}
-                       onEmailChange={this.handleEmailChange}
-                       emailValue={this.state.email}
-                       focusInput={this.focusInput}
-                       convertion={this.state.submitSuccess}/>
-        <ReactNotifications isMobile={true} breakpoint/>
+        <LandingNavbar/>
         <main className="content-container">
           <section className="top-section section">
             <div className="left-info">
-              <h1>Una plataforma inmobiliaria innovadora</h1>
-              <p>Registrate para ser notificado cuando puedas publicar tus propiedades.</p>
-              <LandingForm onSubmit={this.handleSubmit}
-                           submitStatus={this.state.submitSuccess}
-                           onEmailChange={this.handleEmailChange}
-                           emailValue={this.state.email}
-                           inputRef={this.inputRef}/>
+              <h1>Ya puedes comenzar a utilizar la plataforma</h1>
+              <p>Registrate para comenzar a publicar tus propiedades y posicionarlas entre las primeras disponibles.</p>
+              <a href="http://agent.myhauzzy.com:3000/signup" className="landing-button">Comienza a publicar!</a>
             </div>
             <div className="right-info">
-              <img src={rightMap} alt="promotion of map based property search"/>
+              <img src={rightDashboard} alt="promotion of map based property search"/>
             </div>
           </section>
           <section className="connection-section section" id="features-section">
             <div className="connection-img">
-              <img src={connectionImg} alt="promotion of contact form on website"/>
+              <img src={searchImg} alt="promotion of contact form on website"/>
             </div>
             <div className="connection-text">
               <h1>Deja que los clientes se acerquen</h1>

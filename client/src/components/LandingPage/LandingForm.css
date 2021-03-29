@@ -1,3 +1,10 @@
+nav#header.scrolled .nav-container .signup-login-buttons .signup-button {
+  margin-right: 10px;
+}
+nav#header.scrolled .nav-container .signup-login-buttons .login-button {
+  display: block;
+  /* margin-left: 10px; */
+}
 nav.scrolled .landing-email-form {
   width: 100%;
   justify-content: center;
@@ -59,3 +66,8 @@ nav.scrolled .landing-email-form button i {
     flex-grow: 0.3;
   }
 }
+/* @media only screen and (max-width: 768px) {
+  .landing-email-form input {
+    flex-grow: 0.3;
+  }
+} */

@@ -17,9 +17,9 @@ class PropertyCard extends React.Component {
           <Link to={`/properties/${this.props.property.id}`}>
             <div className="property-card-media">
               <div className="photo-container">
-                <img src={image} alt="property"/>
+                <img src={this.props.property['PropertyPictures'][0].location} alt="property"/>
                 <div className="top-left-new">Nuevo</div>
-                <div className="top-left-video"><i className="fas fa-video"></i></div>
+                {/* <div className="top-left-video"><i className="fas fa-video"></i></div> */}
               </div>
             </div>
             <div className="property-card-info">
@@ -33,7 +33,7 @@ class PropertyCard extends React.Component {
                 <div className="stats cars"><i className="fas fa-car-side"></i>{this.props.property.parking_spaces}</div>
                 <div className="stats mts"><i className="fas fa-ruler-vertical"></i>{this.props.property.square_meters} mts</div>
               </div>
-              <div className="home-card-address">{`C/ ${this.props.property.street_name} #${this.props.property.street_number}`}</div>
+              <div className="home-card-address">{this.props.property.listing_address}</div>
               <div className="home-card-sector">{this.props.property.sector}</div>
             </div>
           </Link>
