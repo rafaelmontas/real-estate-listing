@@ -11,6 +11,7 @@ import AgentForgotPassword from './AgentForgotPassword'
 import AgentResetPassword from './AgentResetPassword'
 import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
+import InternalServerError500 from '../ErrorPages/InternalServerError500';
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -56,7 +57,7 @@ class AgentsApp extends React.Component {
             error: {msg: '', status: null},
             agentLoading: false
           })
-          if(!this.props.location.pathname.includes('/account')) {
+          if(!this.props.location.pathname.includes('/account') && this.props.location.pathname !== '/error/500') {
             this.props.history.push('/account/dashboard')
           }
         })
@@ -96,6 +97,7 @@ class AgentsApp extends React.Component {
           <Route path="/login" exact component={AgentLogin}/>
           <Route path="/forgot-password" exact component={AgentForgotPassword}/>
           <Route path="/reset-password/:token" exact component={AgentResetPassword}/>
+          <Route path="/error/500" exact component={InternalServerError500}/>
         </Switch>
       </agentContext.Provider>
     )

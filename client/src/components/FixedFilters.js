@@ -15,7 +15,7 @@ class FixedFilters extends React.Component {
     super(props)
     this.state = {
       listingTypeOpen: false,
-      listingType: "For Sale",
+      listingType: "sale",
       priceFilterOpen: false,
       minPrice: 0,
       maxPrice: 2000000,
@@ -26,7 +26,7 @@ class FixedFilters extends React.Component {
       bathrooms: 0,
       // Property Types
       propertyTypes: {
-        "Apartment": true,
+        "apartment": true,
         "House": true,
         "Villa": true,
         "Comercial": true,
@@ -59,7 +59,7 @@ class FixedFilters extends React.Component {
         bedrooms: parseInt(this.props.initialState.bedrooms),
         bathrooms: parseInt(this.props.initialState.bathrooms),
         propertyTypes: {
-          "Apartment": propertyTypesArray.includes("Apartment"),
+          "apartment": propertyTypesArray.includes("apartment"),
           "House": propertyTypesArray.includes("House"),
           "Villa": propertyTypesArray.includes("Villa"),
           "Comercial": propertyTypesArray.includes("Comercial"),
@@ -82,7 +82,7 @@ class FixedFilters extends React.Component {
           bedrooms: parseInt(this.props.initialState.bedrooms),
           bathrooms: parseInt(this.props.initialState.bathrooms),
           propertyTypes: {
-            "Apartment": propertyTypesArray.includes("Apartment"),
+            "apartment": propertyTypesArray.includes("apartment"),
             "House": propertyTypesArray.includes("House"),
             "Villa": propertyTypesArray.includes("Villa"),
             "Comercial": propertyTypesArray.includes("Comercial"),
@@ -127,7 +127,7 @@ class FixedFilters extends React.Component {
     });
   }
   handleMinPrice(event) {
-    if(this.state.listingType === "For Sale" && parseInt(event.target.value) > this.state.maxPrice && this.state.maxPrice !== 0) {
+    if(this.state.listingType === "sale" && parseInt(event.target.value) > this.state.maxPrice && this.state.maxPrice !== 0) {
       let prices = [0, 75000, 100000, 150000, 175000, 200000, 225000, 250000, 275000, 300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000];
       let index = prices.findIndex(number => {
         return number > event.target.value;
@@ -148,7 +148,7 @@ class FixedFilters extends React.Component {
     return this.props.searchProperties(this.props.initialState.sector == null ? "All" : this.props.initialState.sector, this.state.listingType, parseInt(event.target.value), this.state.maxPrice, this.state.bedrooms, this.state.bathrooms, keys)
   }
   handleMaxPrice(event) {
-    if(this.state.listingType === "For Sale" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
+    if(this.state.listingType === "sale" && this.state.minPrice > parseInt(event.target.value) && parseInt(event.target.value) !== 0) {
       let prices = [0, 75000, 100000, 125000, 150000, 175000, 200000, 225000, 250000, 275000, 300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000];
       let index = prices.findIndex(number => {
         return number > this.state.minPrice;
@@ -277,13 +277,13 @@ class FixedFilters extends React.Component {
           <div className="filter-section-left">
             <div className="buy-sell filters">
               <button onClick={this.handleListingTypeClick} className={buttonCssWhenOpen}>
-                <i className={this.state.listingType === "For Sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
-                <span>{this.state.listingType === "For Sale" ? "Comprar" : "Alquilar"}</span>
+                <i className={this.state.listingType === "sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
+                <span>{this.state.listingType === "sale" ? "Comprar" : "Alquilar"}</span>
                 {this.state.listingTypeOpen ? <i className="fas fa-angle-up dynamic-angle"></i> : <i className="fas fa-angle-down dynamic-angle"></i>}
               </button>
               <div className={popoverCss}>
                 <div className="separator">
-                  <input type="radio" checked={this.state.listingType === "For Sale"} onChange={this.handleListingType} value="For Sale" name="listing-type" id="for-sell"/>
+                  <input type="radio" checked={this.state.listingType === "sale"} onChange={this.handleListingType} value="sale" name="listing-type" id="for-sell"/>
                   <label className="label-listingType" htmlFor="for-sell" id="label-for-sell"><i className="fas fa-circle"></i>Comprar</label>
                 </div>
                 <div className="separator">

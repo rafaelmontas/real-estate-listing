@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.e9b2b3d8.chunk.css",
-    "main.js": "/static/js/main.482afb61.chunk.js",
-    "main.js.map": "/static/js/main.482afb61.chunk.js.map",
+    "main.css": "/static/css/main.df352222.chunk.css",
+    "main.js": "/static/js/main.a271def4.chunk.js",
+    "main.js.map": "/static/js/main.a271def4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.dc853243.js",
     "runtime-main.js.map": "/static/js/runtime-main.dc853243.js.map",
     "static/css/2.e8c1804f.chunk.css": "/static/css/2.e8c1804f.chunk.css",
-    "static/js/2.bf9d376e.chunk.js": "/static/js/2.bf9d376e.chunk.js",
-    "static/js/2.bf9d376e.chunk.js.map": "/static/js/2.bf9d376e.chunk.js.map",
+    "static/js/2.a03c77ad.chunk.js": "/static/js/2.a03c77ad.chunk.js",
+    "static/js/2.a03c77ad.chunk.js.map": "/static/js/2.a03c77ad.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9b1841a8e2d4797a17553e5fc7175802.js": "/precache-manifest.9b1841a8e2d4797a17553e5fc7175802.js",
+    "precache-manifest.3b589c71feb62dac533df9c57abc79e6.js": "/precache-manifest.3b589c71feb62dac533df9c57abc79e6.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.e8c1804f.chunk.css.map": "/static/css/2.e8c1804f.chunk.css.map",
-    "static/css/main.e9b2b3d8.chunk.css.map": "/static/css/main.e9b2b3d8.chunk.css.map",
-    "static/js/2.bf9d376e.chunk.js.LICENSE.txt": "/static/js/2.bf9d376e.chunk.js.LICENSE.txt",
+    "static/css/main.df352222.chunk.css.map": "/static/css/main.df352222.chunk.css.map",
+    "static/js/2.a03c77ad.chunk.js.LICENSE.txt": "/static/js/2.a03c77ad.chunk.js.LICENSE.txt",
     "static/media/brand-logo-vf.svg": "/static/media/brand-logo-vf.128dfed7.svg",
     "static/media/brand-logo-white.svg": "/static/media/brand-logo-white.83feabe7.svg",
     "static/media/contact-form.png": "/static/media/contact-form.c38e0abf.png",
+    "static/media/dashboard.png": "/static/media/dashboard.d714ed73.png",
     "static/media/google-play-badge.png": "/static/media/google-play-badge.db9b21a1.png",
     "static/media/house1.png": "/static/media/house1.4d66e1c0.png",
-    "static/media/like-card.png": "/static/media/like-card.5801cfc1.png",
+    "static/media/listing.png": "/static/media/listing.dc811719.png",
     "static/media/macBook-iphone.png": "/static/media/macBook-iphone.32ae9b0c.png",
     "static/media/right-img-2.png": "/static/media/right-img-2.88a5d5d4.png",
+    "static/media/search.png": "/static/media/search.1db93a18.png",
     "static/media/FixedFilters.css": "/static/media/sort-down.ca82bc74.svg",
     "static/media/undraw_house_searching_n8mp.svg": "/static/media/undraw_house_searching_n8mp.5275082a.svg",
     "static/media/undraw_page_not_found_su7k.svg": "/static/media/undraw_page_not_found_su7k.ed20eaae.svg"
@@ -29,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.dc853243.js",
     "static/css/2.e8c1804f.chunk.css",
-    "static/js/2.bf9d376e.chunk.js",
-    "static/css/main.e9b2b3d8.chunk.css",
-    "static/js/main.482afb61.chunk.js"
+    "static/js/2.a03c77ad.chunk.js",
+    "static/css/main.df352222.chunk.css",
+    "static/js/main.a271def4.chunk.js"
   ]
 }

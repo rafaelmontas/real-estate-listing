@@ -10,6 +10,10 @@
 .listings-content-right .show-listings .listings-tabs {
   display: none;
 }
+.listings-content-right .show-listings .listing-type-container .listings-list .listing-status span {
+  min-width: 79px;
+  text-align: center;
+}
 .listings-content-right .show-listings .listing-type-container .listings-list .listing-status span.active {
   padding: 6px;
   background-color: green;

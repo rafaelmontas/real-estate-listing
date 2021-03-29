@@ -2,6 +2,7 @@ const express = require('express');
 const propertiesRouter = express.Router();
 const db =  require('../models');
 const Property = db.property;
+const PropertyPictures = db.PropertyPictures;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
 
@@ -25,7 +26,10 @@ function isEmpty(obj) {
 }
 propertiesRouter.get("/", (req, res) => {
   if(isEmpty(req.query)) {
-    Property.findAndCountAll().then(properties => {
+    Property.findAndCountAll({
+      include: [{model: PropertyPictures, attributes: ['location']}],
+      distinct: true
+    }).then(properties => {
       res.status(200).json({properties: properties.rows, count: properties.count});
     }).catch(err => {
       console.log(err);
@@ -96,7 +100,9 @@ propertiesRouter.get("/", (req, res) => {
         property_type: {
           [Op.or]: propertyTypeResult
         }
-      }
+      },
+      include: [{model: PropertyPictures, attributes: ['location']}],
+      distinct: true
     }).then(properties => {
       res.status(200).json({properties: properties.rows, count: properties.count});
       console.log(req.params, req.query)

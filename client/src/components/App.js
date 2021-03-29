@@ -33,9 +33,13 @@ class App extends React.Component {
   
   async componentDidMount() {
     // Check token and load user
-    this.getUser()
+    // this.getUser()
     // Init hotjar
-    if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
+    try {
+      if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   getUser() {
@@ -87,9 +91,9 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
+            {/* <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} /> */}
             {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
-            {/* <Route path="/error/500" component={InternalServerError500}/> */}
+            <Route path="/error/500" component={InternalServerError500}/>
             <Route component={pageNotFound404}/>
           </Switch>
         </BrowserRouter>

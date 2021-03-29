@@ -49,6 +49,30 @@ nav#header .nav-container .nav-logo-menu span:hover {
   cursor: pointer;
   color: #186FE1;
 }
+nav#header .nav-container .signup-login-buttons {
+  display: flex;
+  align-items: center;
+}
+nav#header .nav-container .signup-login-buttons .signup-button {
+  padding: 10px;
+  background-color: #2c7bec;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+nav#header .nav-container .signup-login-buttons .login-button {
+  display: none;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 4px;
+  color: #2c7bec;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid #2c7bec;
+}
 nav#header .nav-container .contact-button.hidden {
   display: none;
 }
@@ -74,5 +98,11 @@ nav#header .nav-container .contact-button span:hover {
   }
   nav#header .nav-container .nav-logo-menu span {
     display: flex;
+  }
+  nav#header .nav-container .signup-login-buttons .signup-button {
+    margin-right: 10px;
+  }
+  nav#header .nav-container .signup-login-buttons .login-button {
+    display: block;
   }
 }
