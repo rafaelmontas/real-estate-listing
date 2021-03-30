@@ -7,6 +7,7 @@ const AgentProfilePicture = db.AgentProfilePicture
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/agentAuth')
+const sgMail = require('@sendgrid/mail')
 // const Op = Sequelize.Op
 
 // Use nested route
@@ -63,6 +64,15 @@ agentsRouter.post("/", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  // Email settings
+  let sgKey;
+  if(process.env.NODE_ENV === 'production') {
+    sgKey = process.env.SENDGRID_PROD_EMAIL_API_KEY
+  } else {
+    sgKey = process.env.SENDGRID_DEV_EMAIL_API_KEY
+  }
+  sgMail.setApiKey(sgKey)
+
   // Create Agent
   try {
     const agent = await Agent.create({
@@ -71,6 +81,21 @@ agentsRouter.post("/", async (req, res) => {
       password: hashedPassword
     })
     console.log(agent.toJSON())
+    const msg = {
+      from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
+      reply_to: 'noreply@hauzzy.com',
+      template_id: 'd-21dc6ef0d6a7496985cb9fd67e50825b',
+      personalizations: [
+        {
+          to: [{email: agent.email}],
+          dynamic_template_data: {
+            name: agent.name,
+            link: `https://agent.hauzzy.com/login`
+          }
+        }
+      ]
+    }
+    await sgMail.send(msg)
     // Create and assign token
     const token = jwt.sign({id: agent.id}, process.env.TOKEN_SECRET, { expiresIn: '2d' })
     res.status(201).json({ token, agent: {id: agent.id, name: agent.name, email: agent.email} })
