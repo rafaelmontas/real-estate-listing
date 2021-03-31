@@ -11,6 +11,7 @@ import axios from 'axios';
 import InternalServerError500 from './ErrorPages/InternalServerError500';
 import pageNotFound404 from './ErrorPages/pageNotFound404';
 import TermsAndConditions from './TermsAndConditions';
+import PrivacyPolicy from './PrivacyPolicy';
 import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
 // const history = createBrowserHistory();
@@ -95,6 +96,7 @@ class App extends React.Component {
             {/* <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} /> */}
             {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
+            <Route path="/privacy-policy" exact component={PrivacyPolicy}/>
             <Route path="/error/500" component={InternalServerError500}/>
             <Route component={pageNotFound404}/>
           </Switch>

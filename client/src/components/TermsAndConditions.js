@@ -1,7 +1,37 @@
 import React from 'react'
+import gtag, { gaInit } from '../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
+import publicIp from "public-ip";
 import './TermsAndConditions.css'
 
 class TermsAndConditions extends React.Component {
+  async componentDidMount() {
+    // Track page views GA
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-JQMJWEW91Q', { send_page_view: false })  
+    } else {
+      gaInit('G-WFH68VZSHT', { send_page_view: false })
+    }
+    gtag('event', 'page_view', {
+      page_title: 'Terms & Conditions'
+    })
+    try {
+      // Init Facebook Pixel
+      if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
+        console.log('Internal IP')
+        return null
+      } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+        ReactPixel.init('689804211678157')
+      } else {
+        ReactPixel.init('587601035409958')
+      }
+      ReactPixel.pageView(); // For tracking page view
+    } catch(err) {
+      console.log(err)
+      this.props.history.replace({pathname: '/error/500'})
+    }
+  }
+
   render() {
     return (
       <div className="terms-container">
