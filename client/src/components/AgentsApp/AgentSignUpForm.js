@@ -82,7 +82,7 @@ class AgentSignUpForm extends React.Component {
           <button type="submit">Registarse</button>
         </div>
         <p className="terms-privacy">
-          Accepto los <Link>términos de uso</Link> y <Link>política de privacidad</Link> de Hauzzy.
+          Accepto los <a href="https://www.hauzzy.com/terms-and-conditions" target="_blank">términos de uso</a> y <Link>política de privacidad</Link> de Hauzzy.
         </p>
       </form>
     )

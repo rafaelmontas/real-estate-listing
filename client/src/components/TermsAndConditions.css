@@ -1,0 +1,23 @@
+.terms-container {
+  min-height: 100vh;
+  background-color: #eceeee;
+  /* display: flex;
+  justify-content: center; */
+  padding: 16px;
+}
+.terms-container .terms-info {
+  max-width: 960px;
+  width: 100%;
+  margin: 80px auto;
+  padding: 40px 80px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.terms-container .terms-info h1 {
+  padding-bottom: 45px;
+  margin-bottom: 45px;
+  border-bottom: 1px solid #e3e3e3;
+}
+.terms-container .terms-info .terms-body p {
+  margin: 30px 0;
+}
