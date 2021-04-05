@@ -52,7 +52,7 @@ class LandingPage extends React.Component {
             <div className="left-info">
               <h1>Ya puedes comenzar a utilizar la plataforma</h1>
               <p>Registrate para comenzar a publicar tus propiedades y posicionarlas entre las primeras disponibles.</p>
-              <a href="http://agent.myhauzzy.com:3000/signup" className="landing-button">Comienza a publicar!</a>
+              <a href="http://agent.hauzzy.com/signup" className="landing-button">Comienza a publicar!</a>
             </div>
             <div className="right-info">
               <img src={rightDashboard} alt="promotion of map based property search"/>

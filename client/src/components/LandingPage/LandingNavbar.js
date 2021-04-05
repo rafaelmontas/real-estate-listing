@@ -61,8 +61,8 @@ class LandingNavbar extends React.Component {
               </Link>
             </div>
             <div className="signup-login-buttons">
-              <a href="http://agent.myhauzzy.com:3000/signup" className="signup-button">Registrate</a>
-              <a href="http://agent.myhauzzy.com:3000/login" className="login-button">Iniciar Sesión</a>
+              <a href="http://agent.hauzzy.com/signup" className="signup-button">Registrate</a>
+              <a href="http://agent.hauzzy.com/login" className="login-button">Iniciar Sesión</a>
             </div>
           </div>
         </nav>
