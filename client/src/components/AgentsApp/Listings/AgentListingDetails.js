@@ -10,16 +10,22 @@ class AgentListingDetails extends React.Component {
   async componentDidMount() {
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
-      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Listing Details Page', user_id: this.context.agent.id })  
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Listing Details Page', user_id: this.context.agent.id })
+      gtag('config', 'G-JQMJWEW91Q', {
+        page_title: 'Agent Listing Details Page',
+        page_path: '/account/listings/:id',
+        send_page_view: false,
+        user_id: this.context.agent.id
+      })
     } else {
       gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent Listing Details Page', user_id: this.context.agent.id })
+      gtag('config', 'G-WFH68VZSHT', {
+        page_title: 'Agent Listing Details Page',
+        page_path: '/account/listings/:id',
+        send_page_view: false,
+        user_id: this.context.agent.id
+      })
     }
-    gtag('config', 'G-WFH68VZSHT', {
-      page_title: 'Agent Listing Details Page',
-      page_path: '/account/listings/:id',
-      send_page_view: false,
-      user_id: this.context.agent.id
-    })
     // Init Facebook Pixel
     if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
       console.log('Internal IP')
