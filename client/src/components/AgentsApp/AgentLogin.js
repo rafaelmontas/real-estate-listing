@@ -28,15 +28,20 @@ class AgentLogin extends React.Component {
     }, 1000)
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
-      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Login Page' })  
+      gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Login Page' })
+      gtag('config', 'G-JQMJWEW91Q', {
+        page_title: 'Agent Login Page',
+        page_path: '/login',
+        send_page_view: false
+      })
     } else {
       gaInit('G-WFH68VZSHT', { send_page_view: true, page_title: 'Agent Login Page' })
+      gtag('config', 'G-WFH68VZSHT', {
+        page_title: 'Agent Login Page',
+        page_path: '/login',
+        send_page_view: false
+      })
     }
-    gtag('config', 'G-WFH68VZSHT', {
-      page_title: 'Agent Login Page',
-      page_path: '/login',
-      send_page_view: false
-    })
     // Init Facebook Pixel
     if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
       console.log('Internal IP')

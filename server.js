@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
 const PORT = process.env.PORT || 5000;
-const db =  require('./models'); // Import Database
 
 dotenv.config()
 

@@ -25,7 +25,7 @@ agentAuthRouter.post("/", async (req, res) => {
    // Create and assign token
    const token = jwt.sign({id: agent.id}, process.env.TOKEN_SECRET,  { expiresIn: '2d' })
    
-   res.json({ token, agent: {id: agent.id, name: agent.name, email: agent.email} })
+   res.status(201).json({ token, agent: {id: agent.id, name: agent.name, email: agent.email} })
 })
 
 

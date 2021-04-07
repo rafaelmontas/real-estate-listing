@@ -9,6 +9,7 @@ const verifyToken = (req, res, next) => {
     req.agent = verified;
     next();
   } catch(err) {
+    console.log(err)
     res.status(400).json({msg: 'Invalid Token'});
   }
 }
