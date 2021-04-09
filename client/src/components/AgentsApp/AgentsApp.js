@@ -48,7 +48,7 @@ class AgentsApp extends React.Component {
     // console.log(`${localStorage.getItem('agent-jwt')}`)
     const agentJwt = localStorage.getItem('agent-jwt')
     this.setState({agentLoading: true})
-    axios({method: 'get', url: '/agent-auth/agent', headers: {'agent-auth': agentJwt}})
+    axios({method: 'get', url: '/agent-auth/agent/', headers: {'agent-auth': agentJwt}})
         .then(agent => {
           // console.log(agent.data)
           this.setState({

@@ -83,7 +83,7 @@ class LandingPage extends React.Component {
             <div className="right-info">
               <h1>Deja que los clientes se acerquen</h1>
               <p>Posiciónate frente a clientes potenciales que están buscando propiedades
-                 y gestiona tus clientes de manera rapida y efectiva.</p>
+                 y gestiona tus clientes de manera rápida y efectiva.</p>
             </div>
           </section>
         </main>
