@@ -88,6 +88,36 @@ class AgentProfile extends React.Component {
             errMsg: '',
             alertOpen: true
           })
+        })
+        .then(() => {
+          let listId;
+          let apiKey;
+          if(process.env.NODE_ENV === 'production') {
+            listId = process.env.REACT_APP_SENDGRID_REGISTERED_AGENTS_LIST_ID;
+            apiKey = process.env.REACT_APP_SENDGRID_PROD_API_KEY
+          } else {
+            listId = process.env.REACT_APP_SENDGRID_TEST_LIST_ID;
+            apiKey = process.env.REACT_APP_SENDGRID_DEV_API_KEY
+          }
+          const body = {
+            list_ids: [`${listId}`],
+            contacts: [
+              {
+                email: this.state.agent.email,
+                phone_number: this.state.agent.phone_number,
+                custom_fields: {"e1_T": this.state.agent.name, "e3_T": this.state.agent.alt_phone_number}
+              }
+            ]
+          }
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${apiKey}`,
+              'Content-Type': 'application/json'
+            }
+          }
+          return axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
+        })
+        .then(() => {
           this.timer = setTimeout(() => {
             window.location.reload();
           }, 5000)
