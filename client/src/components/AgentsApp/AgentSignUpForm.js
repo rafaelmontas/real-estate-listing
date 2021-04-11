@@ -31,12 +31,36 @@ class AgentSignUpForm extends React.Component {
           .then(res => {
             // console.log(res.data)
             localStorage.setItem('agent-jwt', res.data.token)
-            this.context.getAgent()
             gtag('event', 'sign_up', {
               event_category: 'engagement',
               event_label: 'Agent Registered'
             })
             ReactPixel.track('CompleteRegistration', {content_name: '/signup'})
+          })
+          .then(() => {
+            let listId;
+            let apiKey;
+            if(process.env.NODE_ENV === 'production') {
+              listId = process.env.REACT_APP_SENDGRID_REGISTERED_AGENTS_LIST_ID;
+              apiKey = process.env.REACT_APP_SENDGRID_PROD_API_KEY
+            } else {
+              listId = process.env.REACT_APP_SENDGRID_TEST_LIST_ID;
+              apiKey = process.env.REACT_APP_SENDGRID_DEV_API_KEY
+            }
+            const body = {
+              list_ids: [`${listId}`],
+              contacts: [{email: this.state.email, custom_fields: {"e1_T": this.state.name}}]
+            }
+            const config = {
+              headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+              }
+            }
+            return axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
+          })
+          .then(() => {
+            this.context.getAgent()
           })
           .catch(err => {
             // console.log(err.response.data, err.response.status)
