@@ -47,7 +47,7 @@ agentsRouter.get("/:id", verifyToken, (req, res) => {
 // @desc Register new agents
 // @acces Public
 agentsRouter.post("/", async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   const { name, email, password } = req.body
 
   // Simple validation - check if fields are empty
@@ -80,7 +80,7 @@ agentsRouter.post("/", async (req, res) => {
       email,
       password: hashedPassword
     })
-    console.log(agent.toJSON())
+    // console.log(agent.toJSON())
     const msg = {
       from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
       reply_to: 'noreply@hauzzy.com',
@@ -110,7 +110,7 @@ agentsRouter.post("/", async (req, res) => {
 // @acces Private
 agentsRouter.put("/:id", verifyToken, async (req, res) => {
   const { name, email, phone_number, alt_phone_number, agent_license, brokerage_name, password, new_password } = req.body
-  console.log(req.params, req.body)
+  // console.log(req.params, req.body)
 
   // Verify that agent trying to update is the same as the one updating
   console.log(`Agent requesting update: ${req.agent.id} for agent: ${req.params.id}`)
@@ -136,7 +136,7 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
       delete infoToUpdate.new_password
 
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
-      console.log(infoToUpdate)
+      // console.log(infoToUpdate)
 
       const updatedAgent = await Agent.update(infoToUpdate, {where: { id: agent.id }, returning: true})
       const returningAgentData = {
@@ -149,7 +149,7 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
         brokerage_name: updatedAgent[1][0].brokerage_name,
         createdAt: updatedAgent[1][0].createdAt
       }
-      console.log(returningAgentData)
+      // console.log(returningAgentData)
       res.status(200).json({msg: 'Perfil actualizado', updatedAgent: returningAgentData})
     } else if(password && new_password) {
       // Hash new password
@@ -164,7 +164,7 @@ agentsRouter.put("/:id", verifyToken, async (req, res) => {
       delete infoToUpdate.new_password
 
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
-      console.log(infoToUpdate)
+      // console.log(infoToUpdate)
       
       const updatedAgent = await Agent.update(info, {where: { id: agent.id }, returning: true})
       const returningAgentData = {
