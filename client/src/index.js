@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import AgentsApp from './components/AgentsApp/AgentsApp'
+import AdminApp from './components/Admin/AdminApp';
 import {BrowserRouter} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
@@ -23,6 +24,15 @@ if(parsedData.length >= 3 && subDomain !== 'www') {
       </React.StrictMode>,
       document.getElementById('root')
     );  
+  } else if(subDomain === 'admin') {
+    ReactDOM.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <AdminApp />
+        </BrowserRouter>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
   }
 } else {
   console.log(window.location.host)
