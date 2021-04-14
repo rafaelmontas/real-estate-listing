@@ -1,0 +1,106 @@
+.admin-listings-container {
+  padding: 16px;
+}
+.admin-listings-container .admin-listings-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -8px;
+}
+/* Cards */
+.admin-listings-container .admin-listings-list .admin-listing-card-container {
+  width: 100%;
+}
+.admin-listings-container .admin-listings-list .admin-listing-card-container .admin-listing-card-item {
+  height: 375px;
+  margin: 8px;
+  padding: 12px;
+  display: block;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media {
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status {
+  position: absolute;
+  top: 0;
+  padding: 4px 10px;
+  margin: 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status.active {
+  background-color: #208000;
+  color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status.pending {
+  background-color: #ABAB1F;
+  color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-info {
+  padding: 16px 0;
+  color: #333;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-info .home-card-top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-stats {
+  display: flex;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+.admin-listing-card-item .admin-listing-card-info  .home-card-stats .stats {
+  margin-right: 5px;
+  color: #7d7d7d;
+  font-size: 16px;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-stats .stats .fas {
+  margin-right: 5px;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-address,
+.admin-listing-card-info .home-card-sector {
+  font-size: 16px;
+  padding: 4px 0;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* Cards */
+  .admin-listings-container .admin-listings-list .admin-listing-card-container {
+    width: 50%;
+  }
+  /* .admin-listings-container .show-listings .listing-details {
+    padding-left: 0;
+  }
+  .listings-content-right .show-listings .listing-details .address-section .info-container {
+    padding-right: 0;
+  }
+  .listings-content-right .show-listings .listing-details .address-section .info-container .listing-stats span.mts {
+    display: none;
+  } */
+}
+@media only screen and (min-width: 992px) {
+  .admin-listings-container {
+    padding: 25px;
+  } 
+  /* Cards */
+  .admin-listings-container .admin-listings-list .admin-listing-card-container {
+    width: 33%;
+  }
+}

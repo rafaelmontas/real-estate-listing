@@ -3,6 +3,8 @@ import Backdrop from "../Backdrop"
 import SideDrawer from './SideDrawer'
 import AdminNavbar from './AdminNavbar'
 import AdminMenuItems from './AdminMenuItems'
+import { Route } from 'react-router-dom'
+import AdminListings from './Listings/AdminListings'
 import './Account.css'
 
 class Account extends React.Component {
@@ -49,12 +51,9 @@ class Account extends React.Component {
               </div>
             </div>
             <div className="right-side-structure">
-              account
-              {/* <Route path="/account/dashboard" component={AgentDashboard}/>
-              <Route path="/account/listings" exact component={AgentListings}/>
-              <Route path="/account/listings/:id" component={AgentListingDetails}/>
-              <Route path="/account/new-listing" component={ListingForm}/>
-              <Route path="/account/profile" component={AgentProfile}/> */}
+              {/* <Route path="/dashboard" component={AgentDashboard}/> */}
+              <Route path="/listings" exact component={AdminListings}/>
+              {/* <Route path="/account/listings/:id" component={AgentListingDetails}/> */}
             </div>
           </div>
         </section>
