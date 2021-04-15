@@ -79,24 +79,35 @@
   padding: 4px 0;
 }
 
+/* Listing Details / Edit */
+.admin-listing-details-container {
+  padding: 16px;
+}
+.admin-listing-details-container .agent-info {
+  width: 100%;
+  height: 100px;
+  padding: 16px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+.admin-listing-details-container .agent-info .agent-info-left {
+  display: flex;
+}
+
+
 
 @media only screen and (min-width: 768px) {
   /* Cards */
   .admin-listings-container .admin-listings-list .admin-listing-card-container {
     width: 50%;
   }
-  /* .admin-listings-container .show-listings .listing-details {
-    padding-left: 0;
-  }
-  .listings-content-right .show-listings .listing-details .address-section .info-container {
-    padding-right: 0;
-  }
-  .listings-content-right .show-listings .listing-details .address-section .info-container .listing-stats span.mts {
-    display: none;
-  } */
 }
 @media only screen and (min-width: 992px) {
-  .admin-listings-container {
+  .admin-listings-container, .admin-listing-details-container {
     padding: 25px;
   } 
   /* Cards */

@@ -5,6 +5,7 @@ import AdminNavbar from './AdminNavbar'
 import AdminMenuItems from './AdminMenuItems'
 import { Route } from 'react-router-dom'
 import AdminListings from './Listings/AdminListings'
+import AdminListingDetails from './Listings/AdminListingDetails'
 import './Account.css'
 
 class Account extends React.Component {
@@ -53,7 +54,7 @@ class Account extends React.Component {
             <div className="right-side-structure">
               {/* <Route path="/dashboard" component={AgentDashboard}/> */}
               <Route path="/listings" exact component={AdminListings}/>
-              {/* <Route path="/account/listings/:id" component={AgentListingDetails}/> */}
+              <Route path="/listings/:id" component={AdminListingDetails}/>
             </div>
           </div>
         </section>
