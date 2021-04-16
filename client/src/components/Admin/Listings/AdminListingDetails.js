@@ -22,6 +22,7 @@ class AdminListingDetails extends React.Component {
     .catch(err => {
       console.log(err.response.data, err.response.status)
     })
+    console.log(this.state.listing.agent)
   }
 
   // Render Agent Photo
@@ -35,21 +36,45 @@ class AdminListingDetails extends React.Component {
   }
   
   render() {
-    return (
-      <div className="admin-listing-details-container">
-        <div className="agent-info">
-          <div className="agent-info-left">
-            {this.renderAgentImg()}
+    if(this.state.isLoading) {
+      return <div></div>
+    } else {
+      return (
+        <div className="admin-listing-details-container">
+          <div className="agent-info">
+            <div className="agent-info-left">
+              {this.renderAgentImg()}
+              <div className="agent-info-text">
+                <h4>{this.state.listing.agent.name}</h4>
+                <span>{this.state.listing.agent.email}</span>
+                <span>{this.state.listing.agent.phone_number}</span>
+                <span>{dateFormat(this.state.listing.agent.createdAt, "dd/mm/yy")}</span>
+              </div>
+            </div>
+            <div className="agent-info-right">
+              <h4>{this.state.listing.agent.brokerage_name}</h4>
+            </div>
           </div>
-          <div className="agent-info-right">
-            {/* <img src={}/> */}
-          </div>
-        </div>
-        <div className="">
+          <div className="listing-details-container">
+            <div className="listing-details-left">
+              <span>{`Tipo de Propiedad: ${this.state.listing.property_type}`}</span>
+              <span>{`Tipo de Publicación: ${this.state.listing.listing_type}`}</span>
+              <span>{`Habitaciones: ${this.state.listing.bedrooms}`}</span>
+              <span>{`Baños: ${this.state.listing.bathrooms}`}</span>
+              <span>{`Medio Baños: ${this.state.listing.half_bathrooms}`}</span>
+              <span>{`Parqueos: ${this.state.listing.parking_spaces}`}</span>
+              <span>{`Metros Cuadrados: ${this.state.listing.square_meters}`}</span>
+              <span>{`Precio: ${this.state.listing.listing_price}`}</span>
+              <span>{`Descripción: ${this.state.listing.description}`}</span>
+              <span>{`Estatus: ${this.state.listing.listing_active}`}</span>
+            </div>
+            <div className="listing-details-right">
 
+            </div>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
