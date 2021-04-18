@@ -2,10 +2,11 @@ const express = require('express');
 const listingsRouter = express.Router();
 const db =  require('../models');
 const Agent = db.agent;
-const AgentProfilePicture = db.AgentProfilePicture
+const AgentProfilePicture = db.AgentProfilePicture;
 const Property = db.property;
 const PropertyAmenities = db.PropertyAmenities;
 const PropertyPictures = db.PropertyPictures;
+const sgMail = require('@sendgrid/mail');
 
 // @route GET /listings/:id
 // @desc Get One Property
@@ -36,6 +37,16 @@ listingsRouter.put('/:id', async (req, res) => {
   delete req.body.createdAt
   delete req.body.updatedAt
   // console.log(req.body)
+
+  // Email settings
+  let sgKey;
+  if(process.env.NODE_ENV === 'production') {
+    sgKey = process.env.SENDGRID_PROD_EMAIL_API_KEY
+  } else {
+    sgKey = process.env.SENDGRID_DEV_EMAIL_API_KEY
+  }
+  sgMail.setApiKey(sgKey)
+
   try {
     await Property.update(req.body, {
       where: {id: req.params.id},
@@ -49,6 +60,23 @@ listingsRouter.put('/:id', async (req, res) => {
         {model: Agent, include: [{model: AgentProfilePicture, attributes: ['location']}]}
       ]
     })
+    // Email
+    const msg = {
+      from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
+      reply_to: 'noreply@hauzzy.com',
+      template_id: 'd-21b276ffcabb46ae95eeeb00a77076cd',
+      personalizations: [
+        {
+          to: [{email: updatedListing.agent.email}],
+          dynamic_template_data: {
+            name: updatedListing.agent.name,
+            address: updatedListing.listing_address,
+            link: `https://agent.hauzzy.com/account/listings`
+          }
+        }
+      ]
+    }
+    await sgMail.send(msg)
     // console.log(updatedListing.toJSON(), 'verified...')
     res.status(200).json({msg: 'Propiedad Verificada.', updatedListing: updatedListing})
   } catch (err) {
