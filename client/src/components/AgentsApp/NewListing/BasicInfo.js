@@ -19,7 +19,7 @@ class BasicInfo extends React.Component {
         <p>Si tienes alguna duda o inconveniente, solo tienes que escribirnos por el chat.</p>
         <div className="property-address listing-container">
           <h3>Ubicación de la Propiedad</h3>
-          <span>Especificar dirección con número (#)</span>
+          {/* <span>Especificar dirección con número (#)</span> */}
           <PlacesAutocomplete 
             value={this.props.propertyAddress}
             onChange={this.props.handleAddressChange}
