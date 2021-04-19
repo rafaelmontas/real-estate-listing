@@ -13,7 +13,7 @@ const sgMail = require('@sendgrid/mail')
 // @acces Public
 agentAuthRouter.post("/", async (req, res) => {
   const { email, password } = req.body
-  console.log(req.body)
+  // console.log(req.body)
   // Check if email doesn't exist
   const agent = await Agent.findOne({ where: { email } })
   if(!agent) return res.status(400).json({msg: 'Email incorrecto'})
@@ -35,7 +35,7 @@ agentAuthRouter.post("/", async (req, res) => {
 agentAuthRouter.get("/agent", verifyToken, (req, res) => {
   Agent.findByPk(req.agent.id)
         .then(agent => {
-          console.log(req.agent)
+          // console.log(req.agent)
           res.status(200).json({id: agent.id, name: agent.name, email: agent.email})
         })
         .catch(err => {

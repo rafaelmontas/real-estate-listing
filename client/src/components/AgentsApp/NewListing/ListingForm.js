@@ -155,43 +155,35 @@ class ListingForm extends React.Component {
       case 1:
         if(this.state.bedrooms && this.state.bathrooms && this.state.parking && this.state.mts && this.state.price) {
           return (
-            <Button variant="contained" type="submit" color="primary">
-              Publicar
+            <Button variant="contained" color="primary" onClick={this.nextStep}>
+              Siguiente
             </Button>
-            // <Button variant="contained" color="primary" onClick={this.nextStep}>
-            //   Siguiente
-            // </Button>
           )
         } else {
           return (
             <Button
               disabled={true}
-              variant="contained" color="primary">
-              Publicar
+              variant="contained" color="primary" onClick={this.nextStep}>
+              Siguiente
             </Button>
-            // <Button
-            //   disabled={true}
-            //   variant="contained" color="primary" onClick={this.nextStep}>
-            //   Siguiente
-            // </Button>
           )
         }
-      // case 2:
-      //   if(this.state.imageFiles.length !== 0) {
-      //     return (
-      //       <Button variant="contained" type="submit" color="primary">
-      //         Publicar
-      //       </Button>
-      //     )
-      //   } else {
-      //     return (
-      //       <Button
-      //         disabled={true}
-      //         variant="contained" color="primary" onClick={this.nextStep}>
-      //         Publicar
-      //       </Button>
-      //     )
-      //   }
+      case 2:
+        if(this.state.imageFiles.length !== 0) {
+          return (
+            <Button variant="contained" type="submit" color="primary">
+              Publicar
+            </Button>
+          )
+        } else {
+          return (
+            <Button
+              disabled={true}
+              variant="contained" color="primary" onClick={this.nextStep}>
+              Publicar
+            </Button>
+          )
+        }
     }
   }
   
@@ -276,10 +268,10 @@ class ListingForm extends React.Component {
             const amenitiesBody = this.state.amenities
             return axios.post(`/api/properties/${res.data.listing_id}/amenities`, amenitiesBody)
           })
-          // .then(res => {
-          //   console.log(res.data.msg, res.data.listing_id)
-          //   return axios.post(`/api/properties/${res.data.listing_id}/pictures`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
-          // })
+          .then(res => {
+            // console.log(res.data.msg, res.data.listing_id)
+            return axios.post(`/api/properties/${res.data.listing_id}/pictures`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
+          })
           .then(res => {
             // console.log(res.data.msg)
             this.setState({submitLoading: false, status: res.status})
@@ -317,11 +309,11 @@ class ListingForm extends React.Component {
                   amenities={this.state.amenities}
                   onChecks={this.handleChecks}
                   description={this.state.description}/>
-      // case 2:
-      //   return <Photos
-      //            handleDrop={this.onDrop}
-      //            handleRemove={this.handleRemove}
-      //            imageFiles={this.state.imageFiles}/>
+      case 2:
+        return <Photos
+                 handleDrop={this.onDrop}
+                 handleRemove={this.handleRemove}
+                 imageFiles={this.state.imageFiles}/>
     }
   }
 
@@ -341,9 +333,9 @@ class ListingForm extends React.Component {
               <Step key='Detalles'>
                 <StepLabel>Detalles</StepLabel>
               </Step>
-              {/* <Step key='Fotos'>
+              <Step key='Fotos'>
                 <StepLabel>Fotos</StepLabel>
-              </Step> */}
+              </Step>
             </Stepper>
             <form onSubmit={this.handleSubmit} className="step-content">
               {this.getStepContent()}
