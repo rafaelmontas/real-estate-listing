@@ -35,7 +35,7 @@ class ListingForm extends React.Component {
       // Step 1
       bedrooms: null,
       bathrooms: null,
-      halfBathrooms: null,
+      halfBathrooms: 0,
       parking: null,
       mts: null,
       price: null,
