@@ -6,12 +6,21 @@ import dateFormat from 'dateformat'
 
 
 class ListingCard extends React.Component {
+
+  renderImage() {
+    if(this.props.listing['PropertyPictures'][0]) {
+      return <img src={this.props.listing['PropertyPictures'][0].location} alt="property image"/>  
+    } else {
+      return <img />
+    }
+  }
+
   render() {
     return (
       <div className="admin-listing-card-container">
         <Link to={`/listings/${this.props.listing.id}`} className="admin-listing-card-item">
           <div className="admin-listing-card-media">
-            <img src={this.props.listing['PropertyPictures'][0].location} alt="property image"/>
+            {this.renderImage()}
             <span className={this.props.listing.listing_active ? "listing-status active" : "listing-status pending"}>
               {this.props.listing.listing_active ? "Activa" : "Pendiente"}
             </span>
