@@ -72,10 +72,10 @@ class AdminListingDetails extends React.Component {
     })
   }
 
-  // Render Agent Photo
+  // Render Admin Photo
   renderAdminImg() {
     if(!this.state.isLoading && this.state.listing.agent['AgentProfilePicture']) {
-      return <img src={this.state.listing.agent['AgentProfilePicture'][0].location} alt="Agent photo"/>
+      return <img src={this.state.listing.agent['AgentProfilePicture'].location} alt="Agent photo"/>
     } else {
       return <img src="https://agents-profile-pictures.s3.us-east-2.amazonaws.com/profile-avatar.png"
                   alt="Agent profile picture"/>
