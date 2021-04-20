@@ -17,7 +17,8 @@
   padding: 25px;
   height: 100%;
 }
-.admin-login-container .inner-login .admin-login .register-header {
+.admin-login-container .inner-login .admin-login .register-header,
+.admin-login-container .inner-login .admin-login .login-header {
   margin-bottom: 16px;
   text-align: center;
 }

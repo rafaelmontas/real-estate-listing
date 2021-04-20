@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, matchPath } from "react-router";
 import {Link} from 'react-router-dom';
+import {adminContext} from './adminContext';
 import './AdminMenuItems.css'
 
 class AdminMenuItems extends React.Component {
@@ -47,7 +48,7 @@ class AdminMenuItems extends React.Component {
     }
   }
   onLogOutclick() {
-    // return this.context.logOut()
+    return this.context.logOut()
   }
 
 
@@ -107,4 +108,5 @@ class AdminMenuItems extends React.Component {
   }
 }
 
+AdminMenuItems.contextType = adminContext;
 export default withRouter(AdminMenuItems)

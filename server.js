@@ -15,6 +15,7 @@ const agentsRouter = require('./routes/agents');
 const agentAuthRouter = require('./routes/agentAuth');
 const listingsRouter = require('./routes/listings');
 const adminsRouter = require('./routes/admins');
+const adminAuthRouter = require('./routes/adminAuth');
 
 // Middlewares
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use("/agents", agentsRouter)
 app.use("/agent-auth", agentAuthRouter)
 app.use("/api/listings", listingsRouter)
 app.use("/admins", adminsRouter)
+app.use("/admin-auth", adminAuthRouter)
 
 // Serve static assets
 if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
