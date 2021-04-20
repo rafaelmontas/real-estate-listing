@@ -8,6 +8,19 @@ const PropertyAmenities = db.PropertyAmenities;
 const PropertyPictures = db.PropertyPictures;
 const sgMail = require('@sendgrid/mail');
 
+listingsRouter.get("/", (req, res) => {
+  Property.findAndCountAll({
+    include: [{model: PropertyPictures, attributes: ['location']}],
+    distinct: true,
+    order: [['createdAt', 'DESC']]
+  }).then(properties => {
+    res.status(200).json({properties: properties.rows, count: properties.count});
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
+})
+
 // @route GET /listings/:id
 // @desc Get One Property
 // @access Private

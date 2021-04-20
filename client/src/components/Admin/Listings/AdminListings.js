@@ -16,7 +16,7 @@ class AdminListings extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      axios.get(`/api/properties`)
+      axios.get(`/api/listings`)
       .then(listings => {
         console.log(listings.data)
         this.setState({listings: listings.data.properties, isLoading: false})
