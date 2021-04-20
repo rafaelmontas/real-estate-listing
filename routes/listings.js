@@ -35,7 +35,7 @@ listingsRouter.get("/:id", async (req, res) => {
         {model: Agent, include: [{model: AgentProfilePicture, attributes: ['location']}]}
       ]
     })
-    console.log(listing.toJSON())
+    // console.log(listing.toJSON())
     res.status(200).json({listing})
   } catch(err) {
     res.status(500).json('There was an error.')
