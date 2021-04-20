@@ -52,22 +52,24 @@ class AdminListingDetails extends React.Component {
       console.log(listing)
       this.setState({listing: listing.data.listing});
     })
+    .then(() => {
+      // Load Google Places API
+      if(!window.google) {
+        insertScript()
+        this.timer = setTimeout(() => {
+          this.setState({isLoading: false})
+          // console.log('places api mounted')
+        }, 2000)
+      } else {
+        this.timer = setTimeout(() => {
+          this.setState({isLoading: false})
+          // console.log('places api already mounted')
+        }, 1000)
+      }
+    })
     .catch(err => {
       console.log(err.response.data, err.response.status)
     })
-    // Load Google Places API
-    if(!window.google) {
-      insertScript()
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        // console.log('places api mounted')
-      }, 2000)
-    } else {
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        // console.log('places api already mounted')
-      }, 1000)
-    }
   }
 
   // Render Agent Photo
