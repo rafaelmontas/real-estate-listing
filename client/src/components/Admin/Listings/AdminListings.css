@@ -1,0 +1,231 @@
+.admin-listings-container {
+  padding: 16px;
+}
+.admin-listings-container .admin-listings-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -8px;
+}
+/* Cards */
+.admin-listings-container .admin-listings-list .admin-listing-card-container {
+  width: 100%;
+}
+.admin-listings-container .admin-listings-list .admin-listing-card-container .admin-listing-card-item {
+  height: 375px;
+  margin: 8px;
+  padding: 12px;
+  display: block;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media {
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status {
+  position: absolute;
+  top: 0;
+  padding: 4px 10px;
+  margin: 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status.active {
+  background-color: #208000;
+  color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-media .listing-status.pending {
+  background-color: #ABAB1F;
+  color: #fff;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-info {
+  padding: 16px 0;
+  color: #333;
+}
+.admin-listing-card-container .admin-listing-card-item .admin-listing-card-info .home-card-top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-stats {
+  display: flex;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+.admin-listing-card-item .admin-listing-card-info  .home-card-stats .stats {
+  margin-right: 5px;
+  color: #7d7d7d;
+  font-size: 16px;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-stats .stats .fas {
+  margin-right: 5px;
+}
+.admin-listing-card-item .admin-listing-card-info .home-card-address,
+.admin-listing-card-info .home-card-sector {
+  font-size: 16px;
+  padding: 4px 0;
+}
+
+/* Listing Details / Edit */
+.admin-listing-details-container {
+  padding: 16px;
+}
+.admin-listing-details-container .agent-info {
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+.admin-listing-details-container .agent-info .agent-info-left {
+  display: flex;
+}
+.admin-listing-details-container .agent-info .agent-info-left img {
+  width: 75px;
+  height: 75px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.admin-listing-details-container .agent-info .agent-info-left .agent-info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.admin-listing-details-container .listing-details-container {
+  display: flex;
+  flex-direction: column;
+}
+.admin-listing-details-container .listing-details-container .listing-details-left {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  background-color: #fff;
+  /* min-height: 500px; */
+}
+.listing-details-container .listing-details-left .image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px -4px 0;
+}
+.listing-details-container .listing-details-left .image-preview .thumb {
+  width: 100%;
+}
+.listing-details-container .listing-details-left .image-preview .thumb .thumb-inner {
+  height: 150px;
+  margin: 4px;
+  border-radius: 4px;
+  border: 1px solid #eaeaea;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+} .listing-details-container .listing-details-left .image-preview .thumb .thumb-inner img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+}
+.admin-listing-details-container .listing-details-container .listing-details-right {
+  flex-basis: 100%;
+  padding: 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  background-color: #fff;
+  /* min-height: 500px; */
+}
+.listing-details-container .listing-details-right .address-search-input,
+.listing-details-container .listing-details-right input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d5d9dc;
+  border-radius: 5px;
+  padding: 8px;
+  color: #3b4144;
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.autocomplete-dropdown-container {
+  width: 100%;
+}
+.listing-details-right .autocomplete-dropdown-container {
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgb(6 44 82 / 10%), 0 2px 16px 0 rgb(33 43 54 / 8%);
+  width: 100%;
+}
+.listing-details-right .autocomplete-dropdown-container .suggestion-item {
+  min-height: 50px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.listing-details-right .autocomplete-dropdown-container .suggestion-item--active {
+  background-color: #f4f5f7;
+  min-height: 50px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.listing-details-right form button {
+  margin-top: 15px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* Cards */
+  .admin-listings-container .admin-listings-list .admin-listing-card-container {
+    width: 50%;
+  }
+  /* Listing Details */
+  .admin-listing-details-container .listing-details-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .admin-listing-details-container .listing-details-container .listing-details-left {
+    flex-basis: 45%;
+    margin-bottom: 0;
+  }
+  .listing-details-container .listing-details-left .image-preview .thumb {
+    width: 50%;
+  }
+  .admin-listing-details-container .listing-details-container .listing-details-right {
+    flex-basis: 53%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .admin-listings-container, .admin-listing-details-container {
+    padding: 25px;
+  } 
+  /* Cards */
+  .admin-listings-container .admin-listings-list .admin-listing-card-container {
+    width: 33%;
+  }
+}

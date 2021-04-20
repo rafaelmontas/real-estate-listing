@@ -1,0 +1,95 @@
+/* Navbar */
+#admin-header {
+  height: 60px;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px 0 rgb(128 128 128 / 10%);
+}
+#admin-header .admin-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 12px 16px;
+  /* max-width: 1280px; */
+}
+/* Left */
+#admin-header .admin-nav-container .admin-navbar-left {
+  display: flex;
+  align-items: center;
+}
+#admin-header .admin-nav-container .admin-navbar-left .toggle-bars {
+  margin-right: 20px;
+}
+#admin-header .admin-nav-container .admin-navbar-left .toggle-bars i {
+  font-size: 25px;
+}
+/* Right */
+#admin-header .admin-nav-container .admin-navbar-right {
+  display: none;
+}
+#admin-header .admin-nav-container .admin-navbar-right .new-listing-link {
+  margin-right: 10px;
+}
+#admin-header .admin-nav-container .admin-navbar-right .new-listing-link a {
+  padding: 8px 10px;
+  color: rgb(59, 65, 68);
+  border-radius: 4px;
+  text-decoration: none;
+}
+#admin-header .admin-nav-container .admin-navbar-right .new-listing-link a:hover {
+  color: #0052CC;
+  background-color: #E1EDFF;
+}
+#admin-header .admin-nav-container .admin-navbar-right .new-listing-link a i {
+  margin-right: 5px;
+}
+
+/* admin Profile Button */
+.admin-navbar-right .admin-hover-button {
+  position: relative;
+}
+.admin-navbar-right .admin-hover-button button.admin-profile-button {
+  padding: 4px 10px;
+  cursor: pointer;
+  color: rgb(59, 65, 68);
+  border-radius: 4px;
+  border: 0px;
+  background-color: #fff;
+}
+.admin-navbar-right .admin-hover-button button.admin-profile-button:hover {
+  background-color: #E1EDFF;
+  color: #0052CC;
+}
+.admin-navbar-right .admin-hover-button button.admin-profile-button .inner-admin-info {
+  display: flex;
+  align-items: center;
+}
+.admin-navbar-right .admin-hover-button button.admin-profile-button .inner-admin-info i {
+  font-size: 26px;
+  margin-right: 5px;
+}
+.admin-navbar-right .admin-hover-button button.admin-profile-button .inner-admin-info .admin-name-email {
+  /* max-width: 100px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 768px) {
+  #admin-header .admin-nav-container .admin-navbar-right {
+    display: flex;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 992px) {
+  #admin-header .admin-nav-container .admin-navbar-left .toggle-bars {
+    display: none;
+  }
+}
