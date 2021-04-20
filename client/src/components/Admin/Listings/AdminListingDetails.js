@@ -71,7 +71,7 @@ class AdminListingDetails extends React.Component {
   }
 
   // Render Agent Photo
-  renderAgentImg() {
+  renderAdminImg() {
     if(!this.state.isLoading && this.state.listing.agent['AgentProfilePicture']) {
       return <img src={this.state.listing.agent['AgentProfilePicture'][0].location} alt="Agent photo"/>
     } else {
@@ -200,7 +200,7 @@ class AdminListingDetails extends React.Component {
           </Snackbar>
           <div className="agent-info">
             <div className="agent-info-left">
-              {this.renderAgentImg()}
+              {this.renderAdminImg()}
               <div className="agent-info-text">
                 <h4>{this.state.listing.agent.name}</h4>
                 <span>{this.state.listing.agent.email}</span>
