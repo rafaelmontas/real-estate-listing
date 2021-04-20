@@ -36,9 +36,9 @@ agentsPropertiesRouter.get('/:propertyId', async (req, res) => {
 
 agentsPropertiesRouter.post('/', async (req, res) => {
   console.log(req.body)
-  const { listing_address, property_type, listing_type, bedrooms, bathrooms, half_bathrooms, parking_spaces, square_meters, listing_price, agent_id } = req.body
+  const { listing_address, property_type, listing_type, bedrooms, bathrooms, parking_spaces, square_meters, listing_price, agent_id } = req.body
   // Check if fields are empty
-  if(!listing_address || !property_type || !listing_type || !bedrooms || !bathrooms || !half_bathrooms || !parking_spaces || !square_meters || !listing_price || !agent_id) {
+  if(!listing_address || !property_type || !listing_type || !bedrooms || !bathrooms || !parking_spaces || !square_meters || !listing_price || !agent_id) {
     return res.status(400).json({msg: 'Favor seleccionar todos los campos obligatorios.'})
   }
 

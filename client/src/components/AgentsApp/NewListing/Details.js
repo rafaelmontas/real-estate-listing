@@ -86,7 +86,7 @@ class Details extends React.Component {
               placeholder="Seleccionar..."
               onChange={this.handleHalfBathroomChange}
               isSearchable={false}
-              value={this.props.halfBathrooms !== null ? {label: `${this.props.halfBathrooms}`, value: `${this.props.halfBathrooms}`}: ''}/>
+              value={this.props.halfBathrooms !== 0 ? {label: `${this.props.halfBathrooms}`, value: `${this.props.halfBathrooms}`}: ''}/>
           </div>
           <div className="listing-options">
             <label>Parqueos</label>
