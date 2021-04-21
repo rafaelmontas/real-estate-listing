@@ -85,7 +85,7 @@ class AdminApp extends React.Component {
       <adminContext.Provider value={value}>
         <Switch>
           <Route path="/login" exact component={AdminLogin}/>
-          <Route path="/signup" exact component={AdminSignup}/>
+          {/* <Route path="/signup" exact component={AdminSignup}/> */}
           <PrivateAccount path="/" component={Account}/>
           {/* <Route path="/forgot-password" exact component={AgentForgotPassword}/>
           <Route path="/reset-password/:token" exact component={AgentResetPassword}/> */}
