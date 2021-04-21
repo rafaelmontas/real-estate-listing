@@ -35,12 +35,12 @@ class AgentsApp extends React.Component {
     this.getAgent()
     // Add background color to doby
     document.body.classList.toggle("background")
-    // Init hotjar
-    if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
     // Redirect
     if(this.props.location.pathname === '/') {
       this.props.history.replace({pathname: '/account/dashboard'})
     }
+    // Init hotjar
+    if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
   }
 
   getAgent() {
