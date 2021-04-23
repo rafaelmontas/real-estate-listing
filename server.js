@@ -49,10 +49,6 @@ app.use("/api/listings", listingsRouter)
 app.use("/admins", adminsRouter)
 app.use("/admin-auth", adminAuthRouter)
 
-app.get("/debug-sentry", function mainHandler(req, res) {
-  throw new Error("My third Sentry error!");
-});
-
 // Error Handlers
 app.use(Sentry.Handlers.errorHandler());
 
