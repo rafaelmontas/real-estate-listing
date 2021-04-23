@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import App from './components/App';
 import AgentsApp from './components/AgentsApp/AgentsApp'
 import AdminApp from './components/Admin/AdminApp';
 import {BrowserRouter} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+
+Sentry.init({
+  dsn: "https://98ca13cd1ef54b99b19e021a4ee1d950@o578013.ingest.sentry.io/5733955",
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0,
+  environment: process.env.NODE_ENV === "production" ? "production" : "development"
+});
 
 const parsedData = window.location.host.split(".");
 const subDomain = parsedData[0];

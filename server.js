@@ -3,9 +3,22 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const dotenv = require('dotenv');
+const Sentry = require('@sentry/node');
+const Tracing = require("@sentry/tracing");
 const PORT = process.env.PORT || 5000;
 
 dotenv.config()
+
+Sentry.init({
+  dsn: "https://8d186034f6c845229352af7b87959938@o578013.ingest.sentry.io/5733973",
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Tracing.Integrations.Express({ app }),
+  ],
+  tracesSampleRate: 1.0,
+  environment: process.env.NODE_ENV === "production" ? "production" : "development"
+});
+
 
 // Require Routes
 const propertiesRouter = require('./routes/properties');
@@ -18,6 +31,8 @@ const adminsRouter = require('./routes/admins');
 const adminAuthRouter = require('./routes/adminAuth');
 
 // Middlewares
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
 app.use(bodyParser.json());
 if(process.env.NODE_ENV !== 'production') {
   const morgan = require('morgan');
@@ -33,6 +48,13 @@ app.use("/agent-auth", agentAuthRouter)
 app.use("/api/listings", listingsRouter)
 app.use("/admins", adminsRouter)
 app.use("/admin-auth", adminAuthRouter)
+
+app.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My third Sentry error!");
+});
+
+// Error Handlers
+app.use(Sentry.Handlers.errorHandler());
 
 // Serve static assets
 if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
