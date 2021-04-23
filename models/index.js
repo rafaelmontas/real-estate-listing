@@ -39,7 +39,8 @@ db.property.belongsTo(db.user, {foreignKey: 'user_id'});
 db.user.hasMany(db.property, {
   foreignKey: 'user_id',
   onDelete: 'SET DEFAULT',
-  onUpdate: 'SET DEFAULT'
+  onUpdate: 'SET DEFAULT',
+  hooks: true
 });
 
 // Agents Relations
@@ -47,7 +48,8 @@ db.property.belongsTo(db.agent, {foreignKey: 'agent_id'});
 db.agent.hasMany(db.property, {
   foreignKey: 'agent_id',
   onDelete: 'SET DEFAULT',
-  onUpdate: 'SET DEFAULT'
+  onUpdate: 'SET DEFAULT',
+  hooks: true
 });
 
 // Agent Profile Picture Relations
@@ -55,7 +57,8 @@ db.AgentProfilePicture.belongsTo(db.agent, {foreignKey: 'agent_id'});
 db.agent.hasOne(db.AgentProfilePicture, {
   foreignKey: 'agent_id',
   onDelete: 'SET DEFAULT',
-  onUpdate: 'SET DEFAULT'
+  onUpdate: 'SET DEFAULT',
+  hooks: true
 });
 
 // Property Pictures Relations
@@ -63,7 +66,8 @@ db.PropertyPictures.belongsTo(db.property, {foreignKey: 'property_id'});
 db.property.hasMany(db.PropertyPictures, {
   foreignKey: 'property_id',
   onDelete: 'SET DEFAULT',
-  onUpdate: 'SET DEFAULT'
+  onUpdate: 'SET DEFAULT',
+  hooks: true
 });
 
 // Property Amenities Relations
@@ -71,7 +75,8 @@ db.PropertyAmenities.belongsTo(db.property, {foreignKey: 'property_id'});
 db.property.hasOne(db.PropertyAmenities, {
   foreignKey: 'property_id',
   onDelete: 'SET DEFAULT',
-  onUpdate: 'SET DEFAULT'
+  onUpdate: 'SET DEFAULT',
+  hooks: true
 });
 
 module.exports = db;
