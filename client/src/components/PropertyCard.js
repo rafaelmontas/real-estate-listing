@@ -33,8 +33,11 @@ class PropertyCard extends React.Component {
                 <div className="stats cars"><i className="fas fa-car-side"></i>{this.props.property.parking_spaces}</div>
                 <div className="stats mts"><i className="fas fa-ruler-vertical"></i>{this.props.property.square_meters} mts</div>
               </div>
-              <div className="home-card-address">{this.props.property.listing_address}</div>
-              <div className="home-card-sector">{this.props.property.sector}</div>
+              {/* <div className="home-card-address">{this.props.property.listing_address}</div> */}
+              <div className="home-card-sector">
+                <i className="fas fa-map-marker-alt"></i>
+                {this.props.property.sector}
+              </div>
             </div>
           </Link>
         </div>
