@@ -29,7 +29,7 @@ export const minPriceList = {
     {value: 950000, text: "US$ 950,000"},
     {value: 1000000, text: "US$ 1,000,000"}
   ],
-  "For Rent": [
+  "rent": [
     {value: 0, text: "No Min"},
     {value: 500, text: "US$500"},
     {value: 750, text: "US$750"},
@@ -82,7 +82,7 @@ export const maxPriceList = {
     {value: 950000, text: "US$ 950,000"},
     {value: 1000000, text: "US$ 1,000,000"}
   ],
-  "For Rent": [
+  "rent": [
     {value: 0, text: "No Max"},
     {value: 500, text: "US$500"},
     {value: 750, text: "US$750"},
