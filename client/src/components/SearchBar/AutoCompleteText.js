@@ -167,7 +167,7 @@ class AutoCompleteText extends React.Component {
       const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
       if(this.props.location.pathname !== '/properties') {
         console.log(this.prevBathrooms)
         this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
@@ -194,7 +194,7 @@ class AutoCompleteText extends React.Component {
       const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
       if(this.props.location.pathname !== '/properties') {
         console.log(this.prevBathrooms)
         this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
@@ -313,7 +313,7 @@ class AutoCompleteText extends React.Component {
             const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
             const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
             const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-            const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+            const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
             if(this.props.location.pathname !== '/properties') {
               console.log(this.prevBathrooms)
               this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
