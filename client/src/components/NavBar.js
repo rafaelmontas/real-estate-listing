@@ -42,7 +42,7 @@ class NavBar extends React.Component {
     if(this.context.isLoggedIn) {
       this.props.history.push({pathname: '/my-hauzzy/favorites'})
     } else {
-      this.props.history.push({state: {referer: '/my-hauzzy/favorites'}})
+      // this.props.history.push({state: {referer: '/my-hauzzy/favorites'}})
       this.props.onLoginClick()
     }
   }
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
     if(this.context.isLoggedIn) {
       this.props.history.push({pathname: '/my-hauzzy/new-listing'})
     } else {
-      this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
+      // this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
       this.props.onLoginClick()
     }
   }
