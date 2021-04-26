@@ -617,6 +617,7 @@ a {
 /* Footer */
 
 .footer-container {
+  margin-top: 35px;
   padding: 35px 16px;
   border-top: 1px solid #7b7b7b;
 }
@@ -626,6 +627,7 @@ a {
   font-size: 14px;
 }
 .footer-container .footer-main .footer-header-name {
+  font-size: 22px;
   margin-bottom: 15px;
   color: #000;
 }
@@ -644,7 +646,7 @@ a {
 }
 .footer-container .footer-main .footer-follow-us a {
   color: #7b7b7b;
-  font-size: 22px;
+  font-size: 30px;
   margin-right: 10px;
 }
 .footer-container .footer-main .footer-badges {

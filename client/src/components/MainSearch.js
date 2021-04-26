@@ -331,7 +331,7 @@ class MainSearch extends React.Component {
                                 onCardHovered={this.handleCardHover}
                                 onCardHoverOut={this.handleCardHoverOut}
                                 listingCount={this.state.listingCount}/>
-                  {this.state.listingCount !== 0 ? <Pagination /> : null}
+                  {/* {this.state.listingCount !== 0 ? <Pagination /> : null} */}
                   <Footer />
                 </div>
                 <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
