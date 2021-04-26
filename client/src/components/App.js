@@ -35,7 +35,7 @@ class App extends React.Component {
   
   async componentDidMount() {
     // Check token and load user
-    // this.getUser()
+    this.getUser()
     // Init hotjar
     try {
       if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
@@ -94,7 +94,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={LandingPage} />
             <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
-            {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
+            <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
             <Route path="/privacy-policy" exact component={PrivacyPolicy}/>
             <Route path="/error/500" component={InternalServerError500}/>

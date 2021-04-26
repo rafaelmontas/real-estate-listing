@@ -108,12 +108,12 @@ class MyHauzzy extends React.Component {
         <SecondNav path={this.props.location.pathname} favCount={this.state.favoritesProperties.slice(0, 3).length}/>
         <div className="my-hauzzy-container">
         {/* this.state.favoritesProperties.slice(0, 3) */}
-          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(0, 3)}/>}/>
+          <Route path="/my-hauzzy/favorites" exact render={() => <Favorites favorites={this.state.favoritesProperties.slice(1, 10)}/>}/>
           <Route path="/my-hauzzy/profile" exact render={()=> <Profile user={this.state.user}/>}/>
-          <Route path="/my-hauzzy/listings"
+          {/* <Route path="/my-hauzzy/listings"
                  exact
-                 render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)} linkTo="/my-hauzzy/listings" linkToNew="/my-hauzzy/new-listing"/>}/>
-          <Route path="/my-hauzzy/listings/:id" exact render={() => <ReportEditListing linkTo="/my-hauzzy/listings"/>}/>
+                 render={() => <Listings listings={this.state.favoritesProperties.slice(0, 3)} linkTo="/my-hauzzy/listings" linkToNew="/my-hauzzy/new-listing"/>}/> */}
+          {/* <Route path="/my-hauzzy/listings/:id" exact render={() => <ReportEditListing linkTo="/my-hauzzy/listings"/>}/> */}
         </div>
         <Footer/>
       </div>

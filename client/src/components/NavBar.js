@@ -19,7 +19,7 @@ class NavBar extends React.Component {
     this.onLiClick = this.onLiClick.bind(this)
     this.onLogOutclick = this.onLogOutclick.bind(this)
     this.onFavClick = this.onFavClick.bind(this)
-    this.onNewClick = this.onNewClick.bind(this)
+    // this.onNewClick = this.onNewClick.bind(this)
   }
   
   onUserHover() {
@@ -46,15 +46,15 @@ class NavBar extends React.Component {
       this.props.onLoginClick()
     }
   }
-  onNewClick(e) {
-    e.preventDefault()
-    if(this.context.isLoggedIn) {
-      this.props.history.push({pathname: '/my-hauzzy/new-listing'})
-    } else {
-      // this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
-      this.props.onLoginClick()
-    }
-  }
+  // onNewClick(e) {
+  //   e.preventDefault()
+  //   if(this.context.isLoggedIn) {
+  //     this.props.history.push({pathname: '/my-hauzzy/new-listing'})
+  //   } else {
+  //     // this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
+  //     this.props.onLoginClick()
+  //   }
+  // }
 
   renderTopRightButton() {
     if(this.props.path === '/properties') {
@@ -90,7 +90,7 @@ class NavBar extends React.Component {
               </div>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/my-hauzzy/new-listing" onClick={this.onLiClick}>
               <div><i className="fas fa-plus">
                 </i>Públicar propiedad
@@ -103,7 +103,7 @@ class NavBar extends React.Component {
                 <i className="far fa-building"></i>Mis propiedades
               </div>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/logout" onClick={this.onLogOutclick}>
               <div><i className="fas fa-sign-out-alt">
@@ -133,9 +133,9 @@ class NavBar extends React.Component {
             <span onClick={this.props.onSideDrawerToggleClick} className="toggle bars">
               <i className="fas fa-bars"></i>
             </span>
-            <Link to="/">
+            <a href="/properties">
               <img src={logo} className="brand-logo"/>
-            </Link>
+            </a>
             <AutoCompleteText search={this.props.search}
                               initialStateSearch={this.props.initialStateSearch}
                               loadingStatus={this.props.loadingStatus}
@@ -144,7 +144,7 @@ class NavBar extends React.Component {
           <div className="navbar-menu-right">
             {this.renderTopRightButton()}
             <Link to="/my-hauzzy/favorites" onClick={this.onFavClick} className="menu-item first"><i className="far fa-heart"></i>Favoritos</Link>
-            <Link to="/my-hauzzy/new-listing" onClick={this.onNewClick} className="menu-item second"><i className="fas fa-plus"></i>Publicar</Link>
+            <a href="https://agent.hauzzy.com/account/new-listing" target="_blank" className="menu-item second"><i className="fas fa-plus"></i>Publicar</a>
             {/* <a href="/" className="menu-item second"><i className="fas fa-plus"></i>Publicar</a> */}
             <div className="user-login-button">
               {!this.context.userLoading && this.renderUserButton()}

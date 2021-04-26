@@ -47,11 +47,11 @@ class SecondNav extends React.Component {
       <div className="secondary-nav">
         <div className="nav-options">
           <ul className="nav-list">
-            <li className={this.state.itemSelected === 1 ? "nav-item selected" : "nav-item"}
+            {/* <li className={this.state.itemSelected === 1 ? "nav-item selected" : "nav-item"}
                 id={1}
                 onClick={this.handleItemClick}>
               <Link to="/my-hauzzy/listings">Mis Propiedades<span>0</span></Link>
-            </li>
+            </li> */}
             <li className={this.state.itemSelected === 2 ? "nav-item selected" : "nav-item"}
                 id={2}
                 onClick={this.handleItemClick}>
@@ -62,11 +62,11 @@ class SecondNav extends React.Component {
                 onClick={this.handleItemClick}>
               <Link to="/my-hauzzy/profile">Mi Perfil</Link>
             </li>
-            <li className={this.state.itemSelected === 4 ? "nav-item selected" : "nav-item"}
+            {/* <li className={this.state.itemSelected === 4 ? "nav-item selected" : "nav-item"}
                 id={4}
                 onClick={this.handleItemClick}>
               <Link to="/my-hauzzy/new-listing">Públicar Propiedad</Link>
-            </li>
+            </li> */}
             <li></li>
           </ul>
         </div>
