@@ -79,4 +79,20 @@ db.property.hasOne(db.PropertyAmenities, {
   hooks: true
 });
 
+// User Likes Relations
+db.like.belongsTo(db.user, {foreignKey: 'user_id'});
+db.user.hasMany(db.like, {
+  foreignKey: 'user_id',
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+})
+
+// Listing Likes Relations
+db.like.belongsTo(db.property, {foreignKey: 'listing_id'});
+db.property.hasMany(db.like, {
+  foreignKey: 'listing_id',
+  onDelete: 'SET DEFAULT',
+  onUpdate: 'SET DEFAULT'
+})
+
 module.exports = db;
