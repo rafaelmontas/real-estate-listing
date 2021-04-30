@@ -2,13 +2,18 @@ const express = require('express');
 const usersRouter = express.Router();
 const db =  require('../models');
 const User = db.user;
+const Like = db.like;
 const Property = db.property;
+const PropertyPictures = db.PropertyPictures;
 const Sequelize = require('sequelize');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Op = Sequelize.Op
 const verifyToken = require('../middleware/userAuth')
 
+// Use nested route
+const userLikesRouter =  require('./userLikes')
+usersRouter.use('/:id/likes', userLikesRouter)
 
 
 usersRouter.get("/:id", verifyToken, (req, res) => {
@@ -16,7 +21,7 @@ usersRouter.get("/:id", verifyToken, (req, res) => {
   console.log(`User requesting: ${req.user.id} for user: ${req.params.id}`)
   if(req.user.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
 
-  User.findByPk(req.params.id, {include: Property})
+  User.findByPk(req.params.id, {include: [{model: Property, include: [{model: PropertyPictures}]}]})
         .then(user => {
           // console.log(req.user, user.toJSON())
           res.status(200).json(user)

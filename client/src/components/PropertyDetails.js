@@ -270,7 +270,11 @@ class PropertyDetails extends React.Component {
             </div>
           </div>
         </div>
-        <SimilarProperties properties={this.state.similarProperties}/>
+        <SimilarProperties 
+          properties={this.state.similarProperties}
+          onLike={this.props.onLike}
+          onLikeDelete={this.props.onLikeDelete}
+          userLikes={this.props.userLikes}/>
         <div className="property-footer">
           <Footer/>
         </div>

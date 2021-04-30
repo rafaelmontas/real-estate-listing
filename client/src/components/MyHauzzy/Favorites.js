@@ -13,6 +13,13 @@ class Favorites extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    // axios.get(`/users/${this.context.user.id}/likes`)
+    // .then(res => {
+    //   this.setState({favoritesProperties: likes})
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }
 
   render() {
@@ -28,7 +35,10 @@ class Favorites extends React.Component {
       return (
         <div className="favorites-container">
           <h1>Favoritos</h1>
-          <FavoritesList properties={this.props.favorites}/>
+          <FavoritesList properties={this.props.favorites}
+                         onLike={this.props.onLike}
+                         onLikeDelete={this.props.onLikeDelete}
+                         userLikes={this.props.userLikes}/>
         </div>
       )
     }

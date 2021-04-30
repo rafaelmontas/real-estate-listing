@@ -488,6 +488,7 @@ a {
   height: 250px;
   border-radius: 4px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
+  position: relative;
 }
 .search-results-list-grid .home-card-container .home-card.cardSelected {
   border: 2px solid #333;
@@ -551,6 +552,24 @@ a {
   float: right;
   color: #7d7d7d;
   font-size: 22px;
+}
+.property-card-info .favorite-button:hover {
+  color: #ca4d4d;
+}
+.home-card .favorite-button {
+  position: absolute;
+  z-index: 50;
+  color: #7d7d7d;
+  font-size: 26px;
+  bottom: 55px;
+  right: 16px;
+  cursor: pointer;
+}
+.home-card .favorite-button.liked {
+  color: #ca4d4d;
+}
+.home-card .favorite-button:hover {
+  color: #ca4d4d;
 }
 .property-card-info .home-card-stats {
   display: flex;

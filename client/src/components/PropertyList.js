@@ -11,6 +11,10 @@ class PropertyList extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(this.props.userLikes)
+  }
+
   renderSectorName() {
     if(this.props.sector === 'All') {
       return null
@@ -48,7 +52,12 @@ class PropertyList extends React.Component {
                                 identifier={property.id}
                                 cardSelected={this.props.cardSelected}
                                 onCardHovered={this.props.onCardHovered}
-                                onCardHoverOut={this.props.onCardHoverOut}/>;
+                                onCardHoverOut={this.props.onCardHoverOut}
+                                onLike={this.props.onLike}
+                                onLikeDelete={this.props.onLikeDelete}
+                                userLike={this.props.userLikes.findIndex(x => x.listing_id === property.id)}
+                                userLikeId={this.props.userLikes.find(x => x.listing_id === property.id)}
+                                />;
           })}
           {this.renderEmptySearch()}
         </div>

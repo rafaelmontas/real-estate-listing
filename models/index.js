@@ -95,4 +95,7 @@ db.property.hasMany(db.like, {
   onUpdate: 'SET DEFAULT'
 })
 
+db.property.belongsToMany(db.user, {through: db.like, unique: false, foreignKey: 'listing_id'});
+db.user.belongsToMany(db.property, {through: db.like, unique: false, foreignKey: 'user_id'});
+
 module.exports = db;
