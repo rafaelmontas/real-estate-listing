@@ -298,22 +298,26 @@ class MainSearch extends React.Component {
   }
 
   handleLike(listingId) {
-    const body = {
-      listing_id: listingId,
-      user_id: this.context.user.id
+    if(this.context.isLoggedIn) {
+      const body = {
+        listing_id: listingId,
+        user_id: this.context.user.id
+      }
+      axios.post(`/users/${this.context.user.id}/likes`, body)
+      .then(res => {
+        console.log('liked', res.data.msg)
+        return axios.get(`/users/${this.context.user.id}/likes`)
+        // this.setState({liked: true})
+      })
+      .then(res => {
+        this.setState({userLikes: res.data.likes})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    } else {
+      this.handleLoginClick()
     }
-    axios.post(`/users/${this.context.user.id}/likes`, body)
-    .then(res => {
-      console.log('liked', res.data.msg)
-      return axios.get(`/users/${this.context.user.id}/likes`)
-      // this.setState({liked: true})
-    })
-    .then(res => {
-      this.setState({userLikes: res.data.likes})
-    })
-    .catch(err => {
-      console.log(err)
-    })
   }
   handleLikeDelete(likeId) {
     axios.delete(`/users/${this.context.user.id}/likes/${likeId}`)
