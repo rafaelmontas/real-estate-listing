@@ -12,15 +12,13 @@ class PhotosCarousel extends React.Component {
           <div className="times-x" onClick={this.props.onCloseClick}><i className="fas fa-times"></i></div>
         </div>
         <Carousel infiniteLoop useKeyboardArrows>
-          <div>
-            <img src={image}/>
-          </div>
-          <div>
-            <img src={image}/>
-          </div>
-          <div>
-            <img src={image}/>
-          </div>
+          {this.props.pictures.map(picture => {
+            return (
+              <div key={picture.id}>
+                <img src={picture.location}/>
+              </div>
+            )
+          })}
         </Carousel>
       </div>
     )

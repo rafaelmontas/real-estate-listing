@@ -2,6 +2,7 @@ const express = require('express');
 const propertiesRouter = express.Router();
 const db =  require('../models');
 const Property = db.property;
+const PropertyAmenities = db.PropertyAmenities;
 const PropertyPictures = db.PropertyPictures;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
@@ -120,14 +121,17 @@ propertiesRouter.get("/", (req, res) => {
 // @desc Get One Property
 // @access Public
 propertiesRouter.get("/:id", (req, res) => {
-  Property.findByPk(req.params.id)
-            .then(property => {
-              res.status(200).send(property)
-            })
-            .catch(err => {
-              console.log(err);
-              res.sendStatus(500);
-            });
+  Property.findOne({
+    where: {id: req.params.id},
+    include: [{model: PropertyAmenities}, {model: PropertyPictures, attributes: ['id', 'location']}]
+  })
+  .then(property => {
+    res.status(200).send(property)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 

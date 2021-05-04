@@ -21,7 +21,7 @@ class PropertyDetails extends React.Component {
       property: {},
       liked: false,
       similarProperties: [],
-      isLoading: false,
+      isLoading: true,
       isContactFormLoading: false,
       ContactFormOpen: false,
       carouselOpen: false
@@ -40,7 +40,7 @@ class PropertyDetails extends React.Component {
     axios.get(`/api/properties/${this.props.match.params.id}`)
         .then(property => {
           console.log(property.data)
-          this.setState({ property: property.data });
+          this.setState({ property: property.data, isLoading: false });
         })
         .catch(err => {
           console.log(err.response.data, err.response.status)
@@ -150,7 +150,7 @@ class PropertyDetails extends React.Component {
     return (
       <div>
         {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
-        {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick}/> : null}
+        {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick} pictures={this.state.property['PropertyPictures']}/> : null}
         {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize}/>}
         <div className="details-container">
           <div className="full-details-view">
@@ -176,7 +176,7 @@ class PropertyDetails extends React.Component {
             {/* Header End */}
             <div className="main-content">
               <div className="main-section">
-                <CollageGrid property={this.state.property}
+                <CollageGrid pictures={this.state.property['PropertyPictures']}
                              loadingStatus={this.state.isLoading}
                              onCollageClick={this.handleCollageClick}/>
                 {/* Details Section */}
