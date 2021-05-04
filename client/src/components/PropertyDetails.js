@@ -19,6 +19,7 @@ class PropertyDetails extends React.Component {
     super(props);
     this.state = {
       property: {},
+      liked: false,
       similarProperties: [],
       isLoading: false,
       isContactFormLoading: false,
@@ -59,6 +60,10 @@ class PropertyDetails extends React.Component {
           }
         })
     window.scrollTo(0, 0);
+    // Like
+    if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
+      this.setState({liked: true})
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     Object.entries(this.props).forEach(([key, val]) =>
@@ -89,6 +94,13 @@ class PropertyDetails extends React.Component {
       }, 500)
       window.scrollTo(0, 0);
     }
+    if(this.props.userLikes !== prevProps.userLikes) {
+      if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
+        this.setState({liked: true})
+      } else if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) === -1) {
+        this.setState({liked: false})
+      }
+    }
   }
 
   handleContactFormClick() {
@@ -106,6 +118,24 @@ class PropertyDetails extends React.Component {
 
   handleBackdropClick() {
     this.setState({carouselOpen: false});
+  }
+
+  renderLikeButton() {
+    if(this.state.liked) {
+      return (
+        <span className="buttons liked" onClick={() => this.props.onLikeDelete(this.props.userLikes.find(x => x.listing_id === this.props.match.params.id).id)}>
+          <i className="fas fa-heart"></i>
+          <span className="button-text">Favorito</span>
+        </span>
+      )
+    } else {
+      return (
+        <span className="buttons" onClick={() => this.props.onLike(this.props.match.params.id)}>
+          <i className="far fa-heart"></i>
+          <span className="button-text">Favorito</span>
+        </span>
+      )
+    }
   }
 
 
@@ -132,7 +162,7 @@ class PropertyDetails extends React.Component {
                   Volver atrás
                 </span>
               </div>
-              <div className="like-share-buttons">
+              {/* <div className="like-share-buttons">
                 <span className="buttons">
                   <i className="far fa-heart"></i>
                   <span className="button-text">Favorito</span>
@@ -141,7 +171,7 @@ class PropertyDetails extends React.Component {
                   <i className="fas fa-share-alt"></i>
                   <span className="button-text">Compartir</span>
                 </span>
-              </div>
+              </div> */}
             </div>
             {/* Header End */}
             <div className="main-content">
@@ -163,6 +193,7 @@ class PropertyDetails extends React.Component {
                           <span>{this.state.property.listing_type === "For Sale" ? "En venta" : "En Alquiler"}</span>
                         </div>
                       </div>
+                      {this.renderLikeButton()}
                     </div>
                     <div className="stats-info">
                       <div className="stats">
