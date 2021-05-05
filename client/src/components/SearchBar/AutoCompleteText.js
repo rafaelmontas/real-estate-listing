@@ -118,7 +118,7 @@ class AutoCompleteText extends React.Component {
       this.prevListingType = "sale";
       this.prevMaxPrice = 2000000;
       this.prevMinPrice = 0;
-      this.prevPropertyType = ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"];
+      this.prevPropertyType = ["apartment", "house", "villa", "penthouse"];
       this.prevSector = this.state.text;
       console.log("Without filters", prevProps.location, this.props.location)
     }
