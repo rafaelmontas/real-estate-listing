@@ -14,6 +14,30 @@ import SimilarProperties from './PropertyDetails/SimilarProperties';
 import axios from 'axios';
 import Footer from './Footer';
 
+const amenities = {
+  half_bathrooms: '1/2 Baño',
+  air_conditioner: 'Aire Acondicionado',
+  game_zone: 'Área de Juegos',
+  laundry_room: 'Área de Lavado',
+  social_area: 'Área Social',
+  elevator: 'Ascensor',
+  balcony: 'Balcón',
+  family_room: 'Family Room',
+  shared_gas: 'Gas Común',
+  gym: 'Gimnasio',
+  service_room: 'Habitación de Servicio',
+  jacuzzy: 'Jacuzzi',
+  lobby: 'Lobby',
+  swimming_pool: 'Piscina',
+  marble_floor: 'Piso de Marmol',
+  power_plant: 'Planta Eléctrica',
+  security: 'Seguridad 24/7',
+  walk_in_closet: 'Walk In Closet',
+  furnished: 'Amueblado',
+  security_system: 'Cámaras de Seguridad',
+  hardwood_floor: 'Piso de Madera'
+}
+
 class PropertyDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -189,8 +213,8 @@ class PropertyDetails extends React.Component {
                           <NumberFormat value={this.state.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
                         </span>
                         <div className="status">
-                          <i className={this.state.property.listing_type === "For Sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
-                          <span>{this.state.property.listing_type === "For Sale" ? "En venta" : "En Alquiler"}</span>
+                          <i className={this.state.property.listing_type === "sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
+                          <span>{this.state.property.listing_type === "sale" ? "En venta" : "En Alquiler"}</span>
                         </div>
                       </div>
                       {this.renderLikeButton()}
@@ -233,15 +257,18 @@ class PropertyDetails extends React.Component {
                       </div>
                     </div>
                     <div className="address-info">
-                      <span>{this.state.property.sector}, {`C/ ${this.state.property.street_name} #${this.state.property.street_number}`}</span>
+                      <div className="inner-address">
+                        <i className="fas fa-map-marker-alt"></i>
+                        <span>{this.state.property.sector}</span>
+                      </div>
                     </div>
-                    <div className="extra-info">
+                    {/* <div className="extra-info">
                       <div className="video-badge">
                         <i className="fas fa-video"></i>
                         <span>Tour en video</span>
                       </div>
                       <span className="map-link"><i className="fas fa-map-marker-alt"></i> Ver en mapa</span>
-                    </div>
+                    </div> */}
                   </div>
                   {/* Info Header end */}
                   <div className="amenities">
@@ -249,48 +276,30 @@ class PropertyDetails extends React.Component {
                       <h3>Amenidades</h3>
                     </div>
                     <div className="amenities-details">
-                      <div className="amenity">
-                        <i className="fas fa-dumbbell"></i>
-                        <span>Gimnasio</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-user-tie"></i>
-                        <span>Portero</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-charging-station"></i>
-                        <span>Planta Eléctrica</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-wind"></i>
-                        <span>Aire Acondicionado</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-swimming-pool"></i>
-                        <span>Piscina</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-lock"></i>
-                        <span>Seguridad</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="far fa-caret-square-up"></i>
-                        <span>Ascensor</span>
-                      </div>
+                      {!this.state.isLoading &&
+                      Object.keys(this.state.property['PropertyAmenity'])
+                      .filter(amenity => this.state.property['PropertyAmenity'][amenity] === true).map(amenity => {
+                        return (
+                          <div className="amenity">
+                            <i className="far fa-check-circle"></i>
+                            <span>{amenities[amenity]}</span>
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
-                  <BrokerSection/>
-                  <MapSection property={this.state.property}/>
+                  {/* <BrokerSection/> */}
+                  {/* <MapSection property={this.state.property}/> */}
                   <div className="description">
                     <h3>Descripción</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
                   </div>
                   <AgentSection onContactClick={this.handleContactFormClick} tel={"8296483530"}/>
                 </div>
-                <div className="ad-section">
+                {/* <div className="ad-section">
                   <span>Publicidad</span>
                   <div className="advertisement"></div>
-                </div>
+                </div> */}
                 {/* Details Section End */}
               </div>
               <div className="info-section">

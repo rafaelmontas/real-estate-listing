@@ -16,7 +16,7 @@ class SimilarProperties extends React.Component {
     return (
       <div className="similar-properties">
         <div className="similar-properties-container">
-          <h2>Propiedades Similares</h2>
+          <h2>Más Propiedades</h2>
           <div className="property-list">
             <PropertyList status={false}
                           properties={this.props.properties.slice(0, 4)}

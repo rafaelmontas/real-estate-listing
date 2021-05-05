@@ -222,6 +222,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.info-header .address-info .inner-address {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: #2270ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+.info-header .address-info .inner-address i {
+  margin-right: 5px;
+}
 .info-header .extra-info {
   display: flex;
   align-items: center;
@@ -441,7 +454,7 @@
   .info-header .stats-info .stats span.text {
     display: inline;
   }
-  .info-header .extra-info {
+  .info-header .address-info {
     padding-bottom: 20px;
   }
   .amenities {
