@@ -156,6 +156,7 @@
 }
 .main-section .details-section .info-header .price-info .price-status-wraper {
   display: flex;
+  flex-direction: column;
 }
 .main-section .details-section .info-header .price-info .price-tag {
   font-weight: bold;
@@ -199,7 +200,7 @@
 
 .info-header .stats-info {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 16px;
 }
 .info-header .stats-info .stats {
@@ -431,6 +432,10 @@
   .main-section .details-section .info-header {
     border-bottom: 0px;
     padding-bottom: 0px;
+  }
+  .main-section .details-section .info-header .price-info .price-status-wraper {
+    flex-direction: row;
+    align-items: center;
   }
   .info-header .stats-info {
     margin: 0;

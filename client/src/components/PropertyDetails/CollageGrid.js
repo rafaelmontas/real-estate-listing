@@ -25,7 +25,7 @@ class CollageGrid extends React.Component {
           </div>
         </div>
       )
-    } else if(this.props.pictures.length === 3) {
+    } else if(this.props.pictures.length >= 3) {
       return (
         <div className="second-media">
           <div className="photo-top">
