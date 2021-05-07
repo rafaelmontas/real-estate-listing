@@ -28,7 +28,7 @@ function isEmpty(obj) {
 propertiesRouter.get("/", (req, res) => {
   if(isEmpty(req.query)) {
     Property.findAndCountAll({
-      where: {listing_active: true},
+      where: {listing_active: true, listing_type: 'sale'},
       include: [{model: PropertyPictures, attributes: ['location']}],
       distinct: true
     }).then(properties => {

@@ -49,7 +49,7 @@ class App extends React.Component {
     console.log(`${localStorage.getItem('user-jwt')}`)
     const userJwt = localStorage.getItem('user-jwt')
     this.setState({userLoading: true})
-    axios({method: 'get', url: '/user-auth/user', headers: {'user-auth': userJwt}})
+    axios({method: 'get', url: '/user-auth/user/', headers: {'user-auth': userJwt}})
         .then(user => {
           console.log(user.data)
           this.setState({
