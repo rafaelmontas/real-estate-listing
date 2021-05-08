@@ -19,6 +19,7 @@ class SimilarProperties extends React.Component {
           <h2>Más Propiedades</h2>
           <div className="property-list">
             <PropertyList status={false}
+                          detailsPage={true}
                           properties={this.props.properties.slice(0, 4)}
                           onCardHovered={this.handleCardHover}
                           onCardHoverOut={this.handleCardHoverOut}

@@ -43,10 +43,11 @@ class PropertyDetails extends React.Component {
     super(props);
     this.state = {
       property: {},
+      agentInfo: {},
       liked: false,
       similarProperties: [],
       isLoading: true,
-      isContactFormLoading: false,
+      isContactFormLoading: true,
       ContactFormOpen: false,
       carouselOpen: false
     }
@@ -57,32 +58,34 @@ class PropertyDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ isContactFormLoading: true })
-    this.timer = setTimeout(() => {
-      this.setState( {isContactFormLoading: false} )
-    }, 2000)
+    // this.setState({ isContactFormLoading: true })
+    // this.timer = setTimeout(() => {
+    //   this.setState( {isContactFormLoading: false} )
+    // }, 4000)
     axios.get(`/api/properties/${this.props.match.params.id}`)
-        .then(property => {
-          console.log(property.data)
-          this.setState({ property: property.data, isLoading: false });
-        })
-        .catch(err => {
-          console.log(err.response.data, err.response.status)
-          if(err.response.status === 500) {
-            this.props.history.replace('/error/500')
-          }
-        })
-    axios.get("/api/properties")
-        .then(similarProperties => {
-          console.log(similarProperties.data)
-          this.setState({ similarProperties: similarProperties.data.properties });
-        })
-        .catch(err => {
-          console.log(err.response.data, err.response.status)
-          if(err.response.status === 500) {
-            this.props.history.replace('/error/500')
-          }
-        })
+      .then(property => {
+        console.log(property.data)
+        this.setState({ property: property.data});
+      })
+      .then(() => {
+        return axios.get(`/api/agents/${this.state.property.agent_id}`)
+      })
+      .then(res => {
+        this.setState({agentInfo: res.data})
+      })
+      .then(() => {
+        return axios.get("/api/properties")
+      })
+      .then(res => {
+        this.setState({ similarProperties: res.data.properties, isLoading: false });
+        this.timer = setTimeout(() => {this.setState({isContactFormLoading: false})}, 2000)
+      })
+      .catch(err => {
+        console.log(err.response.data, err.response.status)
+        if(err.response.status === 500) {
+          this.props.history.replace('/error/500')
+        }
+      })
     window.scrollTo(0, 0);
     // Like
     if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
@@ -175,7 +178,7 @@ class PropertyDetails extends React.Component {
       <div>
         {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
         {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick} pictures={this.state.property['PropertyPictures']}/> : null}
-        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize}/>}
+        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize} agentInfo={this.state.agentInfo}/>}
         <div className="details-container">
           <div className="full-details-view">
             {/* Header Component */}
@@ -292,9 +295,10 @@ class PropertyDetails extends React.Component {
                   {/* <MapSection property={this.state.property}/> */}
                   <div className="description">
                     <h3>Descripción</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
+                    <p>{this.state.property.description}</p>
                   </div>
-                  <AgentSection onContactClick={this.handleContactFormClick} tel={"8296483530"}/>
+                  {!this.state.isLoading && <AgentSection onContactClick={this.handleContactFormClick}
+                                                          agentInfo={this.state.agentInfo}/>}
                 </div>
                 {/* <div className="ad-section">
                   <span>Publicidad</span>
@@ -304,7 +308,9 @@ class PropertyDetails extends React.Component {
               </div>
               <div className="info-section">
                 <div className="info-wraper">
-                  <ContactForm loadingStatus={this.state.isContactFormLoading} size={inputSize}/>
+                  <ContactForm loadingStatus={this.state.isContactFormLoading}
+                                size={inputSize}
+                                agentInfo={this.state.agentInfo}/>
                 </div>
               </div>
             </div>

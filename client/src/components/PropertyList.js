@@ -24,14 +24,16 @@ class PropertyList extends React.Component {
   }
   renderSearchResultHeading() {
     if(this.props.listingCount !== 0 || this.props.status) {
-      return (
-        <div className="search-results-list-heading">
-          <div className="heading-text">
-            {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : <h1>Distrito Nacional, SD</h1>}
-            {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
+      if(!this.props.detailsPage) {
+        return (
+          <div className="search-results-list-heading">
+            <div className="heading-text">
+              {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : <h1>Distrito Nacional, SD</h1>}
+              {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
   }
   renderEmptySearch() {
