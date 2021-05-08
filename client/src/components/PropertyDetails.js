@@ -12,6 +12,7 @@ import AgentSection from './PropertyDetails/AgentSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
 import axios from 'axios';
+import {userContext} from './userContext';
 import Footer from './Footer';
 
 const amenities = {
@@ -178,7 +179,11 @@ class PropertyDetails extends React.Component {
       <div>
         {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
         {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick} pictures={this.state.property['PropertyPictures']}/> : null}
-        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize} agentInfo={this.state.agentInfo}/>}
+        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick}
+                                                         size={inputSize}
+                                                         agentInfo={this.state.agentInfo}
+                                                         userInfo={this.context}
+                                                         onLead={this.props.onLead}/>}
         <div className="details-container">
           <div className="full-details-view">
             {/* Header Component */}
@@ -310,7 +315,9 @@ class PropertyDetails extends React.Component {
                 <div className="info-wraper">
                   <ContactForm loadingStatus={this.state.isContactFormLoading}
                                 size={inputSize}
-                                agentInfo={this.state.agentInfo}/>
+                                agentInfo={this.state.agentInfo}
+                                userInfo={this.context}
+                                onLead={this.props.onLead}/>
                 </div>
               </div>
             </div>
@@ -334,4 +341,5 @@ PropertyDetails.propTypes = {
   match: PropTypes.object.isRequired
 }
 
+PropertyDetails.contextType = userContext;
 export default PropertyDetails;

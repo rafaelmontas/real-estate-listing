@@ -1,6 +1,6 @@
 .register-modal {
   position: fixed;
-  z-index: 400;
+  z-index: 450;
   background-color: #fff;
   overflow: auto;
   left: 0;

@@ -19,7 +19,10 @@ class ContactFormModal extends React.Component {
             <i className="fas fa-times"></i>
           </span>
         </div>
-        <ContactForm size={this.props.size} agentInfo={this.props.agentInfo}/>
+        <ContactForm size={this.props.size}
+                     agentInfo={this.props.agentInfo}
+                     userInfo={this.props.userInfo}
+                     onLead={this.props.onLead}/>
       </div>
     )
   }

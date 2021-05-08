@@ -423,6 +423,7 @@ class MainSearch extends React.Component {
                   onLike={this.handleLike}
                   onLikeDelete={this.handleLikeDelete}
                   userLikes={this.state.userLikes}
+                  onLead={this.handleLoginClick}
                   // userLikeId={this.props.userLikes.find(x => x.listing_id === property.id)}
                   />
               )}
