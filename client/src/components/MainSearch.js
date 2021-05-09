@@ -424,6 +424,7 @@ class MainSearch extends React.Component {
                   onLikeDelete={this.handleLikeDelete}
                   userLikes={this.state.userLikes}
                   onLead={this.handleLoginClick}
+                  // userId={this.context.isLoggedIn ? this.context.user.id : null}
                   // userLikeId={this.props.userLikes.find(x => x.listing_id === property.id)}
                   />
               )}

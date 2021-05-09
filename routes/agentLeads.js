@@ -1,14 +1,14 @@
 const express = require('express');
 const agentLeadsRouter = express.Router();
 const db =  require('../models');
-const AgentLeads = db.AgentLeads;
+const AgentLead = db.AgentLead;
 
 
 agentLeadsRouter.post("/", async (req, res) => {
   console.log(req.body)
 
   try {
-    await AgentLeads.create(req.body)
+    await AgentLead.create(req.body)
     console.log('lead created')
     res.status(201).json({msg: 'Solicitud enviada.'})
   } catch (err) {

@@ -14,6 +14,9 @@ propertiesRouter.use('/:id/pictures', propertyPicturesRouter)
 // Use nested route
 const propertyAmenitiesRouter = require('./propertyAmenities')
 propertiesRouter.use('/:id/amenities', propertyAmenitiesRouter)
+// Use nested route
+const listingViewRouter = require('./listingViews')
+propertiesRouter.use('/:id/views', listingViewRouter)
 
 // @route GET /properties/
 // @desc Get All Properties

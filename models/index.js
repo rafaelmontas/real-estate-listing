@@ -99,8 +99,19 @@ db.property.belongsToMany(db.user, {through: db.like, unique: false, foreignKey:
 db.user.belongsToMany(db.property, {through: db.like, unique: false, foreignKey: 'user_id'});
 
 // Agent Leads
-db.AgentLeads.belongsTo(db.agent, {foreignKey: 'agent_id'});
-db.agent.hasMany(db.AgentLeads)
+db.AgentLead.belongsTo(db.agent, {foreignKey: 'agent_id'});
+db.agent.hasMany(db.AgentLead)
+
+// Listing Views
+db.ListingView.belongsTo(db.property, {foreignKey: 'listing_id'});
+db.ListingView.belongsTo(db.agent, {foreignKey: 'agent_id'});
+db.ListingView.belongsTo(db.user, {foreignKey: 'user_id'});
+db.property.hasMany(db.ListingView)
+db.agent.hasMany(db.ListingView)
+db.user.hasMany(db.ListingView)
+
+// db.property.belongsToMany(db.user, {through: db.ListingView, unique: false, foreignKey: 'listing_id'});
+// db.user.belongsToMany(db.property, {through: db.ListingView, unique: false, foreignKey: 'user_id'});
 
 
 module.exports = db;

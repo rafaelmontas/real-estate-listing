@@ -13,6 +13,7 @@ import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
 import axios from 'axios';
 import {userContext} from './userContext';
+import { withCookies, Cookies } from 'react-cookie';
 import Footer from './Footer';
 
 const amenities = {
@@ -80,6 +81,15 @@ class PropertyDetails extends React.Component {
       .then(res => {
         this.setState({ similarProperties: res.data.properties, isLoading: false });
         this.timer = setTimeout(() => {this.setState({isContactFormLoading: false})}, 2000)
+      })
+      .then(() => {
+        const body = {
+          listing_id: this.state.property.id,
+          agent_id: this.state.property.agent_id,
+          ha_id: this.props.cookies.get('_haid') || null,
+          user_id: this.context.isLoggedIn ? this.context.user.id : null
+        }
+        return axios.post(`/api/properties/${this.state.property.id}/views`, body)
       })
       .catch(err => {
         console.log(err.response.data, err.response.status)
@@ -344,4 +354,4 @@ PropertyDetails.propTypes = {
 }
 
 PropertyDetails.contextType = userContext;
-export default PropertyDetails;
+export default withCookies(PropertyDetails);
