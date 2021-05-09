@@ -14,13 +14,19 @@ import TermsAndConditions from './TermsAndConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
+import { v4 as uuidv4 } from 'uuid';
 // const history = createBrowserHistory();
 
 
 class App extends React.Component {
+  static propTypes = {cookies: instanceOf(Cookies).isRequired};
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
+      _haid: cookies.get('_haid'),
       isLoggedIn: false,
       user: null,
       error: {
@@ -35,6 +41,7 @@ class App extends React.Component {
   
   async componentDidMount() {
     // Check token and load user
+    this.handleSetCookie()
     this.getUser()
     // Init hotjar
     try {
@@ -79,6 +86,14 @@ class App extends React.Component {
     })
   }
 
+  handleSetCookie = () => {
+    const { cookies } = this.props;
+    if(!cookies.get("_haid")) {
+      cookies.set("_haid", uuidv4(), { path: "/", maxAge: 31536000 }); // set the cookie
+      this.setState({ _haid: cookies.get("_haid") });
+    }
+  };
+
   render() {
     const value = {
       user: this.state.user,
@@ -106,4 +121,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withCookies(App);
