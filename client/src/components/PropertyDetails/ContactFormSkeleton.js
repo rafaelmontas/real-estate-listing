@@ -15,7 +15,7 @@ class ContactFormSkeleton extends React.Component {
             <Skeleton height={'40px'} width={'320px'} duration={1}/>
           </div>
           <div style={{marginBottom: "10px"}}>
-            <Skeleton height={'94px'} width={'320px'} duration={1}/>
+            <Skeleton height={'74px'} width={'320px'} duration={1}/>
           </div>
           <div>
             <Skeleton height={'40px'} width={'320px'} duration={1}/>

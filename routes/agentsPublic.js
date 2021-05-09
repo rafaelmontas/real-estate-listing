@@ -8,7 +8,7 @@ const AgentProfilePicture = db.AgentProfilePicture;
 
 agentsPublicRouter.get("/:id", (req, res) => {
   Agent.findByPk(req.params.id, {
-    attributes: ['name', 'phone_number', 'alt_phone_number', [
+    attributes: ['id', 'name', 'phone_number', 'alt_phone_number', [
       db.sequelize.fn('COUNT', db.sequelize.col('properties.id')), 'n_listings'
     ]],
     include: [{

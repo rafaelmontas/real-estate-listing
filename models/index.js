@@ -98,4 +98,9 @@ db.property.hasMany(db.like, {
 db.property.belongsToMany(db.user, {through: db.like, unique: false, foreignKey: 'listing_id'});
 db.user.belongsToMany(db.property, {through: db.like, unique: false, foreignKey: 'user_id'});
 
+// Agent Leads
+db.AgentLeads.belongsTo(db.agent, {foreignKey: 'agent_id'});
+db.agent.hasMany(db.AgentLeads)
+
+
 module.exports = db;

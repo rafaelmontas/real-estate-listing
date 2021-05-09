@@ -17,6 +17,9 @@ agentsRouter.use('/:id/profile-pictures', agentsProfilePicturesRouter)
 const agentsPropertiesRouter = require('./agentsProperties')
 agentsRouter.use('/:id/properties', agentsPropertiesRouter)
 
+const agentLeadsRouter = require('./agentLeads')
+agentsRouter.use('/:id/leads', agentLeadsRouter)
+
 
 agentsRouter.get("/:id", verifyToken, (req, res) => {
   // Verify that agent requested is the same as the one requesting

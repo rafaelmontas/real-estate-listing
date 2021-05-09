@@ -183,7 +183,8 @@ class PropertyDetails extends React.Component {
                                                          size={inputSize}
                                                          agentInfo={this.state.agentInfo}
                                                          userInfo={this.context}
-                                                         onLead={this.props.onLead}/>}
+                                                         onLead={this.props.onLead}
+                                                         listing_id={this.state.property.id}/>}
         <div className="details-container">
           <div className="full-details-view">
             {/* Header Component */}
@@ -317,7 +318,8 @@ class PropertyDetails extends React.Component {
                                 size={inputSize}
                                 agentInfo={this.state.agentInfo}
                                 userInfo={this.context}
-                                onLead={this.props.onLead}/>
+                                onLead={this.props.onLead}
+                                listing_id={this.state.property.id}/>
                 </div>
               </div>
             </div>

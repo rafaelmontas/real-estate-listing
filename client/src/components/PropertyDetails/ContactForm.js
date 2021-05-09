@@ -3,6 +3,9 @@ import { TextField } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import AgentSection from './AgentSection';
 import ContactFormSkeleton from './ContactFormSkeleton';
+import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import './ContactForm.css'
 
 const inputStyles = {
@@ -16,10 +19,14 @@ class ContactForm extends React.Component {
       userName: '',
       userEmail: '',
       userPhoneNumber: '',
-      userText: "Hola, Me interesa. Quisiera más información sobre esta propiedad. Gracias!"
+      userText: "Hola, quisiera más información sobre esta propiedad.",
+      leadStatus: null,
+      alertOpen: false,
+      msg: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleLead = this.handleLead.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   componentDidMount() {
@@ -50,7 +57,33 @@ class ContactForm extends React.Component {
     if(!this.props.userInfo.isLoggedIn) {
       console.log('not logged in')
       this.props.onLead()
+    } else {
+      const body = {
+        user_id: this.props.userInfo.user.id,
+        agent_id: this.props.agentInfo.id,
+        listing_id: this.props.listing_id
+      }
+      axios.post(`/agents/${this.props.agentInfo.id}/leads`, body)
+      .then(res => {
+        console.log(res)
+        this.setState({leadStatus: res.status, msg: res.data.msg, alertOpen: true})
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({leadStatus: err.response.status, msg: err.response.data.msg, alertOpen: true})
+      })
     }
+  }
+
+  renderAlert() {
+    if(this.state.leadStatus === 201) {
+      return <MuiAlert elevation={6} variant="filled" severity="success">{this.state.msg}</MuiAlert>
+    } else {
+      return <MuiAlert elevation={6} variant="filled" severity="error">{this.state.msg}</MuiAlert>
+    }
+  }
+  handleClose() {
+    this.setState({alertOpen: false})
   }
 
   render() {
@@ -59,6 +92,13 @@ class ContactForm extends React.Component {
     } else {
       return (
         <div className="contact-container">
+          <Snackbar open={this.state.alertOpen}
+                    autoHideDuration={4000}
+                    anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                    onClose={this.handleClose}
+                    style={{top: '92px'}}>
+            {this.renderAlert()}
+          </Snackbar>
           <form className="form-wraper" onSubmit={this.handleLead}>
             <h5>Solicitar Información</h5>
             <div className="top-inputs">
@@ -107,8 +147,8 @@ class ContactForm extends React.Component {
                        value={this.state.userText}
                        onChange={this.handleChange}/>
             <button className="send-button" type="submit">
-              Enviar
-              <i className="far fa-paper-plane"></i>
+              Solicitar Información
+              {/* <i className="far fa-paper-plane"></i> */}
             </button>
           </form>
           <AgentSection agentInfo={this.props.agentInfo}/>

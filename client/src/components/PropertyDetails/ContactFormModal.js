@@ -22,7 +22,8 @@ class ContactFormModal extends React.Component {
         <ContactForm size={this.props.size}
                      agentInfo={this.props.agentInfo}
                      userInfo={this.props.userInfo}
-                     onLead={this.props.onLead}/>
+                     onLead={this.props.onLead}
+                     listing_id={this.props.listing_id}/>
       </div>
     )
   }
