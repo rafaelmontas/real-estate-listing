@@ -14,32 +14,34 @@ class AgentDashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: false,
+      isLoading: true,
       topListings: [],
-      listingCount: 0
+      listingCount: 0,
+      listingViews: 0,
+      leads: 0
     }
   }
   async componentDidMount() {
-    this.setState({ isLoading: true })
-    this.timer = setTimeout(() => {
-      axios.get(`/agents/${this.context.agent.id}/properties`)
-      .then(topListings => {
-        // console.log(topListings.data)
-        this.setState({
-          // topListings: topListings.data.properties,
-          listingCount: topListings.data.count,
-          isLoading: false
-        })
-        
+    // this.setState({ isLoading: true })
+    const agentJwt = localStorage.getItem('agent-jwt')
+    axios.get(`/agents/${this.context.agent.id}`, {headers: { 'agent-auth': agentJwt }})
+    .then(res => {
+      console.log(res.data)
+      this.setState({
+        listingCount: res.data.properties.length,
+        listingViews: res.data['ListingViews'].length,
+        leads: res.data['AgentLeads'].length,
+        topListings: res.data.properties,
+        isLoading: false
       })
-      .catch(err => {
-        // console.log(err.response.data, err.response.status)
-        if(err.response.status === 500) {
-          this.props.history.replace('/error/500')
-        }
-      })
-      this.setState({isLoading: false})
-    }, 1000)
+    })
+    .catch(err => {
+      // console.log(err.response.data, err.response.status)
+      if(err.response.status === 500) {
+        this.props.history.replace('/error/500')
+      }
+    })
+
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
       gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Main Dashboard', user_id: this.context.agent.id })
@@ -70,7 +72,7 @@ class AgentDashboard extends React.Component {
     ReactPixel.pageView(); // For tracking page view
   }
   renderBottomDiv() {
-    if(this.state.topListings.length === 0) {
+    if(this.state.listingViews === 0) {
       return (
         <div className="empty-list-container">
           <span className="text">No tienes propiedades con visitas.</span>
@@ -80,8 +82,11 @@ class AgentDashboard extends React.Component {
     } else {
       return (
         <div className="top-listings-list">
-          {this.state.topListings.slice(0, 3).map(listing => {
-            return <ListingCard key={listing.id} listing={listing} linkTo='/account/listings'/>
+          {this.state.topListings.sort((a, b) => (a['ListingViews'].length > b['ListingViews'].length) ? -1 : 1 ).slice(0, 3).map(listing => {
+            return <ListingCard key={listing.id}
+                                listing={listing}
+                                views={listing['ListingViews'].length}
+                                linkTo='/account/listings'/>
           })}
         </div>
       )
@@ -95,7 +100,9 @@ class AgentDashboard extends React.Component {
       return (
         <div className="dashboard-content-right">
           <div className="top-dash-container">
-            <KpiCards listingCount={this.state.listingCount}/>
+            <KpiCards listingCount={this.state.listingCount}
+                      listingViews={this.state.listingViews}
+                      leads={this.state.leads}/>
           </div>
           <div className="bottom-top-listings">
             <div className="top-listings-header">

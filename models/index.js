@@ -100,15 +100,15 @@ db.user.belongsToMany(db.property, {through: db.like, unique: false, foreignKey:
 
 // Agent Leads
 db.AgentLead.belongsTo(db.agent, {foreignKey: 'agent_id'});
-db.agent.hasMany(db.AgentLead)
+db.agent.hasMany(db.AgentLead, {foreignKey: 'agent_id'})
 
 // Listing Views
-db.ListingView.belongsTo(db.property, {foreignKey: 'listing_id'});
 db.ListingView.belongsTo(db.agent, {foreignKey: 'agent_id'});
+db.agent.hasMany(db.ListingView, {foreignKey: 'agent_id'})
 db.ListingView.belongsTo(db.user, {foreignKey: 'user_id'});
-db.property.hasMany(db.ListingView)
-db.agent.hasMany(db.ListingView)
-db.user.hasMany(db.ListingView)
+db.user.hasMany(db.ListingView, {foreignKey: 'user_id'})
+db.ListingView.belongsTo(db.property, {foreignKey: 'listing_id'});
+db.property.hasMany(db.ListingView, {foreignKey: 'listing_id'})
 
 // db.property.belongsToMany(db.user, {through: db.ListingView, unique: false, foreignKey: 'listing_id'});
 // db.user.belongsToMany(db.property, {through: db.ListingView, unique: false, foreignKey: 'user_id'});

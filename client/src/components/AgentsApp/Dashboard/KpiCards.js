@@ -15,7 +15,7 @@ class KpiCards extends React.Component {
         <div className="kpi-card">
           <div className="card-inner" id="card-2">
             <div className="inner-text">
-              <span className="data-text">0</span>
+              <span className="data-text">{this.props.listingViews}</span>
               <span className="title-text">Visitas</span>
             </div>
           </div>
@@ -23,7 +23,7 @@ class KpiCards extends React.Component {
         <div className="kpi-card">
           <div className="card-inner" id="card-3">
             <div className="inner-text">
-              <span className="data-text">0</span>
+              <span className="data-text">{this.props.leads}</span>
               <span className="title-text">Leads</span>
             </div>
           </div>
