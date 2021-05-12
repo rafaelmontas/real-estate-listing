@@ -246,11 +246,11 @@ class MainSearch extends React.Component {
     this.setState({mobileSearchOpen: false})
   }
   
-  searchProperties(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  searchProperties(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      axios.get(`/api/properties?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
           .then(properties => {
             console.log(properties);
             this.setState({ 
@@ -270,14 +270,14 @@ class MainSearch extends React.Component {
     }, 2000)
     this.props.history.push({
       pathname: "/properties",
-      search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
+      search: `?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
     window.scrollTo(0, 0);
   }
-  backForwardSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  backForwardSearch(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      axios.get(`/api/properties?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
           .then(properties => {
             console.log(properties);
             this.setState({ 

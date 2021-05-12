@@ -88,10 +88,10 @@ class MyHauzzy extends React.Component {
     this.setState({mobileSearchOpen: false})
   }
 
-  handleSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  handleSearch(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.props.history.push({
       pathname: "/properties",
-      search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
+      search: `?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
   }
 

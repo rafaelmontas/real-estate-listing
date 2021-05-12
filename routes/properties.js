@@ -81,6 +81,17 @@ propertiesRouter.get("/", (req, res) => {
     }
     let propertyTypeString = req.query.property_type;
     let propertyTypeResult = propertyTypeString.split(",");
+    // Province
+    let province;
+    if(req.query.province === "All") {
+      province = {
+        [Op.like]: "%"
+      }
+    } else {
+      province = {
+        [Op.eq]: req.query.province
+      }
+    }
     // let sector = req.query.sector;
     let sector;
     if(req.query.sector === "All") {
@@ -96,6 +107,7 @@ propertiesRouter.get("/", (req, res) => {
       // where: req.query
       where: {
         listing_active: true,
+        province: province,
         sector: sector,
         listing_type: req.query.listing_type,
         listing_price: {
