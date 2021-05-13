@@ -22,13 +22,20 @@ class PropertyList extends React.Component {
       return <h2>{this.props.sector}</h2>
     }
   }
+  renderProvinceName() {
+    if(this.props.province === 'All') {
+      return null
+    } else {
+      return <h1>{this.props.province}</h1>
+    }
+  }
   renderSearchResultHeading() {
     if(this.props.listingCount !== 0 || this.props.status) {
       if(!this.props.detailsPage) {
         return (
           <div className="search-results-list-heading">
             <div className="heading-text">
-              {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : <h1>Distrito Nacional, SD</h1>}
+              {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : this.renderProvinceName()}
               {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
             </div>
           </div>

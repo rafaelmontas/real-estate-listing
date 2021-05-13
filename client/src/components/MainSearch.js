@@ -391,6 +391,7 @@ class MainSearch extends React.Component {
                                 initialPath={this.props.location.path}
                                 onFiltersClick={this.handleMoreFiltersClick}/>
                   <PropertyList properties={this.state.properties}
+                                province={queryString.parse(this.props.location.search).province}
                                 sector={queryString.parse(this.props.location.search).sector}
                                 status={this.state.isLoading}
                                 cardSelected={this.state.cardSelected}
