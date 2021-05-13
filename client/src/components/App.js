@@ -37,6 +37,7 @@ class App extends React.Component {
     }
     this.getUser = this.getUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
   
   async componentDidMount() {
@@ -94,6 +95,31 @@ class App extends React.Component {
     }
   };
 
+  handleSearch(province, sector, listing_type, min_price, max_price, bedrooms, bathrooms, property_type) {
+    const body = {
+      province,sector,
+      listing_type,
+      min_price,
+      max_price,
+      bedrooms,
+      bathrooms,
+      property_type: Array.isArray(property_type) ? property_type.join() : property_type,
+      ha_id: this.state._haid,
+      user_id: this.state.user && this.state.user.id
+    }
+    console.log('search....', body)
+    clearTimeout(this.timer)
+    this.timer = setTimeout(() => {
+      axios.post("/api/searches", body)
+      .then(res => {
+        console.log("Search Saved!", res.status)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }, 12000)
+  }
+
   render() {
     const value = {
       user: this.state.user,
@@ -108,7 +134,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} />
+            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
             <Route path="/privacy-policy" exact component={PrivacyPolicy}/>

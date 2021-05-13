@@ -261,6 +261,9 @@ class MainSearch extends React.Component {
               cardHovered: 0
             })  
           })
+          .then(() => {
+            this.props.saveSearch(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+          })
           .catch(err => {
             console.log(err.response.data, err.response.status)
             if(err.response.status === 500) {

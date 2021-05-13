@@ -110,6 +110,10 @@ db.user.hasMany(db.ListingView, {foreignKey: 'user_id'})
 db.ListingView.belongsTo(db.property, {foreignKey: 'listing_id'});
 db.property.hasMany(db.ListingView, {foreignKey: 'listing_id'})
 
+// Search Relations
+db.Search.belongsTo(db.user, {foreignKey: 'user_id'});
+db.user.hasMany(db.Search, {foreignKey: 'user_id'});
+
 // db.property.belongsToMany(db.user, {through: db.ListingView, unique: false, foreignKey: 'listing_id'});
 // db.user.belongsToMany(db.property, {through: db.ListingView, unique: false, foreignKey: 'user_id'});
 
