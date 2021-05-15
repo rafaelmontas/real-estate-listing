@@ -247,7 +247,7 @@ class AutoCompleteText extends React.Component {
         <div className="hauzzy-suggestions-bottom">
           <div className="suggestions-bottom-container">
             <div>
-              <h2>Descubre el Distrito Nacional</h2>
+              <h2>Descubre más sectores</h2>
             </div>
             <div className="suggestions-container">
               <div className="suggestions-column">

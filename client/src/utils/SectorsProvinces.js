@@ -27,17 +27,42 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'La Altagracia',
+    sector: 'Bávaro, Punta Cana',
+    type: 'sector',
+    provinceShort: 'LA',
+    zoomLevel: 12,
+    centerLocation: {
+      lat: 18.623918,
+      lng: -68.398618
+    },
+    paths: [
+      { lat: 18.482289, lng: -69.931080 },
+      { lat: 18.468409, lng: -69.931788 },
+      { lat: 18.465620, lng: -69.930244 },
+      { lat: 18.469040, lng: -69.923677 },
+      { lat: 18.470586, lng: -69.924750 },
+      { lat: 18.470810, lng: -69.924300 },
+      { lat: 18.471380, lng: -69.923871 },
+      { lat: 18.474596, lng: -69.920180 },
+      { lat: 18.475023, lng: -69.920325 },
+      { lat: 18.481841, lng: -69.920765 },
+      { lat: 18.482065, lng: -69.921129 },
+      { lat: 18.482711, lng: -69.931064 }, 
+    ]
+  },
+  {
     province: 'Distrito Nacional',
     sector: 'Piantini',
     type: 'sector',
     provinceShort: 'DN',
     zoomLevel: 15,
     centerLocation: {
-      lat: 18.473527,
-      lng: -69.935778
+      lat: 18.471710,
+      lng: -69.936051
     },
     paths: [
-      { lat: 18.482289, lng: -69.931080 },
+      { lat: 18.480764, lng: -69.931140 },
       { lat: 18.468409, lng: -69.931788 },
       { lat: 18.465620, lng: -69.930244 },
       { lat: 18.462694, lng: -69.936008 },
@@ -48,12 +73,368 @@ export const sectorsProvinces = [
       { lat: 18.476732, lng: -69.941561 },
       { lat: 18.476630, lng: -69.941464 },
       { lat: 18.478604, lng: -69.937591 },
-      { lat: 18.483987, lng: -69.940595 },
-      { lat: 18.484313, lng: -69.939629 },
-      { lat: 18.484211, lng: -69.939029 },
-      { lat: 18.483051, lng: -69.934930 },
-      { lat: 18.482929, lng: -69.934222 },
-      { lat: 18.482715, lng: -69.931057 },
+      { lat: 18.479134, lng: -69.936534 },
+      { lat: 18.479347, lng: -69.936051 },
+      { lat: 18.479567, lng: -69.934544 },
+      { lat: 18.480764, lng: -69.931859 },
+      // { lat: 18.483987, lng: -69.940595 },
+      // { lat: 18.484313, lng: -69.939629 },
+      // { lat: 18.484211, lng: -69.939029 },
+      // { lat: 18.483051, lng: -69.934930 },
+      // { lat: 18.482929, lng: -69.934222 },
+      // { lat: 18.482715, lng: -69.931057 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Este',
+    sector: 'Alma Rosa',
+    type: 'sector',
+    provinceShort: 'SD Este',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.494714,
+      lng: -69.854439
+    },
+    paths: [
+      { lat: 18.494322, lng: -69.865027 },
+      { lat: 18.485032, lng: -69.865725 },
+      { lat: 18.484369, lng: -69.857690 },
+      { lat: 18.485162, lng: -69.852261 },
+      { lat: 18.485549, lng: -69.848248 },
+      { lat: 18.485610, lng: -69.844214 },
+      { lat: 18.489787, lng: -69.845330 },
+      { lat: 18.490357, lng: -69.843259 },
+      { lat: 18.499753, lng: -69.845866 },
+      { lat: 18.499814, lng: -69.846403 },
+      { lat: 18.500328, lng: -69.848828 },
+      { lat: 18.499606, lng: -69.850566 },
+      { lat: 18.499917, lng: -69.852693 },
+      { lat: 18.501223, lng: -69.853194 },
+      { lat: 18.505006, lng: -69.856804 },
+      { lat: 18.503953, lng: -69.859100 },
+      { lat: 18.503538, lng: -69.859589 },
+      { lat: 18.501414, lng: -69.860543 },
+      { lat: 18.500437, lng: -69.860565 },
+      { lat: 18.497293, lng: -69.860125 },
+      { lat: 18.496775, lng: -69.860350 },
+      { lat: 18.494923, lng: -69.863118 },
+      { lat: 18.494384, lng: -69.864470 }
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Gazcue',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.468028,
+      lng: -69.902789
+    },
+    paths: [
+      { lat: 18.472917, lng: -69.912611 },
+      { lat: 18.467224, lng: -69.911093 },
+      { lat: 18.466491, lng: -69.910835 },
+      { lat: 18.458696, lng: -69.906758 },
+      { lat: 18.458777, lng: -69.906522 },
+      { lat: 18.458879, lng: -69.905685 },
+      { lat: 18.460365, lng: -69.902638 },
+      { lat: 18.461220, lng: -69.899227 },
+      { lat: 18.461423, lng: -69.898733 },
+      { lat: 18.461667, lng: -69.897810 },
+      { lat: 18.462298, lng: -69.897210 },
+      { lat: 18.463540, lng: -69.895321 },
+      { lat: 18.463906, lng: -69.894291 },
+      { lat: 18.464354, lng: -69.893669 },
+      { lat: 18.466634, lng: -69.895729 },
+      { lat: 18.467127, lng: -69.895241 },
+      { lat: 18.470602, lng: -69.892671 },
+      { lat: 18.470704, lng: -69.892435 },
+      { lat: 18.470775, lng: -69.892607 },
+      { lat: 18.470948, lng: -69.892864 },
+      { lat: 18.471304, lng: -69.892939 },
+      { lat: 18.471579, lng: -69.892821 },
+      { lat: 18.471783, lng: -69.892585 },
+      { lat: 18.471844, lng: -69.892360 },
+      { lat: 18.473767, lng: -69.894420 },
+      { lat: 18.475558, lng: -69.895986 },
+      { lat: 18.476586, lng: -69.896684 },
+      { lat: 18.477481, lng: -69.897499 },
+      { lat: 18.476972, lng: -69.898100 },
+      { lat: 18.476688, lng: -69.898840 },
+      { lat: 18.476006, lng: -69.900589 },
+      { lat: 18.476158, lng: -69.900654 },
+      { lat: 18.476087, lng: -69.901877 },
+      { lat: 18.476169, lng: -69.902424 },
+      { lat: 18.475863, lng: -69.904269 },
+      { lat: 18.474032, lng: -69.909912 },
+      { lat: 18.472994, lng: -69.912391 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Los Cacicazgos',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.440833,
+      lng: -69.970699
+    },
+    paths: [
+      { lat: 18.442258, lng: -69.977683 },
+      { lat: 18.440955, lng: -69.978477 },
+      { lat: 18.436517, lng: -69.982254 },
+      { lat: 18.436502, lng: -69.980891 },
+      { lat: 18.437342, lng: -69.972544 },
+      { lat: 18.437667, lng: -69.971428 },
+      { lat: 18.442507, lng: -69.959369 },
+      { lat: 18.445855, lng: -69.960335 },
+      { lat: 18.441108, lng: -69.974787 },
+      { lat: 18.441163, lng: -69.975366 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Los Próceres',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 17,
+    centerLocation: {
+      lat: 18.482148,
+      lng: -69.966188
+    },
+    paths: [
+      { lat: 18.484722, lng: -69.966864 },
+      { lat: 18.483715, lng: -69.967153 },
+      { lat: 18.481324, lng: -69.967336 },
+      { lat: 18.480998, lng: -69.967207 },
+      { lat: 18.479960, lng: -69.965963 },
+      { lat: 18.479655, lng: -69.965287 },
+      { lat: 18.479818, lng: -69.964654 },
+      { lat: 18.483875, lng: -69.966156 },
+      { lat: 18.483829, lng: -69.966220 },
+      { lat: 18.483931, lng: -69.966279 },
+      { lat: 18.484099, lng: -69.966317 },
+      { lat: 18.484109, lng: -69.966225 },
+      { lat: 18.484206, lng: -69.966156 },
+      { lat: 18.484302, lng: -69.966145 },
+      { lat: 18.484328, lng: -69.966478 },
+      { lat: 18.484545, lng: -69.966470 },
+      { lat: 18.484576, lng: -69.966429 },
+      { lat: 18.484683, lng: -69.966445 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Mirador Norte',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 18.452733,
+      lng: -69.954227
+    },
+    paths: [
+      { lat: 18.457618, lng: -69.947768 },
+      { lat: 18.456437, lng: -69.951287 },
+      { lat: 18.454545, lng: -69.954892 },
+      { lat: 18.451675, lng: -69.961436 },
+      { lat: 18.448886, lng: -69.961329 },
+      { lat: 18.447970, lng: -69.961029 },
+      { lat: 18.448723, lng: -69.958432 },
+      { lat: 18.452245, lng: -69.950879 },
+      { lat: 18.453669, lng: -69.947049 },
+      { lat: 18.454087, lng: -69.946373 },
+      { lat: 18.457516, lng: -69.947704 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Mirador Sur',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 18.446910,
+      lng: -69.955378
+    },
+    paths: [
+      { lat: 18.451347, lng: -69.952728 },
+      { lat: 18.448711, lng: -69.958447 },
+      { lat: 18.447897, lng: -69.961000 },
+      { lat: 18.445882, lng: -69.960292 },
+      { lat: 18.442523, lng: -69.959369 },
+      { lat: 18.443363, lng: -69.956521 },
+      { lat: 18.443816, lng: -69.954917 },
+      { lat: 18.445424, lng: -69.949445 },
+      { lat: 18.451266, lng: -69.952567 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Serrallés',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 18.481916,
+      lng: -69.935494
+    },
+    paths: [
+      { lat: 18.484114, lng: -69.940687 },
+      { lat: 18.478680, lng: -69.937575 },
+      { lat: 18.479327, lng: -69.936095 },
+      { lat: 18.479428, lng: -69.935408 },
+      { lat: 18.479572, lng: -69.934523 },
+      { lat: 18.480759, lng: -69.931927 },
+      { lat: 18.480749, lng: -69.931176 },
+      { lat: 18.482835, lng: -69.931079 },
+      { lat: 18.483018, lng: -69.933987 },
+      { lat: 18.484381, lng: -69.939201 },
+      { lat: 18.484391, lng: -69.939887 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
+    sector: 'Zona Universitaria',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.459568,
+      lng: -69.916564
+    },
+    paths: [
+      { lat: 18.458133, lng: -69.926108 },
+      { lat: 18.451477, lng: -69.922352 },
+      { lat: 18.450948, lng: -69.921559 },
+      { lat: 18.451365, lng: -69.921344 },
+      { lat: 18.451731, lng: -69.921033 },
+      { lat: 18.451843, lng: -69.920872 },
+      { lat: 18.452149, lng: -69.920668 },
+      { lat: 18.452352, lng: -69.920335 },
+      { lat: 18.452515, lng: -69.920164 },
+      { lat: 18.452627, lng: -69.919863 },
+      { lat: 18.453065, lng: -69.919681 },
+      { lat: 18.453502, lng: -69.919037 },
+      { lat: 18.453716, lng: -69.918351 },
+      { lat: 18.455543, lng: -69.915744 },
+      { lat: 18.456296, lng: -69.912911 },
+      { lat: 18.457018, lng: -69.911173 },
+      { lat: 18.457945, lng: -69.908115 },
+      { lat: 18.458708, lng: -69.906763 },
+      { lat: 18.466483, lng: -69.910862 },
+      { lat: 18.467236, lng: -69.911066 },
+      { lat: 18.465964, lng: -69.916248 },
+      { lat: 18.465384, lng: -69.918737 },
+      { lat: 18.464875, lng: -69.920797 },
+      { lat: 18.462962, lng: -69.919853 },
+      { lat: 18.461293, lng: -69.922492 },
+      { lat: 18.460102, lng: -69.924348 },
+      { lat: 18.459822, lng: -69.924734 },
+      { lat: 18.459298, lng: -69.925196 },
+      { lat: 18.458723, lng: -69.925469 },
+      { lat: 18.458326, lng: -69.925587 },
+      { lat: 18.458260, lng: -69.926161 },
+    ]
+  },
+  {
+    province: 'Puerto Plata',
+    sector: 'Puerto Plata',
+    type: 'sector',
+    provinceShort: 'Pto. Plata',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 19.787587,
+      lng: -70.690203
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Puerto Plata',
+    sector: 'Sosúa',
+    type: 'sector',
+    provinceShort: 'Pto. Plata',
+    zoomLevel: 14,
+    centerLocation: {
+      lat: 19.767466,
+      lng: -70.498582
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'San Pedro De Macorís',
+    sector: 'Guayacanes',
+    type: 'sector',
+    provinceShort: 'SP. Macorís',
+    zoomLevel: 14,
+    centerLocation: {
+      lat: 18.426282,
+      lng: -69.457401
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'La Romana',
+    sector: 'Casa De Campo',
+    type: 'sector',
+    provinceShort: 'LR',
+    zoomLevel: 14,
+    centerLocation: {
+      lat: 18.413218,
+      lng: -68.916256
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'La Romana',
+    sector: 'La Romana',
+    type: 'sector',
+    provinceShort: 'LR',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 18.429765,
+      lng: -68.963598
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Monseñor Nouel',
+    sector: 'Bonao',
+    type: 'sector',
+    provinceShort: 'MN',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 18.937259,
+      lng: -70.410320
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Azua',
+    sector: 'Azua',
+    type: 'sector',
+    provinceShort: 'Azua',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 18.453943,
+      lng: -70.734777
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
     ]
   },
   {
@@ -233,100 +614,6 @@ export const sectorsProvinces = [
   },
   {
     province: 'Distrito Nacional',
-    sector: 'Ciudad Universitaria',
-    type: 'sector',
-    provinceShort: 'DN',
-    zoomLevel: 15,
-    centerLocation: {
-      lat: 18.459568,
-      lng: -69.916564
-    },
-    paths: [
-      { lat: 18.458133, lng: -69.926108 },
-      { lat: 18.451477, lng: -69.922352 },
-      { lat: 18.450948, lng: -69.921559 },
-      { lat: 18.451365, lng: -69.921344 },
-      { lat: 18.451731, lng: -69.921033 },
-      { lat: 18.451843, lng: -69.920872 },
-      { lat: 18.452149, lng: -69.920668 },
-      { lat: 18.452352, lng: -69.920335 },
-      { lat: 18.452515, lng: -69.920164 },
-      { lat: 18.452627, lng: -69.919863 },
-      { lat: 18.453065, lng: -69.919681 },
-      { lat: 18.453502, lng: -69.919037 },
-      { lat: 18.453716, lng: -69.918351 },
-      { lat: 18.455543, lng: -69.915744 },
-      { lat: 18.456296, lng: -69.912911 },
-      { lat: 18.457018, lng: -69.911173 },
-      { lat: 18.457945, lng: -69.908115 },
-      { lat: 18.458708, lng: -69.906763 },
-      { lat: 18.466483, lng: -69.910862 },
-      { lat: 18.467236, lng: -69.911066 },
-      { lat: 18.465964, lng: -69.916248 },
-      { lat: 18.465384, lng: -69.918737 },
-      { lat: 18.464875, lng: -69.920797 },
-      { lat: 18.462962, lng: -69.919853 },
-      { lat: 18.461293, lng: -69.922492 },
-      { lat: 18.460102, lng: -69.924348 },
-      { lat: 18.459822, lng: -69.924734 },
-      { lat: 18.459298, lng: -69.925196 },
-      { lat: 18.458723, lng: -69.925469 },
-      { lat: 18.458326, lng: -69.925587 },
-      { lat: 18.458260, lng: -69.926161 },
-    ]
-  },
-  {
-    province: 'Distrito Nacional',
-    sector: 'Gazcue',
-    type: 'sector',
-    provinceShort: 'DN',
-    zoomLevel: 15,
-    centerLocation: {
-      lat: 18.468028,
-      lng: -69.902789
-    },
-    paths: [
-      { lat: 18.472917, lng: -69.912611 },
-      { lat: 18.467224, lng: -69.911093 },
-      { lat: 18.466491, lng: -69.910835 },
-      { lat: 18.458696, lng: -69.906758 },
-      { lat: 18.458777, lng: -69.906522 },
-      { lat: 18.458879, lng: -69.905685 },
-      { lat: 18.460365, lng: -69.902638 },
-      { lat: 18.461220, lng: -69.899227 },
-      { lat: 18.461423, lng: -69.898733 },
-      { lat: 18.461667, lng: -69.897810 },
-      { lat: 18.462298, lng: -69.897210 },
-      { lat: 18.463540, lng: -69.895321 },
-      { lat: 18.463906, lng: -69.894291 },
-      { lat: 18.464354, lng: -69.893669 },
-      { lat: 18.466634, lng: -69.895729 },
-      { lat: 18.467127, lng: -69.895241 },
-      { lat: 18.470602, lng: -69.892671 },
-      { lat: 18.470704, lng: -69.892435 },
-      { lat: 18.470775, lng: -69.892607 },
-      { lat: 18.470948, lng: -69.892864 },
-      { lat: 18.471304, lng: -69.892939 },
-      { lat: 18.471579, lng: -69.892821 },
-      { lat: 18.471783, lng: -69.892585 },
-      { lat: 18.471844, lng: -69.892360 },
-      { lat: 18.473767, lng: -69.894420 },
-      { lat: 18.475558, lng: -69.895986 },
-      { lat: 18.476586, lng: -69.896684 },
-      { lat: 18.477481, lng: -69.897499 },
-      { lat: 18.476972, lng: -69.898100 },
-      { lat: 18.476688, lng: -69.898840 },
-      { lat: 18.476006, lng: -69.900589 },
-      { lat: 18.476158, lng: -69.900654 },
-      { lat: 18.476087, lng: -69.901877 },
-      { lat: 18.476169, lng: -69.902424 },
-      { lat: 18.475863, lng: -69.904269 },
-      { lat: 18.474032, lng: -69.909912 },
-      { lat: 18.472994, lng: -69.912391 },
-    ]
-  },
-  {
-    province: 'Distrito Nacional',
     sector: 'Bella Vista',
     type: 'sector',
     provinceShort: 'DN',
@@ -356,52 +643,6 @@ export const sectorsProvinces = [
       { lat: 18.462657, lng: -69.935955 },
       { lat: 18.459502, lng: -69.942177 },
       { lat: 18.457802, lng: -69.947638 },
-    ]
-  },
-  {
-    province: 'Distrito Nacional',
-    sector: 'Mirador Norte',
-    type: 'sector',
-    provinceShort: 'DN',
-    zoomLevel: 16,
-    centerLocation: {
-      lat: 18.452733,
-      lng: -69.954227
-    },
-    paths: [
-      { lat: 18.457618, lng: -69.947768 },
-      { lat: 18.456437, lng: -69.951287 },
-      { lat: 18.454545, lng: -69.954892 },
-      { lat: 18.451675, lng: -69.961436 },
-      { lat: 18.448886, lng: -69.961329 },
-      { lat: 18.447970, lng: -69.961029 },
-      { lat: 18.448723, lng: -69.958432 },
-      { lat: 18.452245, lng: -69.950879 },
-      { lat: 18.453669, lng: -69.947049 },
-      { lat: 18.454087, lng: -69.946373 },
-      { lat: 18.457516, lng: -69.947704 },
-    ]
-  },
-  {
-    province: 'Distrito Nacional',
-    sector: 'Mirador Sur',
-    type: 'sector',
-    provinceShort: 'DN',
-    zoomLevel: 16,
-    centerLocation: {
-      lat: 18.446910,
-      lng: -69.955378
-    },
-    paths: [
-      { lat: 18.451347, lng: -69.952728 },
-      { lat: 18.448711, lng: -69.958447 },
-      { lat: 18.447897, lng: -69.961000 },
-      { lat: 18.445882, lng: -69.960292 },
-      { lat: 18.442523, lng: -69.959369 },
-      { lat: 18.443363, lng: -69.956521 },
-      { lat: 18.443816, lng: -69.954917 },
-      { lat: 18.445424, lng: -69.949445 },
-      { lat: 18.451266, lng: -69.952567 },
     ]
   },
   {
