@@ -504,12 +504,14 @@ a {
 }
 
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container {
+  display: flex;
   overflow: hidden;
   height: 150px;
   position: relative;
   border-radius: 4px 4px 0 0;
 }
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container img {
+  object-fit: cover;
   width: 100%;
   display: block;
   height: 100%;

@@ -23,6 +23,9 @@
 }
 
 /* Override css for prev and next arrows */
+.carousel-modal .carousel.carousel-slider {
+  max-height: 350px;
+}
 .carousel-modal .carousel.carousel-slider .control-arrow {
   padding: 15px;
 }
@@ -38,6 +41,26 @@
 .carousel-modal .carousel .control-arrow:before, .carousel.carousel-slider button.control-arrow:before {
   border-top: 25px solid transparent;
   border-bottom: 25px solid transparent;
+}
+.carousel-modal .carousel.carousel-slider .slider-wrapper {
+  max-height: 350px;
+}
+.carousel-modal .carousel.carousel-slider .slider-wrapper .slider li div.img-container {
+  display: flex;
+  max-height: 350px;
+}
+.carousel-modal .carousel.carousel-slider .slider-wrapper .slider li div.img-container .listing-img {
+  height: auto;
+  object-fit: contain;
+}
+
+.carousel-modal .carousel .thumbs-wrapper .thumbs .thumb {
+  width: 80px;
+  height: 50px;
+}
+.carousel-modal .carousel .thumbs-wrapper .thumbs .thumb img {
+  object-fit: cover;
+  height: 100%;
 }
 
 /* Center thumbnails */

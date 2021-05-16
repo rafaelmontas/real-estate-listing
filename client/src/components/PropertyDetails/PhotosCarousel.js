@@ -14,8 +14,8 @@ class PhotosCarousel extends React.Component {
         <Carousel infiniteLoop useKeyboardArrows>
           {this.props.pictures.map(picture => {
             return (
-              <div key={picture.id}>
-                <img src={picture.location}/>
+              <div key={picture.id} className="img-container">
+                <img src={picture.location} className="listing-img"/>
               </div>
             )
           })}
