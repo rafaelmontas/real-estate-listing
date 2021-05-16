@@ -17,6 +17,7 @@ import publicIp from "public-ip";
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 import { v4 as uuidv4 } from 'uuid';
+import ReactPixel from 'react-facebook-pixel';
 // const history = createBrowserHistory();
 
 
@@ -33,7 +34,7 @@ class App extends React.Component {
         msg: '',
         status: null
       },
-      userLoading: false
+      userLoading: true
     }
     this.getUser = this.getUser.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -50,13 +51,19 @@ class App extends React.Component {
     } catch(err) {
       console.log(err)
     }
+    // Init Facebook Pixel
+    if(process.env.NODE_ENV === 'production') {
+      ReactPixel.init('824704561474532')
+    } else {
+      ReactPixel.init('248636197019006')
+    }
   }
 
   getUser() {
     console.log('getUser called!!!')
     console.log(`${localStorage.getItem('user-jwt')}`)
     const userJwt = localStorage.getItem('user-jwt')
-    this.setState({userLoading: true})
+    // this.setState({userLoading: true})
     axios({method: 'get', url: '/user-auth/user/', headers: {'user-auth': userJwt}})
         .then(user => {
           console.log(user.data)
@@ -134,7 +141,7 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
+            <Route path="/properties" render={(props) => !this.state.userLoading && <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
             <Route path="/privacy-policy" exact component={PrivacyPolicy}/>

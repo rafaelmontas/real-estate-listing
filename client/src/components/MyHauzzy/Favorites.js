@@ -1,6 +1,8 @@
 import React from 'react';
 import FavoritesList from './FavoritesList';
 import {Link} from 'react-router-dom';
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 import './Favorites.css'
 
 class Favorites extends React.Component {
@@ -13,13 +15,28 @@ class Favorites extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // axios.get(`/users/${this.context.user.id}/likes`)
-    // .then(res => {
-    //   this.setState({favoritesProperties: likes})
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
+    // Google Analytics
+    let initBody;
+    if(this.context.isLoggedIn) {
+      initBody = {send_page_view: true, page_title: 'Favorites Page', user_id: this.context.user.id}
+    } else {
+      initBody = {send_page_view: true, page_title: 'Favorites Page'}
+    }
+    let configBody;
+    if(this.context.isLoggedIn) {
+      configBody = {page_title: 'Favorites Page', page_path: '/my-hauzzy/favorites', send_page_view: false, user_id: this.context.user.id}
+    } else {
+      configBody = {page_title: 'Favorites Page', page_path: '/my-hauzzy/favorites', send_page_view: false}
+    }
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-7TW72RB4M9', initBody)
+      gtag('config', 'G-7TW72RB4M9', configBody)
+    } else {
+      gaInit('G-D570FDN0FX', initBody)
+      gtag('config', 'G-D570FDN0FX', configBody)
+    }
+    // Send Page View FB
+    ReactPixel.pageView(); // For tracking page view
   }
 
   render() {

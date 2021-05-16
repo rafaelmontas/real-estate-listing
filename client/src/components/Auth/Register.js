@@ -2,6 +2,8 @@ import React from 'react';
 import {userContext} from '../userContext';
 import ErrorMsg from './ErrorMsg';
 import axios from 'axios';
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 
 class Register extends React.Component {
   constructor(props) {
@@ -29,6 +31,11 @@ class Register extends React.Component {
           .then(res => {
             console.log(res.data)
             localStorage.setItem('user-jwt', res.data.token)
+            gtag('event', 'sign_up', {
+              event_category: 'engagement',
+              event_label: 'User Registered'
+            })
+            ReactPixel.track('CompleteRegistration')
             this.context.getUser()
           })
           .catch(err => {

@@ -2,6 +2,8 @@ import React from 'react';
 import {userContext} from '../userContext';
 import ErrorMsg from './ErrorMsg';
 import axios from 'axios';
+import gtag, { gaInit } from '../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,6 +30,11 @@ class Login extends React.Component {
           .then(res => {
             console.log(res.data)
             localStorage.setItem('user-jwt', res.data.token)
+            gtag('event', 'login', {
+              event_category: 'engagement',
+              event_label: 'User Login'
+            })
+            ReactPixel.trackCustom('UserLogin')
             this.context.getUser()
           })
           .catch(err => {

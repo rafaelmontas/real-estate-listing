@@ -6,6 +6,7 @@ import AutoCompleteText from './SearchBar/AutoCompleteText';
 import {userContext} from './userContext';
 import { withRouter } from "react-router-dom";
 import logo from '../demo_img/brand-logo-vf.svg';
+import gtag, { gaInit } from '../utils/GaUtils';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -39,6 +40,10 @@ class NavBar extends React.Component {
 
   onFavClick(e) {
     e.preventDefault()
+    gtag('event', 'click', {
+      event_category: 'engagement',
+      event_label: 'Favorites button clicked'
+    })
     if(this.context.isLoggedIn) {
       this.props.history.push({pathname: '/my-hauzzy/favorites'})
     } else {

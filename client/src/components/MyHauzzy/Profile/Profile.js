@@ -6,6 +6,8 @@ import Msg from './Msg';
 import Backdrop from '../../Backdrop';
 import DeleteModal from './DeleteModal'
 import {userContext} from '../../userContext';
+import gtag, { gaInit } from '../../../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 import './Profile.css'
 
 class Profile extends React.Component {
@@ -38,6 +40,28 @@ class Profile extends React.Component {
         phone: this.props.user.phone_number ? this.props.user.phone_number : ''
       })
     }
+    // Google Analytics
+    let initBody;
+    if(this.context.isLoggedIn) {
+      initBody = {send_page_view: true, page_title: 'Profile Page', user_id: this.context.user.id}
+    } else {
+      initBody = {send_page_view: true, page_title: 'Profile Page'}
+    }
+    let configBody;
+    if(this.context.isLoggedIn) {
+      configBody = {page_title: 'Profile Page', page_path: '/my-hauzzy/profile', send_page_view: false, user_id: this.context.user.id}
+    } else {
+      configBody = {page_title: 'Profile Page', page_path: '/my-hauzzy/profile', send_page_view: false}
+    }
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-7TW72RB4M9', initBody)
+      gtag('config', 'G-7TW72RB4M9', configBody)
+    } else {
+      gaInit('G-D570FDN0FX', initBody)
+      gtag('config', 'G-D570FDN0FX', configBody)
+    }
+    // Send Page View FB
+    ReactPixel.pageView(); // For tracking page view
   }
   componentDidUpdate(prevProps) {
     if(prevProps.user !== this.props.user) {

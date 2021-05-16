@@ -14,6 +14,8 @@ import SimilarProperties from './PropertyDetails/SimilarProperties';
 import axios from 'axios';
 import {userContext} from './userContext';
 import { withCookies, Cookies } from 'react-cookie';
+import gtag, { gaInit } from '../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 import Footer from './Footer';
 
 const amenities = {
@@ -102,6 +104,28 @@ class PropertyDetails extends React.Component {
     if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
       this.setState({liked: true})
     }
+    // Google Analytics
+    let initBody;
+    if(this.context.isLoggedIn) {
+      initBody = {send_page_view: true, page_title: 'Listing Details Page', user_id: this.context.user.id}
+    } else {
+      initBody = {send_page_view: true, page_title: 'Listing Details Page'}
+    }
+    let configBody;
+    if(this.context.isLoggedIn) {
+      configBody = {page_title: 'Listing Details Page', page_path: '/properties/:id', send_page_view: false, user_id: this.context.user.id}
+    } else {
+      configBody = {page_title: 'Listing Details Page', page_path: '/properties/:id', send_page_view: false}
+    }
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-7TW72RB4M9', initBody)
+      gtag('config', 'G-7TW72RB4M9', configBody)
+    } else {
+      gaInit('G-D570FDN0FX', initBody)
+      gtag('config', 'G-D570FDN0FX', configBody)
+    }
+    // Send Page View FB
+    ReactPixel.pageView(); // For tracking page view
   }
   componentDidUpdate(prevProps, prevState) {
     Object.entries(this.props).forEach(([key, val]) =>

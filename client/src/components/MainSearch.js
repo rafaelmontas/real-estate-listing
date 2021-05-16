@@ -21,6 +21,8 @@ import DefaultLoad from './DefaultLoad';
 import axios from 'axios';
 import smoothscroll from 'smoothscroll-polyfill';
 import {userContext} from './userContext';
+import gtag, { gaInit } from '../utils/GaUtils';
+import ReactPixel from 'react-facebook-pixel';
 smoothscroll.polyfill();
 
 class MainSearch extends React.Component {
@@ -126,6 +128,29 @@ class MainSearch extends React.Component {
             })
     }, 2000)
     console.log(queryString.parse(this.props.location.search).sector, queryString.parse(this.props.location.search));
+    // Google Analytics
+    let initBody;
+    if(this.context.isLoggedIn) {
+      initBody = {send_page_view: true, page_title: 'Search Page', user_id: this.context.user.id}
+    } else {
+      initBody = {send_page_view: true, page_title: 'Search Page'}
+    }
+    let configBody;
+    if(this.context.isLoggedIn) {
+      configBody = {page_title: 'Search Page', page_path: '/properties', send_page_view: false, user_id: this.context.user.id}
+    } else {
+      configBody = {page_title: 'Search Page', page_path: '/properties', send_page_view: false}
+    }
+    console.log(this.context.isLoggedIn, 'login status')
+    if(process.env.NODE_ENV === 'production') {
+      gaInit('G-7TW72RB4M9', initBody)
+      gtag('config', 'G-7TW72RB4M9', configBody)
+    } else {
+      gaInit('G-D570FDN0FX', initBody)
+      gtag('config', 'G-D570FDN0FX', configBody)
+    }
+    // Send Page View FB
+    ReactPixel.pageView(); // For tracking page view
   }
   componentWillUnmount() {
     clearTimeout(this.timer);
