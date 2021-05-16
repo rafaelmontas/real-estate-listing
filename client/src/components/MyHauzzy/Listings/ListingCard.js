@@ -67,7 +67,7 @@ class ListingCard extends React.Component {
                   <span>{this.props.listing.listing_type === "sale" ? "En venta" : "Alquiler"}</span>
                 </div>
                 <div className="listing-visits sections">  
-                  <span><i className="far fa-eye"></i> 0</span>
+                  <span><i className="far fa-eye"></i> {this.props.views || this.props.listing['ListingViews'].length}</span>
                 </div>
                 <div className="listing-actions sections">  
                   <span className="edit-button"><i className="far fa-edit"></i></span>

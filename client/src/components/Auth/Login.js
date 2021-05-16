@@ -80,9 +80,9 @@ class Login extends React.Component {
           <div className="form-group">
             <button type="submit">Iniciar Sesión</button>
           </div>
-          <div className="forgot-pss">
+          {/* <div className="forgot-pss">
             <a href="/">Olvidaste tu contraseña?</a>
-          </div>
+          </div> */}
           {/* Social login */}
           <div className="other-methods" style={{display: "none"}}>
             <span>Continúa con:</span>

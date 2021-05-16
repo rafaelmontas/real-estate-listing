@@ -14,13 +14,19 @@ import TermsAndConditions from './TermsAndConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
+import { v4 as uuidv4 } from 'uuid';
 // const history = createBrowserHistory();
 
 
 class App extends React.Component {
+  static propTypes = {cookies: instanceOf(Cookies).isRequired};
   constructor(props) {
     super(props);
+    const { cookies } = props;
     this.state = {
+      _haid: cookies.get('_haid'),
       isLoggedIn: false,
       user: null,
       error: {
@@ -31,11 +37,13 @@ class App extends React.Component {
     }
     this.getUser = this.getUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
   
   async componentDidMount() {
     // Check token and load user
-    // this.getUser()
+    this.handleSetCookie()
+    this.getUser()
     // Init hotjar
     try {
       if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
@@ -49,7 +57,7 @@ class App extends React.Component {
     console.log(`${localStorage.getItem('user-jwt')}`)
     const userJwt = localStorage.getItem('user-jwt')
     this.setState({userLoading: true})
-    axios({method: 'get', url: '/user-auth/user', headers: {'user-auth': userJwt}})
+    axios({method: 'get', url: '/user-auth/user/', headers: {'user-auth': userJwt}})
         .then(user => {
           console.log(user.data)
           this.setState({
@@ -79,6 +87,39 @@ class App extends React.Component {
     })
   }
 
+  handleSetCookie = () => {
+    const { cookies } = this.props;
+    if(!cookies.get("_haid")) {
+      cookies.set("_haid", uuidv4(), { path: "/", maxAge: 31536000 }); // set the cookie
+      this.setState({ _haid: cookies.get("_haid") });
+    }
+  };
+
+  handleSearch(province, sector, listing_type, min_price, max_price, bedrooms, bathrooms, property_type) {
+    const body = {
+      province,sector,
+      listing_type,
+      min_price,
+      max_price,
+      bedrooms,
+      bathrooms,
+      property_type: Array.isArray(property_type) ? property_type.join() : property_type,
+      ha_id: this.state._haid,
+      user_id: this.state.user && this.state.user.id
+    }
+    console.log('search....', body)
+    clearTimeout(this.timer)
+    this.timer = setTimeout(() => {
+      axios.post("/api/searches", body)
+      .then(res => {
+        console.log("Search Saved!", res.status)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }, 12000)
+  }
+
   render() {
     const value = {
       user: this.state.user,
@@ -93,8 +134,8 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={LandingPage} />
-            {/* <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn}/>} /> */}
-            {/* <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/> */}
+            <Route path="/properties" render={(props) => <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
+            <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
             <Route path="/privacy-policy" exact component={PrivacyPolicy}/>
             <Route path="/error/500" component={InternalServerError500}/>
@@ -106,4 +147,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withCookies(App);

@@ -20,10 +20,12 @@
 .form-wraper label {
   font-size: 14px;
 }
-.form-wraper span.send-button {
+.form-wraper button.send-button {
   display: block;
+  width: 100%;
   text-align: center;
   padding: 10px;
+  font-size: 14px;
   border: 1px solid #e2e2e2;
   background-color: #1657D7;
   border-radius: 4px;
@@ -31,7 +33,7 @@
   font-weight: 600;
   cursor: pointer;
 }
-.form-wraper span.send-button i {
+.form-wraper button.send-button i {
   margin-left: 5px;
 }
 

@@ -2,11 +2,39 @@ import React from "react";
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import {Link} from 'react-router-dom';
-
-// Temporal image
-import image from "../demo_img/house1.png"
+import {userContext} from './userContext';
 
 class PropertyCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      liked: false
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.props.userLike, this.props.userLikeId)
+    if(this.props.userLike !== -1) this.setState({liked: true})
+  }
+  componentDidUpdate(prevProps) {
+    if(this.props.userLike !== prevProps.userLike) {
+      console.log(this.props.userLike, this.props.userLikeId)
+      if(this.props.userLike !== -1) {
+        this.setState({liked: true})
+      } else if(this.props.userLike === -1) {
+        this.setState({liked: false})
+      }
+    } 
+  }
+
+  renderFavButton() {
+    if(this.state.liked) {
+      return <div className="favorite-button liked" onClick={() => this.props.onLikeDelete(this.props.userLikeId.id)}><i className="fas fa-heart"></i></div>
+    } else {
+      return <div className="favorite-button" onClick={() => this.props.onLike(this.props.property.id)}><i className="far fa-heart"></i></div>
+    }
+  }
+
   render() {
     return (
       <div className="home-card-container"
@@ -26,17 +54,20 @@ class PropertyCard extends React.Component {
               <span className="home-card-price">
                 <NumberFormat value={this.props.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'}/>
               </span>
-              <div className="favorite-button"><i className="far fa-heart"></i></div>
               <div className="home-card-stats">
                 <div className="stats beds"><i className="fas fa-bed"></i>{this.props.property.bedrooms}</div>
                 <div className="stats baths"><i className="fas fa-bath"></i>{this.props.property.bathrooms}</div>
                 <div className="stats cars"><i className="fas fa-car-side"></i>{this.props.property.parking_spaces}</div>
                 <div className="stats mts"><i className="fas fa-ruler-vertical"></i>{this.props.property.square_meters} mts</div>
               </div>
-              <div className="home-card-address">{this.props.property.listing_address}</div>
-              <div className="home-card-sector">{this.props.property.sector}</div>
+              {/* <div className="home-card-address">{this.props.property.listing_address}</div> */}
+              <div className="home-card-sector">
+                <i className="fas fa-map-marker-alt"></i>
+                {this.props.property.sector}
+              </div>
             </div>
           </Link>
+          {this.renderFavButton()}
         </div>
       </div>
     )
@@ -47,4 +78,5 @@ PropertyCard.propTypes = {
   property: PropTypes.object.isRequired
 }
 
+PropertyCard.contextType = userContext;
 export default PropertyCard;

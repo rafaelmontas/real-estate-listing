@@ -2,6 +2,7 @@ const express = require('express');
 const propertiesRouter = express.Router();
 const db =  require('../models');
 const Property = db.property;
+const PropertyAmenities = db.PropertyAmenities;
 const PropertyPictures = db.PropertyPictures;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op
@@ -13,6 +14,9 @@ propertiesRouter.use('/:id/pictures', propertyPicturesRouter)
 // Use nested route
 const propertyAmenitiesRouter = require('./propertyAmenities')
 propertiesRouter.use('/:id/amenities', propertyAmenitiesRouter)
+// Use nested route
+const listingViewRouter = require('./listingViews')
+propertiesRouter.use('/:id/views', listingViewRouter)
 
 // @route GET /properties/
 // @desc Get All Properties
@@ -27,6 +31,7 @@ function isEmpty(obj) {
 propertiesRouter.get("/", (req, res) => {
   if(isEmpty(req.query)) {
     Property.findAndCountAll({
+      where: {listing_active: true, listing_type: 'sale'},
       include: [{model: PropertyPictures, attributes: ['location']}],
       distinct: true
     }).then(properties => {
@@ -76,6 +81,17 @@ propertiesRouter.get("/", (req, res) => {
     }
     let propertyTypeString = req.query.property_type;
     let propertyTypeResult = propertyTypeString.split(",");
+    // Province
+    let province;
+    if(req.query.province === "All") {
+      province = {
+        [Op.like]: "%"
+      }
+    } else {
+      province = {
+        [Op.eq]: req.query.province
+      }
+    }
     // let sector = req.query.sector;
     let sector;
     if(req.query.sector === "All") {
@@ -90,6 +106,8 @@ propertiesRouter.get("/", (req, res) => {
     Property.findAndCountAll({
       // where: req.query
       where: {
+        listing_active: true,
+        province: province,
         sector: sector,
         listing_type: req.query.listing_type,
         listing_price: {
@@ -120,14 +138,17 @@ propertiesRouter.get("/", (req, res) => {
 // @desc Get One Property
 // @access Public
 propertiesRouter.get("/:id", (req, res) => {
-  Property.findByPk(req.params.id)
-            .then(property => {
-              res.status(200).send(property)
-            })
-            .catch(err => {
-              console.log(err);
-              res.sendStatus(500);
-            });
+  Property.findOne({
+    where: {id: req.params.id},
+    include: [{model: PropertyAmenities}, {model: PropertyPictures, attributes: ['id', 'location']}]
+  })
+  .then(property => {
+    res.status(200).send(property)
+  })
+  .catch(err => {
+    console.log(err);
+    res.sendStatus(500);
+  });
 })
 
 

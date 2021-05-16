@@ -46,6 +46,8 @@ class AutoCompleteText extends React.Component {
     this.state = {
       suggestions: sectorsProvinces.slice(0, 3),
       text: '',
+      province: '',
+      sector: '',
       activeOption: -1,
       suggestionsOpen: false,
     }
@@ -118,8 +120,9 @@ class AutoCompleteText extends React.Component {
       this.prevListingType = "sale";
       this.prevMaxPrice = 2000000;
       this.prevMinPrice = 0;
-      this.prevPropertyType = ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"];
-      this.prevSector = this.state.text;
+      this.prevPropertyType = ["apartment", "house", "villa", "penthouse"];
+      this.prevSector = this.state.sector;
+      this.prevProvince = this.state.province
       console.log("Without filters", prevProps.location, this.props.location)
     }
     // if (this.state.text === "" && prevState.text !== "") {
@@ -156,9 +159,11 @@ class AutoCompleteText extends React.Component {
     }
   }
 
-  suggestionSelected(value) {
+  suggestionSelected(value, province, sector) {
     this.setState({
       text: value,
+      province: province,
+      sector: sector,
       activeOption: -1,
       suggestions: sectorsProvinces.slice(0, 4),
     }, () => {
@@ -167,15 +172,15 @@ class AutoCompleteText extends React.Component {
       const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
       if(this.props.location.pathname !== '/properties') {
-        console.log(this.prevBathrooms)
-        this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+        console.log(this.prevBathrooms, this.state.sector, this.state.province)
+        this.props.search(this.state.province, this.state.sector, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
         if(window.innerWidth <= 770) {
           this.props.onCloseMobileSearchClick();
         }
       } else {
-        this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+        this.props.search(this.state.province, this.state.sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
         if(window.innerWidth <= 770) {
           this.props.onCloseMobileSearchClick();
         }
@@ -183,9 +188,11 @@ class AutoCompleteText extends React.Component {
     })
     // this.props.search("For Sale", 0, 2000000, 0, 0, ["apartment", "House", "Villa"])
   }
-  bottomSuggestionSelected(value) {
+  bottomSuggestionSelected(value, province, sector) {
     this.setState({
       text: value,
+      province: province,
+      sector: sector,
       activeOption: -1,
       suggestions: sectorsProvinces.slice(0, 4)
     }, () => {
@@ -194,15 +201,15 @@ class AutoCompleteText extends React.Component {
       const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
       const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
       const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+      const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
       if(this.props.location.pathname !== '/properties') {
         console.log(this.prevBathrooms)
-        this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+        this.props.search(this.state.province, this.state.sector, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
         if(window.innerWidth <= 770) {
           this.props.onCloseMobileSearchClick();
         }
       } else {
-        this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+        this.props.search(this.state.province, this.state.sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
         if(window.innerWidth <= 770) {
           this.props.onCloseMobileSearchClick();
         }
@@ -221,7 +228,7 @@ class AutoCompleteText extends React.Component {
           {suggestions.map((item, index) => {
             return (
               <div key={index} className={index === this.state.activeOption ? "autocomplete-option autocomplete-option-selected" : "autocomplete-option"}
-                              onMouseDown={() => this.suggestionSelected(item.sector)}
+                              onMouseDown={() => this.suggestionSelected(item.sector, item.province, item.sector)}
                               onMouseEnter={this.handleOptionsHover}
                               tabIndex={-1}
                               rol="option">
@@ -240,13 +247,13 @@ class AutoCompleteText extends React.Component {
         <div className="hauzzy-suggestions-bottom">
           <div className="suggestions-bottom-container">
             <div>
-              <h2>Descubre el Distrito Nacional</h2>
+              <h2>Descubre más sectores</h2>
             </div>
             <div className="suggestions-container">
               <div className="suggestions-column">
                 {sectorsProvinces.slice(3, 7).map((item, index) => {
                   return (
-                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector, item.province, item.sector)}>
                       <span>{item.sector}</span>
                     </div>
                   )
@@ -255,7 +262,7 @@ class AutoCompleteText extends React.Component {
               <div className="suggestions-column">
                 {sectorsProvinces.slice(7, 11).map((item, index) => {
                   return (
-                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector, item.province, item.sector)}>
                       <span>{item.sector}</span>
                     </div>
                   )
@@ -264,7 +271,7 @@ class AutoCompleteText extends React.Component {
               <div className="suggestions-column">
                 {sectorsProvinces.slice(11, 15).map((item, index) => {
                   return (
-                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector)}>
+                    <div key={index} className="suggestion-item" onMouseDown={() => this.bottomSuggestionSelected(item.sector, item.province, item.sector)}>
                       <span>{item.sector}</span>
                     </div>
                   )
@@ -301,24 +308,29 @@ class AutoCompleteText extends React.Component {
         if(this.state.activeOption === -1) {
           this.setState({
             text: this.state.suggestions[0].sector,
+            province: this.state.suggestions[0].province,
+            sector: this.state.suggestions[0].sector,
             activeOption: -1
           });  
         } else {
           this.setState({
             text: this.state.suggestions[this.state.activeOption].sector,
+            province: this.state.suggestions[this.state.activeOption].province,
+            sector: this.state.suggestions[this.state.activeOption].sector,
             activeOption: -1
           }, () => {
+            // const province
             const listingType = this.props.initialStateSearch.listing_type == null ? "sale" : this.props.initialStateSearch.listing_type;
             const minPrice = this.props.initialStateSearch.minPrice == null ? 0 : this.props.initialStateSearch.minPrice;
             const maxPrice = this.props.initialStateSearch.maxPrice == null ? 2000000 : this.props.initialStateSearch.maxPrice;
             const bedrooms = this.props.initialStateSearch.bedrooms == null ? 0 : this.props.initialStateSearch.bedrooms;
             const bathrooms = this.props.initialStateSearch.bathrooms == null ? 0 : this.props.initialStateSearch.bathrooms;
-            const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "House", "Villa", "Comercial", "Industrial", "Penthouse"] : this.props.initialStateSearch.property_type;
+            const propertyType = this.props.initialStateSearch.property_type == null ? ["apartment", "house", "villa", "penthouse"] : this.props.initialStateSearch.property_type;
             if(this.props.location.pathname !== '/properties') {
               console.log(this.prevBathrooms)
-              this.props.search(this.state.text, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
+              this.props.search(this.state.province, this.state.sector, this.prevListingType, this.prevMinPrice, this.prevMaxPrice, this.prevBedrooms, this.prevBathrooms, this.prevPropertyType)
             } else {
-              this.props.search(this.state.text, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+              this.props.search(this.state.province, this.state.sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
             }
           });
         }

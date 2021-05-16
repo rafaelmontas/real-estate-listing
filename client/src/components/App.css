@@ -485,9 +485,10 @@ a {
 }
 .search-results-list-grid .home-card-container .home-card {
   margin: 8px;
-  height: 260px;
+  height: 250px;
   border-radius: 4px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,.15);
+  position: relative;
 }
 .search-results-list-grid .home-card-container .home-card.cardSelected {
   border: 2px solid #333;
@@ -503,12 +504,14 @@ a {
 }
 
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container {
+  display: flex;
   overflow: hidden;
   height: 150px;
   position: relative;
   border-radius: 4px 4px 0 0;
 }
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container img {
+  object-fit: cover;
   width: 100%;
   display: block;
   height: 100%;
@@ -541,6 +544,7 @@ a {
 .search-results-list-grid .home-card-container .home-card .property-card-info {
   padding: 16px;
   color: #333;
+  max-height: 100px;
 }
 .property-card-info .home-card-price {
   color: #333;
@@ -550,6 +554,24 @@ a {
   float: right;
   color: #7d7d7d;
   font-size: 22px;
+}
+.property-card-info .favorite-button:hover {
+  color: #ca4d4d;
+}
+.home-card .favorite-button {
+  position: absolute;
+  /* z-index: 50; */
+  color: #7d7d7d;
+  font-size: 26px;
+  bottom: 55px;
+  right: 16px;
+  cursor: pointer;
+}
+.home-card .favorite-button.liked {
+  color: #ca4d4d;
+}
+.home-card .favorite-button:hover {
+  color: #ca4d4d;
 }
 .property-card-info .home-card-stats {
   display: flex;
@@ -565,7 +587,12 @@ a {
   margin-right: 5px;
 }
 .property-card-info .home-card-address, .property-card-info .home-card-sector {
-  font-size: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #545454;
+}
+.property-card-info .home-card-sector .fa-map-marker-alt {
+  margin-right: 5px;
 }
 
 /* Pagination */
@@ -611,6 +638,7 @@ a {
 /* Footer */
 
 .footer-container {
+  margin-top: 35px;
   padding: 35px 16px;
   border-top: 1px solid #7b7b7b;
 }
@@ -620,6 +648,7 @@ a {
   font-size: 14px;
 }
 .footer-container .footer-main .footer-header-name {
+  font-size: 22px;
   margin-bottom: 15px;
   color: #000;
 }
@@ -638,7 +667,7 @@ a {
 }
 .footer-container .footer-main .footer-follow-us a {
   color: #7b7b7b;
-  font-size: 22px;
+  font-size: 30px;
   margin-right: 10px;
 }
 .footer-container .footer-main .footer-badges {

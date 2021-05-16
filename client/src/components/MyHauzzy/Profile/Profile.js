@@ -90,8 +90,8 @@ class Profile extends React.Component {
     this.setState({deleteOpen: true})
   }
   handleDelete() {
-    const body = {password: this.state.password}
-    console.log(body)
+    // const body = {password: this.state.password}
+    // console.log(body)
     const userJwt = localStorage.getItem('user-jwt')
     axios.delete(`/users/${this.props.user.id}`, {
       headers: {
@@ -160,8 +160,12 @@ class Profile extends React.Component {
                                 placeholder="(___)___-___"
                                 name="phone"
                                 id="phone"
-                                onChange={this.onInputChange}
+                                isNumericString={true}
                                 value={this.state.phone}
+                                onValueChange={(values) => {
+                                  const {formattedValue, value} = values;
+                                  this.setState({phone: value})
+                                }}
                                 />
                 </div>
               </div>

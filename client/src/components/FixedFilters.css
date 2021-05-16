@@ -10,9 +10,9 @@
   text-align-last: center;
 } */
 
-.buy-sell button.active {
-  background-color: #c30000;
-  color: #fff;
+.buy-sell button.active, .beds-baths button.active, .type button.active {
+  background-color: #E1EDFF;
+  color: #2169D3;
 }
 .buy-sell button i:first-child {
   margin-right: 5px;
@@ -81,6 +81,7 @@
 }
 
 .exposed-popover .separator.done {
+  display: none;
   justify-content: flex-end;
   padding-right: 15px;
   border-radius: 0px 0px 4px 4px;
@@ -98,8 +99,8 @@
   cursor: pointer;
 }
 .price button.active {
-  background-color: #c30000;
-  color: #fff;
+  background-color: #E1EDFF;
+  color: #2169D3;
 }
 
 

@@ -7,6 +7,7 @@ import App from './components/App';
 import AgentsApp from './components/AgentsApp/AgentsApp'
 import AdminApp from './components/Admin/AdminApp';
 import {BrowserRouter} from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 import * as serviceWorker from './serviceWorker';
 
 Sentry.init({
@@ -47,7 +48,9 @@ if(parsedData.length >= 3 && subDomain !== 'www') {
   console.log(window.location.host)
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </React.StrictMode>,
     document.getElementById('root')
   );

@@ -11,6 +11,10 @@ class PropertyList extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    console.log(this.props.userLikes)
+  }
+
   renderSectorName() {
     if(this.props.sector === 'All') {
       return null
@@ -18,16 +22,25 @@ class PropertyList extends React.Component {
       return <h2>{this.props.sector}</h2>
     }
   }
+  renderProvinceName() {
+    if(this.props.province === 'All') {
+      return null
+    } else {
+      return <h1>{this.props.province}</h1>
+    }
+  }
   renderSearchResultHeading() {
     if(this.props.listingCount !== 0 || this.props.status) {
-      return (
-        <div className="search-results-list-heading">
-          <div className="heading-text">
-            {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : <h1>Distrito Nacional, SD</h1>}
-            {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
+      if(!this.props.detailsPage) {
+        return (
+          <div className="search-results-list-heading">
+            <div className="heading-text">
+              {this.props.status ? <Skeleton height={15} width={'50%'} duration={1}/> : this.renderProvinceName()}
+              {this.props.status ? <Skeleton height={15} width={'40%'} duration={1}/> : this.renderSectorName()}
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
   }
   renderEmptySearch() {
@@ -48,7 +61,12 @@ class PropertyList extends React.Component {
                                 identifier={property.id}
                                 cardSelected={this.props.cardSelected}
                                 onCardHovered={this.props.onCardHovered}
-                                onCardHoverOut={this.props.onCardHoverOut}/>;
+                                onCardHoverOut={this.props.onCardHoverOut}
+                                onLike={this.props.onLike}
+                                onLikeDelete={this.props.onLikeDelete}
+                                userLike={this.props.userLikes.findIndex(x => x.listing_id === property.id)}
+                                userLikeId={this.props.userLikes.find(x => x.listing_id === property.id)}
+                                />;
           })}
           {this.renderEmptySearch()}
         </div>

@@ -156,6 +156,7 @@
 }
 .main-section .details-section .info-header .price-info .price-status-wraper {
   display: flex;
+  flex-direction: column;
 }
 .main-section .details-section .info-header .price-info .price-tag {
   font-weight: bold;
@@ -176,10 +177,30 @@
 .main-section .details-section .info-header .price-info i.rent {
   color: #f7e500;
 }
+.main-section .details-section .info-header .price-info .buttons {
+  padding: 8px 8px;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.main-section .details-section .info-header .price-info .buttons:hover {
+  background-color: #f5f4f4;
+}
+.main-section .details-section .info-header .price-info .buttons i {
+  font-size: 20px;
+}
+.main-section .details-section .info-header .price-info .buttons.liked {
+  background-color: #f5f4f4;
+}
+.main-section .details-section .info-header .price-info .buttons.liked i {
+  color: #ca4d4d;
+}
 
 .info-header .stats-info {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 16px;
 }
 .info-header .stats-info .stats {
@@ -201,6 +222,19 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.info-header .address-info .inner-address {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: #2270ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+.info-header .address-info .inner-address i {
+  margin-right: 5px;
 }
 .info-header .extra-info {
   display: flex;
@@ -313,7 +347,7 @@
   border-radius: 4px;
   top: 80px;
   background-color: #fff;
-  height: 420px;
+  height: 400px;
   box-shadow: 0 4px 16px 0 rgba(0,0,0,.1);
   z-index: 90;
 }
@@ -399,6 +433,10 @@
     border-bottom: 0px;
     padding-bottom: 0px;
   }
+  .main-section .details-section .info-header .price-info .price-status-wraper {
+    flex-direction: row;
+    align-items: center;
+  }
   .info-header .stats-info {
     margin: 0;
     padding: 30px 0;
@@ -421,7 +459,7 @@
   .info-header .stats-info .stats span.text {
     display: inline;
   }
-  .info-header .extra-info {
+  .info-header .address-info {
     padding-bottom: 20px;
   }
   .amenities {

@@ -14,17 +14,19 @@ class AgentListings extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: false,
+      isLoading: true,
       listings: []
     }
   }
   async componentDidMount() {
-    this.setState({ isLoading: true })
-    this.timer = setTimeout(() => {
-      axios.get(`/agents/${this.context.agent.id}/properties`)
+    // this.setState({ isLoading: true })
+    axios.get(`/agents/${this.context.agent.id}/properties`)
       .then(listings => {
         // console.log(listings.data)
-        this.setState({listings: listings.data.listings, isLoading: false})
+        this.setState({listings: listings.data.listings})
+        this.timer = setTimeout(() => {
+          this.setState({isLoading: false})
+        }, 1000)
         // // Track page views GA
         if(process.env.NODE_ENV === 'production') {
           gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent Listings Page', user_id: this.context.agent.id })
@@ -50,7 +52,7 @@ class AgentListings extends React.Component {
           this.props.history.replace('/error/500')
         }
       })
-    }, 1000)
+    
     // Init Facebook Pixel
     if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
       console.log('Internal IP')

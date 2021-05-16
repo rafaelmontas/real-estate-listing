@@ -20,7 +20,7 @@ function PrivateRoute ({component: Component, ...rest}) {
 
   return !loading ? (
     <userContext.Consumer>
-      {({user, isLoggedIn, userLoading}) => (isLoggedIn && !userLoading ? <Route {...rest} render={(props) => <Component {...props}/>}/> : <Redirect to="/" />)}
+      {({user, isLoggedIn, userLoading}) => (isLoggedIn && !userLoading ? <Route {...rest} render={(props) => <Component {...props}/>}/> : <Redirect to="/properties" />)}
     </userContext.Consumer>
   ) : (<div></div>)
 }

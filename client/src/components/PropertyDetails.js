@@ -12,16 +12,44 @@ import AgentSection from './PropertyDetails/AgentSection';
 import ContactForm from './PropertyDetails/ContactForm';
 import SimilarProperties from './PropertyDetails/SimilarProperties';
 import axios from 'axios';
+import {userContext} from './userContext';
+import { withCookies, Cookies } from 'react-cookie';
 import Footer from './Footer';
+
+const amenities = {
+  half_bathrooms: '1/2 Baño',
+  air_conditioner: 'Aire Acondicionado',
+  game_zone: 'Área de Juegos',
+  laundry_room: 'Área de Lavado',
+  social_area: 'Área Social',
+  elevator: 'Ascensor',
+  balcony: 'Balcón',
+  family_room: 'Family Room',
+  shared_gas: 'Gas Común',
+  gym: 'Gimnasio',
+  service_room: 'Habitación de Servicio',
+  jacuzzy: 'Jacuzzi',
+  lobby: 'Lobby',
+  swimming_pool: 'Piscina',
+  marble_floor: 'Piso de Marmol',
+  power_plant: 'Planta Eléctrica',
+  security: 'Seguridad 24/7',
+  walk_in_closet: 'Walk In Closet',
+  furnished: 'Amueblado',
+  security_system: 'Cámaras de Seguridad',
+  hardwood_floor: 'Piso de Madera'
+}
 
 class PropertyDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       property: {},
+      agentInfo: {},
+      liked: false,
       similarProperties: [],
-      isLoading: false,
-      isContactFormLoading: false,
+      isLoading: true,
+      isContactFormLoading: true,
       ContactFormOpen: false,
       carouselOpen: false
     }
@@ -32,33 +60,48 @@ class PropertyDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ isContactFormLoading: true })
-    this.timer = setTimeout(() => {
-      this.setState( {isContactFormLoading: false} )
-    }, 2000)
+    // this.setState({ isContactFormLoading: true })
+    // this.timer = setTimeout(() => {
+    //   this.setState( {isContactFormLoading: false} )
+    // }, 4000)
     axios.get(`/api/properties/${this.props.match.params.id}`)
-        .then(property => {
-          console.log(property.data)
-          this.setState({ property: property.data });
-        })
-        .catch(err => {
-          console.log(err.response.data, err.response.status)
-          if(err.response.status === 500) {
-            this.props.history.replace('/error/500')
-          }
-        })
-    axios.get("/api/properties")
-        .then(similarProperties => {
-          console.log(similarProperties.data)
-          this.setState({ similarProperties: similarProperties.data.properties });
-        })
-        .catch(err => {
-          console.log(err.response.data, err.response.status)
-          if(err.response.status === 500) {
-            this.props.history.replace('/error/500')
-          }
-        })
+      .then(property => {
+        console.log(property.data)
+        this.setState({ property: property.data});
+      })
+      .then(() => {
+        return axios.get(`/api/agents/${this.state.property.agent_id}`)
+      })
+      .then(res => {
+        this.setState({agentInfo: res.data})
+      })
+      .then(() => {
+        return axios.get("/api/properties")
+      })
+      .then(res => {
+        this.setState({ similarProperties: res.data.properties, isLoading: false });
+        this.timer = setTimeout(() => {this.setState({isContactFormLoading: false})}, 2000)
+      })
+      .then(() => {
+        const body = {
+          listing_id: this.state.property.id,
+          agent_id: this.state.property.agent_id,
+          ha_id: this.props.cookies.get('_haid') || null,
+          user_id: this.context.isLoggedIn ? this.context.user.id : null
+        }
+        return axios.post(`/api/properties/${this.state.property.id}/views`, body)
+      })
+      .catch(err => {
+        console.log(err.response.data, err.response.status)
+        if(err.response.status === 500) {
+          this.props.history.replace('/error/500')
+        }
+      })
     window.scrollTo(0, 0);
+    // Like
+    if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
+      this.setState({liked: true})
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     Object.entries(this.props).forEach(([key, val]) =>
@@ -89,6 +132,13 @@ class PropertyDetails extends React.Component {
       }, 500)
       window.scrollTo(0, 0);
     }
+    if(this.props.userLikes !== prevProps.userLikes) {
+      if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
+        this.setState({liked: true})
+      } else if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) === -1) {
+        this.setState({liked: false})
+      }
+    }
   }
 
   handleContactFormClick() {
@@ -108,6 +158,24 @@ class PropertyDetails extends React.Component {
     this.setState({carouselOpen: false});
   }
 
+  renderLikeButton() {
+    if(this.state.liked) {
+      return (
+        <span className="buttons liked" onClick={() => this.props.onLikeDelete(this.props.userLikes.find(x => x.listing_id === this.props.match.params.id).id)}>
+          <i className="fas fa-heart"></i>
+          <span className="button-text">Favorito</span>
+        </span>
+      )
+    } else {
+      return (
+        <span className="buttons" onClick={() => this.props.onLike(this.props.match.params.id)}>
+          <i className="far fa-heart"></i>
+          <span className="button-text">Favorito</span>
+        </span>
+      )
+    }
+  }
+
 
   render() {
     let inputSize;
@@ -120,8 +188,13 @@ class PropertyDetails extends React.Component {
     return (
       <div>
         {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
-        {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick}/> : null}
-        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick} size={inputSize}/>}
+        {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick} pictures={this.state.property['PropertyPictures']}/> : null}
+        {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick}
+                                                         size={inputSize}
+                                                         agentInfo={this.state.agentInfo}
+                                                         userInfo={this.context}
+                                                         onLead={this.props.onLead}
+                                                         listing_id={this.state.property.id}/>}
         <div className="details-container">
           <div className="full-details-view">
             {/* Header Component */}
@@ -132,7 +205,7 @@ class PropertyDetails extends React.Component {
                   Volver atrás
                 </span>
               </div>
-              <div className="like-share-buttons">
+              {/* <div className="like-share-buttons">
                 <span className="buttons">
                   <i className="far fa-heart"></i>
                   <span className="button-text">Favorito</span>
@@ -141,12 +214,12 @@ class PropertyDetails extends React.Component {
                   <i className="fas fa-share-alt"></i>
                   <span className="button-text">Compartir</span>
                 </span>
-              </div>
+              </div> */}
             </div>
             {/* Header End */}
             <div className="main-content">
               <div className="main-section">
-                <CollageGrid property={this.state.property}
+                <CollageGrid pictures={this.state.property['PropertyPictures']}
                              loadingStatus={this.state.isLoading}
                              onCollageClick={this.handleCollageClick}/>
                 {/* Details Section */}
@@ -159,10 +232,11 @@ class PropertyDetails extends React.Component {
                           <NumberFormat value={this.state.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
                         </span>
                         <div className="status">
-                          <i className={this.state.property.listing_type === "For Sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
-                          <span>{this.state.property.listing_type === "For Sale" ? "En venta" : "En Alquiler"}</span>
+                          <i className={this.state.property.listing_type === "sale" ? "fas fa-circle sell" : "fas fa-circle rent"}></i>
+                          <span>{this.state.property.listing_type === "sale" ? "En venta" : "En Alquiler"}</span>
                         </div>
                       </div>
+                      {this.renderLikeButton()}
                     </div>
                     <div className="stats-info">
                       <div className="stats">
@@ -202,15 +276,18 @@ class PropertyDetails extends React.Component {
                       </div>
                     </div>
                     <div className="address-info">
-                      <span>{this.state.property.sector}, {`C/ ${this.state.property.street_name} #${this.state.property.street_number}`}</span>
+                      <div className="inner-address">
+                        <i className="fas fa-map-marker-alt"></i>
+                        <span>{this.state.property.sector}</span>
+                      </div>
                     </div>
-                    <div className="extra-info">
+                    {/* <div className="extra-info">
                       <div className="video-badge">
                         <i className="fas fa-video"></i>
                         <span>Tour en video</span>
                       </div>
                       <span className="map-link"><i className="fas fa-map-marker-alt"></i> Ver en mapa</span>
-                    </div>
+                    </div> */}
                   </div>
                   {/* Info Header end */}
                   <div className="amenities">
@@ -218,59 +295,51 @@ class PropertyDetails extends React.Component {
                       <h3>Amenidades</h3>
                     </div>
                     <div className="amenities-details">
-                      <div className="amenity">
-                        <i className="fas fa-dumbbell"></i>
-                        <span>Gimnasio</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-user-tie"></i>
-                        <span>Portero</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-charging-station"></i>
-                        <span>Planta Eléctrica</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-wind"></i>
-                        <span>Aire Acondicionado</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-swimming-pool"></i>
-                        <span>Piscina</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="fas fa-lock"></i>
-                        <span>Seguridad</span>
-                      </div>
-                      <div className="amenity">
-                        <i className="far fa-caret-square-up"></i>
-                        <span>Ascensor</span>
-                      </div>
+                      {!this.state.isLoading &&
+                      Object.keys(this.state.property['PropertyAmenity'])
+                      .filter(amenity => this.state.property['PropertyAmenity'][amenity] === true).map(amenity => {
+                        return (
+                          <div className="amenity">
+                            <i className="far fa-check-circle"></i>
+                            <span>{amenities[amenity]}</span>
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
-                  <BrokerSection/>
-                  <MapSection property={this.state.property}/>
+                  {/* <BrokerSection/> */}
+                  {/* <MapSection property={this.state.property}/> */}
                   <div className="description">
                     <h3>Descripción</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu purus ex. Suspendisse sed aliquet orci. Donec sodales blandit odio sed mollis. Praesent molestie volutpat venenatis. Cras aliquet, tellus non malesuada tristique, felis leo vestibulum nunc, vel lacinia metus sapien sit amet leo. Quisque in pulvinar felis, sit amet egestas massa. Donec nisl ipsum, mattis quis arcu id, dapibus semper augue. Curabitur placerat quam a nisi tincidunt, eget mattis odio placerat.</p>
+                    <p>{this.state.property.description}</p>
                   </div>
-                  <AgentSection onContactClick={this.handleContactFormClick} tel={"8296483530"}/>
+                  {!this.state.isLoading && <AgentSection onContactClick={this.handleContactFormClick}
+                                                          agentInfo={this.state.agentInfo}/>}
                 </div>
-                <div className="ad-section">
+                {/* <div className="ad-section">
                   <span>Publicidad</span>
                   <div className="advertisement"></div>
-                </div>
+                </div> */}
                 {/* Details Section End */}
               </div>
               <div className="info-section">
                 <div className="info-wraper">
-                  <ContactForm loadingStatus={this.state.isContactFormLoading} size={inputSize}/>
+                  <ContactForm loadingStatus={this.state.isContactFormLoading}
+                                size={inputSize}
+                                agentInfo={this.state.agentInfo}
+                                userInfo={this.context}
+                                onLead={this.props.onLead}
+                                listing_id={this.state.property.id}/>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <SimilarProperties properties={this.state.similarProperties}/>
+        <SimilarProperties 
+          properties={this.state.similarProperties}
+          onLike={this.props.onLike}
+          onLikeDelete={this.props.onLikeDelete}
+          userLikes={this.props.userLikes}/>
         <div className="property-footer">
           <Footer/>
         </div>
@@ -284,4 +353,5 @@ PropertyDetails.propTypes = {
   match: PropTypes.object.isRequired
 }
 
-export default PropertyDetails;
+PropertyDetails.contextType = userContext;
+export default withCookies(PropertyDetails);

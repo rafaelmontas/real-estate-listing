@@ -4,10 +4,14 @@ const db =  require('../models');
 const Agent = db.agent;
 const Property = db.property;
 const AgentProfilePicture = db.AgentProfilePicture
+const ListingView = db.ListingView
+const AgentLead = db.AgentLead;
+const PropertyPictures = db.PropertyPictures;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/agentAuth')
 const sgMail = require('@sendgrid/mail')
+// const Sequelize = require('sequelize');
 // const Op = Sequelize.Op
 
 // Use nested route
@@ -16,6 +20,9 @@ agentsRouter.use('/:id/profile-pictures', agentsProfilePicturesRouter)
 
 const agentsPropertiesRouter = require('./agentsProperties')
 agentsRouter.use('/:id/properties', agentsPropertiesRouter)
+
+const agentLeadsRouter = require('./agentLeads')
+agentsRouter.use('/:id/leads', agentLeadsRouter)
 
 
 agentsRouter.get("/:id", verifyToken, (req, res) => {
@@ -26,12 +33,13 @@ agentsRouter.get("/:id", verifyToken, (req, res) => {
   Agent.findByPk(req.params.id, {
     include: [
       {
-        model: Property
+        model: Property,
+        where: {listing_active: true},
+        include: [{model: ListingView}, {model: PropertyPictures}]
       },
-      {
-        model: AgentProfilePicture,
-        attributes: ['location']
-      }
+      {model: AgentProfilePicture, attributes: ['location']},
+      {model: ListingView},
+      {model: AgentLead}
     ]
   })
         .then(agent => {

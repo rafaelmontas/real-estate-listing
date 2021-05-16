@@ -2,23 +2,28 @@ const express = require('express');
 const usersRouter = express.Router();
 const db =  require('../models');
 const User = db.user;
+const Like = db.like;
 const Property = db.property;
+const PropertyPictures = db.PropertyPictures;
 const Sequelize = require('sequelize');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Op = Sequelize.Op
 const verifyToken = require('../middleware/userAuth')
 
+// Use nested route
+const userLikesRouter =  require('./userLikes')
+usersRouter.use('/:id/likes', userLikesRouter)
 
 
 usersRouter.get("/:id", verifyToken, (req, res) => {
   // Verify that user requested is the same as the one requesting
-  console.log(`User requesting: ${req.user.id} for user: ${Number(req.params.id)}`)
-  if(req.user.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`User requesting: ${req.user.id} for user: ${req.params.id}`)
+  if(req.user.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
 
-  User.findByPk(req.params.id, {include: Property})
+  User.findByPk(req.params.id, {include: [{model: Property, include: [{model: PropertyPictures}]}]})
         .then(user => {
-          console.log(req.user, user.toJSON())
+          // console.log(req.user, user.toJSON())
           res.status(200).json(user)
         })
         .catch(err => {
@@ -32,7 +37,7 @@ usersRouter.get("/:id", verifyToken, (req, res) => {
 // @desc Register new users
 // @acces Public
 usersRouter.post("/", async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   const { name, email, password } = req.body
 
   // Simple validation - check if fields are empty
@@ -55,7 +60,7 @@ usersRouter.post("/", async (req, res) => {
     })
     // Create and assign token
     const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET, { expiresIn: '2d' })
-    console.log(user.toJSON())
+    // console.log(user.toJSON())
     res.status(201).json({ token, user: {id: user.id, name: user.name, email: user.email} })
   } catch(err) {
     console.log(err.errors[0].message)
@@ -68,11 +73,11 @@ usersRouter.post("/", async (req, res) => {
 // @acces Private
 usersRouter.put("/:id", verifyToken, async (req, res) => {
   const { name, email, phone_number, password, new_password } = req.body
-  console.log(req.params, req.body)
+  // console.log(req.params, req.body)
 
   // Verify that user trying to update is the same as the one updating
-  console.log(`User requesting update: ${req.user.id} for user: ${Number(req.params.id)}`)
-  if(req.user.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`User requesting update: ${req.user.id} for user: ${req.params.id}`)
+  if(req.user.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
   
   // Simple validation - check if fields are empty
   if(!email || !password) return res.status(400).json({msg: 'Ingresar Email y Contraseña'})
@@ -95,7 +100,7 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
       delete infoToUpdate.new_password
 
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
-      console.log(infoToUpdate)
+      // console.log(infoToUpdate)
 
       await User.update(infoToUpdate, {where: { id: user.id }})
 
@@ -114,7 +119,7 @@ usersRouter.put("/:id", verifyToken, async (req, res) => {
 
 
       Object.keys(infoToUpdate).forEach(key => infoToUpdate[key] == false && delete infoToUpdate[key])
-      console.log(infoToUpdate)
+      // console.log(infoToUpdate)
       
       await User.update(info, {where: { id: user.id }})
       
@@ -134,8 +139,8 @@ usersRouter.delete("/:id", verifyToken, async (req, res) => {
   // console.log(req.body, req.data)
   
   // Verify that the user to be deleted is the same as the one deleting
-  console.log(`User requesting delete: ${req.user.id} for user: ${Number(req.params.id)}`)
-  if(req.user.id !== Number(req.params.id)) return res.status(401).json({msg: 'Access Denied'});
+  console.log(`User requesting delete: ${req.user.id} for user: ${req.params.id}`)
+  if(req.user.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
 
   // Simple validation - check if password is empty
   // if(!password) return res.status(401).json({msg: 'Confirmar Contraseña'})

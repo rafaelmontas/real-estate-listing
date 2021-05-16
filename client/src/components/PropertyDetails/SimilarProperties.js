@@ -16,12 +16,16 @@ class SimilarProperties extends React.Component {
     return (
       <div className="similar-properties">
         <div className="similar-properties-container">
-          <h2>Propiedades Similares</h2>
+          <h2>Más Propiedades</h2>
           <div className="property-list">
             <PropertyList status={false}
+                          detailsPage={true}
                           properties={this.props.properties.slice(0, 4)}
                           onCardHovered={this.handleCardHover}
-                          onCardHoverOut={this.handleCardHoverOut}/>
+                          onCardHoverOut={this.handleCardHoverOut}
+                          onLike={this.props.onLike}
+                          onLikeDelete={this.props.onLikeDelete}
+                          userLikes={this.props.userLikes}/>
           </div>
         </div>
       </div>

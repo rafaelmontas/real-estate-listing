@@ -29,6 +29,8 @@ const agentAuthRouter = require('./routes/agentAuth');
 const listingsRouter = require('./routes/listings');
 const adminsRouter = require('./routes/admins');
 const adminAuthRouter = require('./routes/adminAuth');
+const agentsPublicRouter = require('./routes/agentsPublic');
+const searchesRouter = require('./routes/searches');
 
 // Middlewares
 app.use(Sentry.Handlers.requestHandler());
@@ -48,6 +50,8 @@ app.use("/agent-auth", agentAuthRouter)
 app.use("/api/listings", listingsRouter)
 app.use("/admins", adminsRouter)
 app.use("/admin-auth", adminAuthRouter)
+app.use("/api/agents", agentsPublicRouter)
+app.use("/api/searches", searchesRouter)
 
 // Error Handlers
 app.use(Sentry.Handlers.errorHandler());

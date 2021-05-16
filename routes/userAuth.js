@@ -12,7 +12,7 @@ const verifyToken = require('../middleware/userAuth')
 // @acces Public
 userAuthRouter.post("/", async (req, res) => {
   const { email, password } = req.body
-  console.log(req.body.email)
+  // console.log(req.body.email)
   // Check if email doesn't exist
   const user = await User.findOne({ where: { email } })
   if(!user) return res.status(400).json({msg: 'Email incorrecto'})
@@ -35,7 +35,7 @@ userAuthRouter.post("/", async (req, res) => {
 userAuthRouter.get("/user", verifyToken, (req, res) => {
   User.findByPk(req.user.id)
         .then(user => {
-          console.log(req.user)
+          // console.log(req.user)
           res.status(200).json({id: user.id, name: user.name, email: user.email})
         })
         .catch(err => {

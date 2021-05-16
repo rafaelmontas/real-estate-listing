@@ -16,7 +16,10 @@ class FavoritesList extends React.Component {
         <PropertyList status={false}
                       properties={this.props.properties}
                       onCardHovered={this.handleCardHover}
-                      onCardHoverOut={this.handleCardHoverOut}/>
+                      onCardHoverOut={this.handleCardHoverOut}
+                      onLike={this.props.onLike}
+                      onLikeDelete={this.props.onLikeDelete}
+                      userLikes={this.props.userLikes}/>
       </div>
     )
   }

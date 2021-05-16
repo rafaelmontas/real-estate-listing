@@ -20,6 +20,7 @@ import PropertyDetails from './PropertyDetails';
 import DefaultLoad from './DefaultLoad';
 import axios from 'axios';
 import smoothscroll from 'smoothscroll-polyfill';
+import {userContext} from './userContext';
 smoothscroll.polyfill();
 
 class MainSearch extends React.Component {
@@ -27,6 +28,7 @@ class MainSearch extends React.Component {
     super(props);
     this.state = {
       properties: [],
+      userLikes: [],
       isLoading: false,
       sideDrawerOpen: false,
       mapToggleOpen: false,
@@ -54,6 +56,8 @@ class MainSearch extends React.Component {
     this.backForwardSearch = this.backForwardSearch.bind(this);
     this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
     this.handleCloseMobileSearchClick = this.handleCloseMobileSearchClick.bind(this);
+    this.handleLike = this.handleLike.bind(this);
+    this.handleLikeDelete = this.handleLikeDelete.bind(this);
   }
 
   handleMarkerClick(id) {
@@ -98,15 +102,27 @@ class MainSearch extends React.Component {
               console.log(properties.data)
               this.setState({
                 properties: properties.data.properties,
-                listingCount: properties.data.count,
-                isLoading: false
+                listingCount: properties.data.count
               });
             })
-            .catch(err => {
-              console.log(err.response.data, err.response.status)
-              if(err.response.status === 500) {
-                this.props.history.replace('/error/500')
+            .then(() => {
+              if(this.context.isLoggedIn) return axios.get(`/users/${this.context.user.id}/likes`)
+            })
+            .then(res => {
+              if(this.context.isLoggedIn) {
+                this.setState({
+                  userLikes: res.data.likes,
+                  isLoading: false
+                })
+              } else {
+                this.setState({isLoading: false})
               }
+            })
+            .catch(err => {
+              console.log(err)
+              // if(err.response.status === 500) {
+              //   this.props.history.replace('/error/500')
+              // }
             })
     }, 2000)
     console.log(queryString.parse(this.props.location.search).sector, queryString.parse(this.props.location.search));
@@ -120,6 +136,16 @@ class MainSearch extends React.Component {
     if(this.props.loginStatus === true && prevProps.loginStatus === false && this.state.registerLoginOpen === true) {
       this.handleRegisterClose()
     }
+    if(this.props.loginStatus === true && prevProps.loginStatus === false) {
+      axios.get(`/users/${this.context.user.id}/likes`)
+      .then(res => {
+        this.setState({userLikes: res.data.likes})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    if(this.props.loginStatus === false && prevProps.loginStatus === true) this.setState({userLikes: []})
     // Handle Logout mobil
     if(this.props.loginStatus === false && prevProps.loginStatus === true && this.state.sideDrawerOpen === true) {
       this.setState({sideDrawerOpen: false})
@@ -220,11 +246,11 @@ class MainSearch extends React.Component {
     this.setState({mobileSearchOpen: false})
   }
   
-  searchProperties(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  searchProperties(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      axios.get(`/api/properties?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
           .then(properties => {
             console.log(properties);
             this.setState({ 
@@ -235,6 +261,9 @@ class MainSearch extends React.Component {
               cardHovered: 0
             })  
           })
+          .then(() => {
+            this.props.saveSearch(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType)
+          })
           .catch(err => {
             console.log(err.response.data, err.response.status)
             if(err.response.status === 500) {
@@ -244,14 +273,14 @@ class MainSearch extends React.Component {
     }, 2000)
     this.props.history.push({
       pathname: "/properties",
-      search: `?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
+      search: `?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
     })
     window.scrollTo(0, 0);
   }
-  backForwardSearch(sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+  backForwardSearch(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
     this.setState({ isLoading: true })
     this.timer = setTimeout(() => {
-      axios.get(`/api/properties?sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
+      axios.get(`/api/properties?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`)
           .then(properties => {
             console.log(properties);
             this.setState({ 
@@ -269,6 +298,43 @@ class MainSearch extends React.Component {
             }
           })
     }, 1000)
+  }
+
+  handleLike(listingId) {
+    if(this.context.isLoggedIn) {
+      const body = {
+        listing_id: listingId,
+        user_id: this.context.user.id
+      }
+      axios.post(`/users/${this.context.user.id}/likes`, body)
+      .then(res => {
+        console.log('liked', res.data.msg)
+        return axios.get(`/users/${this.context.user.id}/likes`)
+        // this.setState({liked: true})
+      })
+      .then(res => {
+        this.setState({userLikes: res.data.likes})
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    } else {
+      this.handleLoginClick()
+    }
+  }
+  handleLikeDelete(likeId) {
+    axios.delete(`/users/${this.context.user.id}/likes/${likeId}`)
+    .then(res => {
+      console.log(res.data.msg)
+      return axios.get(`/users/${this.context.user.id}/likes`)
+      // this.setState({liked: false})
+    })
+    .then(res => {
+      this.setState({userLikes: res.data.likes})
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   render() {
@@ -325,13 +391,17 @@ class MainSearch extends React.Component {
                                 initialPath={this.props.location.path}
                                 onFiltersClick={this.handleMoreFiltersClick}/>
                   <PropertyList properties={this.state.properties}
+                                province={queryString.parse(this.props.location.search).province}
                                 sector={queryString.parse(this.props.location.search).sector}
                                 status={this.state.isLoading}
                                 cardSelected={this.state.cardSelected}
                                 onCardHovered={this.handleCardHover}
                                 onCardHoverOut={this.handleCardHoverOut}
-                                listingCount={this.state.listingCount}/>
-                  {this.state.listingCount !== 0 ? <Pagination /> : null}
+                                listingCount={this.state.listingCount}
+                                onLike={this.handleLike}
+                                onLikeDelete={this.handleLikeDelete}
+                                userLikes={this.state.userLikes}/>
+                  {/* {this.state.listingCount !== 0 ? <Pagination /> : null} */}
                   <Footer />
                 </div>
                 <div id="map-column-right" className={this.state.mapToggleOpen ? "search-results-columns show" : "search-results-columns"}>
@@ -351,7 +421,24 @@ class MainSearch extends React.Component {
                 </div>
               </section>
             </Route>
-            <Route path={`${this.props.match.url}/:id`} exact component={PropertyDetails}/>
+            <Route path={`${this.props.match.url}/:id`} exact
+              render={props => (
+                <PropertyDetails {...props}
+                  onLike={this.handleLike}
+                  onLikeDelete={this.handleLikeDelete}
+                  userLikes={this.state.userLikes}
+                  onLead={this.handleLoginClick}
+                  // userId={this.context.isLoggedIn ? this.context.user.id : null}
+                  // userLikeId={this.props.userLikes.find(x => x.listing_id === property.id)}
+                  />
+              )}
+            />
+              {/* <PropertyDetails
+                onLike={this.handleLike}
+                onLikeDelete={this.handleLikeDelete}
+                userLikes={this.state.userLikes}
+                /> */}
+            
             {/* <AnimatedRoute path="/properties/:id" component={PropertyDetails}
             atEnter={{ offset: -100 }}
             atLeave={{ offset: -100 }}
@@ -370,4 +457,5 @@ MainSearch.propTypes = {
   match: PropTypes.object.isRequired
 }
 
+MainSearch.contextType = userContext;
 export default MainSearch;

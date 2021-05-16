@@ -11,7 +11,7 @@ class SideDrawer extends React.Component {
     super(props);
     
     this.onFavClick = this.onFavClick.bind(this)
-    this.onNewClick = this.onNewClick.bind(this)
+    // this.onNewClick = this.onNewClick.bind(this)
     this.onMyPropertiesClick = this.onMyPropertiesClick.bind(this)
     this.onLogOutclick = this.onLogOutclick.bind(this)
   }
@@ -25,15 +25,15 @@ class SideDrawer extends React.Component {
       this.props.onLoginClick()
     }
   }
-  onNewClick(e) {
-    e.preventDefault()
-    if(this.context.isLoggedIn) {
-      this.props.history.push({pathname: '/my-hauzzy/new-listing'})
-    } else {
-      this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
-      this.props.onLoginClick()
-    }
-  }
+  // onNewClick(e) {
+  //   e.preventDefault()
+  //   if(this.context.isLoggedIn) {
+  //     this.props.history.push({pathname: '/my-hauzzy/new-listing'})
+  //   } else {
+  //     this.props.history.push({state: {referer: '/my-hauzzy/new-listing'}})
+  //     this.props.onLoginClick()
+  //   }
+  // }
   onMyPropertiesClick(e) {
     e.preventDefault()
     if(this.context.isLoggedIn) {
@@ -115,21 +115,21 @@ class SideDrawer extends React.Component {
               </div>
             </li> */}
             <li className="separator"></li>
-            <li className="manage-property-button button">
+            {/* <li className="manage-property-button button">
               <Link to="/my-hauzzy/listings" onClick={this.onMyPropertiesClick}>
                 <div>
                   <i className="far fa-building"></i>
                   <span>Mis propiedades</span>
                 </div>
               </Link>
-            </li>
+            </li> */}
             <li className="post-property-button button">
-              <Link to="/my-hauzzy/new-listing" onClick={this.onNewClick}>
+              <a href="https://agent.hauzzy.com/account/new-listing" target="_blank">
                 <div>
                   <i className="fas fa-plus"></i>
                   <span>Públicar Propiedad</span>
                 </div>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
