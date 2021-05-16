@@ -133,6 +133,7 @@
     width: 500px;
     /* before was 150px */
     height: calc(100% - 200px); 
+    max-height: 400px;
     left: 50%;
     right: 50%;
     top: 50%;
