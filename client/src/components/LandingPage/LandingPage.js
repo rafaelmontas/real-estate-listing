@@ -13,6 +13,7 @@ import 'animate.css';
 import gtag, { gaInit } from '../../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
 import publicIp from "public-ip";
+import {Link} from 'react-router-dom';
 
 class LandingPage extends React.Component {
 
@@ -52,7 +53,7 @@ class LandingPage extends React.Component {
             <div className="left-info">
               <h1>Ya puedes comenzar a utilizar la plataforma</h1>
               <p>Registrate para comenzar a publicar tus propiedades y posicionarlas entre las primeras disponibles.</p>
-              <a href="http://agent.hauzzy.com/signup" className="landing-button">Comienza a publicar!</a>
+              <Link to="/signup" className="landing-button">Comienza a publicar!</Link>
             </div>
             <div className="right-info">
               <img src={rightDashboard} alt="promotion of map based property search"/>

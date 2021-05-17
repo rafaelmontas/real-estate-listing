@@ -12,6 +12,7 @@ import AgentResetPassword from './AgentResetPassword'
 import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
 import InternalServerError500 from '../ErrorPages/InternalServerError500';
+import LandingPage from '../LandingPage/LandingPage';
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -36,9 +37,9 @@ class AgentsApp extends React.Component {
     // Add background color to doby
     document.body.classList.toggle("background")
     // Redirect
-    if(this.props.location.pathname === '/') {
-      this.props.history.replace({pathname: '/account/dashboard'})
-    }
+    // if(this.props.location.pathname === '/') {
+    //   this.props.history.replace({pathname: '/account/dashboard'})
+    // }
     // Init hotjar
     if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
   }
@@ -58,7 +59,9 @@ class AgentsApp extends React.Component {
             agentLoading: false
           })
           if(!this.props.location.pathname.includes('/account') && this.props.location.pathname !== '/error/500') {
-            this.props.history.push('/account/dashboard')
+            if(this.props.location.pathname !== '/') {
+              this.props.history.push('/account/dashboard')
+            }
           }
         })
         .catch(err => {
@@ -92,6 +95,7 @@ class AgentsApp extends React.Component {
     return (
       <agentContext.Provider value={value}>
         <Switch>
+          <Route path="/" exact component={LandingPage} />
           <PrivateAccount path="/account" component={Account}/>
           <Route path="/signup" exact component={AgentSignUp}/>
           <Route path="/login" exact component={AgentLogin}/>

@@ -1,5 +1,4 @@
 import React from 'react';
-import LandingPage from './LandingPage/LandingPage';
 import Home from './Home';
 import MainSearch from './MainSearch';
 import MyHauzzy from './MyHauzzy/MyHauzzy';
@@ -140,7 +139,7 @@ class App extends React.Component {
         {/* history={history} */}
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={LandingPage} />
+            <Route path="/" exact component={Home} />
             <Route path="/properties" render={(props) => !this.state.userLoading && <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>

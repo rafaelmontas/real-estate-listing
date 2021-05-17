@@ -1,6 +1,7 @@
 import React from 'react';
 import './LandingForm.css';
 import gtag from '../../utils/GaUtils';
+import { Link } from 'react-router-dom';
 
 class LandingForm extends React.Component {
   
@@ -20,12 +21,12 @@ class LandingForm extends React.Component {
   render() {
     return (
       <div className="signup-login-buttons">
-        <a href="http://agent.myhauzzy.com:3000/signup"
+        <Link to="/signup"
             className="signup-button"
-            onClick={this.handleSignupClick}>Registrate</a>
-        <a href="http://agent.myhauzzy.com:3000/login"
+            onClick={this.handleSignupClick}>Registrate</Link>
+        <Link to="/login"
             className="login-button"
-            onClick={this.handleLoginClick}>Iniciar Sesión</a>
+            onClick={this.handleLoginClick}>Iniciar Sesión</Link>
       </div>
     )
   }
