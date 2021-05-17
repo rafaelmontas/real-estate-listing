@@ -11,7 +11,7 @@ class CardSkeleton extends React.Component {
           <a href="/">
             <div className="property-card-media">
               <div className="photo-container">
-                <Skeleton height={150} duration={1}/>
+                <Skeleton height={150} width={'100%'} duration={1}/>
               </div>
             </div>
             <div className="property-card-info" style={{paddingLeft: '0'}}>

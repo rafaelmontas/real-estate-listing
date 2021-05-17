@@ -510,6 +510,9 @@ a {
   position: relative;
   border-radius: 4px 4px 0 0;
 }
+.search-results-list-grid .home-card-container .home-card .property-card-media .photo-container > span {
+  width: 100%
+}
 .search-results-list-grid .home-card-container .home-card .property-card-media .photo-container img {
   object-fit: cover;
   width: 100%;
