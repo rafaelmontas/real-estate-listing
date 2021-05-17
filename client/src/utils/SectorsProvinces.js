@@ -438,6 +438,20 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santiago',
+    sector: 'Los Cerros de Gurabo',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 11,
+    centerLocation: {
+      lat: 19.455521,
+      lng: -70.682932
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Distrito Nacional',
     sector: 'Julieta Morales',
     type: 'sector',
