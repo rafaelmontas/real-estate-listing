@@ -35,6 +35,7 @@ agentsRouter.get("/:id", verifyToken, (req, res) => {
       {
         model: Property,
         where: {listing_active: true},
+        required: false,
         include: [{model: ListingView}, {model: PropertyPictures}]
       },
       {model: AgentProfilePicture, attributes: ['location']},
