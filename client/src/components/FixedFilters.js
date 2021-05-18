@@ -49,7 +49,7 @@ class FixedFilters extends React.Component {
   }
 
   componentDidMount() {
-    if (Object.entries(this.props.initialState).length > 0) {
+    if (Object.entries(this.props.initialState).length > 0 && !this.props.initialState['utm'] === 'undefined') {
       const propertyTypesArray = this.props.initialState.property_type.split(",")
       console.log(propertyTypesArray.includes("villa"))
       this.setState({
@@ -72,7 +72,7 @@ class FixedFilters extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if(this.props.initialState !== prevProps.initialState && this.props.initialPath === prevProps.initialPath) {
-      if (Object.entries(this.props.initialState).length > 0) {
+      if (Object.entries(this.props.initialState).length > 0 && !this.props.initialState['utm'] === 'undefined') {
         const propertyTypesArray = this.props.initialState.property_type.split(",")
         console.log(propertyTypesArray.includes("Villa"))
         this.setState({
