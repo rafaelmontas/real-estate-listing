@@ -29,7 +29,8 @@ function isEmpty(obj) {
   return true;
 }
 propertiesRouter.get("/", (req, res) => {
-  if(isEmpty(req.query) || req.query.utm) {
+  console.log(req.query)
+  if(isEmpty(req.query) || req.query.utm_source) {
     Property.findAndCountAll({
       where: {listing_active: true, listing_type: 'sale'},
       include: [{model: PropertyPictures, attributes: ['location']}],

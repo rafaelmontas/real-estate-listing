@@ -452,6 +452,20 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santo Domingo Norte',
+    sector: 'Ciudad Modelo',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 18.553649,
+      lng: -69.915498
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Distrito Nacional',
     sector: 'Julieta Morales',
     type: 'sector',
