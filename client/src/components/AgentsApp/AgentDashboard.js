@@ -61,10 +61,7 @@ class AgentDashboard extends React.Component {
       })
     }
     // Init Facebook Pixel
-    if(await publicIp.v4() === '186.150.167.185' && process.env.NODE_ENV === 'production') {
-      console.log('Internal IP')
-      return null
-    } else if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV === 'production') {
       ReactPixel.init('689804211678157')
     } else {
       ReactPixel.init('587601035409958')

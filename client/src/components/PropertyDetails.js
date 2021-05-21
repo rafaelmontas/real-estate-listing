@@ -125,6 +125,11 @@ class PropertyDetails extends React.Component {
       gtag('config', 'G-D570FDN0FX', configBody)
     }
     // Send Page View FB
+    if(process.env.NODE_ENV === 'production') {
+      ReactPixel.init('824704561474532')
+    } else {
+      ReactPixel.init('248636197019006')
+    }
     ReactPixel.pageView(); // For tracking page view
   }
   componentDidUpdate(prevProps, prevState) {

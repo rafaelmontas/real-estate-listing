@@ -13,6 +13,7 @@ import { hotjar } from 'react-hotjar';
 import publicIp from "public-ip";
 import InternalServerError500 from '../ErrorPages/InternalServerError500';
 import LandingPage from '../LandingPage/LandingPage';
+import ReactPixel from 'react-facebook-pixel';
 import './AgentsApp.css'
 
 class AgentsApp extends React.Component {
@@ -42,6 +43,12 @@ class AgentsApp extends React.Component {
     // }
     // Init hotjar
     if(await publicIp.v4() !== '186.150.167.185' && process.env.NODE_ENV === 'production') return hotjar.initialize(2147929, 6)
+    // Init Facebook Pixel
+    if(process.env.NODE_ENV === 'production') {
+      ReactPixel.init('689804211678157')
+    } else {
+      ReactPixel.init('587601035409958')
+    }
   }
 
   getAgent() {
