@@ -16,6 +16,7 @@ import publicIp from "public-ip";
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 import { v4 as uuidv4 } from 'uuid';
+import gtag, { gaInit } from '../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
 // const history = createBrowserHistory();
 
@@ -119,6 +120,11 @@ class App extends React.Component {
       axios.post("/api/searches", body)
       .then(res => {
         console.log("Search Saved!", res.status)
+        gtag('event', 'search', {
+          event_category: 'engagement',
+          event_label: 'User Search'
+        })
+        ReactPixel.track('Search')
       })
       .catch(err => {
         console.log(err)
