@@ -38,6 +38,28 @@ class Register extends React.Component {
             ReactPixel.track('CompleteRegistration')
             this.context.getUser()
           })
+          .then(() => {
+            let listId;
+            let apiKey;
+            if(process.env.NODE_ENV === 'production') {
+              listId = process.env.REACT_APP_SENDGRID_REGISTERED_USERS_LIST_ID;
+              apiKey = process.env.REACT_APP_SENDGRID_PROD_API_KEY
+            } else {
+              listId = process.env.REACT_APP_SENDGRID_TEST_LIST_ID;
+              apiKey = process.env.REACT_APP_SENDGRID_DEV_API_KEY
+            }
+            const body = {
+              list_ids: [`${listId}`],
+              contacts: [{email: this.state.email, custom_fields: {"e1_T": this.state.name}}]
+            }
+            const config = {
+              headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+              }
+            }
+            return axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
+          })
           .catch(err => {
             console.log(err.response.data, err.response.status)
             this.setState({errorMsg: err.response.data.msg})
