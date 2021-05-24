@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Op = Sequelize.Op
 const verifyToken = require('../middleware/userAuth')
+const sgMail = require('@sendgrid/mail')
 
 // Use nested route
 const userLikesRouter =  require('./userLikes')
@@ -51,6 +52,15 @@ usersRouter.post("/", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  // Email settings
+  let sgKey;
+  if(process.env.NODE_ENV === 'production') {
+    sgKey = process.env.SENDGRID_PROD_EMAIL_API_KEY
+  } else {
+    sgKey = process.env.SENDGRID_DEV_EMAIL_API_KEY
+  }
+  sgMail.setApiKey(sgKey)
+  
   // Create User
   try {
     const user = await User.create({
@@ -58,6 +68,21 @@ usersRouter.post("/", async (req, res) => {
       email,
       password: hashedPassword
     })
+    const msg = {
+      from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
+      reply_to: 'noreply@hauzzy.com',
+      template_id: 'd-42dcb000fcb840379be1f5e5df8f9191',
+      personalizations: [
+        {
+          to: [{email: user.email}],
+          dynamic_template_data: {
+            name: user.name,
+            link: `https://www.hauzzy.com/properties`
+          }
+        }
+      ]
+    }
+    await sgMail.send(msg)
     // Create and assign token
     const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET, { expiresIn: '2d' })
     // console.log(user.toJSON())
