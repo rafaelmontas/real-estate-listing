@@ -466,6 +466,34 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santo Domingo Este',
+    sector: 'Prado Oriental',
+    type: 'sector',
+    provinceShort: 'SD Este',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.492443,
+      lng: -69.784075
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santiago',
+    sector: 'Villa Maria',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.492443,
+      lng: -69.784075
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Distrito Nacional',
     sector: 'Julieta Morales',
     type: 'sector',
