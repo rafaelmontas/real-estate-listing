@@ -486,8 +486,8 @@ export const sectorsProvinces = [
     provinceShort: 'Stgo',
     zoomLevel: 15,
     centerLocation: {
-      lat: 18.492443,
-      lng: -69.784075
+      lat: 19.442563,
+      lng: -70.658714
     },
     paths: [
       // { lat: 18.481701, lng: -69.954813 },
