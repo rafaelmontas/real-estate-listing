@@ -145,6 +145,8 @@ class MainSearch extends React.Component {
     if(process.env.NODE_ENV === 'production') {
       gaInit('G-7TW72RB4M9', initBody)
       gtag('config', 'G-7TW72RB4M9', configBody)
+      gtag('config', 'AW-458168758');
+      gtag('event', 'conversion', {'send_to': 'AW-458168758/gblpCNSM_KUCELazvNoB'});
     } else {
       gaInit('G-D570FDN0FX', initBody)
       gtag('config', 'G-D570FDN0FX', configBody)
