@@ -173,6 +173,38 @@ export const sectorsProvinces = [
   },
   {
     province: 'Distrito Nacional',
+    sector: 'La Esperilla',
+    type: 'sector',
+    provinceShort: 'DN',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.469750,
+      lng: -69.920149
+    },
+    paths: [
+      { lat: 18.465517, lng: -69.930191 },
+      { lat: 18.462993, lng: -69.928786 },
+      { lat: 18.463237, lng: -69.927466 },
+      { lat: 18.463950, lng: -69.924795 },
+      { lat: 18.465395, lng: -69.918658 },
+      { lat: 18.466178, lng: -69.915203 },
+      { lat: 18.467257, lng: -69.911116 },
+      { lat: 18.476110, lng: -69.913476 },
+      { lat: 18.475927, lng: -69.914828 },
+      { lat: 18.475154, lng: -69.916104 },
+      { lat: 18.472640, lng: -69.919312 },
+      { lat: 18.473129, lng: -69.919709 },
+      { lat: 18.474563, lng: -69.920171 },
+      { lat: 18.471470, lng: -69.923818 },
+      { lat: 18.470900, lng: -69.924248 },
+      { lat: 18.470758, lng: -69.924484 },
+      { lat: 18.470666, lng: -69.924773 },
+      { lat: 18.468956, lng: -69.923636 },
+      { lat: 18.465629, lng: -69.930127 },
+    ]
+  },
+  {
+    province: 'Distrito Nacional',
     sector: 'Los Cacicazgos',
     type: 'sector',
     provinceShort: 'DN',
@@ -358,10 +390,24 @@ export const sectorsProvinces = [
     sector: 'Sosúa',
     type: 'sector',
     provinceShort: 'Pto. Plata',
-    zoomLevel: 14,
+    zoomLevel: 13,
     centerLocation: {
       lat: 19.767466,
       lng: -70.498582
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'La Romana',
+    sector: 'Casa De Campo',
+    type: 'sector',
+    provinceShort: 'LR',
+    zoomLevel: 14,
+    centerLocation: {
+      lat: 18.413218,
+      lng: -68.916256
     },
     paths: [
       // { lat: 18.481701, lng: -69.954813 },
@@ -382,19 +428,19 @@ export const sectorsProvinces = [
     ]
   },
   {
-    province: 'La Romana',
-    sector: 'Casa De Campo',
+    province: 'Distrito Nacional',
+    sector: 'Los Ríos',
     type: 'sector',
-    provinceShort: 'LR',
-    zoomLevel: 14,
+    provinceShort: 'DN',
+    zoomLevel: 15,
     centerLocation: {
-      lat: 18.413218,
-      lng: -68.916256
+      lat: 18.491713,
+      lng: -69.967312
     },
     paths: [
       // { lat: 18.481701, lng: -69.954813 },
     ]
-  },
+  }, 
   {
     province: 'La Romana',
     sector: 'La Romana',
@@ -494,6 +540,48 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santiago',
+    sector: 'Jardines Del Norte',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 19.487299,
+      lng: -70.688949
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santiago',
+    sector: 'La Trinitaria',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 19.457081,
+      lng: -70.691532
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Samaná',
+    sector: 'Las Terrenas',
+    type: 'sector',
+    provinceShort: 'Samaná',
+    zoomLevel: 13,
+    centerLocation: {
+      lat: 19.299547,
+      lng: -69.554977
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Distrito Nacional',
     sector: 'Julieta Morales',
     type: 'sector',
@@ -574,38 +662,6 @@ export const sectorsProvinces = [
       { lat: 18.481711, lng: -69.954788 },
       { lat: 18.480907, lng: -69.957921 },
       { lat: 18.480032, lng: -69.962363 },
-    ]
-  },
-  {
-    province: 'Distrito Nacional',
-    sector: 'La Esperilla',
-    type: 'sector',
-    provinceShort: 'DN',
-    zoomLevel: 15,
-    centerLocation: {
-      lat: 18.469750,
-      lng: -69.920149
-    },
-    paths: [
-      { lat: 18.465517, lng: -69.930191 },
-      { lat: 18.462993, lng: -69.928786 },
-      { lat: 18.463237, lng: -69.927466 },
-      { lat: 18.463950, lng: -69.924795 },
-      { lat: 18.465395, lng: -69.918658 },
-      { lat: 18.466178, lng: -69.915203 },
-      { lat: 18.467257, lng: -69.911116 },
-      { lat: 18.476110, lng: -69.913476 },
-      { lat: 18.475927, lng: -69.914828 },
-      { lat: 18.475154, lng: -69.916104 },
-      { lat: 18.472640, lng: -69.919312 },
-      { lat: 18.473129, lng: -69.919709 },
-      { lat: 18.474563, lng: -69.920171 },
-      { lat: 18.471470, lng: -69.923818 },
-      { lat: 18.470900, lng: -69.924248 },
-      { lat: 18.470758, lng: -69.924484 },
-      { lat: 18.470666, lng: -69.924773 },
-      { lat: 18.468956, lng: -69.923636 },
-      { lat: 18.465629, lng: -69.930127 },
     ]
   },
   {
