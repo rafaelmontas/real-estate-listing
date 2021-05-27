@@ -20,6 +20,33 @@ class BasicInfo extends React.Component {
         <div className="property-address listing-container">
           <h3>Ubicación de la Propiedad</h3>
           {/* <span>Especificar dirección con número (#)</span> */}
+          <div className="location-info">
+            <div className="listing-options">
+              <label for="prov-input">Provincia</label>
+              <div className="prov-option">
+                <input id="prov-input"
+                      type="text"
+                      // pattern="[0-9]+"
+                      onChange={this.props.handleChange('propertyProvince')}
+                      value={this.props.propertyProvince}
+                      />
+                {/* <label htmlFor="mts-input">Mts2</label> */}
+              </div>
+            </div>
+            <div className="listing-options">
+              <label for="sect-input">Sector</label>
+              <div className="sect-option">
+                <input id="sect-input"
+                      type="text"
+                      // pattern="[0-9]+"
+                      onChange={this.props.handleChange('propertySector')}
+                      value={this.props.propertySector}
+                      />
+                {/* <label htmlFor="mts-input">Mts2</label> */}
+              </div>
+            </div>
+          </div>
+          <label for="searchInpt">Dirección</label>
           <PlacesAutocomplete 
             value={this.props.propertyAddress}
             onChange={this.props.handleAddressChange}
@@ -29,7 +56,8 @@ class BasicInfo extends React.Component {
                 <div>
                   <input {...getInputProps({
                     placeholder: 'Dirección de la propiedad ...',
-                    className: 'address-search-input'
+                    className: 'address-search-input',
+                    id: 'searchInpt'
                     })}/>
                   <div className="autocomplete-dropdown-container">
                     {loading && <div>Cargando...</div>}
