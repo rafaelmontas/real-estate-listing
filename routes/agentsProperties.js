@@ -26,20 +26,27 @@ agentsPropertiesRouter.get('/:propertyId', async (req, res) => {
   try {
     const listing = await Property.findOne({
       where: {id: req.params.propertyId, agent_id: req.params.id},
-      include: [{model: PropertyAmenities}, {model: PropertyPictures, attributes: ['id', 'location', 'original_name']}]
+      attributes: {include: [[db.sequelize.fn('COUNT', db.sequelize.col('ListingViews.id')), 'n_views']]},
+      include: [
+        {model: PropertyAmenities},
+        {model: PropertyPictures, attributes: ['id', 'location', 'original_name']},
+        {model: ListingView, attributes: []}
+      ],
+      group: ['property.id', 'PropertyAmenity.id', 'PropertyPictures.id']
     })
     console.log(listing.toJSON())
     res.status(200).json({listing: listing, msg: 'agent property'})
   } catch(err) {
+    // console.log(err)
     res.status(400).json('There was an error.')
   }
 })
 
 agentsPropertiesRouter.post('/', async (req, res) => {
   console.log(req.body)
-  const { listing_address, property_type, listing_type, bedrooms, bathrooms, parking_spaces, square_meters, listing_price, agent_id } = req.body
+  const { province, sector, listing_address, property_type, listing_type, bedrooms, bathrooms, parking_spaces, square_meters, listing_price, agent_id } = req.body
   // Check if fields are empty
-  if(!listing_address || !property_type || !listing_type || !bedrooms || !bathrooms || !parking_spaces || !square_meters || !listing_price || !agent_id) {
+  if(!province || !sector || !listing_address || !property_type || !listing_type || !bedrooms || !bathrooms || !parking_spaces || !square_meters || !listing_price || !agent_id) {
     return res.status(400).json({msg: 'Favor seleccionar todos los campos obligatorios.'})
   }
 

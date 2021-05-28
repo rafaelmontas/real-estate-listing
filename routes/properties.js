@@ -34,7 +34,8 @@ propertiesRouter.get("/", (req, res) => {
     Property.findAndCountAll({
       where: {listing_active: true, listing_type: 'sale'},
       include: [{model: PropertyPictures, attributes: ['location']}],
-      distinct: true
+      distinct: true,
+      order: [['createdAt', 'DESC']]
     }).then(properties => {
       res.status(200).json({properties: properties.rows, count: properties.count});
     }).catch(err => {
@@ -121,7 +122,8 @@ propertiesRouter.get("/", (req, res) => {
         }
       },
       include: [{model: PropertyPictures, attributes: ['location']}],
-      distinct: true
+      distinct: true,
+      order: [['createdAt', 'DESC']]
     }).then(properties => {
       res.status(200).json({properties: properties.rows, count: properties.count});
       console.log(req.params, req.query)

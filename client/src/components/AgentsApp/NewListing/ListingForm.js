@@ -27,6 +27,8 @@ class ListingForm extends React.Component {
       status: null,
       activeStep: 0,
       // Step 0
+      propertyProvince: '',
+      propertySector: '',
       propertyAddress: '',
       lat: null,
       lng: null,
@@ -134,7 +136,7 @@ class ListingForm extends React.Component {
   renderNextButton() {
     switch(this.state.activeStep) {
       case 0:
-        if(this.state.propertyAddress && this.state.propertyType && this.state.listingType) {
+        if(this.state.propertyProvince && this.state.propertySector && this.state.propertyAddress && this.state.propertyType && this.state.listingType) {
           return (
             <Button variant="contained" color="primary" onClick={this.nextStep}>
               Siguiente
@@ -240,6 +242,8 @@ class ListingForm extends React.Component {
     this.setState({submitLoading: true})
     // console.log('submitted')
     const body = {
+      province: this.state.propertyProvince,
+      sector: this.state.propertySector,
       listing_address: this.state.propertyAddress,
       lat: this.state.lat,
       lng: this.state.lng,
@@ -290,6 +294,8 @@ class ListingForm extends React.Component {
                   handleChange={this.handleChange}
                   handleAddressChange={this.handleAddressChange}
                   handleSelect={this.handleAddressSelect}
+                  propertyProvince={this.state.propertyProvince}
+                  propertySector={this.state.propertySector}
                   propertyAddress={this.state.propertyAddress}
                   propertyType={this.state.propertyType}
                   listingType={this.state.listingType}/>

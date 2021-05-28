@@ -352,7 +352,7 @@ class ReportEditListing extends React.Component {
               <div className="performance-preview">
                 <div className="performance">
                   <span>Visitas<i className="far fa-eye"></i></span>
-                  <span>0</span>
+                  <span>{this.state.listing.n_views}</span>
                 </div>
                 <div className="preview">
                   <span>Estatus: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
@@ -365,6 +365,8 @@ class ReportEditListing extends React.Component {
             {!this.state.isLoading && <ListingEditForm
                                             listing={this.state.listing}
                                             isLoading={this.state.isLoading}
+                                            listingProvince={this.state.listing.province}
+                                            listingSector={this.state.listing.sector}
                                             listingAddress={this.state.listing.listing_address}
                                             handleAddressChange={this.handleAddressChange}
                                             handleAddressSelect={this.handleAddressSelect}
