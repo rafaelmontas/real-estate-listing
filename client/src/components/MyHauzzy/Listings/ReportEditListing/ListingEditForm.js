@@ -51,7 +51,29 @@ class ListingEditForm extends React.Component {
         <form className="listing-edit-section" onSubmit={this.props.onUpdate}>
           <div className="property-address listing-container">
             <h3>Ubicación de la Propiedad</h3>
-            <span>Especificar dirección con número (#)</span>
+            <div className="location-info">
+              <div className="listing-options">
+                <label for="prov-input">Provincia</label>
+                <div className="prov-option">
+                  <input id="prov-input"
+                        type="text"
+                        onChange={this.props.handleChange('province')}
+                        value={this.props.listingProvince}
+                        />
+                </div>
+              </div>
+              <div className="listing-options">
+                <label for="sect-input">Sector</label>
+                <div className="sect-option">
+                  <input id="sect-input"
+                        type="text"
+                        onChange={this.props.handleChange('sector')}
+                        value={this.props.listingSector}
+                        />
+                </div>
+              </div>
+            </div>
+            <label for="searchInpt">Dirección</label>
             <PlacesAutocomplete 
               value={this.props.listingAddress}
               onChange={this.props.handleAddressChange}
@@ -61,7 +83,8 @@ class ListingEditForm extends React.Component {
                   <div>
                     <input {...getInputProps({
                       placeholder: 'Dirección de la propiedad ...',
-                      className: 'address-search-input'
+                      className: 'address-search-input',
+                      id: 'searchInpt'
                       })}/>
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Cargando...</div>}

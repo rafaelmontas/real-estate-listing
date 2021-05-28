@@ -365,6 +365,8 @@ class ReportEditListing extends React.Component {
             {!this.state.isLoading && <ListingEditForm
                                             listing={this.state.listing}
                                             isLoading={this.state.isLoading}
+                                            listingProvince={this.state.listing.province}
+                                            listingSector={this.state.listing.sector}
                                             listingAddress={this.state.listing.listing_address}
                                             handleAddressChange={this.handleAddressChange}
                                             handleAddressSelect={this.handleAddressSelect}

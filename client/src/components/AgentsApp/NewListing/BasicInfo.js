@@ -19,18 +19,15 @@ class BasicInfo extends React.Component {
         <p>Si tienes alguna duda o inconveniente, solo tienes que escribirnos por el chat.</p>
         <div className="property-address listing-container">
           <h3>Ubicación de la Propiedad</h3>
-          {/* <span>Especificar dirección con número (#)</span> */}
           <div className="location-info">
             <div className="listing-options">
               <label for="prov-input">Provincia</label>
               <div className="prov-option">
                 <input id="prov-input"
                       type="text"
-                      // pattern="[0-9]+"
                       onChange={this.props.handleChange('propertyProvince')}
                       value={this.props.propertyProvince}
                       />
-                {/* <label htmlFor="mts-input">Mts2</label> */}
               </div>
             </div>
             <div className="listing-options">
@@ -38,11 +35,9 @@ class BasicInfo extends React.Component {
               <div className="sect-option">
                 <input id="sect-input"
                       type="text"
-                      // pattern="[0-9]+"
                       onChange={this.props.handleChange('propertySector')}
                       value={this.props.propertySector}
                       />
-                {/* <label htmlFor="mts-input">Mts2</label> */}
               </div>
             </div>
           </div>
