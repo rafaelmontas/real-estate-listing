@@ -414,6 +414,20 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Puerto Plata',
+    sector: 'Playa Dorada',
+    type: 'sector',
+    provinceShort: 'Pto. Plata',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 19.768359,
+      lng: -70.643222
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'San Pedro De Macorís',
     sector: 'Guayacanes',
     type: 'sector',
@@ -512,6 +526,20 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santo Domingo Norte',
+    sector: 'El Edén',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.536371,
+      lng: -69.894965
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Santo Domingo Este',
     sector: 'Prado Oriental',
     type: 'sector',
@@ -520,6 +548,34 @@ export const sectorsProvinces = [
     centerLocation: {
       lat: 18.492443,
       lng: -69.784075
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Este',
+    sector: 'Autopista San Isidro',
+    type: 'sector',
+    provinceShort: 'SD Este',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.489605,
+      lng: -69.824266
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Este',
+    sector: 'Juan López',
+    type: 'sector',
+    provinceShort: 'SD Este',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.488533,
+      lng: -69.813027
     },
     paths: [
       // { lat: 18.481701, lng: -69.954813 },
@@ -562,6 +618,34 @@ export const sectorsProvinces = [
     centerLocation: {
       lat: 19.457081,
       lng: -70.691532
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santiago',
+    sector: 'La Esmeralda',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 16,
+    centerLocation: {
+      lat: 19.457542,
+      lng: -70.681811
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santiago',
+    sector: 'Llanos de Gurabo',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 19.475726,
+      lng: -70.656735
     },
     paths: [
       // { lat: 18.481701, lng: -69.954813 },
