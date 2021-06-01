@@ -16,11 +16,11 @@
   display: inline-block;
   margin-left: 5px;
 }
-.agent-info .agent-text .properties-listed {
+/* .agent-info .agent-text .properties-listed {
   color: #3838fd;
   text-decoration: underline;
   cursor: pointer;
-}
+} */
 .agent-section-skeleton span span {
   border-radius: 0;
 }
