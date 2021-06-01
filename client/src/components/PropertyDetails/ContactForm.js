@@ -61,7 +61,8 @@ class ContactForm extends React.Component {
       const body = {
         user_id: this.props.userInfo.user.id,
         agent_id: this.props.agentInfo.id,
-        listing_id: this.props.listing_id
+        listing_id: this.props.listing_id,
+        initial_request: this.state.userText
       }
       axios.post(`/agents/${this.props.agentInfo.id}/leads`, body)
       .then(res => {
