@@ -384,7 +384,14 @@ class MainSearch extends React.Component {
     
     let mapPropertyCard;
     if(window.innerWidth <= 770 && this.state.cardSelected) {
-      mapPropertyCard = <MapPropertyCard properties={this.state.properties} identifier={this.state.cardSelected}/>
+      mapPropertyCard = <MapPropertyCard
+                          property={this.state.properties.filter(property => property.id === this.state.cardSelected)[0]}
+                          onLike={this.handleLike}
+                          onLikeDelete={this.handleLikeDelete}
+                          userLike={this.state.userLikes.findIndex(x => x.listing_id === this.state.cardSelected)}
+                          userLikeId={this.state.userLikes.find(x => x.listing_id === this.state.cardSelected)}
+                          // identifier={this.state.cardSelected}
+                          />
     }
 
     let mapsApiKey;
