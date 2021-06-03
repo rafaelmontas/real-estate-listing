@@ -442,7 +442,7 @@ class MainSearch extends React.Component {
                     {/* <FilterToggle /> */}
                   </div>
                   <div id="map-div">
-                    <MainMap properties={this.state.properties}
+                    <MainMap properties={this.state.properties.filter(property => property.active_location === true)}
                                 onMarkerClick={this.handleMarkerClick}
                                 onMapClick={this.handleMapClick} 
                                 cardHovered={this.state.cardHovered}
