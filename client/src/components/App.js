@@ -18,6 +18,8 @@ import { withCookies, Cookies } from 'react-cookie';
 import { v4 as uuidv4 } from 'uuid';
 import gtag, { gaInit } from '../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
+import UserForgotPassword from './Auth/UserForgotPassword';
+import UserResetPassword from './Auth/UserResetPassword';
 // const history = createBrowserHistory();
 
 
@@ -150,6 +152,8 @@ class App extends React.Component {
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>
             <Route path="/privacy-policy" exact component={PrivacyPolicy}/>
+            <Route path="/forgot-password" exact component={UserForgotPassword}/>
+            <Route path="/reset-password/:token" exact component={UserResetPassword}/>
             <Route path="/error/500" component={InternalServerError500}/>
             <Route component={pageNotFound404}/>
           </Switch>
