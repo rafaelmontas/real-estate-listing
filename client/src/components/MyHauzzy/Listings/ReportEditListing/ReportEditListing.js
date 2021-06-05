@@ -31,6 +31,7 @@ class ReportEditListing extends React.Component {
     }
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
+    this.handleHideAddress = this.handleHideAddress.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleBedroomChange = this.handleBedroomChange.bind(this)
     this.handleBathroomChange = this.handleBathroomChange.bind(this)
@@ -73,7 +74,7 @@ class ReportEditListing extends React.Component {
   handleAddressChange = address => {
     this.setState(prevState => {
       let listing = {...prevState.listing}
-      listing.listing_address = address
+      listing.listing_address = address.replace(', República Dominicana', '')
       return {listing}
     })
   }
@@ -82,12 +83,20 @@ class ReportEditListing extends React.Component {
     const latLng = await getLatLng(results[0])
     this.setState(prevState => {
       let listing = {...prevState.listing}
-      listing.listing_address = value
+      listing.listing_address = value.replace(', República Dominicana', '')
       listing.lat = latLng.lat
       listing.lng = latLng.lng
       return {listing}
     })
     console.log(value, latLng)
+  }
+  handleHideAddress = input => e => {
+    e.persist()
+    this.setState(prevState => {
+      let listing = {...prevState.listing}
+      listing[input] = !e.target.checked
+      return {listing}
+    })
   }
   handleChange = input => e => {
     e.persist()
@@ -368,8 +377,11 @@ class ReportEditListing extends React.Component {
                                             listingProvince={this.state.listing.province}
                                             listingSector={this.state.listing.sector}
                                             listingAddress={this.state.listing.listing_address}
+                                            streetNumber={this.state.listing.street_number}
+                                            hideAddress={this.state.listing.active_location}
                                             handleAddressChange={this.handleAddressChange}
                                             handleAddressSelect={this.handleAddressSelect}
+                                            handleHide={this.handleHideAddress}
                                             propertyType={this.state.listing.property_type}
                                             handleChange={this.handleChange}
                                             listingType={this.state.listing.listing_type}
