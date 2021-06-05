@@ -527,6 +527,20 @@ export const sectorsProvinces = [
   },
   {
     province: 'Santo Domingo Norte',
+    sector: 'Av. Jacobo Majluta',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.546989,
+      lng: -69.918034
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Norte',
     sector: 'El Edén',
     type: 'sector',
     provinceShort: 'SD Norte',
@@ -882,7 +896,7 @@ export const sectorsProvinces = [
     sector: 'Evaristo Morales',
     type: 'sector',
     provinceShort: 'DN',
-    zoomLevel: 16,
+    zoomLevel: 15,
     centerLocation: {
       lat: 18.465505,
       lng: -69.941674
