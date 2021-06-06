@@ -41,33 +41,60 @@ class BasicInfo extends React.Component {
               </div>
             </div>
           </div>
-          <label for="searchInpt">Dirección</label>
-          <PlacesAutocomplete 
-            value={this.props.propertyAddress}
-            onChange={this.props.handleAddressChange}
-            onSelect={this.props.handleSelect}
-            searchOptions={{componentRestrictions: { country: "do" }, types: ['address'], fields: ['address_components']}}>
-              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                <div>
-                  <input {...getInputProps({
-                    placeholder: 'Dirección de la propiedad ...',
-                    className: 'address-search-input',
-                    id: 'searchInpt'
-                    })}/>
-                  <div className="autocomplete-dropdown-container">
-                    {loading && <div>Cargando...</div>}
-                    {suggestions.map(suggestion => {
-                      const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item'
-                      return (
-                        <div {...getSuggestionItemProps(suggestion, {className})} key={suggestion.placeId}>
-                          {suggestion.description}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}                                
-          </PlacesAutocomplete>
+          <div className="address-info">
+            <div className="listing-options">
+              <label for="searchInpt">Nombre de la calle</label>
+              <PlacesAutocomplete 
+                value={this.props.propertyAddress}
+                onChange={this.props.handleAddressChange}
+                onSelect={this.props.handleSelect}
+                searchOptions={{componentRestrictions: { country: "do" }, types: ['address'], fields: ['address_components']}}>
+                  {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                      <input {...getInputProps({
+                        placeholder: 'Dirección de la propiedad ...',
+                        className: 'address-search-input',
+                        id: 'searchInpt'
+                        })}/>
+                      <div className="autocomplete-dropdown-container">
+                        {loading && <div>Cargando...</div>}
+                        {suggestions.map(suggestion => {
+                          const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item'
+                          return (
+                            <div {...getSuggestionItemProps(suggestion, {className})} key={suggestion.placeId}>
+                              {suggestion.description.replace(', República Dominicana', '')}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}                                
+              </PlacesAutocomplete>
+            </div>
+            <div className="listing-options">
+              <label htmlFor="stnumber">Número</label>
+              <input id="stnumber"
+                      type="number"
+                      min="1"
+                      onChange={this.props.handleChange('streetNumber')}
+                      value={this.props.streetNumber}
+                      />
+            </div>
+            <div className="address-text">
+              <p>
+                <i className="fas fa-exclamation-circle"></i>
+                Nombre y número de calle necesarios para verificar la autenticidad de la publicación</p>
+            </div>
+            <div className="hide-option">
+              <input id="hideAddress" name="hideAddress" type="checkbox" className="hide-address"
+                     onChange={this.props.onHide} checked={this.props.hideAddress}
+                     />
+              <label htmlFor="hideAddress" className="hide-label">Ocultar dirección al público</label>
+              {/* <p>
+                <i className="fas fa-info-circle"></i>
+                No recomendamos ocultar la dirección porque la propiedad se mostrará debajo de otras que si muestren la dirección.</p> */}
+            </div>
+          </div>
         </div>
         <div className="property-type listing-container">
           <h3>Tipo de Propiedad</h3>

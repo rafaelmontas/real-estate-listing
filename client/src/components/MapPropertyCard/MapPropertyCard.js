@@ -9,67 +9,80 @@ class MapPropertyCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      property: {}
+      liked: false
     }
   }
 
   componentDidMount() {
-    const property = this.props.properties.find(property => property.id === this.props.identifier);
-    this.setState({property}, () => console.log(this.state.property, this.props.identifier))
+    console.log(this.props.userLike, this.props.userLikeId)
+    if(this.props.userLike !== -1) this.setState({liked: true})
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.identifier !== this.props.identifier) {
-      const property = this.props.properties.find(property => property.id === this.props.identifier);
-      this.setState({property}, () => console.log(this.state.property, this.props.identifier))
+    if(this.props.userLike !== prevProps.userLike) {
+      console.log(this.props.userLike, this.props.userLikeId)
+      if(this.props.userLike !== -1) {
+        this.setState({liked: true})
+      } else if(this.props.userLike === -1) {
+        this.setState({liked: false})
+      }
+    } 
+  }
+
+  renderFavButton() {
+    if(this.state.liked) {
+      return <div className="favorite-button liked" onClick={() => this.props.onLikeDelete(this.props.userLikeId.id)}><i className="fas fa-heart"></i></div>
+    } else {
+      return <div className="favorite-button" onClick={() => this.props.onLike(this.props.property.id)}><i className="far fa-heart"></i></div>
     }
   }
 
   render() {
     return (
       <div className="map-property-card">
-        <Link to={`/properties/${this.state.property.id}`} style={{ textDecoration: 'none', color: '#000' }}>
+        <Link to={`/properties/${this.props.property.id}`} style={{ textDecoration: 'none', color: '#000' }}>
           <div className="map-property-card-content">
             <div className="map-property-card-img">
-              <img src={image}/>
+              <img src={this.props.property['PropertyPictures'][0].location}/>
             </div>
             <div className="map-property-card-info">
               <div className="price-like-section">
                 <div className="price-tag">
-                  <NumberFormat value={this.state.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
+                  <NumberFormat value={this.props.property.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
                 </div>
-                <div className="like-button">
+                {/* <div className="like-button">
                   <i className="far fa-heart"></i>
-                </div>
+                </div> */}
               </div>
               <div className="property-stats">
                 <div className="stats beds">
-                  {this.state.property.bedrooms}
+                  {this.props.property.bedrooms}
                   <span>hab</span>
                   {/* <i className="fas fa-bed"></i> */}
                 </div>
                 <div className="stats baths">
-                  {this.state.property.bathrooms}
-                  <span>{this.state.property.bathrooms > 1 ? "baños" : "baño"}</span>
+                  {this.props.property.bathrooms}
+                  <span>{this.props.property.bathrooms > 1 ? "baños" : "baño"}</span>
                   {/* <i className="fas fa-bath"></i> */}
                 </div>
                 <div className="stats cars">
-                  {this.state.property.parking_spaces}
+                  {this.props.property.parking_spaces}
                   <span>parq</span>
                   {/* <i className="fas fa-car-side"></i> */}
                 </div>
                 <div className="stats mts">
-                  {this.state.property.square_meters}
+                  {this.props.property.square_meters}
                   <span>mts</span>
                   {/* <i className="fas fa-ruler-vertical"></i> */}
                 </div>
               </div>
-              <div className="property-address">
-                {`C/ ${this.state.property.street_name} #${this.state.property.street_number}`}
-              </div>
-              <div className="property-sector">{this.state.property.sector}</div>
+              {/* <div className="property-address">
+                {`C/ ${this.props.property.street_name} #${this.props.property.street_number}`}
+              </div> */}
+              <div className="property-sector">{this.props.property.sector}</div>
             </div>
           </div>
         </Link>
+        {this.renderFavButton()}
       </div>
     )
   }

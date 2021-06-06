@@ -182,22 +182,42 @@
   margin-bottom: 10px;
   color: #216bff;
 }
-.listing-right .listing-edit-section .property-address .location-info {
+.listing-right .listing-edit-section .property-address .location-info,
+.listing-right .listing-edit-section .property-address .address-info {
   display: flex;
   flex-wrap: wrap;
 }
-.listing-right .listing-edit-section .property-address .location-info .listing-options {
+.listing-right .listing-edit-section .property-address .location-info .listing-options,
+.listing-right .listing-edit-section .property-address .address-info .listing-options {
   flex-basis: 100%;
   margin-bottom: 15px;
 }
+.listing-right .listing-edit-section .property-address .address-info .listing-options.hide-address {
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+}
+.listing-edit-section .property-address .address-info .listing-options.hide-address input {
+  position: static;
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(209, 209, 213);
+  cursor: pointer;
+}
 .listing-right .listing-edit-section .property-address .location-info .listing-options label,
-.listing-right .listing-edit-section .property-address > label {
+.listing-right .listing-edit-section .property-address > label,
+.listing-edit-section .property-address .address-info .listing-options label:not(label.hide-label) {
   display: block;
   margin-bottom: 5px;
   color: rgb(42, 42, 51);
   font-weight: 700;
 }
-.listing-right .listing-edit-section .property-address .location-info .listing-options input {
+.listing-edit-section .property-address .address-info .listing-options label.hide-label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.listing-right .listing-edit-section .property-address .location-info .listing-options input,
+.listing-edit-section .property-address .address-info .listing-options input:not(input.hide-address) {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -555,11 +575,16 @@
   .report-edit-container .re-listing-container .listing-right {
     flex-basis: 50%;
   }
-  .listing-right .listing-edit-section .property-address .location-info {
+  .listing-right .listing-edit-section .property-address .location-info,
+  .listing-right .listing-edit-section .property-address .address-info {
     justify-content: space-between;
   }
-  .listing-right .listing-edit-section .property-address .location-info .listing-options {
+  .listing-right .listing-edit-section .property-address .location-info .listing-options,
+  .listing-right .listing-edit-section .property-address .address-info .listing-options {
     flex-basis: 49%;
+  }
+  .listing-edit-section .property-address .address-info .listing-options.address-search {
+    flex-basis: 100%;
   }
   .listing-edit-section .property-type fieldset {
     justify-content: space-between;

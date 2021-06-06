@@ -115,7 +115,7 @@ class MainMap extends React.Component {
         center={this.props.loadingStatus ? this.prevCenter : this.state.centerMap}
         zoom={this.props.loadingStatus ? this.prevZoom : this.state.zoomLevel}
         onClick={this.props.onMapClick}>
-          {/* {this.props.properties.map(property => {
+          {this.props.properties.map(property => {
             return <OverlayView
               key={property.id}
               position={{lat: property.lat, lng: property.lng}}
@@ -124,7 +124,7 @@ class MainMap extends React.Component {
                       handleClick={this.props.onMarkerClick} 
                       cardHovered={this.props.cardHovered} />
             </OverlayView>
-          })} */}
+          })}
           <Polygon
             paths={this.props.loadingStatus ? this.prevPaths : this.state.paths}
             options={polygonOptions}

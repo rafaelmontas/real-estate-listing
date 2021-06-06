@@ -32,6 +32,8 @@ class ListingForm extends React.Component {
       propertyAddress: '',
       lat: null,
       lng: null,
+      streetNumber: '',
+      hideAddress: false,
       propertyType: '',
       listingType: '',
       // Step 1
@@ -73,6 +75,7 @@ class ListingForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handleAddressSelect = this.handleAddressSelect.bind(this)
+    this.handleHideAddress = this.handleHideAddress.bind(this)
     // Step 1
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleChecks = this.handleChecks.bind(this)
@@ -136,7 +139,7 @@ class ListingForm extends React.Component {
   renderNextButton() {
     switch(this.state.activeStep) {
       case 0:
-        if(this.state.propertyProvince && this.state.propertySector && this.state.propertyAddress && this.state.propertyType && this.state.listingType) {
+        if(this.state.propertyProvince && this.state.propertySector && this.state.propertyAddress && this.state.streetNumber && this.state.propertyType && this.state.listingType) {
           return (
             <Button variant="contained" color="primary" onClick={this.nextStep}>
               Siguiente
@@ -204,13 +207,16 @@ class ListingForm extends React.Component {
     this.setState({[optionSelected]: parseInt(value)})
   }
   handleAddressChange = address => {
-    this.setState({propertyAddress: address})
+    this.setState({propertyAddress: address.replace(', República Dominicana', '')})
   }
   handleAddressSelect = async value => {
     const results = await geocodeByAddress(value)
     const latLng = await getLatLng(results[0])
-    this.setState({propertyAddress: value,lat: latLng.lat, lng: latLng.lng})
+    this.setState({propertyAddress: value.replace(', República Dominicana', ''),lat: latLng.lat, lng: latLng.lng})
     // console.log(value, latLng)
+  }
+  handleHideAddress(e) {
+    this.setState({[e.target.name]: e.target.checked  })
   }
   handleChecks(e) {
     e.persist()
@@ -247,6 +253,8 @@ class ListingForm extends React.Component {
       listing_address: this.state.propertyAddress,
       lat: this.state.lat,
       lng: this.state.lng,
+      street_number: parseInt(this.state.streetNumber),
+      active_location: !this.state.hideAddress,
       property_type: this.state.propertyType,
       listing_type: this.state.listingType,
       bedrooms: this.state.bedrooms,
@@ -294,9 +302,12 @@ class ListingForm extends React.Component {
                   handleChange={this.handleChange}
                   handleAddressChange={this.handleAddressChange}
                   handleSelect={this.handleAddressSelect}
+                  onHide={this.handleHideAddress}
                   propertyProvince={this.state.propertyProvince}
                   propertySector={this.state.propertySector}
                   propertyAddress={this.state.propertyAddress}
+                  streetNumber={this.state.streetNumber}
+                  hideAddress={this.state.hideAddress}
                   propertyType={this.state.propertyType}
                   listingType={this.state.listingType}/>
       case 1:
@@ -372,7 +383,7 @@ function insertScript() {
   script.id = 'newListingTag'
   script.type = 'text/javascript'
   script.async = false
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places&language=es`
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places&language=es&region=DR`
   head.appendChild(script)
 }
 

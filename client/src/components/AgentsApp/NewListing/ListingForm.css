@@ -50,22 +50,26 @@
   margin-bottom: 20px;
   color: #216bff;
 }
-.new-listing-container .step-content .basic-info-container .property-address .location-info {
+.new-listing-container .step-content .basic-info-container .property-address .location-info,
+.new-listing-container .step-content .basic-info-container .property-address .address-info {
   display: flex;
   flex-wrap: wrap;
 }
-.basic-info-container .property-address .location-info .listing-options {
+.basic-info-container .property-address .location-info .listing-options,
+.basic-info-container .property-address .address-info .listing-options {
   flex-basis: 100%;
   margin-bottom: 15px;
 }
 .basic-info-container .property-address .location-info .listing-options label,
-.basic-info-container .property-address > label {
+.basic-info-container .property-address > label,
+.basic-info-container .property-address .address-info .listing-options label {
   display: block;
   margin-bottom: 5px;
   color: rgb(42, 42, 51);
   font-weight: 700;
 }
-.basic-info-container .property-address .location-info .listing-options input {
+.basic-info-container .property-address .location-info .listing-options input,
+.basic-info-container .property-address .address-info .listing-options input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -117,6 +121,45 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+}
+.basic-info-container .property-address .address-info .address-text {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.basic-info-container .property-address .address-info .address-text p {
+  font-size: 14px;
+  width: 100%;
+}
+.basic-info-container .property-address .address-info .address-text p i {
+  margin-right: 5px;
+  color: #145BC7;
+}
+/* Hide Address */
+.basic-info-container .property-address .address-info .hide-option {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.basic-info-container .property-address .address-info .hide-option input.hide-address {
+  position: static;
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(209, 209, 213);
+  cursor: pointer;
+}
+.basic-info-container .property-address .address-info .hide-option label.hide-label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.basic-info-container .property-address .address-info .hide-option p {
+  margin-top: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+.basic-info-container .property-address .address-info .hide-option p i {
+  color: #145BC7;
+  margin-right: 5px;
 }
 /* Property Type */
 .basic-info-container .property-type .property-type-options fieldset {
@@ -467,10 +510,12 @@
 
 
 @media only screen and (min-width: 768px) {
-  .new-listing-container .step-content .basic-info-container .property-address .location-info {
+  .new-listing-container .step-content .basic-info-container .property-address .location-info,
+  .new-listing-container .step-content .basic-info-container .property-address .address-info {
     justify-content: space-between;
   }
-  .basic-info-container .property-address .location-info .listing-options {
+  .basic-info-container .property-address .location-info .listing-options,
+  .basic-info-container .property-address .address-info .listing-options {
     flex-basis: 49%;
   }
   .basic-info-container .property-type .property-type-options fieldset label,
@@ -480,10 +525,10 @@
   }
   /* Search */
   .basic-info-container .property-address .address-search-input {
-    width: 75%;
+    width: 49%;
   }
   .property-address .autocomplete-dropdown-container {
-    width: 75%;
+    width: 100%;
   }
   /* Details */
   .details-info-container .listing-beds-baths-mts {

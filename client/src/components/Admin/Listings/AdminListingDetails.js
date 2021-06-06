@@ -86,7 +86,7 @@ class AdminListingDetails extends React.Component {
   handleAddressChange = address => {
     this.setState(prevState => {
       let listing = {...prevState.listing}
-      listing.listing_address = address
+      listing.listing_address = address.replace(', República Dominicana', '')
       return {listing}
     })
   }
@@ -95,7 +95,7 @@ class AdminListingDetails extends React.Component {
     const latLng = await getLatLng(results[0])
     this.setState(prevState => {
       let listing = {...prevState.listing}
-      listing.listing_address = value
+      listing.listing_address = value.replace(', República Dominicana', '')
       listing.lat = latLng.lat
       listing.lng = latLng.lng
       return {listing}
@@ -232,6 +232,7 @@ class AdminListingDetails extends React.Component {
               <span>Fecha: {dateFormat(this.state.listing.createdAt, "dd/mm/yy")}</span>
               <span>{`Descripción: ${this.state.listing.description}`}</span>
               <span>{`Estatus: ${this.state.listing.listing_active}`}</span>
+              <span>{`active_location: ${this.state.listing.active_location}`}</span>
               <div className="image-preview">
                 {this.state.listing['PropertyPictures'].map(image => (
                   <div className="thumb" key={image.id}>
@@ -261,7 +262,7 @@ class AdminListingDetails extends React.Component {
                           const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item'
                           return (
                             <div {...getSuggestionItemProps(suggestion, {className})} key={suggestion.placeId}>
-                              {suggestion.description}
+                              {suggestion.description.replace(', República Dominicana', '')}
                             </div>
                           )
                         })}
