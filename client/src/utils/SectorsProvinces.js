@@ -911,5 +911,33 @@ export const sectorsProvinces = [
       { lat: 18.471834, lng: -69.941309 },
       { lat: 18.470084, lng: -69.944957 },
     ]
+  },
+  {
+    province: 'Santo Domingo Norte',
+    sector: 'Colinas del Arroyo',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.544624,
+      lng: -69.920973
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Norte',
+    sector: 'Sabana Perdida',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.543880,
+      lng: -69.866834
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
   }
 ]
