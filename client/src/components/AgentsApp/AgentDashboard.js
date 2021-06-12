@@ -29,8 +29,8 @@ class AgentDashboard extends React.Component {
       console.log(res.data)
       this.setState({
         listingCount: res.data.properties.length,
-        listingViews: res.data.n_views,
-        leads: res.data.n_leads,
+        listingViews: parseInt(res.data.n_views),
+        leads: parseInt(res.data.n_leads),
         topListings: res.data.properties,
         isLoading: false
       })
