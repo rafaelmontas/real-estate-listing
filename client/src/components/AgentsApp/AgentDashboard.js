@@ -29,8 +29,8 @@ class AgentDashboard extends React.Component {
       console.log(res.data)
       this.setState({
         listingCount: res.data.properties.length,
-        listingViews: res.data['ListingViews'].length,
-        leads: res.data['AgentLeads'].length,
+        listingViews: res.data.n_views,
+        leads: res.data.n_leads,
         topListings: res.data.properties,
         isLoading: false
       })
@@ -79,10 +79,10 @@ class AgentDashboard extends React.Component {
     } else {
       return (
         <div className="top-listings-list">
-          {this.state.topListings.sort((a, b) => (a['ListingViews'].length > b['ListingViews'].length) ? -1 : 1 ).slice(0, 3).map(listing => {
+          {this.state.topListings.slice(0, 3).map(listing => {
             return <ListingCard key={listing.id}
                                 listing={listing}
-                                views={listing['ListingViews'].length}
+                                views={listing.n_views}
                                 linkTo='/account/listings'/>
           })}
         </div>
