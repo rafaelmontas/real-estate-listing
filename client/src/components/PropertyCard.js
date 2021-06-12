@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
+import dateFormat from 'dateformat'
 import {Link} from 'react-router-dom';
 import {userContext} from './userContext';
 
@@ -35,6 +36,20 @@ class PropertyCard extends React.Component {
     }
   }
 
+  renderNewBadge() {
+    // Set todays date
+    let today = new Date();
+    // Set listing date
+    let listingDate = new Date(dateFormat(this.props.property.createdAt, "mm/dd/yyyy"))
+    // To calculate the time difference of two dates
+    let differenceInTime = today.getTime() - listingDate.getTime();
+    // To calculate the no. of days between two dates
+    let differenceInDays = Math.round(differenceInTime / (1000 * 3600 * 24));
+    if(differenceInDays <= 7) {
+      return <div className="top-left-new">Nuevo</div>
+    }
+  }
+
   render() {
     return (
       <div className="home-card-container"
@@ -46,7 +61,7 @@ class PropertyCard extends React.Component {
             <div className="property-card-media">
               <div className="photo-container">
                 <img src={this.props.property['PropertyPictures'][0].location} alt="property"/>
-                <div className="top-left-new">Nuevo</div>
+                {this.renderNewBadge()}
                 {/* <div className="top-left-video"><i className="fas fa-video"></i></div> */}
               </div>
             </div>
