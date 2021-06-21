@@ -939,5 +939,19 @@ export const sectorsProvinces = [
     paths: [
       // { lat: 18.469982, lng: -69.945021 },
     ]
+  },
+  {
+    province: 'Santo Domingo Oeste',
+    sector: 'Hato Nuevo',
+    type: 'sector',
+    provinceShort: 'SD Oeste',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.482849,
+      lng: -70.011471
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
   }
 ]
