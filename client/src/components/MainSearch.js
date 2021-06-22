@@ -191,9 +191,9 @@ class MainSearch extends React.Component {
       // if back button hit between searches
       if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search !== "") {
         console.log(queryString.parse(this.props.location.search))
-        const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(this.props.location.search)
+        const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector, province} = queryString.parse(this.props.location.search)
         console.log(property_type)
-        this.backForwardSearch(sector, listing_type, parseInt(minPrice), parseInt(maxPrice), parseInt(bedrooms), parseInt(bathrooms), property_type.split(","))
+        this.backForwardSearch(province, sector, listing_type, parseInt(minPrice), parseInt(maxPrice), parseInt(bedrooms), parseInt(bathrooms), property_type.split(","))
         // if back button hit to /properties
       } else if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search === "") {
         this.setState({ isLoading: true })
