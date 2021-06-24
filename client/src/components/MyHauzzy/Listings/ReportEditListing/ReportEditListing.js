@@ -12,6 +12,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import LoadingBackdrop from '../../../AgentsApp/NewListing/LoadingBackdrop'
 import Backdrop from '../../../Backdrop'
 import DeleteListingModal from '../../../AgentsApp/Listings/DeleteListingModal'
+import CircularProgressSpinner from '../../../CircularProgressSpinner'
 import './ReportEditListing.css'
 
 class ReportEditListing extends React.Component {
@@ -315,97 +316,101 @@ class ReportEditListing extends React.Component {
 
 
   render() {
-    return (
-      <div className="report-edit-container">
-        {this.state.updateLoading && <LoadingBackdrop backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
-        <Snackbar open={this.state.alertOpen}
-                      autoHideDuration={4000}
-                      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-                      onClose={this.handleClose}
-                      style={{top: '92px'}}>
-              {this.renderAlert()}
-            </Snackbar>
-        {this.state.deleteOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
-        {this.state.deleteOpen && <DeleteListingModal onCancelClick={this.handleBackdropClick} onDeleteConfirm={this.handleDelete}/>}
-        <div className="re-header">
-          <div className="back-button">
-            <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
+    if(this.state.isLoading) {
+      return <CircularProgressSpinner/>
+    } else {
+      return (
+        <div className="report-edit-container">
+          {this.state.updateLoading && <LoadingBackdrop backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+          <Snackbar open={this.state.alertOpen}
+                        autoHideDuration={4000}
+                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                        onClose={this.handleClose}
+                        style={{top: '92px'}}>
+                {this.renderAlert()}
+              </Snackbar>
+          {this.state.deleteOpen && <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>}
+          {this.state.deleteOpen && <DeleteListingModal onCancelClick={this.handleBackdropClick} onDeleteConfirm={this.handleDelete}/>}
+          <div className="re-header">
+            <div className="back-button">
+              <Link to={this.props.linkTo}><i className="fas fa-angle-left"></i>Lista de propiedades</Link>
+            </div>
+            {/* <div className="share-button">
+              <span><i className="far fa-share-square"></i>Compartir</span>
+            </div> */}
           </div>
-          {/* <div className="share-button">
-            <span><i className="far fa-share-square"></i>Compartir</span>
-          </div> */}
-        </div>
-        <div className="re-listing-container">
-          <div className="listing-left">
-            <div className="listing-info">
-              <div className="listing-photo">
-                {this.renderImage()}
-                <div className="listing-details-over">
-                  <div className="listing-details-top">
-                    <span className="street-info">{this.state.listing.listing_address}</span>
-                    {/* <span className="sector-province">{`${this.state.listing.sector}, ${this.state.listing.province}`}</span> */}
-                  </div>
-                  <div className="listing-details-bottom">
-                    <span className="price-info listing-stats">
-                      <NumberFormat value={this.state.listing.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
-                    </span>
-                    <div className="stats-wrapper">
-                      <span className="listing-stats">{`${this.state.listing.bedrooms} hab`}</span>
-                      <span className="listing-stats">{`${this.state.listing.bathrooms} ${this.state.listing.bathrooms > 1 ? 'baños' : 'baño'}`}</span>
-                      <span className="listing-stats">{`${this.state.listing.parking_spaces} parq`}</span>
-                      <span className="listing-stats">{`${this.state.listing.square_meters} Mts2`}</span>
+          <div className="re-listing-container">
+            <div className="listing-left">
+              <div className="listing-info">
+                <div className="listing-photo">
+                  {this.renderImage()}
+                  <div className="listing-details-over">
+                    <div className="listing-details-top">
+                      <span className="street-info">{this.state.listing.listing_address}</span>
+                      {/* <span className="sector-province">{`${this.state.listing.sector}, ${this.state.listing.province}`}</span> */}
+                    </div>
+                    <div className="listing-details-bottom">
+                      <span className="price-info listing-stats">
+                        <NumberFormat value={this.state.listing.listing_price} displayType={'text'} thousandSeparator={true} prefix={'US$'} />
+                      </span>
+                      <div className="stats-wrapper">
+                        <span className="listing-stats">{`${this.state.listing.bedrooms} hab`}</span>
+                        <span className="listing-stats">{`${this.state.listing.bathrooms} ${this.state.listing.bathrooms > 1 ? 'baños' : 'baño'}`}</span>
+                        <span className="listing-stats">{`${this.state.listing.parking_spaces} parq`}</span>
+                        <span className="listing-stats">{`${this.state.listing.square_meters} Mts2`}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="performance-preview">
-                <div className="performance">
-                  <span>Visitas<i className="far fa-eye"></i></span>
-                  <span>{this.state.listing.n_views}</span>
+                <div className="performance-preview">
+                  <div className="performance">
+                    <span>Visitas<i className="far fa-eye"></i></span>
+                    <span>{this.state.listing.n_views}</span>
+                  </div>
+                  <div className="preview">
+                    <span>Estatus: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
+                  </div>
                 </div>
-                <div className="preview">
-                  <span>Estatus: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
-                </div>
+                {!this.state.isLoading && <ListingMap latLng={{lat: this.state.listing.lat, lng: this.state.listing.lng}}/>}
               </div>
-              {!this.state.isLoading && <ListingMap latLng={{lat: this.state.listing.lat, lng: this.state.listing.lng}}/>}
+            </div>
+            <div className="listing-right">
+              {!this.state.isLoading && <ListingEditForm
+                                              listing={this.state.listing}
+                                              isLoading={this.state.isLoading}
+                                              listingProvince={this.state.listing.province}
+                                              listingSector={this.state.listing.sector}
+                                              listingAddress={this.state.listing.listing_address}
+                                              streetNumber={this.state.listing.street_number}
+                                              hideAddress={this.state.listing.active_location}
+                                              handleAddressChange={this.handleAddressChange}
+                                              handleAddressSelect={this.handleAddressSelect}
+                                              handleHide={this.handleHideAddress}
+                                              propertyType={this.state.listing.property_type}
+                                              handleChange={this.handleChange}
+                                              listingType={this.state.listing.listing_type}
+                                              bedrooms={this.state.listing.bedrooms}
+                                              handleBedroomChange={this.handleBedroomChange}
+                                              bathrooms={this.state.listing.bathrooms}
+                                              handleBathroomChange={this.handleBathroomChange}
+                                              halfBathrooms={this.state.listing.half_bathrooms}
+                                              handleHalfBathroomChange={this.handleHalfBathroomChange}
+                                              parking={this.state.listing.parking_spaces}
+                                              handleParkingChange={this.handleParkingChange}
+                                              mts={this.state.listing.square_meters}
+                                              price={this.state.listing.listing_price}
+                                              amenities={this.state.listing['PropertyAmenity']}
+                                              handleChecks={this.handleChecks}
+                                              imageFiles={this.state.listing['PropertyPictures']}
+                                              handleDrop={this.handleDrop}
+                                              handleRemove={this.handleRemove}
+                                              onDeleteClick={this.handleDeleteClick}
+                                              onUpdate={this.handleUpdate}/>}
             </div>
           </div>
-          <div className="listing-right">
-            {!this.state.isLoading && <ListingEditForm
-                                            listing={this.state.listing}
-                                            isLoading={this.state.isLoading}
-                                            listingProvince={this.state.listing.province}
-                                            listingSector={this.state.listing.sector}
-                                            listingAddress={this.state.listing.listing_address}
-                                            streetNumber={this.state.listing.street_number}
-                                            hideAddress={this.state.listing.active_location}
-                                            handleAddressChange={this.handleAddressChange}
-                                            handleAddressSelect={this.handleAddressSelect}
-                                            handleHide={this.handleHideAddress}
-                                            propertyType={this.state.listing.property_type}
-                                            handleChange={this.handleChange}
-                                            listingType={this.state.listing.listing_type}
-                                            bedrooms={this.state.listing.bedrooms}
-                                            handleBedroomChange={this.handleBedroomChange}
-                                            bathrooms={this.state.listing.bathrooms}
-                                            handleBathroomChange={this.handleBathroomChange}
-                                            halfBathrooms={this.state.listing.half_bathrooms}
-                                            handleHalfBathroomChange={this.handleHalfBathroomChange}
-                                            parking={this.state.listing.parking_spaces}
-                                            handleParkingChange={this.handleParkingChange}
-                                            mts={this.state.listing.square_meters}
-                                            price={this.state.listing.listing_price}
-                                            amenities={this.state.listing['PropertyAmenity']}
-                                            handleChecks={this.handleChecks}
-                                            imageFiles={this.state.listing['PropertyPictures']}
-                                            handleDrop={this.handleDrop}
-                                            handleRemove={this.handleRemove}
-                                            onDeleteClick={this.handleDeleteClick}
-                                            onUpdate={this.handleUpdate}/>}
-          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 

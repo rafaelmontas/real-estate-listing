@@ -1,5 +1,6 @@
 .agent-listing-details-container {
   padding: 16px;
+  height: 100%;
 }
 .agent-listing-details-container .report-edit-container {
   padding: 0 0 25px;
