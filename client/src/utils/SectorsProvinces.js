@@ -967,5 +967,19 @@ export const sectorsProvinces = [
     paths: [
       // { lat: 18.469982, lng: -69.945021 },
     ]
+  },
+  {
+    province: 'Santo Domingo Oeste',
+    sector: 'Herrera',
+    type: 'sector',
+    provinceShort: 'SD Oeste',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.462983,
+      lng: -69.981139
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
   }
 ]
