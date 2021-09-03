@@ -41,7 +41,15 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
 }
 
+// Set View Engine
+// app.set('views', './views')
+// app.set('view engine', 'ejs')
+
+// Serve static assets
+// app.use(express.static('public'))
+
 // Use Routes
+// app.get('/', function(req, res) {res.render('index', {text: 'hauzzy'})})
 app.use("/api/properties", propertiesRouter)
 app.use("/users", usersRouter)
 app.use("/user-auth", userAuthRouter)
