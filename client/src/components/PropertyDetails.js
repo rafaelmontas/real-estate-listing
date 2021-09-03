@@ -17,6 +17,7 @@ import { withCookies, Cookies } from 'react-cookie';
 import gtag, { gaInit } from '../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
 import Footer from './Footer';
+import {Helmet} from "react-helmet";
 
 const amenities = {
   half_bathrooms: '1/2 Baño',
@@ -216,6 +217,14 @@ class PropertyDetails extends React.Component {
 
     return (
       <div>
+        <Helmet>
+          {/* <title>My Title</title> */}
+          <meta property="og:title" content={`${this.state.property.sector} | Hauzzy`}/>
+          <meta property="og:image" content="https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/og-image.png"/>
+          <meta property="og:description" content={`${this.state.property.bedrooms} hab, ${this.state.property.bathrooms} baños, ${this.state.property.parking_spaces} parq`}/>
+          <meta property="og:url" content={`https://www.hauzzy.com/properties/${this.state.property.id}`}/>
+          <meta property="og:type" content="website"/>
+        </Helmet>
         {this.state.carouselOpen ? <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.8)"}/> : null}
         {this.state.carouselOpen ? <PhotosCarousel onCloseClick={this.handleCollageCloseClick} pictures={this.state.property['PropertyPictures']}/> : null}
         {this.state.ContactFormOpen && <ContactFormModal onCloseClick={this.handleContactFormClick}
