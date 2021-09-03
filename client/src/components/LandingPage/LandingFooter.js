@@ -2,6 +2,7 @@ import React from 'react';
 import './LandingFooter.css';
 import logo from '../../demo_img/brand-logo-white.svg';
 import gtag from '../../utils/GaUtils';
+import appStoreApple from "../../demo_img/appstorewhite.svg";
 
 class LandingFooter extends React.Component {
   
@@ -41,6 +42,12 @@ class LandingFooter extends React.Component {
                   target="blank"
                   onClick={this.handleIgClick}>
                   <i className="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li style={{marginLeft: '20px'}}>
+                <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386"
+                  target="blank">
+                  <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
                 </a>
               </li>
             </ul>
