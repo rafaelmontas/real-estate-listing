@@ -21,7 +21,7 @@ class BasicInfo extends React.Component {
           <h3>Ubicación de la Propiedad</h3>
           <div className="location-info">
             <div className="listing-options">
-              <label for="prov-input">Provincia</label>
+              <label htmlFor="prov-input">Provincia</label>
               <div className="prov-option">
                 <input id="prov-input"
                       type="text"
@@ -31,7 +31,7 @@ class BasicInfo extends React.Component {
               </div>
             </div>
             <div className="listing-options">
-              <label for="sect-input">Sector</label>
+              <label htmlFor="sect-input">Sector</label>
               <div className="sect-option">
                 <input id="sect-input"
                       type="text"
@@ -41,7 +41,7 @@ class BasicInfo extends React.Component {
               </div>
             </div>
           </div>
-          <div className="address-info">
+          {/* <div className="address-info">
             <div className="listing-options">
               <label for="searchInpt">Nombre de la calle</label>
               <PlacesAutocomplete 
@@ -90,11 +90,8 @@ class BasicInfo extends React.Component {
                      onChange={this.props.onHide} checked={this.props.hideAddress}
                      />
               <label htmlFor="hideAddress" className="hide-label">Ocultar dirección al público</label>
-              {/* <p>
-                <i className="fas fa-info-circle"></i>
-                No recomendamos ocultar la dirección porque la propiedad se mostrará debajo de otras que si muestren la dirección.</p> */}
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="property-type listing-container">
           <h3>Tipo de Propiedad</h3>

@@ -33,7 +33,7 @@ class ListingForm extends React.Component {
       lat: null,
       lng: null,
       streetNumber: '',
-      hideAddress: false,
+      hideAddress: true,
       propertyType: '',
       listingType: '',
       // Step 1
@@ -139,7 +139,7 @@ class ListingForm extends React.Component {
   renderNextButton() {
     switch(this.state.activeStep) {
       case 0:
-        if(this.state.propertyProvince && this.state.propertySector && this.state.propertyAddress && this.state.streetNumber && this.state.propertyType && this.state.listingType) {
+        if(this.state.propertyProvince && this.state.propertySector && this.state.propertyType && this.state.listingType) {
           return (
             <Button variant="contained" color="primary" onClick={this.nextStep}>
               Siguiente
@@ -250,10 +250,10 @@ class ListingForm extends React.Component {
     const body = {
       province: this.state.propertyProvince,
       sector: this.state.propertySector,
-      listing_address: this.state.propertyAddress,
+      // listing_address: this.state.propertyAddress,
       lat: this.state.lat,
       lng: this.state.lng,
-      street_number: parseInt(this.state.streetNumber),
+      // street_number: parseInt(this.state.streetNumber),
       active_location: !this.state.hideAddress,
       property_type: this.state.propertyType,
       listing_type: this.state.listingType,
