@@ -4,9 +4,15 @@ const ListingView = db.ListingView;
 const listingViewRouter = express.Router({mergeParams: true})
 
 listingViewRouter.post("/", async (req, res) => {
-  console.log(req.body)
+  let body = req.body
+  body.browser = req.useragent.browser
+  body.os = req.useragent.os
+  body.platform = req.useragent.platform
+  body.is_mobile = req.useragent.isMobile
+  body.is_mobile_native = req.useragent.isMobileNative
+  console.log(body)
   try {
-    await ListingView.create(req.body)
+    await ListingView.create(body)
     console.log('view created')
     res.sendStatus(201)
   } catch (err) {

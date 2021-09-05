@@ -16,9 +16,16 @@ userLikesRouter.get("/", async (req, res) => {
 })
 
 userLikesRouter.post("/", async (req, res) => {
-  console.log('likes post', req.body)
+  // console.log(req.useragent)
+  let body = req.body
+  body.browser = req.useragent.browser
+  body.os = req.useragent.os
+  body.platform = req.useragent.platform
+  body.is_mobile = req.useragent.isMobile
+  body.is_mobile_native = req.useragent.isMobileNative
+  console.log('likes post', body)
   try {
-    await Like.create(req.body)
+    await Like.create(body)
     res.status(200).json({msg: 'Like creado'})
   } catch(err) {
     console.log(err.errors[0].message)
