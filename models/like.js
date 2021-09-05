@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     user_id: {
       type: DataTypes.UUID,
       allowNull: false,
-    }
+    },
+    browser: DataTypes.STRING,
+    os: DataTypes.STRING,
+    platform: DataTypes.STRING,
+    is_mobile: DataTypes.BOOLEAN,
+    is_mobile_native: DataTypes.BOOLEAN
   }, {
     indexes: [
       {
