@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     os: DataTypes.STRING,
     platform: DataTypes.STRING,
     is_mobile: DataTypes.BOOLEAN,
-    is_mobile_native: DataTypes.BOOLEAN
+    is_mobile_native: DataTypes.BOOLEAN,
+    ip_address: DataTypes.STRING,
+    udid: DataTypes.STRING
   }, {
     tableName: 'listing_views',
     indexes: [{fields: ['listing_id', 'user_id', 'agent_id', 'ha_id']}]
