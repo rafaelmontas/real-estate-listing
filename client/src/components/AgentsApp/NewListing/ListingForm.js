@@ -87,18 +87,22 @@ class ListingForm extends React.Component {
   }
 
   async componentDidMount() {
-    if(!window.google) {
-      insertScript()
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        // console.log('places api mounted')
-      }, 2000)
-    } else {
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        // console.log('places api already mounted')
-      }, 1000)
-    }
+    // if(!window.google) {
+    //   insertScript()
+    //   this.timer = setTimeout(() => {
+    //     this.setState({isLoading: false})
+    //     // console.log('places api mounted')
+    //   }, 2000)
+    // } else {
+    //   this.timer = setTimeout(() => {
+    //     this.setState({isLoading: false})
+    //     // console.log('places api already mounted')
+    //   }, 1000)
+    // }
+    this.timer = setTimeout(() => {
+      this.setState({isLoading: false})
+      // console.log('places api already mounted')
+    }, 1000)
     // Track page views GA
     if(process.env.NODE_ENV === 'production') {
       gaInit('G-JQMJWEW91Q', { send_page_view: true, page_title: 'Agent New Listing Page', user_id: this.context.agent.id })

@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 import axios from 'axios';
 import ListingEditForm from './ListingEditForm'
 import ListingMap from './ListingMap'
-import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+// import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import LoadingBackdrop from '../../../AgentsApp/NewListing/LoadingBackdrop'
@@ -31,7 +31,7 @@ class ReportEditListing extends React.Component {
       deleteOpen: false
     }
     this.handleAddressChange = this.handleAddressChange.bind(this)
-    this.handleAddressSelect = this.handleAddressSelect.bind(this)
+    // this.handleAddressSelect = this.handleAddressSelect.bind(this)
     this.handleHideAddress = this.handleHideAddress.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleBedroomChange = this.handleBedroomChange.bind(this)
@@ -55,21 +55,27 @@ class ReportEditListing extends React.Component {
       // console.log(listing)
       this.setState({listing: listing.data.listing});
     })
-    .catch(err => {
-      console.log(err.response.data, err.response.status)
-    })
-    if(!window.google) {
-      insertScript()
-      this.timer = setTimeout(() => {
-        this.setState({isLoading: false})
-        // console.log('places api mounted')
-      }, 2000)
-    } else {
+    .then(() => {
       this.timer = setTimeout(() => {
         this.setState({isLoading: false})
         // console.log('places api already mounted')
       }, 1000)
-    }
+    })
+    .catch(err => {
+      console.log(err.response.data, err.response.status)
+    })
+    // if(!window.google) {
+    //   insertScript()
+    //   this.timer = setTimeout(() => {
+    //     this.setState({isLoading: false})
+    //     // console.log('places api mounted')
+    //   }, 2000)
+    // } else {
+    //   this.timer = setTimeout(() => {
+    //     this.setState({isLoading: false})
+    //     // console.log('places api already mounted')
+    //   }, 1000)
+    // }
   }
 
   handleAddressChange = address => {
@@ -79,18 +85,18 @@ class ReportEditListing extends React.Component {
       return {listing}
     })
   }
-  handleAddressSelect = async value => {
-    const results = await geocodeByAddress(value)
-    const latLng = await getLatLng(results[0])
-    this.setState(prevState => {
-      let listing = {...prevState.listing}
-      listing.listing_address = value.replace(', República Dominicana', '')
-      listing.lat = latLng.lat
-      listing.lng = latLng.lng
-      return {listing}
-    })
-    console.log(value, latLng)
-  }
+  // handleAddressSelect = async value => {
+  //   const results = await geocodeByAddress(value)
+  //   const latLng = await getLatLng(results[0])
+  //   this.setState(prevState => {
+  //     let listing = {...prevState.listing}
+  //     listing.listing_address = value.replace(', República Dominicana', '')
+  //     listing.lat = latLng.lat
+  //     listing.lng = latLng.lng
+  //     return {listing}
+  //   })
+  //   console.log(value, latLng)
+  // }
   handleHideAddress = input => e => {
     e.persist()
     this.setState(prevState => {
@@ -371,7 +377,7 @@ class ReportEditListing extends React.Component {
                     <span>Estatus: {this.state.listing.listing_active ? "Active" : "Pendiente"}</span>
                   </div>
                 </div>
-                {!this.state.isLoading && <ListingMap latLng={{lat: this.state.listing.lat, lng: this.state.listing.lng}}/>}
+                {/* {!this.state.isLoading && <ListingMap latLng={{lat: this.state.listing.lat, lng: this.state.listing.lng}}/>} */}
               </div>
             </div>
             <div className="listing-right">
@@ -384,7 +390,7 @@ class ReportEditListing extends React.Component {
                                               streetNumber={this.state.listing.street_number}
                                               hideAddress={this.state.listing.active_location}
                                               handleAddressChange={this.handleAddressChange}
-                                              handleAddressSelect={this.handleAddressSelect}
+                                              // handleAddressSelect={this.handleAddressSelect}
                                               handleHide={this.handleHideAddress}
                                               propertyType={this.state.listing.property_type}
                                               handleChange={this.handleChange}
