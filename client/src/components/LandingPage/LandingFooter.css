@@ -13,9 +13,11 @@ footer.landing-footer {
 .landing-footer .social-media {
   margin-bottom: 20px;
 }
-.landing-footer .social-media ul {
+.landing-footer .social-media ul, .landing-footer .apps ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .landing-footer .social-media ul li:first-child {
   margin-right: 20px;
@@ -33,6 +35,16 @@ footer.landing-footer {
 .landing-footer .copyrights span {
   margin-top: 10px;
   color: #fff;
+}
+.landing-footer .apps {
+  margin-top: 30px;
+}
+.landing-footer .apps ul li .apple {
+  width: 128px;
+}
+.landing-footer .apps ul li .android {
+  width: 164px;
+  margin-top: -10px;
 }
 
 @media only screen and (min-width: 768px) {

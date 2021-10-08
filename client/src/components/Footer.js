@@ -23,12 +23,12 @@ class Footer extends React.Component {
             </a>
           </div>
           <div className="footer-badges">
-            <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386">
+            <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386" target="_blank">
               <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
             </a>
-            {/* <a href="/">
+            <a href="https://play.google.com/store/apps/details?id=com.hauzzyapp" target="_blank">
               <img className="android" src={appStoreAndroid} alt="Google Play Store Badge"/>
-            </a> */}
+            </a>
           </div>
         </div>
       </footer>

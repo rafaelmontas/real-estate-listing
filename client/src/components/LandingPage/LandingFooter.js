@@ -3,6 +3,7 @@ import './LandingFooter.css';
 import logo from '../../demo_img/brand-logo-white.svg';
 import gtag from '../../utils/GaUtils';
 import appStoreApple from "../../demo_img/appstorewhite.svg";
+import googlePlayStore from "../../demo_img/google-play-badge.png";
 
 class LandingFooter extends React.Component {
   
@@ -44,17 +45,39 @@ class LandingFooter extends React.Component {
                   <i className="fab fa-instagram"></i>
                 </a>
               </li>
-              <li style={{marginLeft: '20px'}}>
+              {/* <li style={{marginLeft: '20px'}}>
                 <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386"
                   target="blank">
                   <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
                 </a>
               </li>
+              <li style={{marginLeft: '20px'}}>
+                <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386"
+                  target="_blank">
+                  <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
+                </a>
+              </li> */}
             </ul>
           </div>
           <div className="copyrights">
             <img src={logo} className="brand-logo"/>
             <span>&copy; 2021 hauzzy</span>
+          </div>
+          <div className="apps">
+            <ul>
+              <li style={{marginBottom: '10px'}}>
+                <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386"
+                  target="_blank">
+                  <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
+                </a>
+              </li>
+              <li>
+                <a href="https://play.google.com/store/apps/details?id=com.hauzzyapp"
+                  target="_blank">
+                  <img className="android" src={googlePlayStore} alt="Google Play Store Badge"/>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </footer>
