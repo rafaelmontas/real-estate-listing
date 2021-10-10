@@ -84,7 +84,7 @@ class NavBar extends React.Component {
           <li>
             <Link to="/my-hauzzy/profile" onClick={this.onLiClick}>
               <div>
-                <i className="fas fa-user-circle"></i>Perfíl
+                <i className="fas fa-user-circle"></i>Perfil
               </div>
             </Link>
           </li>

@@ -13,6 +13,15 @@ body {
 a {
   text-decoration: none;
 }
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 300;
+}
 
 /************************************* Header **************************************/
 header {
@@ -31,6 +40,80 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
+}
+.nav-container .nav-menu .side-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 65%;
+  max-width: 400px;
+  background-color: white;
+  z-index: 400;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+  overflow-y: scroll;
+  /* padding: 8px 16px 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-container .nav-menu .side-drawer.open {
+  transform: translateX(0);
+  box-shadow: 1px 0px 4px rgb(0 0 0 / 50%);
+}
+.nav-container .nav-menu .side-drawer .top-div {
+  padding: 8px 16px 0;
+}
+.nav-container .nav-menu .side-drawer .top-div a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #141414;
+  height: 44px;
+  font-size: 17px;
+  font-weight: 200;
+  margin-top: 5px;
+}
+.nav-container .nav-menu .side-drawer .top-div span {
+  width: 100%;
+  margin-left: 10px;
+}
+.nav-container .nav-menu .side-drawer .top-div > span {
+  display: block;
+  width: 100%;
+  border-top: 1px solid #e2e2e2;
+  margin: 5px 0;
+}
+.nav-container .nav-menu .side-drawer .bottom-div {
+  background-color: #565656;
+  color: #fff;
+  font-size: 17px;
+}
+.nav-container .nav-menu .side-drawer .bottom-div a {
+  display: block;
+  padding: 16px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 100;
+}
+.nav-container .nav-menu .side-drawer .bottom-div a i {
+  margin-right: 10px;
+}
+.nav-container .nav-menu .side-drawer .bottom-div a span {
+  margin-left: -5px;
+}
+
+
+
+.nav-container .nav-menu .toggle.bars {
+  display: none;
+  z-index: 10;
+}
+.nav-container .nav-menu .toggle.bars .fas.fa-bars {
+  font-size: 28px;
+  color: #b5b3b3;
+  padding: 10px 10px 10px 0;
 }
 .nav-container .nav-menu .main-logo {
   position: absolute;
@@ -55,7 +138,8 @@ header {
   margin-right: 10px;
 }
 .nav-container .nav-menu .nav-link, .nav-container .action-menu .nav-link {
-  margin: 0 5px;
+  /* margin: 0 5px; */
+  margin-right: 5px;
   padding: 10px;
   border-radius: 4px;
   color: #3e3e3e;
@@ -69,4 +153,141 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
+  z-index: 10;
+}
+/* User Login Button*/
+.nav-container .action-menu .auth-container .hover-class {
+  position: relative;
+}
+.nav-container .action-menu .auth-container .hover-class .user-info-button {
+  cursor: pointer;
+  padding: 9px 10px;
+  color: rgb(59, 65, 68);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 0px;
+}
+.nav-container .action-menu .auth-container .hover-class:hover .user-info-button {
+  background-color: #e1edff;
+  color: #0052cc;
+}
+.nav-container .action-menu .auth-container .hover-class .user-info-button i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.nav-container .action-menu .auth-container .hover-class .user-info-button .name-email {
+  max-width: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* .nav-container .action-menu .auth-container .hover-class .user-info-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+} */
+.nav-container .action-menu .auth-container .hover-class:hover .user-dropdown {
+  display: block;
+
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown::before {
+  content: '';
+  position: absolute;
+  /* top: 0; */
+  /* bottom: 0; */
+  width: 100%;
+  height: 15px;
+  top: -15px;
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown {
+  display: none;
+  position: absolute;
+  list-style: none;
+  right: 0;
+  top: 42px;
+  width: 185px;
+  background: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: rgb(59 65 68 / 50%) 0px 2px 4px 0px;
+  /* padding: 4px 0px; */
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown:hover {
+  display: block;
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown a {
+  display: block;
+  color: #3e3e3e;
+  text-decoration: none;
+  padding: 10px 16px;
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown a:hover {
+  background-color: rgb(232, 233, 234);
+  cursor: pointer;
+}
+.nav-container .action-menu .auth-container .hover-class .user-dropdown a i {
+  margin-right: 5px;
+}
+
+
+
+
+.nav-container .action-menu .auth-container .user-login-button {
+  display: flex;
+  align-items: center;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button {
+  padding: 10px;
+  text-decoration: none;
+  margin-left: 5px;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button:hover {
+  cursor: pointer;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button.primary {
+  background-color: #2c7bec;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-left: 10px;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button.secondary {
+  border: 1px solid #1c68d4;
+  border-radius: 4px;
+  color: #0069ff;
+  font-weight: 500;
+  padding: 9px;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button.primary:hover {
+  background-color: #1c68d4;
+}
+.nav-container .action-menu .auth-container .user-login-button .menu-item.button.secondary:hover {
+  background-color: #1c68d4;
+  color: #fff;
+}
+
+
+
+@media only screen and (max-width: 991px) {
+  .nav-container .nav-menu .toggle.bars {
+    display: block;
+  }
+  .nav-container .nav-menu .nav-link {
+    display: none;
+  }
+  .nav-container .action-menu .action-link {
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .nav-container .nav-menu .main-logo .brand-logo {
+    width: 125px;
+  }
+  .nav-container .action-menu {
+    display: none;
+  }
 }

@@ -127,7 +127,7 @@ class SideDrawer extends React.Component {
               <a href="https://agent.hauzzy.com/account/new-listing" target="_blank">
                 <div>
                   <i className="fas fa-plus"></i>
-                  <span>Públicar Propiedad</span>
+                  <span>Publicar Propiedad</span>
                 </div>
               </a>
             </li>
