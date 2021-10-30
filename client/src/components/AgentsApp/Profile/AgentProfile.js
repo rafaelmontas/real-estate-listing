@@ -112,7 +112,7 @@ class AgentProfile extends React.Component {
               'Content-Type': 'application/json'
             }
           }
-          return axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
+          // return axios.put('https://api.sendgrid.com/v3/marketing/contacts', body, config)
         })
         .then(() => {
           this.timer = setTimeout(() => {

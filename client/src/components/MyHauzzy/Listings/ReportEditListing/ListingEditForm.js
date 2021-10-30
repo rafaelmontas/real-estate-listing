@@ -1,5 +1,5 @@
 import React from 'react'
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
+// import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import Select from 'react-select'
 import Dropzone from 'react-dropzone'
 
@@ -53,7 +53,7 @@ class ListingEditForm extends React.Component {
             <h3>Ubicación de la Propiedad</h3>
             <div className="location-info">
               <div className="listing-options">
-                <label for="prov-input">Provincia</label>
+                <label htmlFor="prov-input">Provincia</label>
                 <div className="prov-option">
                   <input id="prov-input"
                         type="text"
@@ -63,7 +63,7 @@ class ListingEditForm extends React.Component {
                 </div>
               </div>
               <div className="listing-options">
-                <label for="sect-input">Sector</label>
+                <label htmlFor="sect-input">Sector</label>
                 <div className="sect-option">
                   <input id="sect-input"
                         type="text"
@@ -74,7 +74,7 @@ class ListingEditForm extends React.Component {
               </div>
             </div>
             <div className="address-info">
-              <div className="listing-options address-search">
+              {/* <div className="listing-options address-search">
                 <label for="searchInpt">Nombre de la calle</label>
                 <PlacesAutocomplete 
                   value={this.props.listingAddress}
@@ -118,7 +118,7 @@ class ListingEditForm extends React.Component {
                       checked={this.props.hideAddress === false ? true : false}
                       />
                 <label htmlFor="hideAddress" className="hide-label">Ocultar dirección</label>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="property-type listing-container">

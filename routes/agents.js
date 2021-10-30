@@ -31,17 +31,36 @@ agentsRouter.get("/:id", verifyToken, (req, res) => {
   if(req.agent.id !== req.params.id) return res.status(401).json({msg: 'Access Denied'});
   
   Agent.findByPk(req.params.id, {
+    attributes: {
+      include: [
+        // [db.sequelize.fn('COUNT', db.sequelize.fn('DISTINCT', db.sequelize.col('properties.id'))), 'n_listings'],
+        [db.sequelize.fn('COUNT', db.sequelize.fn('DISTINCT', db.sequelize.col('ListingViews.id'))), 'n_views'],
+        [db.sequelize.fn('COUNT', db.sequelize.fn('DISTINCT', db.sequelize.col('AgentLeads.id'))), 'n_leads']
+      ]
+    },
+    // subQuery: false,
     include: [
       {
         model: Property,
+        attributes: {
+          include: [
+            [db.sequelize.fn('COUNT', db.sequelize.fn('DISTINCT', db.sequelize.col('properties->ListingViews.id'))), 'n_views']
+          ]
+        },
         where: {listing_active: true},
         required: false,
-        include: [{model: ListingView}, {model: PropertyPictures}]
+        include: [
+          {model: ListingView, attributes: []},
+          {model: PropertyPictures, attributes: ['location']}
+        ]
       },
       {model: AgentProfilePicture, attributes: ['location']},
-      {model: ListingView},
-      {model: AgentLead}
-    ]
+      {model: ListingView, attributes: []},
+      {model: AgentLead, attributes: []}
+    ],
+    group: ['agent.id', 'properties.id', 'AgentProfilePicture.id', 'properties->PropertyPictures.id'],
+    order: [[db.sequelize.fn('COUNT', db.sequelize.fn('DISTINCT', db.sequelize.col('properties->ListingViews.id'))), 'DESC']],
+    // limit: 3
   })
         .then(agent => {
           res.status(200).send(agent)

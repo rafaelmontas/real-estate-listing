@@ -1,5 +1,5 @@
 import React from "react";
-import appStoreApple from "../demo_img/appstore.png";
+import appStoreApple from "../demo_img/appstoreblack.svg";
 import appStoreAndroid from "../demo_img/google-play-badge.png";
 
 class Footer extends React.Component {
@@ -22,14 +22,14 @@ class Footer extends React.Component {
               <i className="fab fa-instagram"></i>
             </a>
           </div>
-          {/* <div className="footer-badges">
-            <a href="/">
+          <div className="footer-badges">
+            <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386" target="_blank">
               <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
             </a>
-            <a href="/">
+            <a href="https://play.google.com/store/apps/details?id=com.hauzzyapp" target="_blank">
               <img className="android" src={appStoreAndroid} alt="Google Play Store Badge"/>
             </a>
-          </div> */}
+          </div>
         </div>
       </footer>
     )

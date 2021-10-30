@@ -512,6 +512,20 @@ export const sectorsProvinces = [
     ]
   },
   {
+    province: 'Santiago',
+    sector: 'Cerro Hermoso',
+    type: 'sector',
+    provinceShort: 'Stgo',
+    zoomLevel: 11,
+    centerLocation: {
+      lat: 19.455521,
+      lng: -70.682932
+    },
+    paths: [
+      // { lat: 18.481701, lng: -69.954813 },
+    ]
+  },
+  {
     province: 'Santo Domingo Norte',
     sector: 'Ciudad Modelo',
     type: 'sector',
@@ -910,6 +924,76 @@ export const sectorsProvinces = [
       { lat: 18.462676, lng: -69.936159 },
       { lat: 18.471834, lng: -69.941309 },
       { lat: 18.470084, lng: -69.944957 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Norte',
+    sector: 'Colinas del Arroyo',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.544624,
+      lng: -69.920973
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Norte',
+    sector: 'Sabana Perdida',
+    type: 'sector',
+    provinceShort: 'SD Norte',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.543880,
+      lng: -69.866834
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Oeste',
+    sector: 'Hato Nuevo',
+    type: 'sector',
+    provinceShort: 'SD Oeste',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.482849,
+      lng: -70.011471
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Oeste',
+    sector: 'Alameda',
+    type: 'sector',
+    provinceShort: 'SD Oeste',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.493863,
+      lng: -69.996814
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
+    ]
+  },
+  {
+    province: 'Santo Domingo Oeste',
+    sector: 'Herrera',
+    type: 'sector',
+    provinceShort: 'SD Oeste',
+    zoomLevel: 15,
+    centerLocation: {
+      lat: 18.462983,
+      lng: -69.981139
+    },
+    paths: [
+      // { lat: 18.469982, lng: -69.945021 },
     ]
   }
 ]

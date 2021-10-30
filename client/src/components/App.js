@@ -88,6 +88,8 @@ class App extends React.Component {
         })
   }
   logOut() {
+    const { cookies } = this.props;
+    cookies.remove('userJwt')
     localStorage.removeItem('user-jwt');
     this.setState({
       isLoggedIn: false,

@@ -5,6 +5,11 @@ const app = express();
 const dotenv = require('dotenv');
 const Sentry = require('@sentry/node');
 const Tracing = require("@sentry/tracing");
+const useragent = require('express-useragent');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser')
+const db =  require('./models');
+const User = db.user;
 const PORT = process.env.PORT || 5000;
 
 dotenv.config()
@@ -35,13 +40,42 @@ const searchesRouter = require('./routes/searches');
 // Middlewares
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
+app.use(useragent.express());
+app.use(cookieParser())
 app.use(bodyParser.json());
 if(process.env.NODE_ENV !== 'production') {
   const morgan = require('morgan');
   app.use(morgan('dev'))
 }
 
+// Set View Engine
+app.set('views', './views')
+app.set('view engine', 'ejs')
+
+// Serve static assets
+app.use(express.static('public'))
+
 // Use Routes
+app.get('/', async function(req, res) {
+  const token = req.cookies.userJwt;
+  console.log(token)
+  let user;
+
+  try {
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    req.user = verified;
+    console.log(req.user)
+    user = await User.findByPk(req.user.id)
+    // next() ;
+    console.log(user.toJSON())
+  } catch(err) {
+    console.log(err.message)
+    user = null
+  }
+  // console.log(req.ips)
+  // console.log(req.useragent)
+  res.render('index', {user: user})
+})
 app.use("/api/properties", propertiesRouter)
 app.use("/users", usersRouter)
 app.use("/user-auth", userAuthRouter)

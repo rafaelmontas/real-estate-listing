@@ -306,12 +306,14 @@ class AutoCompleteText extends React.Component {
     if(e.keyCode === 13) {
       if(e.target.value.length != 0 || this.state.activeOption != -1) {
         if(this.state.activeOption === -1) {
-          this.setState({
-            text: this.state.suggestions[0].sector,
-            province: this.state.suggestions[0].province,
-            sector: this.state.suggestions[0].sector,
-            activeOption: -1
-          });  
+          if(this.state.suggestions.length != 0) {
+            this.setState({
+              text: this.state.suggestions[0].sector,
+              province: this.state.suggestions[0].province,
+              sector: this.state.suggestions[0].sector,
+              activeOption: -1
+            })
+          }
         } else {
           this.setState({
             text: this.state.suggestions[this.state.activeOption].sector,

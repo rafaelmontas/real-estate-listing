@@ -686,6 +686,7 @@ a {
 }
 .footer-container .footer-main .footer-badges a .android {
   width: 164px;
+  margin-left: -10px;
 }
 
 

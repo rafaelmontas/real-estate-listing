@@ -23,6 +23,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {userContext} from './userContext';
 import gtag, { gaInit } from '../utils/GaUtils';
 import ReactPixel from 'react-facebook-pixel';
+import {Helmet} from "react-helmet";
 smoothscroll.polyfill();
 
 class MainSearch extends React.Component {
@@ -191,9 +192,9 @@ class MainSearch extends React.Component {
       // if back button hit between searches
       if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search !== "") {
         console.log(queryString.parse(this.props.location.search))
-        const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector} = queryString.parse(this.props.location.search)
+        const {bathrooms, bedrooms, listing_type, maxPrice, minPrice, property_type, sector, province} = queryString.parse(this.props.location.search)
         console.log(property_type)
-        this.backForwardSearch(sector, listing_type, parseInt(minPrice), parseInt(maxPrice), parseInt(bedrooms), parseInt(bathrooms), property_type.split(","))
+        this.backForwardSearch(province, sector, listing_type, parseInt(minPrice), parseInt(maxPrice), parseInt(bedrooms), parseInt(bathrooms), property_type.split(","))
         // if back button hit to /properties
       } else if(this.props.location.search !== prevProps.location.search && this.props.location.pathname === prevProps.location.pathname && this.props.location.search === "") {
         this.setState({ isLoading: true })
@@ -369,6 +370,28 @@ class MainSearch extends React.Component {
     })
   }
 
+  renderHelmet() {
+    if(this.props.location.pathname === '/properties') {
+      return (
+        <Helmet>
+          <title>Hauzzy: Innovadora plataforma inmobiliaria</title>
+          <meta name="description" content="Busca propiedades en venta y en alquiler y conecta con profesionales."/>
+          <meta property="og:title" content="Hauzzy: Innovadora plataforma inmobiliaria"/>
+          <meta property="og:image" content="https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/fb_post_tiny.png"/>
+          <meta property="og:description" content="Busca propiedades en venta y en alquiler y conecta con profesionales."/>
+          <meta property="og:url" content="https://www.hauzzy.com" />
+          <meta property="og:type" content="website"/>
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@hauzzyrd" />
+          <meta name="twitter:title" content="Hauzzy: Innovadora plataforma inmobiliaria" />
+          <meta name="twitter:description" content="Busca propiedades en venta y en alquiler y conecta con profesionales." />
+          <meta name="twitter:image" content="https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/fb_post_tiny.png"/>
+        </Helmet>
+      )
+    }
+  }
+
   render() {
     let mapOpenCss;
     if(this.state.mapToggleOpen) {
@@ -402,6 +425,7 @@ class MainSearch extends React.Component {
     }
     return (
       <div className="main-app-container">
+        {this.renderHelmet()}
         {backdrop}
         {this.state.mobileSearchOpen && <AutoCompleteMobile onCloseMobileSearchClick={this.handleCloseMobileSearchClick} initialStateSearch={queryString.parse(this.props.location.search)} search={this.searchProperties}/>}
         <SideDrawer show={this.state.sideDrawerOpen}
