@@ -17,7 +17,10 @@ function showBackDrop() {
     console.log('backdrop and side drawer removed')
     backDrop.remove()
     let sideDrawer = document.getElementById('side-drawer')
-    sideDrawer.classList.toggle('open')
+    sideDrawer.classList.remove('open')
+    if (document.getElementById('auth-modal')) {
+      document.getElementById('auth-modal').remove()
+    }
   })
   // Insert backdrop after header
   let header = document.getElementById('header')
@@ -34,3 +37,20 @@ function burgerMenuClickHandler() {
   showSideMenu()
 }
 burgerMenu.addEventListener('click', burgerMenuClickHandler)
+
+
+// Handle login/signup buttons
+let authButton = document.getElementById('login-button')
+let authButtons = document.querySelectorAll('.auth')
+console.log(authButton, authButtons)
+function authClickHandler(event) {
+  console.log(event.target.id)
+  showBackDrop()
+  // Create modal
+  let authModal = document.createElement('div')
+  authModal.id = 'auth-modal'
+  document.body.appendChild(authModal)
+}
+authButtons.forEach((button) => {
+  button.addEventListener('click', authClickHandler)
+})
