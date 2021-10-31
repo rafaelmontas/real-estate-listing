@@ -18,8 +18,12 @@ function showBackDrop() {
     backDrop.remove()
     let sideDrawer = document.getElementById('side-drawer')
     sideDrawer.classList.remove('open')
-    if (document.getElementById('auth-modal')) {
-      document.getElementById('auth-modal').remove()
+    // if (document.getElementById('auth-modal')) {
+    //   document.getElementById('auth-modal').remove()
+    // }
+    if (document.getElementById('user-auth-modal')) {
+      let authModal = document.getElementById('user-auth-modal')
+      authModal.classList.remove('show')
     }
   })
   // Insert backdrop after header
@@ -46,10 +50,13 @@ console.log(authButton, authButtons)
 function authClickHandler(event) {
   console.log(event.target.id)
   showBackDrop()
+  // Show Modal
+  let authModal = document.getElementById('user-auth-modal')
+  authModal.classList.add('show')
   // Create modal
-  let authModal = document.createElement('div')
-  authModal.id = 'auth-modal'
-  document.body.appendChild(authModal)
+  // let authModal = document.createElement('div')
+  // authModal.id = 'auth-modal'
+  // document.body.appendChild(authModal)
 }
 authButtons.forEach((button) => {
   button.addEventListener('click', authClickHandler)

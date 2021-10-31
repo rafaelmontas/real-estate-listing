@@ -272,6 +272,22 @@ header {
   color: #fff;
 }
 
+/* Auth Modal */
+#user-auth-modal {
+  display: none;
+  position: fixed;
+  z-index: 450;
+  background-color: #fff;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#user-auth-modal.show {
+  display: block;
+}
+
 
 
 @media only screen and (max-width: 991px) {
@@ -291,5 +307,18 @@ header {
   }
   .nav-container .action-menu {
     display: none;
+  }
+}
+@media only screen and (min-width: 768px) {
+  #user-auth-modal {
+    width: 500px;
+    height: calc(100% - 200px);
+    max-height: 400px;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 4px;
   }
 }
