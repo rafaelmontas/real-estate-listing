@@ -52,6 +52,27 @@ function authClickHandler(event) {
   // Create modal
   let authModal = document.createElement('div')
   authModal.id = 'user-auth-modal'
+  
+  let switchSpan = document.createElement('span')
+  switchSpan.class = 'auth-switch'
+  switchSpan.id = 'switch-to-signup'
+  switchSpan.innerText = 'Registrate'
+  switchSpan.addEventListener('click', () => {
+    let authHeader = document.getElementsByClassName('action-text')
+    authHeader[0].innerHTML = signupHeader
+  })
+  let loginHeader = `
+  <h2>Inicia Sesión</h2>
+  <p>Necesitas una cuenta? 
+    <span class="auth-switch" id="switch-to-signup">Registrate</span>
+  </p>
+  `
+  let signupHeader = `
+  <h2>Registrate</h2>
+  <p>Tienes una cuenta? 
+    <span class="auth-switch" id="switch-to-login">Inicia Sesión</span>
+  </p>
+  `
   let loginForm = `
   <form class="login-form">
     <div class="form-group">
@@ -74,10 +95,7 @@ function authClickHandler(event) {
   <div class="container">
     <div class="auth-header">
       <div class="action-text">
-        <h2>${event.target.id === 'login-button' ? 'Inicia Sesión' : 'Registrate'}</h2>
-        <p>${event.target.id === 'login-button' ? 'Necesitas una cuenta? ' : 'Tienes una cuenta? '}
-          <span>${event.target.id === 'login-button' ? 'Registrate' : 'Inicia Sesión'}</span>
-        </p>
+        ${event.target.id === 'login-button' ? loginHeader : signupHeader}
       </div>
       <div>
         <span class="close-button">
@@ -96,6 +114,27 @@ function authClickHandler(event) {
     let backDrop = document.getElementById('backdrop')
     backDrop.remove()
     authModal.remove()
+  })
+  // Handle Auth Switch
+  let switchButtons = document.querySelectorAll('.auth-switch')
+  let authHeader = document.getElementsByClassName('action-text')
+  // console.log(switchButtons)
+  switchButtons[0].addEventListener('click', (event) => {
+    console.log('clicked', event.target.id)
+    if (event.target.id === 'switch-to-signup') {
+      authHeader[0].innerHTML = signupHeader
+      switchButtons = document.querySelectorAll('.auth-switch')
+      // console.log(switchButtons)
+      // switchButtons[0].addEventListener('click', () => {
+      //   authHeader[0].innerHTML = loginHeader
+      // })
+    } else {
+      authHeader[0].innerHTML = loginHeader
+      switchButtons = document.querySelectorAll('.auth-switch')
+      // switchButtons[0].addEventListener('click', () => {
+      //   authHeader[0].innerHTML = signupHeader
+      // })
+    }
   })
 }
 authButtons.forEach((button) => {
