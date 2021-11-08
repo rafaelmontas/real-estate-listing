@@ -59,7 +59,7 @@ function authClickHandler(event) {
   let authActionText = document.createElement('div')
   authActionText.className = 'action-text'
   let loginText = document.createElement('h2')
-  loginText.innerText = 'Inicia Sesíon'
+  loginText.innerText = 'Inicia Sesión'
   let loginSubText = document.createElement('p')
   loginSubText.textContent = 'Necesitas una cuenta? '
   let signupText = document.createElement('h2')
@@ -79,7 +79,7 @@ function authClickHandler(event) {
   closeButton.className = 'far fa-times-circle'
   closeArea.appendChild(closeSpan)
   closeSpan.appendChild(closeButton)
-  
+  // Switch to signup/login
   let switchToSignup = document.createElement('span')
   switchToSignup.className = 'auth-switch'
   switchToSignup.id = 'switch-to-signup'
@@ -101,8 +101,29 @@ function authClickHandler(event) {
     loginSubText.appendChild(switchToSignup)
   })
   
+
+  let loginForm = `
+  <form class="login-form">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" name="password" id="password" placeholder="Constraseña"/>
+    </div>
+    <div class="form-group">
+      <button type="submit">Iniciar sesión</button>
+    </div>
+    <div class="forgot-pss">
+      <a href="/forgot-password">Olvidaste tu contraseña?</a>
+    </div>
+  </form>
+  `
+
   authModal.appendChild(authContainer)
-  authContainer.appendChild(authHeader)
+  authContainer.append(authHeader)
+  authContainer.insertAdjacentHTML('beforeend', loginForm)
   authHeader.append(authActionText, closeArea)
   if (event.target.id === 'login-button') {
     authActionText.append(loginText, loginSubText)
