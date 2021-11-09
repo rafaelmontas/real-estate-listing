@@ -89,6 +89,8 @@ function authClickHandler(event) {
     loginSubText.remove()
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
+    authContainer.removeChild(document.querySelector('.login-form'))
+    authContainer.insertAdjacentHTML('beforeend', signupForm)
   })
   let switchToLogin = document.createElement('span')
   switchToLogin.className = 'auth-switch'
@@ -99,6 +101,8 @@ function authClickHandler(event) {
     signupSubText.remove()
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
+    authContainer.removeChild(document.querySelector('.register-form'))
+    authContainer.insertAdjacentHTML('beforeend', loginForm)
   })
   
 
@@ -121,14 +125,35 @@ function authClickHandler(event) {
   </form>
   `
 
+  let signupForm = `
+  <form class="register-form">
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" name="name" id="name" placeholder="Nombre"/>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" name="password" id="password" placeholder="Constraseña"/>
+    </div>
+    <div class="form-group">
+      <button type="submit">Registrarse</button>
+    </div>
+  </form>
+  `
+
   authModal.appendChild(authContainer)
   authContainer.append(authHeader)
-  authContainer.insertAdjacentHTML('beforeend', loginForm)
   authHeader.append(authActionText, closeArea)
   if (event.target.id === 'login-button') {
+    authContainer.insertAdjacentHTML('beforeend', loginForm)
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
   } else {
+    authContainer.insertAdjacentHTML('beforeend', signupForm)
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
   }
