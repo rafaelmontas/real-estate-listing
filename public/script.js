@@ -40,9 +40,6 @@ burgerMenu.addEventListener('click', burgerMenuClickHandler)
 
 
 // Handle login/signup buttons
-// let authButton = document.getElementById('login-button')
-let authButtons = document.querySelectorAll('.auth')
-console.log(authButtons)
 function authClickHandler(event) {
   console.log(event.target.id)
   showBackDrop()
@@ -89,7 +86,7 @@ function authClickHandler(event) {
     loginSubText.remove()
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
-    authContainer.removeChild(document.querySelector('.login-form'))
+    authContainer.removeChild(document.querySelector('.login-container'))
     authContainer.insertAdjacentHTML('beforeend', signupForm)
   })
   let switchToLogin = document.createElement('span')
@@ -101,48 +98,52 @@ function authClickHandler(event) {
     signupSubText.remove()
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
-    authContainer.removeChild(document.querySelector('.register-form'))
+    authContainer.removeChild(document.querySelector('.signup-container'))
     authContainer.insertAdjacentHTML('beforeend', loginForm)
   })
   
 
   let loginForm = `
-  <form class="login-form">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" placeholder="Dirección de email"/>
-    </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" name="password" id="password" placeholder="Constraseña"/>
-    </div>
-    <div class="form-group">
-      <button type="submit">Iniciar sesión</button>
-    </div>
-    <div class="forgot-pss">
-      <a href="/forgot-password">Olvidaste tu contraseña?</a>
-    </div>
-  </form>
+  <div class="form-container login-container">
+    <form class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" placeholder="Constraseña"/>
+      </div>
+      <div class="form-group">
+        <button type="submit">Iniciar sesión</button>
+      </div>
+      <div class="forgot-pss">
+        <a href="/forgot-password">Olvidaste tu contraseña?</a>
+      </div>
+    </form>
+  </div>
   `
 
   let signupForm = `
-  <form class="register-form">
-    <div class="form-group">
-      <label for="name">Nombre</label>
-      <input type="text" name="name" id="name" placeholder="Nombre"/>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" placeholder="Dirección de email"/>
-    </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" name="password" id="password" placeholder="Constraseña"/>
-    </div>
-    <div class="form-group">
-      <button type="submit">Registrarse</button>
-    </div>
-  </form>
+  <div class="form-container signup-container">
+    <form class="register-form">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" placeholder="Nombre"/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" placeholder="Constraseña"/>
+      </div>
+      <div class="form-group">
+        <button type="submit">Registrarse</button>
+      </div>
+    </form>
+  </div>
   `
 
   authModal.appendChild(authContainer)
@@ -157,72 +158,10 @@ function authClickHandler(event) {
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
   }
-  
 
-  // let loginForm = `
-  // <form class="login-form">
-  //   <div class="form-group">
-  //     <label for="email">Email</label>
-  //     <input type="email" name="email" id="email" placeholder="Dirección de email"/>
-  //   </div>
-  //   <div class="form-group">
-  //     <label for="password">Contraseña</label>
-  //     <input type="password" name="password" id="password" placeholder="Constraseña"/>
-  //   </div>
-  //   <div class="form-group">
-  //     <button type="submit">Iniciar sesión</button>
-  //   </div>
-  //   <div class="forgot-pss">
-  //     <a href="/forgot-password">Olvidaste tu contraseña?</a>
-  //   </div>
-  // </form>
-  // `
-  // authModal.innerHTML = `
-  // <div class="container">
-  //   <div class="auth-header">
-  //     <div class="action-text">
-  //       ${event.target.id === 'login-button' ? loginHeader : signupHeader}
-  //     </div>
-  //     <div>
-  //       <span class="close-button">
-  //         <i class="far fa-times-circle"></i>
-  //       </span>
-  //     </div>
-  //   </div>
-  //   <div class="auth-body">
-  //     ${loginForm}
-  //   </div>
-  // </div>
-  // `
   document.body.appendChild(authModal)
-  // let closeButton = document.getElementsByClassName('close-button')[0]
-  // closeButton.addEventListener('click', () => {
-  //   let backDrop = document.getElementById('backdrop')
-  //   backDrop.remove()
-  //   authModal.remove()
-  // })
-  // Handle Auth Switch
-  // let switchButtons = document.querySelectorAll('.auth-switch')
-  // let authHeader = document.getElementsByClassName('action-text')
-  // // console.log(switchButtons)
-  // switchButtons[0].addEventListener('click', (event) => {
-  //   console.log('clicked', event.target.id)
-  //   if (event.target.id === 'switch-to-signup') {
-  //     authHeader[0].innerHTML = signupHeader
-  //     switchButtons = document.querySelectorAll('.auth-switch')
-  //     // console.log(switchButtons)
-  //     // switchButtons[0].addEventListener('click', () => {
-  //     //   authHeader[0].innerHTML = loginHeader
-  //     // })
-  //   } else {
-  //     authHeader[0].innerHTML = loginHeader
-  //     switchButtons = document.querySelectorAll('.auth-switch')
-  //     // switchButtons[0].addEventListener('click', () => {
-  //     //   authHeader[0].innerHTML = signupHeader
-  //     // })
-  //   }
-  // })
 }
+let authButtons = document.querySelectorAll('.auth')
 authButtons.forEach((button) => {
   button.addEventListener('click', authClickHandler)
 })
