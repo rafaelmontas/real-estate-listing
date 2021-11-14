@@ -51,6 +51,8 @@ function authClickHandler(event) {
   authModal.id = 'user-auth-modal'
   let authContainer = document.createElement('div')
   authContainer.className = 'container'
+  // let userTypeSwitch = document.createElement('div')
+  // userTypeSwitch.className = 'user-type-switch'
   let authHeader = document.createElement('div')
   authHeader.className = 'auth-header'
   let authActionText = document.createElement('div')
@@ -87,7 +89,10 @@ function authClickHandler(event) {
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
     authContainer.removeChild(document.querySelector('.login-container'))
-    authContainer.insertAdjacentHTML('beforeend', signupForm)
+    authContainer.appendChild(signupContainer)
+    signupContainer.appendChild(signupForm)
+    signupForm.innerHTML = signupFormData
+    // authContainer.insertAdjacentHTML('beforeend', signupForm)
   })
   let switchToLogin = document.createElement('span')
   switchToLogin.className = 'auth-switch'
@@ -99,62 +104,86 @@ function authClickHandler(event) {
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
     authContainer.removeChild(document.querySelector('.signup-container'))
-    authContainer.insertAdjacentHTML('beforeend', loginForm)
+    authContainer.appendChild(loginContainer)
+    loginContainer.appendChild(loginForm)
+    loginForm.innerHTML = loginFormData
+    // authContainer.insertAdjacentHTML('beforeend', loginForm)
   })
   
+  let loginContainer = document.createElement('div')
+  loginContainer.className = 'form-container login-container'
+  let loginForm = document.createElement('form')
+  loginForm.className = 'login-form'
+  loginForm.id = 'login-form'
+  loginForm.addEventListener('submit', handleLogin)
 
-  let loginForm = `
-  <div class="form-container login-container">
-    <form class="login-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Dirección de email"/>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" placeholder="Constraseña"/>
-      </div>
-      <div class="form-group">
-        <button type="submit">Iniciar sesión</button>
-      </div>
-      <div class="forgot-pss">
-        <a href="/forgot-password">Olvidaste tu contraseña?</a>
-      </div>
-    </form>
+  let loginFormData = `
+  <div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" name="password" id="password" placeholder="Constraseña"/>
+    </div>
+    <div class="form-group">
+      <button type="submit" id="login-button">Iniciar sesión</button>
+    </div>
+    <div class="forgot-pss">
+      <a href="/forgot-password">Olvidaste tu contraseña?</a>
+    </div>
   </div>
   `
 
-  let signupForm = `
-  <div class="form-container signup-container">
-    <form class="register-form">
-      <div class="form-group">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" id="name" placeholder="Nombre"/>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="Dirección de email"/>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" placeholder="Constraseña"/>
-      </div>
-      <div class="form-group">
-        <button type="submit">Registrarse</button>
-      </div>
-    </form>
+  let signupContainer = document.createElement('div')
+  signupContainer.className = 'form-container signup-container'
+  let signupForm = document.createElement('form')
+  signupForm.className = 'register-form'
+  signupForm.id = 'register-form'
+  // signupForm.addEventListener('submit', handleLogin)
+
+  let signupFormData = `
+<div>
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" name="name" id="name" placeholder="Nombre"/>
   </div>
-  `
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" placeholder="Dirección de email"/>
+  </div>
+  <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input type="password" name="password" id="password" placeholder="Constraseña"/>
+  </div>
+  <div class="form-group">
+    <button type="submit" id="signup-button">Registrarse</button>
+  </div>
+</div>
+`
 
   authModal.appendChild(authContainer)
   authContainer.append(authHeader)
   authHeader.append(authActionText, closeArea)
   if (event.target.id === 'login-button') {
-    authContainer.insertAdjacentHTML('beforeend', loginForm)
+    authContainer.appendChild(loginContainer)
+    loginContainer.appendChild(loginForm)
+    loginForm.innerHTML = loginFormData
+    // authContainer.insertAdjacentHTML('beforeend', loginForm)
+    // let loginFormSubmit = document.getElementsByClassName('login-form')
+    // console.log(loginFormSubmit)
+    // loginFormSubmit.addEventListener('submit', (e) => {
+    //   e.preventDefault()
+    //   console.log('body')
+    // })
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
   } else {
-    authContainer.insertAdjacentHTML('beforeend', signupForm)
+    // authContainer.insertAdjacentHTML('beforeend', signupForm)
+    authContainer.appendChild(signupContainer)
+    signupContainer.appendChild(signupForm)
+    signupForm.innerHTML = signupFormData
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
   }
@@ -165,3 +194,42 @@ let authButtons = document.querySelectorAll('.auth')
 authButtons.forEach((button) => {
   button.addEventListener('click', authClickHandler)
 })
+
+// Handle Login
+function handleLogin(event) {
+  event.preventDefault()
+  const body = {email: document.getElementById('email').value, password: document.getElementById('password').value}
+  console.log('body', body)
+  fetch('http://localhost:5000/user-auth', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body)
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error('Something went wrong');
+    }
+  })
+  .then(data => {
+    console.log(data, 'data')
+    localStorage.setItem('user-jwt', data.token)
+    fetch('http://localhost:5000/user-auth/user', {headers: {'user-auth': localStorage.getItem('user-jwt')}})
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error('Something went wrong getting user');
+      }
+    })
+    .then(data => {
+      console.log(data, 'user')
+    })
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
