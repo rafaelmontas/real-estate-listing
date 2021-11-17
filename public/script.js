@@ -88,11 +88,13 @@ function authClickHandler(event) {
     loginSubText.remove()
     authActionText.append(signupText, signupSubText)
     signupSubText.appendChild(switchToLogin)
+    if (document.getElementById('error-msg-text')) {
+      loginContainer.removeChild(document.getElementsByClassName('error-msg')[0])
+    }
     authContainer.removeChild(document.querySelector('.login-container'))
     authContainer.appendChild(signupContainer)
     signupContainer.appendChild(signupForm)
     signupForm.innerHTML = signupFormData
-    // authContainer.insertAdjacentHTML('beforeend', signupForm)
   })
   let switchToLogin = document.createElement('span')
   switchToLogin.className = 'auth-switch'
@@ -103,11 +105,13 @@ function authClickHandler(event) {
     signupSubText.remove()
     authActionText.append(loginText, loginSubText)
     loginSubText.appendChild(switchToSignup)
+    if (document.getElementById('error-msg-text')) {
+      signupContainer.removeChild(document.getElementsByClassName('error-msg')[0])
+    }
     authContainer.removeChild(document.querySelector('.signup-container'))
     authContainer.appendChild(loginContainer)
     loginContainer.appendChild(loginForm)
     loginForm.innerHTML = loginFormData
-    // authContainer.insertAdjacentHTML('beforeend', loginForm)
   })
   
   let loginContainer = document.createElement('div')
@@ -141,7 +145,7 @@ function authClickHandler(event) {
   let signupForm = document.createElement('form')
   signupForm.className = 'register-form'
   signupForm.id = 'register-form'
-  // signupForm.addEventListener('submit', handleLogin)
+  signupForm.addEventListener('submit', handleSignup)
 
   let signupFormData = `
 <div>
@@ -207,29 +211,83 @@ function handleLogin(event) {
     },
     body: JSON.stringify(body)
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error('Something went wrong');
-    }
-  })
+  .then(res => res.json())
   .then(data => {
-    console.log(data, 'data')
-    localStorage.setItem('user-jwt', data.token)
-    fetch('http://localhost:5000/user-auth/user', {headers: {'user-auth': localStorage.getItem('user-jwt')}})
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        throw new Error('Something went wrong getting user');
-      }
-    })
-    .then(data => {
-      console.log(data, 'user')
-    })
+    if (data.msg) {
+      authError(data.msg)
+      console.log(data.msg)
+    } else {
+      console.log(data, 'data')
+      localStorage.setItem('user-jwt', data.token)
+      // getUser()
+    }
   })
   .catch(err => {
     console.log(err)
   })
+}
+
+// Handle Signup
+function handleSignup(event) {
+  event.preventDefault()
+    const body = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    }
+    console.log('body', body)
+    fetch('http://localhost:5000/users', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.msg) {
+      authError(data.msg)
+      console.log(data.msg)
+    } else {
+      console.log(data)
+      localStorage.setItem('user-jwt', data.token)
+      // getUser()
+    }
+  })
+  .catch(err => console.log(err))
+}
+
+// function getUser() {
+//   console.log('getUser called!!!')
+//   console.log(`${localStorage.getItem('user-jwt')}`)
+//   const userJwt = localStorage.getItem('user-jwt')
+//   fetch('http://localhost:5000/user-auth/user', {headers: {'user-auth': userJwt}})
+//   .then(res => {
+//     if (res.ok) {
+//       return res.json()
+//     } else {
+//       throw new Error('Something went wrong getting user');
+//     }
+//   })
+//   .then(data => {
+//     console.log(data, 'user')
+//   })
+// }
+
+function authError(errorMsg) {
+  let errorDiv = ''
+  let errorExist = document.getElementById('error-msg-text')
+  if (errorExist) {
+    console.log(errorExist)
+    errorDiv.innerText = `${errorMsg}`
+  } else {
+    errorDiv = `
+    <div class="error-msg">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="error-msg-text">${errorMsg}</span>
+    </div>
+    ` 
+  }
+  let formCont = document.getElementsByClassName('form-container')
+  formCont[0].insertAdjacentHTML('afterbegin', errorDiv)
 }
