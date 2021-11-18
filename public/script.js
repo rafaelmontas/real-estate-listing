@@ -219,7 +219,11 @@ function handleLogin(event) {
     } else {
       console.log(data, 'data')
       localStorage.setItem('user-jwt', data.token)
-      // getUser()
+      if (data.user.name) {
+        authReplace(data.user.name) 
+      } else {
+        authReplace(data.user.email)
+      }
     }
   })
   .catch(err => {
@@ -251,7 +255,11 @@ function handleSignup(event) {
     } else {
       console.log(data)
       localStorage.setItem('user-jwt', data.token)
-      // getUser()
+      if (data.user.name) {
+        authReplace(data.user.name) 
+      } else {
+        authReplace(data.user.email)
+      }
     }
   })
   .catch(err => console.log(err))
@@ -279,7 +287,7 @@ function authError(errorMsg) {
   let errorExist = document.getElementById('error-msg-text')
   if (errorExist) {
     console.log(errorExist)
-    errorDiv.innerText = `${errorMsg}`
+    errorExist.innerText = `${errorMsg}`
   } else {
     errorDiv = `
     <div class="error-msg">
@@ -290,4 +298,38 @@ function authError(errorMsg) {
   }
   let formCont = document.getElementsByClassName('form-container')
   formCont[0].insertAdjacentHTML('afterbegin', errorDiv)
+}
+
+function authReplace(name) {
+  // Desktop
+  let userDataButton = `
+  <div class="hover-class" id="info-button-hover">
+    <div class="user-info-button">
+      <i class="fas fa-user-circle"></i>
+      <div class="name-email">
+        ${name}
+      </div>
+    </div>
+    <div class="user-dropdown">
+      <a href="/my-hauzzy/profile">
+        <i class="fas fa-user-circle"></i>
+        <span>Perfil</span>
+      </a>
+      <a href="/my-hauzzy/favorites">
+        <i class="far fa-heart"></i>
+        <span>Favoritos</span>
+      </a>
+      <a href="/logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar sesión</span>
+      </a>
+    </div>
+  </div>
+  `
+  let authButtonsCont = document.getElementById('user-login-cont')
+  authButtonsCont.innerHTML = userDataButton
+  let backDrop = document.getElementById('backdrop')
+  let authModal = document.getElementById('user-auth-modal')
+    backDrop.remove()
+    authModal.remove()
 }
