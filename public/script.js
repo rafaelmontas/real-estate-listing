@@ -326,7 +326,7 @@ function authReplace(name) {
         <i class="far fa-heart"></i>
         <span>Favoritos</span>
       </a>
-      <a href="/logout">
+      <a href="/logout" id="logout-button">
         <i class="fas fa-sign-out-alt"></i>
         <span>Cerrar sesión</span>
       </a>
@@ -335,20 +335,66 @@ function authReplace(name) {
   `
   let authButtonsCont = document.getElementById('user-login-cont')
   authButtonsCont.innerHTML = userDataButton
+  let logoutButton = document.getElementById('logout-button')
+  logoutButton.addEventListener('click', handleLogout)
   // Mobil
   let mobilDataButtons = `
   <a href="/my-hauzzy/profile">
     <i class="fas fa-user-circle"></i>${name}
   </a>
-  <a href="/logout">
+  <a href="/logout" id="mobil-logout-button">
     <i class="fas fa-sign-out-alt"></i>Cerrar sesión
   </a>
   `
   let authMobilButtonsCont = document.getElementById('auth-bottom-div')
   authMobilButtonsCont.innerHTML = mobilDataButtons
+  let mobilLogoutButton = document.getElementById('mobil-logout-button')
+  mobilLogoutButton.addEventListener('click', handleLogout)
 
   let backDrop = document.getElementById('backdrop')
   let authModal = document.getElementById('user-auth-modal')
     backDrop.remove()
     authModal.remove()
+}
+
+// Add logout event handler
+if (document.getElementById('logout-button') || document.getElementById('mobil-logout-button')) {
+  document.getElementById('logout-button').addEventListener('click', handleLogout)
+  document.getElementById('mobil-logout-button').addEventListener('click', handleLogout)
+}
+
+function handleLogout(e) {
+  e.preventDefault()
+  console.log('logout clicked')
+  document.cookie = 'userJwt=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  localStorage.removeItem('user-jwt');
+  console.log(document.cookie)
+  logoutReplace()
+}
+function logoutReplace(e) {
+  let desktopAuthButton = `
+  <div class="user-login-button" id="user-login-cont">
+    <span class="menu-item button secondary auth" id="login-button">Iniciar Sesión</span>
+    <span class="menu-item button primary auth" id="signup-button">Registrarse</span>
+  </div>
+  `
+  let authButtonsCont = document.getElementById('user-login-cont')
+  authButtonsCont.innerHTML = desktopAuthButton
+  // Mobil
+  let mobilAuthButtons = `
+  <a href="/login" class="auth" id="login-button-mobil">
+    <i class="far fa-arrow-alt-circle-right"></i>Iniciar sesión
+  </a>
+  <a href="/signup" class="auth" id="signup-button-mobil">
+    <i class="fas fa-user-plus"></i>Registrarse
+  </a>
+  `
+  let authMobilButtonsCont = document.getElementById('auth-bottom-div')
+  authMobilButtonsCont.innerHTML = mobilAuthButtons
+
+  // Add event listeners to auth buttons
+  let authButtons = document.querySelectorAll('.auth')
+  authButtons.forEach((button) => {
+    button.addEventListener('click', authClickHandler)
+  })
 }
