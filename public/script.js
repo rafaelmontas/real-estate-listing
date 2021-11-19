@@ -41,8 +41,15 @@ burgerMenu.addEventListener('click', burgerMenuClickHandler)
 
 // Handle login/signup buttons
 function authClickHandler(event) {
+  event.preventDefault()
+  event.stopPropagation()
   console.log(event.target.id)
-  showBackDrop()
+  if (!document.getElementById('backdrop')) {
+    showBackDrop() 
+  }
+  if (document.getElementById('side-drawer')) {
+    document.getElementById('side-drawer').classList.remove('open')
+  }
   // Show Modal
   // let authModal = document.getElementById('user-auth-modal')
   // authModal.classList.add('show')
@@ -170,7 +177,7 @@ function authClickHandler(event) {
   authModal.appendChild(authContainer)
   authContainer.append(authHeader)
   authHeader.append(authActionText, closeArea)
-  if (event.target.id === 'login-button') {
+  if (event.target.id === 'login-button' || event.target.id === 'login-button-mobil') {
     authContainer.appendChild(loginContainer)
     loginContainer.appendChild(loginForm)
     loginForm.innerHTML = loginFormData
@@ -328,6 +335,18 @@ function authReplace(name) {
   `
   let authButtonsCont = document.getElementById('user-login-cont')
   authButtonsCont.innerHTML = userDataButton
+  // Mobil
+  let mobilDataButtons = `
+  <a href="/my-hauzzy/profile">
+    <i class="fas fa-user-circle"></i>${name}
+  </a>
+  <a href="/logout">
+    <i class="fas fa-sign-out-alt"></i>Cerrar sesión
+  </a>
+  `
+  let authMobilButtonsCont = document.getElementById('auth-bottom-div')
+  authMobilButtonsCont.innerHTML = mobilDataButtons
+
   let backDrop = document.getElementById('backdrop')
   let authModal = document.getElementById('user-auth-modal')
     backDrop.remove()
