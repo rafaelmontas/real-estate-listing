@@ -42,7 +42,7 @@ header {
   height: 100%;
 }
 .nav-container .nav-menu .side-drawer {
-  visibility: hidden;
+  /* visibility: hidden; */
   position: fixed;
   top: 0;
   left: 0;
@@ -60,7 +60,7 @@ header {
   justify-content: space-between;
 }
 .nav-container .nav-menu .side-drawer.open {
-  visibility: visible;
+  /* visibility: visible; */
   transform: translateX(0);
   box-shadow: 1px 0px 4px rgb(0 0 0 / 50%);
 }
