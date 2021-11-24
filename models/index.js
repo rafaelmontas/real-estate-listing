@@ -118,7 +118,15 @@ db.user.hasMany(db.Search, {foreignKey: 'user_id'});
 // db.user.belongsToMany(db.property, {through: db.ListingView, unique: false, foreignKey: 'user_id'});
 
 // Emails
-db.ListingEmail.belongsToMany(db.property, { through: db.ScheduledListingEmail });
-db.property.belongsToMany(db.ListingEmail, { through: db.ScheduledListingEmail });
+db.ListingEmail.belongsToMany(db.property, {
+  through: db.ScheduledListingEmail,
+  foreignKey: 'email_id',
+  otherKey: 'listing_id'
+});
+db.property.belongsToMany(db.ListingEmail, {
+  through: db.ScheduledListingEmail,
+  foreignKey: 'listing_id',
+  otherKey: 'email_id'
+});
 
 module.exports = db;

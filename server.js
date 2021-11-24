@@ -24,6 +24,8 @@ Sentry.init({
   environment: process.env.NODE_ENV === "production" ? "production" : "development"
 });
 
+// Schedule tasks to be run on the server
+// const scheduledEmail = require('./jobs/scheduledListingsEmail')
 
 // Require Routes
 const propertiesRouter = require('./routes/properties');
