@@ -76,12 +76,14 @@ class PropertyDetails extends React.Component {
         return axios.get(`/api/agents/${this.state.property.agent_id}`)
       })
       .then(res => {
+        console.log(res.data)
         this.setState({agentInfo: res.data})
       })
       .then(() => {
         return axios.get("/api/properties")
       })
       .then(res => {
+        console.log(res.data)
         this.setState({ similarProperties: res.data.properties, isLoading: false });
         this.timer = setTimeout(() => {this.setState({isContactFormLoading: false})}, 2000)
       })
@@ -221,6 +223,29 @@ class PropertyDetails extends React.Component {
       )
     }
   }
+  renderAmenities() {
+    if (this.state.property['PropertyAmenity']) {
+      return (
+        <div className="amenities">
+          <div className="amenities-header">
+            <h3>Amenidades</h3>
+          </div>
+          <div className="amenities-details">
+            {!this.state.isLoading &&
+            Object.keys(this.state.property['PropertyAmenity'])
+            .filter(amenity => this.state.property['PropertyAmenity'][amenity] === true).map(amenity => {
+              return (
+                <div className="amenity">
+                  <i className="far fa-check-circle"></i>
+                  <span>{amenities[amenity]}</span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )
+    }
+  }
 
 
   render() {
@@ -337,23 +362,7 @@ class PropertyDetails extends React.Component {
                     </div> */}
                   </div>
                   {/* Info Header end */}
-                  <div className="amenities">
-                    <div className="amenities-header">
-                      <h3>Amenidades</h3>
-                    </div>
-                    <div className="amenities-details">
-                      {!this.state.isLoading &&
-                      Object.keys(this.state.property['PropertyAmenity'])
-                      .filter(amenity => this.state.property['PropertyAmenity'][amenity] === true).map(amenity => {
-                        return (
-                          <div className="amenity">
-                            <i className="far fa-check-circle"></i>
-                            <span>{amenities[amenity]}</span>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
+                  {this.renderAmenities()}
                   {/* <BrokerSection/> */}
                   {/* <MapSection property={this.state.property}/> */}
                   <div className="description">
