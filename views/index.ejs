@@ -34,24 +34,20 @@
                 <span>Publicar Propiedad</span>
               </a>
             </div>
-            <div class="bottom-div">
+            <div class="bottom-div" id="auth-bottom-div">
               <% if (user) { %>
                 <a href="/my-hauzzy/profile">
-                  <i class="fas fa-user-circle"></i>
-                  <span><%= user.name %></span>
+                  <i class="fas fa-user-circle"></i><%= user.name %>
                 </a>
-                <a href="/logout">
-                  <i class="fas fa-sign-out-alt"></i>
-                  <span>Cerrar sesión</span>
+                <a href="/logout" id="mobil-logout-button">
+                  <i class="fas fa-sign-out-alt"></i>Cerrar sesión
                 </a>
               <% } else { %>
-                <a href="/login">
-                  <i class="far fa-arrow-alt-circle-right"></i>
-                  <span>Iniciar sesión</span>
+                <a href="/login" class="auth" id="login-button-mobil">
+                  <i class="far fa-arrow-alt-circle-right"></i>Iniciar sesión
                 </a>
-                <a href="/signup">
-                  <i class="fas fa-user-plus"></i>
-                  <span>Registrarse</span>
+                <a href="/signup" class="auth" id="signup-button-mobil">
+                  <i class="fas fa-user-plus"></i>Registrarse
                 </a>
               <% } %>
             </div>
@@ -93,14 +89,14 @@
                     <i class="far fa-heart"></i>
                     <span>Favoritos</span>
                   </a>
-                  <a href="/logout">
+                  <a href="/logout" id="logout-button">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Cerrar sesión</span>
                   </a>
                 </div>
               </div>
             <% } else { %>
-              <div class="user-login-button">
+              <div class="user-login-button" id="user-login-cont">
                 <span class="menu-item button secondary auth" id="login-button">Iniciar Sesión</span>
                 <span class="menu-item button primary auth" id="signup-button">Registrarse</span>
               </div>

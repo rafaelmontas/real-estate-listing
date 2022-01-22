@@ -86,7 +86,7 @@ usersRouter.post("/", async (req, res) => {
     // Create and assign token
     const token = jwt.sign({id: user.id}, process.env.TOKEN_SECRET, { expiresIn: '2d' })
     // console.log(user.toJSON())
-    res.status(201).json({ token, user: {id: user.id, name: user.name, email: user.email} })
+    res.cookie('userJwt', token).json({ token, user: {id: user.id, name: user.name, email: user.email} })
   } catch(err) {
     console.log(err.errors[0].message)
     res.status(400).json({msg: err.errors[0].message})

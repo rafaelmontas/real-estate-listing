@@ -24,6 +24,8 @@ Sentry.init({
   environment: process.env.NODE_ENV === "production" ? "production" : "development"
 });
 
+// Schedule tasks to be run on the server
+const scheduledEmail = require('./jobs/scheduledListingsEmail')
 
 // Require Routes
 const propertiesRouter = require('./routes/properties');
@@ -56,26 +58,26 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 // Use Routes
-app.get('/', async function(req, res) {
-  const token = req.cookies.userJwt;
-  console.log(token)
-  let user;
+// app.get('/', async function(req, res) {
+//   const token = req.cookies.userJwt;
+//   console.log(token)
+//   let user;
 
-  try {
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-    req.user = verified;
-    console.log(req.user)
-    user = await User.findByPk(req.user.id)
-    // next() ;
-    console.log(user.toJSON())
-  } catch(err) {
-    console.log(err.message)
-    user = null
-  }
-  // console.log(req.ips)
-  // console.log(req.useragent)
-  res.render('index', {user: user})
-})
+//   try {
+//     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+//     req.user = verified;
+//     console.log(req.user)
+//     user = await User.findByPk(req.user.id)
+//     // next() ;
+//     console.log(user.toJSON())
+//   } catch(err) {
+//     console.log(err.message)
+//     user = null
+//   }
+//   // console.log(req.ips)
+//   // console.log(req.useragent)
+//   res.render('index', {user: user})
+// })
 app.use("/api/properties", propertiesRouter)
 app.use("/users", usersRouter)
 app.use("/user-auth", userAuthRouter)
@@ -102,11 +104,3 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
 })
 
-
-// {force: true}
-// db.agent.drop()
-// db.sequelize.sync({force: true}).then(() => {
-//   app.listen(PORT, () => {
-//     console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);
-//   })
-// })

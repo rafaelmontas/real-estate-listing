@@ -36,6 +36,7 @@ class RegisterLoginModal extends React.Component {
           <div className="action-text">
             <h2>Inicia Sesión</h2>
             <p>Necesitas una cuenta? <span onClick={this.props.onRegisterSwitch}>Registrate</span></p>
+            <a href='https://agent.hauzzy.com/login'>Inicia Sesión como agente inmobiliario</a>
           </div>
           <span className="close-button" onClick={this.props.onCloseClick}>
             <i className="far fa-times-circle"></i>
@@ -48,6 +49,7 @@ class RegisterLoginModal extends React.Component {
           <div className="action-text">
             <h2>Registrate</h2>
             <p>Tienes una cuenta? <span onClick={this.props.onLoginSwitch}>Inicia Sesión</span></p>
+            <a href='https://agent.hauzzy.com/signup'>Registrate como agente inmobiliario</a>
           </div>
           <span className="close-button" onClick={this.props.onCloseClick}>
             <i className="far fa-times-circle"></i>
