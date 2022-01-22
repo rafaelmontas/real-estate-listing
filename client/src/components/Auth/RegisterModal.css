@@ -37,6 +37,12 @@
   color: #1080a2;
   cursor: pointer;
 }
+.register-modal .container .register-header .action-text a {
+  display: block;
+  margin-top: 10px;
+  color: #006AFF;
+  cursor: pointer;
+}
 .register-modal .container .register-header .close-button {
   padding: 5px;
 }
