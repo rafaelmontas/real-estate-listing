@@ -170,7 +170,7 @@ class PropertyDetails extends React.Component {
           })
         })
       }, 500)
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     }
     if(this.props.userLikes !== prevProps.userLikes) {
       if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
