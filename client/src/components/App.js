@@ -149,7 +149,7 @@ class App extends React.Component {
         {/* history={history} */}
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact render={(props) => <Home {...props} loginStatus={this.state.isLoggedIn}/>} />
             <Route path="/properties" render={(props) => !this.state.userLoading && <MainSearch {...props} loginStatus={this.state.isLoggedIn} saveSearch={this.handleSearch}/>} />
             <PrivateRoute path="/my-hauzzy" component={MyHauzzy}/>
             <Route path="/terms-and-conditions" exact component={TermsAndConditions}/>

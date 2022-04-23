@@ -30,13 +30,14 @@ class Login extends React.Component {
           .then(res => {
             console.log(res.data)
             localStorage.setItem('user-jwt', res.data.token)
-            gtag('event', 'login', {
-              event_category: 'engagement',
-              event_label: 'User Login'
-            })
-            ReactPixel.trackCustom('UserLogin')
-            this.context.getUser()
+            // gtag('event', 'login', {
+            //   event_category: 'engagement',
+            //   event_label: 'User Login'
+            // })
+            // ReactPixel.trackCustom('UserLogin')
+            
           })
+          .then(() => this.context.getUser())
           .catch(err => {
             console.log(err.response.data, err.response.status)
             this.setState({errorMsg: err.response.data.msg})
