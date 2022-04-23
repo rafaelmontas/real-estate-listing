@@ -4,6 +4,9 @@ import {Helmet} from "react-helmet";
 import {userContext} from './userContext';
 import RegisterLoginModal from './Auth/RegisterLoginModal';
 import Backdrop from "./Backdrop";
+import SideDrawer from "./SideDrawer";
+import queryString from 'query-string'
+import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
 import "./Home.css"
 
 class Home extends React.Component {
@@ -13,7 +16,9 @@ class Home extends React.Component {
       registerLoginOpen: false,
       modalTypeOpen: null,
       sideDrawerOpen: false,
-      dropDownOpen: false
+      dropDownOpen: false,
+      mobileSearchOpen: false,
+      isLoading: false
     }
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleRegisterClick = this.handleRegisterClick.bind(this);
@@ -25,21 +30,41 @@ class Home extends React.Component {
     this.onUserHoverOut = this.onUserHoverOut.bind(this)
     this.onLiClick = this.onLiClick.bind(this)
     this.onLogOutclick = this.onLogOutclick.bind(this)
-    this.onFavClick = this.onFavClick.bind(this)
+    this.handleSideDrawerToggleClick = this.handleSideDrawerToggleClick.bind(this)
+    this.handleMobileSearchClick = this.handleMobileSearchClick.bind(this);
+    this.handleCloseMobileSearchClick = this.handleCloseMobileSearchClick.bind(this);
+    this.searchProperties = this.searchProperties.bind(this)
   }
   componentDidMount() {
     // Redirect
     // if(this.props.location.pathname === '/') {
     //   this.props.history.replace({pathname: '/properties'})
     // }
-    console.log((this.context.isLoggedIn));
+    console.log(this.context.isLoggedIn);
+    console.log(this.props)
   }
   componentDidUpdate(prevProps) {
     if(this.props.loginStatus === true && prevProps.loginStatus === false && this.state.registerLoginOpen === true) {
       this.handleRegisterClose()
     }
+    if(this.props.loginStatus === false && prevProps.loginStatus === true && this.state.sideDrawerOpen === true) {
+      this.setState({sideDrawerOpen: false})
+    }
   }
 
+  handleSideDrawerToggleClick() {
+    this.setState((prevState) => {
+      return {sideDrawerOpen: !prevState.sideDrawerOpen};
+    });
+  }
+  handleMobileSearchClick() {
+    if(this.state.mobileSearchOpen !== true && window.innerWidth <= 770) {
+      this.setState({mobileSearchOpen: true, sideDrawerOpen: false});
+    }
+  }
+  handleCloseMobileSearchClick() {
+    this.setState({mobileSearchOpen: false})
+  }
 
   handleLoginClick() {
     this.setState((prevState) => {
@@ -85,18 +110,12 @@ class Home extends React.Component {
     this.setState({dropDownOpen: false})
     return this.context.logOut()
   }
-  onFavClick(e) {
-    e.preventDefault()
-    // gtag('event', 'click', {
-    //   event_category: 'engagement',
-    //   event_label: 'Favorites button clicked'
-    // })
-    if(this.context.isLoggedIn) {
-      this.props.history.push({pathname: '/my-hauzzy/favorites'})
-    } else {
-      // this.props.history.push({state: {referer: '/my-hauzzy/favorites'}})
-      this.handleLoginClick()
-    }
+
+  searchProperties(province, sector, listingType, minPrice, maxPrice, bedrooms, bathrooms, propertyType) {
+    this.props.history.push({
+      pathname: "/properties",
+      search: `?province=${province}&sector=${sector}&listing_type=${listingType}&minPrice=${minPrice}&maxPrice=${maxPrice}&bedrooms=${bedrooms}&bathrooms=${bathrooms}&property_type=${propertyType}`
+    })
   }
 
   renderUserButton() {
@@ -188,7 +207,13 @@ class Home extends React.Component {
         <header id="header">
           <div className="nav-container">
             <nav className="nav-menu">
-              <div className="side-drawer" id="side-drawer">
+              {this.state.mobileSearchOpen && <AutoCompleteMobile onCloseMobileSearchClick={this.handleCloseMobileSearchClick} initialStateSearch={queryString.parse(this.props.location.search)} search={this.searchProperties}/>}
+              <SideDrawer show={this.state.sideDrawerOpen}
+                  onMobileSearchClick={this.handleMobileSearchClick}
+                  onLoginClick={this.handleLoginClick}
+                  onRegisterClick={this.handleRegisterClick} />
+              {/* side */}
+              {/* <div className="side-drawer" id="side-drawer">
                 <div className="top-div">
                   <a href="/properties">
                     <i className="fas fa-search"></i>
@@ -204,8 +229,8 @@ class Home extends React.Component {
                     <span>Publicar Propiedad</span>
                   </a>
                 </div>
-              </div>
-              <span className="toggle bars" id="burger-menu">
+              </div> */}
+              <span className="toggle bars" id="burger-menu" onClick={this.handleSideDrawerToggleClick}>
                 <i className="fas fa-bars"></i>
               </span>
               <div className="main-logo">
@@ -213,8 +238,8 @@ class Home extends React.Component {
                   <img src="/media/brand-logo-vf.svg" className="brand-logo"/>
                 </a>
               </div>
-              <a href="/" className="nav-link">Comprar</a>
-              <a href="/" className="nav-link">Alquilar</a>
+              <Link to="/properties" className="nav-link">Comprar</Link>
+              <Link to="/properties?province=All&sector=All&listing_type=rent&minPrice=0&maxPrice=2000000&bedrooms=0&bathrooms=0&property_type=apartment,house,villa,penthouse" className="nav-link">Alquilar</Link>
               {/* <!-- <a href="/" className="nav-link">Agentes</a> --> */}
             </nav>
             <div className="action-menu">

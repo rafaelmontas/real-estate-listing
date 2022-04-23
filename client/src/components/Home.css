@@ -92,13 +92,13 @@ header {
   color: #fff;
   font-size: 17px;
 }
-.nav-container .nav-menu .side-drawer .bottom-div a {
+/* .nav-container .nav-menu .side-drawer .bottom-div a {
   display: block;
   padding: 16px;
   text-decoration: none;
   color: #fff;
   font-weight: 100;
-}
+} */
 .nav-container .nav-menu .side-drawer .bottom-div a i {
   margin-right: 10px;
 }

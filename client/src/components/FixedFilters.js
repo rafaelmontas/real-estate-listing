@@ -49,7 +49,7 @@ class FixedFilters extends React.Component {
   }
 
   componentDidMount() {
-    if (Object.entries(this.props.initialState).length > 0 && this.props.initialState['utm_source'] === 'undefined') {
+    if (Object.entries(this.props.initialState).length > 0) {
       const propertyTypesArray = this.props.initialState.property_type.split(",")
       console.log(propertyTypesArray.includes("villa"))
       this.setState({

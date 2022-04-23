@@ -138,7 +138,7 @@ class NavBar extends React.Component {
             <span onClick={this.props.onSideDrawerToggleClick} className="toggle bars">
               <i className="fas fa-bars"></i>
             </span>
-            <a href="/properties">
+            <a href="/">
               <img src={logo} className="brand-logo"/>
             </a>
             <AutoCompleteText search={this.props.search}
