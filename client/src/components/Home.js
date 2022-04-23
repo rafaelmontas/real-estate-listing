@@ -7,6 +7,7 @@ import Backdrop from "./Backdrop";
 import SideDrawer from "./SideDrawer";
 import queryString from 'query-string'
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
+import AutoCompleteText from './SearchBar/AutoCompleteText';
 import "./Home.css"
 
 class Home extends React.Component {
@@ -262,6 +263,17 @@ class Home extends React.Component {
           <section className="home-page-hero">
             <div className="hero-image"></div>
             <div className='hero-overlay'></div>
+            <div className='hero-search-wrapper'>
+              <div className='search-centered  navbar-menu-form'>
+                <h1>Descubre Tu Próxima Propiedad</h1>
+                <div className='search-bar'>
+                  <AutoCompleteText search={this.searchProperties}
+                                    initialStateSearch={queryString.parse(this.props.location.search)}
+                                    // loadingStatus={this.props.loadingStatus}
+                                    onMobileSearchClick={this.handleMobileSearchClick}/>
+                </div>
+              </div>
+            </div>
           </section>
         </main>
       </div>

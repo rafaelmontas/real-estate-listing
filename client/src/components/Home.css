@@ -449,7 +449,55 @@ header {
   right: 0;
   background: rgb(0 0 0 / 32%);
 }
-
+.home-page-hero .hero-search-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+  height: 100%;
+}
+.home-page-hero .hero-search-wrapper .search-centered {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  position: relative;
+  color: #fff;
+}
+.home-page-hero .hero-search-wrapper .search-centered h1 {
+  font-size: 35px;
+  margin-bottom: 34px;
+  text-align: center;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar {
+  max-width: 700px;
+  width: 100%;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar input {
+  padding: 22px;
+  height: 100%;
+  font-weight: 600;
+  padding-left: 35px;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar button {
+  flex: 0 0 80px
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar button i {
+  font-size: 22px;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar .autocomplete-suggestions {
+  width: 100%;
+  max-width: 700px;
+  top: inherit;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar .autocomplete-suggestions i {
+  font-size: 18px;
+}
+.home-page-hero .hero-search-wrapper .search-centered .search-bar .autocomplete-suggestions li {
+  color: #000;
+}
 
 
 @media only screen and (max-width: 991px) {
