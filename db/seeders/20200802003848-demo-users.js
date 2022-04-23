@@ -6,7 +6,7 @@ module.exports = {
     return queryInterface.bulkInsert('users', [{
       id: uuidv4(),
       name: 'Rafael Montas',
-      email: "rafaelmontas1@gmail.com",
+      email: "rafaelmontas@gmail.com",
       phone_number: "8296483530",
       password: "123",
       createdAt: new Date(),

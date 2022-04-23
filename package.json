@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/rafaelmontas/real-estate-project/issues"
   },
-  "homepage": "https://github.com/rafaelmontas/real-estate-project#readme",
+  "homepage": "https://www.hauzzy.com",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@sendgrid/mail": "^7.4.2",
