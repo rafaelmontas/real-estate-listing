@@ -431,7 +431,7 @@ header {
   position: relative;
 }
 .home-page-hero .hero-image {
-  background-image: url('/media/Floyd-Sectional-Three-Seater-Sofa.png');
+  background-image: url('https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/hauzzy-hero-section.png');
   position: absolute;
   top: 0;
   bottom: 0;
@@ -590,6 +590,91 @@ header {
   transform: scale(1.1);
 }
 
+/* Mobile app section */
+.mobile-app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.mobile-app .mobile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.mobile-app .mobile-left .mobile-left-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mobile-app .mobile-left .mobile-left-header img {
+  margin-bottom: 15px;
+  width: 104px;
+}
+.mobile-app .mobile-left .mobile-left-header .header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 32px;
+}
+.mobile-app .mobile-left .mobile-left-header .header-text h3 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.875rem;
+}
+.mobile-app .mobile-left .mobile-left-header .header-text p {
+  text-align: center;
+  color: #858995;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  max-width: 416px;
+}
+.mobile-app .mobile-left .appstores {
+  margin-top: 36px;
+}
+.mobile-app .mobile-left .appstores h4 {
+  display: none;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin-bottom: 16px
+}
+.mobile-app .mobile-left .appstores .icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.mobile-app .mobile-left .appstores .icons a:first-child {
+  margin-right: 15px;
+}
+.mobile-app .mobile-left .appstores .icons .apple {
+  width: 128px;
+}
+.mobile-app .mobile-left .appstores .icons .android {
+  width: 164px;
+  margin-left: -10px;
+}
+.mobile-app .mobile-right {
+  display: flex;
+}
+.mobile-app .mobile-right img {
+  width: 235px;
+}
+
+/* Footer Section */
+.footer-container {
+  background-color: #1a2b49;
+}
+#root .footer-container .footer-main, #root .footer-container .footer-main h4, #root .footer-follow-us a {
+  color: #fff;
+}
+
 
 
 @media only screen and (max-width: 991px) {
@@ -630,5 +715,39 @@ header {
   }
   .homepage-feature .city-cards .city-card-container {
     width: 33.33%;
+  }
+  .mobile-app {
+    flex-direction: row;
+  }
+  .mobile-app .mobile-left {
+    align-items: flex-start;
+    margin-bottom: 0px;
+  }
+  .mobile-app .mobile-left .mobile-left-header {
+    flex-direction: row;
+  }
+  .mobile-app .mobile-left .mobile-left-header img {
+    margin-bottom: 0px;
+  }
+  .mobile-app .mobile-left .mobile-left-header .header-text {
+    align-items: flex-start;
+  }
+  .mobile-app .mobile-left .mobile-left-header .header-text p {
+    text-align: left;
+  }
+  .mobile-app .mobile-left .appstores {
+    margin-top: 56px;
+  }
+  .mobile-app .mobile-left .appstores h4 {
+    display: block;
+  }
+  .mobile-app .mobile-left .appstores .icons .apple {
+    width: 145px;
+  }
+  .mobile-app .mobile-left .appstores .icons .android {
+    width: 184px;
+  }
+  .mobile-app .mobile-right img {
+    width: 335px;
   }
 }

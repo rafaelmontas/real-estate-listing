@@ -8,6 +8,9 @@ import SideDrawer from "./SideDrawer";
 import queryString from 'query-string'
 import AutoCompleteMobile from './SearchBar/AutoCompleteMobile';
 import AutoCompleteText from './SearchBar/AutoCompleteText';
+import appStoreApple from "../demo_img/appstoreblack.svg";
+import appStoreAndroid from "../demo_img/google-play-badge.png";
+import Footer from "./Footer";
 import "./Home.css"
 
 class Home extends React.Component {
@@ -289,7 +292,7 @@ class Home extends React.Component {
                             <i className="fa fa-angle-right" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <img src='/media/dn.jpeg'/>
+                        <img src='https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/dn.jpeg'/>
                       </div>
                     </div>
                   </Link>
@@ -305,7 +308,7 @@ class Home extends React.Component {
                             <i className="fa fa-angle-right" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <img src='/media/pc.jpeg'/>
+                        <img src='https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/pc.jpeg'/>
                       </div>
                     </div>
                   </Link>
@@ -321,14 +324,40 @@ class Home extends React.Component {
                             <i className="fa fa-angle-right" aria-hidden="true"></i>
                           </div>
                         </div>
-                        <img src='/media/sm.jpeg'/>
+                        <img src='https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/sm.jpeg'/>
                       </div>
                     </div>
                   </Link>
                 </div>
               </div>
           </section>
+          <section className='mobile-app'>
+            <div className='mobile-left'>
+              <div className='mobile-left-header'>
+                <img src='/media/app-logo.svg'/>
+                <div className='header-text'>
+                  <h3>Hauzzy: Encuentra tu hogar</h3>
+                  <p>Utiliza las mejores herramientas para comprar, vender o alquilar una propiedad. Todo en la palma de tu mano.</p>
+                </div>
+              </div>
+              <div className='appstores'>
+                <h4>Descarga la app</h4>
+                <div className='icons'>
+                  <a href="https://apps.apple.com/us/app/hauzzy-find-your-home/id1581286386" target="_blank">
+                    <img className="apple" src={appStoreApple} alt="Apple Store Badge"/>
+                  </a>
+                  <a href="https://play.google.com/store/apps/details?id=com.hauzzyapp" target="_blank">
+                    <img className="android" src={appStoreAndroid} alt="Google Play Store Badge"/>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className='mobile-right'>
+              <img src='https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/hauzzy-app.png'/>
+            </div>
+          </section>
         </main>
+        <Footer/>
       </div>
     )
   }
