@@ -239,7 +239,7 @@ class Home extends React.Component {
               </span>
               <div className="main-logo">
                 <a href="/">
-                  <img src="/media/brand-logo-vf.svg" className="brand-logo"/>
+                  <img src="https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/brand-logo-vf.svg" className="brand-logo"/>
                 </a>
               </div>
               <Link to="/properties" className="nav-link">Comprar</Link>
@@ -334,7 +334,7 @@ class Home extends React.Component {
           <section className='mobile-app'>
             <div className='mobile-left'>
               <div className='mobile-left-header'>
-                <img src='/media/app-logo.svg'/>
+                <img src='https://hauzzy-media-assets.s3.us-east-2.amazonaws.com/app-logo.svg'/>
                 <div className='header-text'>
                   <h3>Hauzzy: Encuentra tu hogar</h3>
                   <p>Utiliza las mejores herramientas para comprar, vender o alquilar una propiedad. Todo en la palma de tu mano.</p>
