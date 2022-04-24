@@ -544,6 +544,7 @@ header {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 8px;
 }
 .homepage-feature .city-cards .city-card-container a .city-card .image-back .card-text {
   position: absolute;
