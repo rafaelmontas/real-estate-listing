@@ -668,10 +668,10 @@ header {
 }
 
 /* Footer Section */
-.footer-container {
+.root-home .footer-container {
   background-color: #1a2b49;
 }
-#root .footer-container .footer-main, #root .footer-container .footer-main h4, #root .footer-follow-us a {
+.root-home .footer-container .footer-main, .root-home .footer-container .footer-main h4, .root-home .footer-follow-us a {
   color: #fff;
 }
 

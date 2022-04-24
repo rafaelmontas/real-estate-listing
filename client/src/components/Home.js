@@ -191,7 +191,7 @@ class Home extends React.Component {
       backdrop = <Backdrop onBackdropClick={this.handleBackdropClick} backgroundColor={"rgba(0, 0, 0, 0.5)"}/>
     }
     return (
-      <div>
+      <div className='root-home'>
         {backdrop}
         <Helmet>
           <title>Hauzzy: Innovadora plataforma inmobiliaria</title>
