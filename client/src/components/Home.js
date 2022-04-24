@@ -275,6 +275,59 @@ class Home extends React.Component {
               </div>
             </div>
           </section>
+          <section className='homepage-feature'>
+              <h1>Explora inmuebles públicados</h1>
+              <div className='city-cards'>
+                <div className='city-card-container'>
+                  <Link to='properties?province=Distrito%20Nacional&sector=Evaristo%20Morales&listing_type=sale&minPrice=0&maxPrice=2000000&bedrooms=0&bathrooms=0&property_type=apartment,house,villa,penthouse'>
+                    <div className='city-card'>
+                      <div className='image-back'>
+                        <div className='card-text'>
+                          <h4>Evaristo Morales, DN</h4>
+                          <div className='action-button'>
+                            <h5>Ver Propiedades</h5>
+                            <i className="fa fa-angle-right" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                        <img src='/media/dn.jpeg'/>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+                <div className='city-card-container'>
+                  <Link to='/properties?province=La%20Altagracia&sector=Bávaro,%20Punta%20Cana&listing_type=sale&minPrice=0&maxPrice=2000000&bedrooms=0&bathrooms=0&property_type=apartment,house,villa,penthouse'>
+                    <div className='city-card'>
+                      <div className='image-back'>
+                        <div className='card-text'>
+                          <h4>Bávaro, Punta Cana</h4>
+                          <div className='action-button'>
+                            <h5>Ver Propiedades</h5>
+                            <i className="fa fa-angle-right" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                        <img src='/media/pc.jpeg'/>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+                <div className='city-card-container'>
+                  <Link to='/properties?province=Samaná&sector=Las%20Terrenas&listing_type=sale&minPrice=0&maxPrice=2000000&bedrooms=0&bathrooms=0&property_type=apartment,house,villa,penthouse'>
+                    <div className='city-card'>
+                      <div className='image-back'>
+                        <div className='card-text'>
+                          <h4>Las Terrenas, Samaná</h4>
+                          <div className='action-button'>
+                            <h5>Ver Propiedades</h5>
+                            <i className="fa fa-angle-right" aria-hidden="true"></i>
+                          </div>
+                        </div>
+                        <img src='/media/sm.jpeg'/>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+          </section>
         </main>
       </div>
     )
