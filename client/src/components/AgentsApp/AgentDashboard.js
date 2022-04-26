@@ -36,7 +36,7 @@ class AgentDashboard extends React.Component {
       })
     })
     .catch(err => {
-      // console.log(err.response.data, err.response.status)
+      console.log(err.response.data, err.response.status, err)
       if(err.response.status === 500) {
         this.props.history.replace('/error/500')
       }

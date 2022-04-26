@@ -25,7 +25,7 @@ Sentry.init({
 });
 
 // Schedule tasks to be run on the server
-const scheduledEmail = require('./jobs/scheduledListingsEmail')
+// const scheduledEmail = require('./jobs/scheduledListingsEmail')
 
 // Require Routes
 const propertiesRouter = require('./routes/properties');
@@ -93,12 +93,12 @@ app.use("/api/searches", searchesRouter)
 app.use(Sentry.Handlers.errorHandler());
 
 // Serve static assets
-if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client', 'build')))
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
-}
+// if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, 'client', 'build')))
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+//   })
+// }
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`, process.env.NODE_ENV);

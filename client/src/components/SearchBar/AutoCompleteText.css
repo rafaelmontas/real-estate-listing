@@ -16,7 +16,7 @@
   color: #B4B3BC;
 }
 .input-autocomplete input {
-  padding-left: 35px;
+  padding-left: 35px !important;
   color: rgb(59, 65, 68);
   font-size: 16px;
   -webkit-appearance: none;
@@ -188,6 +188,6 @@
     display: none;
   }
   .input-autocomplete input {
-    padding-left: 8px;
+    padding-left: 8px !important;
   }
 }

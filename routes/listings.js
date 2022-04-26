@@ -84,7 +84,7 @@ listingsRouter.put('/:id', async (req, res) => {
           to: [{email: updatedListing.agent.email}],
           dynamic_template_data: {
             name: updatedListing.agent.name,
-            address: updatedListing.listing_address,
+            address: updatedListing.sector,
             link: `https://agent.hauzzy.com/account/listings`
           }
         }

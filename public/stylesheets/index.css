@@ -424,6 +424,24 @@ header {
   font-size: 14px;
 }
 
+/* Hero section */
+
+.home-page-hero {
+  height: 500px;
+  position: relative;
+}
+.home-page-hero .hero-image {
+  background-image: url('/media/stock-photo-contemporary-interior-design-for-poster-frames-in-living-room-mock-up-with-green-couch-wooden-1725666700.jpeg');
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 
 
 @media only screen and (max-width: 991px) {

@@ -83,6 +83,19 @@ class SideDrawer extends React.Component {
     }
   }
 
+  renderSearchButton() {
+    if (window.innerWidth <= 770) {
+      return (
+        <li className="search-button button" onClick={this.props.onMobileSearchClick}>
+          <div>
+            <i className="fas fa-search"></i>
+            <span>Buscar</span>
+          </div>
+        </li>
+      )
+    }
+  }
+
   
   render() {
     let drawerClasses = "side-drawer";
@@ -94,12 +107,7 @@ class SideDrawer extends React.Component {
       <div className={drawerClasses}>
         <div className="top-div">
           <ul>
-            <li className="search-button button" onClick={this.props.onMobileSearchClick}>
-              <div>
-                <i className="fas fa-search"></i>
-                <span>Buscar</span>
-              </div>
-            </li>
+            {this.renderSearchButton()}
             <li className="favorite-button button">
               <Link to="/my-hauzzy/favorites" onClick={this.onFavClick}>
                 <div>

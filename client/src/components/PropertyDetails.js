@@ -151,18 +151,26 @@ class PropertyDetails extends React.Component {
         isContactFormLoading: true
       })
       this.timer = setTimeout(() => {
-        fetch(`/api/properties/${this.props.match.params.id}`)
-          .then(res => res.json())
-          .then(property => {
-            console.log(property)
-            this.setState({ 
-              property: property,
-              isLoading: false,
-              isContactFormLoading: false
-            });
-          });
+        axios.get(`/api/properties/${this.props.match.params.id}`)
+        .then(property => {
+          console.log(property.data)
+          this.setState({
+            property: property.data,
+            isLoading: false
+          })
+        })
+        .then(() => {
+          return axios.get(`/api/agents/${this.state.property.agent_id}`)
+        })
+        .then(res => {
+          console.log(res.data)
+          this.setState({
+            agentInfo: res.data,            
+            isContactFormLoading: false
+          })
+        })
       }, 500)
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     }
     if(this.props.userLikes !== prevProps.userLikes) {
       if(this.props.userLikes.findIndex(x => x.listing_id === this.props.match.params.id) !== -1) {
