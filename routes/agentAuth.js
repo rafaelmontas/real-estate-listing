@@ -5,7 +5,6 @@ const Agent = db.agent;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const verifyToken = require('../middleware/agentAuth')
-const sgMail = require('@sendgrid/mail')
 
 
 // @route POST /agent-auth
@@ -58,34 +57,10 @@ agentAuthRouter.put("/forgot-password", async (req, res) => {
   // Create and assign token
   const token = jwt.sign({id: agent.id}, process.env.TOKEN_SECRET, { expiresIn: '2h' })
 
-  // Email settings
-  let sgKey;
-  if(process.env.NODE_ENV === 'production') {
-    sgKey = process.env.SENDGRID_PROD_EMAIL_API_KEY
-  } else {
-    sgKey = process.env.SENDGRID_DEV_EMAIL_API_KEY
-  }
-  sgMail.setApiKey(sgKey)
-  const msg = {
-    from: {email: 'noreply@hauzzy.com', name: 'Hauzzy'},
-    reply_to: 'noreply@hauzzy.com',
-    template_id: 'd-dd67e2cd23984cb9955ab7373d47b076',
-    personalizations: [
-      {
-        to: [{email: agent.email}],
-        dynamic_template_data: {
-          name: agent.name,
-          link_reset: `https://agent.hauzzy.com/reset-password/${token}`
-        }
-      }
-    ]
-  }
-
   try {
     // Create and assign token
     // const token = jwt.sign({id: agent.id}, process.env.TOKEN_SECRET, { expiresIn: '2h' })
     await agent.update({reset_token: token})
-    await sgMail.send(msg)
     res.status(200).json({msg: 'Se ha enviado un link al correo electronico.'})
   } catch (err) {
     console.log(err.errors[0].message)
